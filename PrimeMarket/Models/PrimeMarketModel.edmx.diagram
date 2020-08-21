@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="bfab5abd2f884a13bd5d22dc466711f6" Name="Diagram1">
+        <EntityTypeShape EntityType="PrimeMarketModel.Account" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Cart" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Category" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Order" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.OrderStatu" Width="1.5" PointX="3.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.ShowCommodity" Width="1.5" PointX="0.75" PointY="8.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.SubCategory" Width="1.5" PointX="1.5" PointY="13.75" IsExpanded="true" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Cart_Account" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Order_Account2" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Order_Account4" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Cart_ShowCommodity" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_SubCategory_Category" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Order_OrderStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Order_ShowCommodity" ManuallyRouted="false" />
+        <AssociationConnector Association="PrimeMarketModel.FK_ShowCommodity_SubCategory" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

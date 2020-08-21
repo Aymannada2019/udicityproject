@@ -1,0 +1,51 @@
+﻿@model PrimeMarket.Models.Cart
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/front_end/Views/Shared/_LayoutFront.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Cart</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CartDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CartDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Quantity)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Quantity)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Account.Full_name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Account.Full_name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShowCommodity.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShowCommodity.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CartId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,37 @@
+﻿@model IEnumerable<PrimeMarket.Models.Category>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/front_end/Views/Shared/_LayoutFront.cshtml";
+}
+@section categories{
+<h2>Index</h2>
+
+    <ul>
+
+    @foreach (var item in Model)
+    {
+        <li><a href="#">
+    @Html.DisplayFor(modelItem => item.Category1)
+            </a>
+</li>
+    }
+</ul>
+
+
+
+}
+@section categoriesFilter{
+    <h2>محتوى</h2>
+
+
+
+        <ul>
+            <li class="active" data-filter="*">All</li>
+            <li data-filter=".oranges">فواكه</li>
+            <li data-filter=".fresh-meat">لحوم طازجة</li>
+            <li data-filter=".vegetables">خضراوات</li>
+            <li data-filter=".fastfood">أطعمة سريع</li>
+        </ul>
+ 
+    }
