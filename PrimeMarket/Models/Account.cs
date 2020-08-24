@@ -29,6 +29,7 @@ namespace PrimeMarket.Models
         public string Email { get; set; }
         public string PassWord { get; set; }
         public string ImagePath { get; set; }
+        public Nullable<decimal> VillageId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
@@ -36,5 +37,6 @@ namespace PrimeMarket.Models
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders1 { get; set; }
+        public virtual Village Village { get; set; }
     }
 }

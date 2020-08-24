@@ -11,6 +11,7 @@
     <Property Name="Email" Type="nvarchar" MaxLength="50" />
     <Property Name="PassWord" Type="nvarchar" MaxLength="50" Nullable="false" />
     <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
+    <Property Name="VillageId" Type="numeric" Precision="18" Scale="0" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -29,6 +30,21 @@
     <Property Name="CategoryId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Category" Type="nvarchar" MaxLength="200" />
     <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="int" Nullable="false" />
+    <Property Name="District" Type="nvarchar" MaxLength="50" />
+    <Property Name="GovernorateId" Type="smallint" />
+  </EntityType>
+  <EntityType Name="Governorate">
+    <Key>
+      <PropertyRef Name="GovernorateId" />
+    </Key>
+    <Property Name="GovernorateId" Type="smallint" Nullable="false" />
+    <Property Name="Governorate" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
@@ -54,12 +70,6 @@
     <Property Name="OrderStatusId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
-        <EntityType Name="PayingMethod">
-          <Property Name="PayingMethod_Id" Type="int" />
-          <Property Name="PayingMethod" Type="nvarchar" MaxLength="50" />
-        </EntityType>-->
   <EntityType Name="ShowCommodity">
     <Key>
       <PropertyRef Name="ShowCommodityId" />
@@ -86,6 +96,26 @@ warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a prim
     <Property Name="SubCategory" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
   </EntityType>
+  <EntityType Name="Village">
+    <Key>
+      <PropertyRef Name="VillageId" />
+    </Key>
+    <Property Name="VillageId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Village" Type="nvarchar" MaxLength="50" />
+    <Property Name="DistrictId" Type="int" />
+  </EntityType>
+  <Association Name="FK_Account_Village">
+    <End Role="Village" Type="Self.Village" Multiplicity="0..1" />
+    <End Role="Account" Type="Self.Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Village">
+        <PropertyRef Name="VillageId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="VillageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Cart_Account">
     <End Role="Account" Type="Self.Account" Multiplicity="0..1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
@@ -107,6 +137,18 @@ warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a prim
       </Principal>
       <Dependent Role="Cart">
         <PropertyRef Name="ShowCommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_Governorate">
+    <End Role="Governorate" Type="Self.Governorate" Multiplicity="0..1" />
+    <End Role="District" Type="Self.District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Governorate">
+        <PropertyRef Name="GovernorateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="GovernorateId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -182,14 +224,33 @@ warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a prim
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Village_District">
+    <End Role="District" Type="Self.District" Multiplicity="0..1" />
+    <End Role="Village" Type="Self.Village" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Village">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="PrimeMarketModelStoreContainer">
     <EntitySet Name="Account" EntityType="Self.Account" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Cart" EntityType="Self.Cart" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Category" EntityType="Self.Category" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Governorate" EntityType="Self.Governorate" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="OrderStatus" EntityType="Self.OrderStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ShowCommodity" EntityType="Self.ShowCommodity" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Village" EntityType="Self.Village" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Account_Village" Association="Self.FK_Account_Village">
+      <End Role="Village" EntitySet="Village" />
+      <End Role="Account" EntitySet="Account" />
+    </AssociationSet>
     <AssociationSet Name="FK_Cart_Account" Association="Self.FK_Cart_Account">
       <End Role="Account" EntitySet="Account" />
       <End Role="Cart" EntitySet="Cart" />
@@ -197,6 +258,10 @@ warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a prim
     <AssociationSet Name="FK_Cart_ShowCommodity" Association="Self.FK_Cart_ShowCommodity">
       <End Role="ShowCommodity" EntitySet="ShowCommodity" />
       <End Role="Cart" EntitySet="Cart" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_Governorate" Association="Self.FK_District_Governorate">
+      <End Role="Governorate" EntitySet="Governorate" />
+      <End Role="District" EntitySet="District" />
     </AssociationSet>
     <AssociationSet Name="FK_Order_Account2" Association="Self.FK_Order_Account2">
       <End Role="Account" EntitySet="Account" />
@@ -221,6 +286,10 @@ warning 6013: The table/view 'PrimeMarket.dbo.PayingMethod' does not have a prim
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Village_District" Association="Self.FK_Village_District">
+      <End Role="District" EntitySet="District" />
+      <End Role="Village" EntitySet="Village" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

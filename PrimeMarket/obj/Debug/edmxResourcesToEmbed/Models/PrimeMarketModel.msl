@@ -4,6 +4,7 @@
     <EntitySetMapping Name="Accounts">
       <EntityTypeMapping TypeName="PrimeMarketModel.Account">
         <MappingFragment StoreEntitySet="Account">
+          <ScalarProperty Name="VillageId" ColumnName="VillageId" />
           <ScalarProperty Name="AccountId" ColumnName="AccountId" />
           <ScalarProperty Name="Full_name" ColumnName="Full_name" />
           <ScalarProperty Name="Address" ColumnName="Address" />
@@ -85,6 +86,32 @@
           <ScalarProperty Name="CategoryId" ColumnName="CategoryId" />
           <ScalarProperty Name="SubCategory1" ColumnName="SubCategory" />
           <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Districts">
+      <EntityTypeMapping TypeName="PrimeMarketModel.District">
+        <MappingFragment StoreEntitySet="District">
+          <ScalarProperty Name="GovernorateId" ColumnName="GovernorateId" />
+          <ScalarProperty Name="District1" ColumnName="District" />
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Governorates">
+      <EntityTypeMapping TypeName="PrimeMarketModel.Governorate">
+        <MappingFragment StoreEntitySet="Governorate">
+          <ScalarProperty Name="Governorate1" ColumnName="Governorate" />
+          <ScalarProperty Name="GovernorateId" ColumnName="GovernorateId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Villages">
+      <EntityTypeMapping TypeName="PrimeMarketModel.Village">
+        <MappingFragment StoreEntitySet="Village">
+          <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+          <ScalarProperty Name="Village1" ColumnName="Village" />
+          <ScalarProperty Name="VillageId" ColumnName="VillageId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

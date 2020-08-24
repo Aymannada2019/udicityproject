@@ -14,6 +14,8 @@
     <NavigationProperty Name="Carts" Relationship="Self.FK_Cart_Account" FromRole="Account" ToRole="Cart" />
     <NavigationProperty Name="Orders" Relationship="Self.FK_Order_Account2" FromRole="Account" ToRole="Order" />
     <NavigationProperty Name="Orders1" Relationship="Self.FK_Order_Account4" FromRole="Account" ToRole="Order" />
+    <Property Name="VillageId" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Village" Relationship="PrimeMarketModel.FK_Account_Village" FromRole="Account" ToRole="Village" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -232,5 +234,84 @@
       <End Role="SubCategory" EntitySet="SubCategories" />
       <End Role="ShowCommodity" EntitySet="ShowCommodities" />
     </AssociationSet>
+    <EntitySet Name="Districts" EntityType="PrimeMarketModel.District" />
+    <EntitySet Name="Governorates" EntityType="PrimeMarketModel.Governorate" />
+    <EntitySet Name="Villages" EntityType="PrimeMarketModel.Village" />
+    <AssociationSet Name="FK_Account_Village" Association="PrimeMarketModel.FK_Account_Village">
+      <End Role="Village" EntitySet="Villages" />
+      <End Role="Account" EntitySet="Accounts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_District_Governorate" Association="PrimeMarketModel.FK_District_Governorate">
+      <End Role="Governorate" EntitySet="Governorates" />
+      <End Role="District" EntitySet="Districts" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Village_District" Association="PrimeMarketModel.FK_Village_District">
+      <End Role="District" EntitySet="Districts" />
+      <End Role="Village" EntitySet="Villages" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="District">
+    <Key>
+      <PropertyRef Name="DistrictId" />
+    </Key>
+    <Property Name="DistrictId" Type="Int32" Nullable="false" />
+    <Property Name="District1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GovernorateId" Type="Int16" />
+    <NavigationProperty Name="Governorate" Relationship="PrimeMarketModel.FK_District_Governorate" FromRole="District" ToRole="Governorate" />
+    <NavigationProperty Name="Villages" Relationship="PrimeMarketModel.FK_Village_District" FromRole="District" ToRole="Village" />
+  </EntityType>
+  <EntityType Name="Governorate">
+    <Key>
+      <PropertyRef Name="GovernorateId" />
+    </Key>
+    <Property Name="GovernorateId" Type="Int16" Nullable="false" />
+    <Property Name="Governorate1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Districts" Relationship="PrimeMarketModel.FK_District_Governorate" FromRole="Governorate" ToRole="District" />
+  </EntityType>
+  <EntityType Name="Village">
+    <Key>
+      <PropertyRef Name="VillageId" />
+    </Key>
+    <Property Name="VillageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="Village1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DistrictId" Type="Int32" />
+    <NavigationProperty Name="Accounts" Relationship="PrimeMarketModel.FK_Account_Village" FromRole="Village" ToRole="Account" />
+    <NavigationProperty Name="District" Relationship="PrimeMarketModel.FK_Village_District" FromRole="Village" ToRole="District" />
+  </EntityType>
+  <Association Name="FK_Account_Village">
+    <End Type="PrimeMarketModel.Village" Role="Village" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.Account" Role="Account" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Village">
+        <PropertyRef Name="VillageId" />
+      </Principal>
+      <Dependent Role="Account">
+        <PropertyRef Name="VillageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_District_Governorate">
+    <End Type="PrimeMarketModel.Governorate" Role="Governorate" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.District" Role="District" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Governorate">
+        <PropertyRef Name="GovernorateId" />
+      </Principal>
+      <Dependent Role="District">
+        <PropertyRef Name="GovernorateId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Village_District">
+    <End Type="PrimeMarketModel.District" Role="District" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.Village" Role="Village" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="District">
+        <PropertyRef Name="DistrictId" />
+      </Principal>
+      <Dependent Role="Village">
+        <PropertyRef Name="DistrictId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

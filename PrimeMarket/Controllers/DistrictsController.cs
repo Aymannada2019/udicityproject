@@ -8,109 +8,114 @@ using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
 
-namespace PrimeMarket.Areas.front_end.Controllers
+namespace PrimeMarket.Controllers
 {
-    public class CategoriesController : Controller
+    public class DistrictsController : Controller
     {
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
-        // GET: front_end/Categories
+        // GET: Districts
         public ActionResult Index()
         {
-            return View(db.Categories.ToList());
+            var districts = db.Districts.Include(d => d.Governorate);
+            return View(districts.ToList());
         }
 
-        // GET: front_end/Categories/Details/5
-        public ActionResult Details(decimal id)
+        // GET: Districts/Details/5
+        public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            District district = db.Districts.Find(id);
+            if (district == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(district);
         }
 
-        // GET: front_end/Categories/Create
+        // GET: Districts/Create
         public ActionResult Create()
         {
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1");
             return View();
         }
 
-        // POST: front_end/Categories/Create
+        // POST: Districts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoryId,Category1,ImagePath")] Category category)
+        public ActionResult Create([Bind(Include = "DistrictId,District1,GovernorateId")] District district)
         {
             if (ModelState.IsValid)
             {
-                db.Categories.Add(category);
+                db.Districts.Add(district);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            return View(category);
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", district.GovernorateId);
+            return View(district);
         }
 
-        // GET: front_end/Categories/Edit/5
-        public ActionResult Edit(decimal id)
+        // GET: Districts/Edit/5
+        public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            District district = db.Districts.Find(id);
+            if (district == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", district.GovernorateId);
+            return View(district);
         }
 
-        // POST: front_end/Categories/Edit/5
+        // POST: Districts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoryId,Category1,ImagePath")] Category category)
+        public ActionResult Edit([Bind(Include = "DistrictId,District1,GovernorateId")] District district)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(category).State = EntityState.Modified;
+                db.Entry(district).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(category);
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", district.GovernorateId);
+            return View(district);
         }
 
-        // GET: front_end/Categories/Delete/5
-        public ActionResult Delete(decimal id)
+        // GET: Districts/Delete/5
+        public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Category category = db.Categories.Find(id);
-            if (category == null)
+            District district = db.Districts.Find(id);
+            if (district == null)
             {
                 return HttpNotFound();
             }
-            return View(category);
+            return View(district);
         }
 
-        // POST: front_end/Categories/Delete/5
+        // POST: Districts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(int id)
         {
-            Category category = db.Categories.Find(id);
-            db.Categories.Remove(category);
+            District district = db.Districts.Find(id);
+            db.Districts.Remove(district);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

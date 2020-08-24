@@ -32,5 +32,8 @@ namespace PrimeMarket.Models
         public virtual DbSet<OrderStatu> OrderStatus { get; set; }
         public virtual DbSet<ShowCommodity> ShowCommodities { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<District> Districts { get; set; }
+        public virtual DbSet<Governorate> Governorates { get; set; }
+        public virtual DbSet<Village> Villages { get; set; }
     }
 }

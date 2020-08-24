@@ -5,7 +5,7 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="bfab5abd2f884a13bd5d22dc466711f6" Name="Diagram1">
-        <EntityTypeShape EntityType="PrimeMarketModel.Account" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Account" Width="1.5" PointX="7.75" PointY="2.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PrimeMarketModel.Cart" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="PrimeMarketModel.Category" Width="1.5" PointX="1.5" PointY="16.875" IsExpanded="true" />
         <EntityTypeShape EntityType="PrimeMarketModel.Order" Width="1.5" PointX="6" PointY="2.75" IsExpanded="true" />
@@ -20,6 +20,12 @@
         <AssociationConnector Association="PrimeMarketModel.FK_Order_OrderStatus" ManuallyRouted="false" />
         <AssociationConnector Association="PrimeMarketModel.FK_Order_ShowCommodity" ManuallyRouted="false" />
         <AssociationConnector Association="PrimeMarketModel.FK_ShowCommodity_SubCategory" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="PrimeMarketModel.District" Width="1.5" PointX="0.75" PointY="20.5" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Governorate" Width="1.5" PointX="0.75" PointY="23.625" />
+        <EntityTypeShape EntityType="PrimeMarketModel.Village" Width="1.5" PointX="0.75" PointY="0.75" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Account_Village" />
+        <AssociationConnector Association="PrimeMarketModel.FK_District_Governorate" />
+        <AssociationConnector Association="PrimeMarketModel.FK_Village_District" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

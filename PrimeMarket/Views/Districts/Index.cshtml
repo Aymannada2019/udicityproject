@@ -1,0 +1,40 @@
+﻿@model IEnumerable<PrimeMarket.Models.District>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.District1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Governorate.Governorate1)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.District1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Governorate.Governorate1)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.DistrictId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.DistrictId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.DistrictId })
+        </td>
+    </tr>
+}
+
+</table>

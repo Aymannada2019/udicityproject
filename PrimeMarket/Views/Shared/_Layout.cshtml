@@ -31,9 +31,19 @@
                         <li>@Html.ActionLink("List of Categories", "Index", "Categories")</li>
                         <li>@Html.ActionLink("List of Sub Categories", "Index", "SubCategories")</li>
                         <li>@Html.ActionLink("List of Order Status", "Index", "OrderStatus")</li>
-
+                    
                     </ul>
                     </li>
+                    <li>
+                        @Html.ActionLink("البيانات الجغرافية", "Index", "Home")
+
+                    <ul>
+                        <li>@Html.ActionLink("المحافظات", "Index", "Governorates")</li>
+                        <li>@Html.ActionLink("المراكز", "Index", "Districts")</li>
+                        <li>@Html.ActionLink("القرى-المدى", "Index", "Villages")</li>
+                    </ul>
+                </li>
+
                     <li>@Html.ActionLink("السلع التى تم عرضها", "Index", "ShowCommodities")</li>
                     
                     <li>@Html.ActionLink("السلع التى تم إضافتها للعربة", "Index", "Carts")</li>
@@ -46,7 +56,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content"><br /><br /><br /><br /><br /><br />
         @RenderBody()
         <hr />
         <footer>

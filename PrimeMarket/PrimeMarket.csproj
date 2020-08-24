@@ -198,18 +198,21 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Areas\front_end\Controllers\CartsController.cs" />
-    <Compile Include="Areas\front_end\Controllers\CategoriesController.cs" />
+    <Compile Include="Areas\front_end\Controllers\FECategoriesController.cs" />
     <Compile Include="Areas\front_end\front_endAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\DistrictsController.cs" />
+    <Compile Include="Controllers\GovernoratesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrderStatusController.cs" />
     <Compile Include="Controllers\ShowCommoditiesController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -221,6 +224,12 @@
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\District.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Governorate.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
@@ -250,6 +259,9 @@
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubCategory.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Village.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -372,6 +384,11 @@
     <Content Include="Areas\front_end\Views\Categories\Details.cshtml" />
     <Content Include="Areas\front_end\Views\Categories\Edit.cshtml" />
     <Content Include="Areas\front_end\Views\Categories\Index.cshtml" />
+    <Content Include="Areas\front_end\Views\FECategories\Create.cshtml" />
+    <Content Include="Areas\front_end\Views\FECategories\Delete.cshtml" />
+    <Content Include="Areas\front_end\Views\FECategories\Details.cshtml" />
+    <Content Include="Areas\front_end\Views\FECategories\Edit.cshtml" />
+    <Content Include="Areas\front_end\Views\FECategories\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -461,6 +478,21 @@
     <Content Include="Views\Accounts\Details.cshtml" />
     <Content Include="Views\Accounts\Edit.cshtml" />
     <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\Governorates\Create.cshtml" />
+    <Content Include="Views\Governorates\Delete.cshtml" />
+    <Content Include="Views\Governorates\Details.cshtml" />
+    <Content Include="Views\Governorates\Edit.cshtml" />
+    <Content Include="Views\Governorates\Index.cshtml" />
+    <Content Include="Views\Districts\Create.cshtml" />
+    <Content Include="Views\Districts\Delete.cshtml" />
+    <Content Include="Views\Districts\Details.cshtml" />
+    <Content Include="Views\Districts\Edit.cshtml" />
+    <Content Include="Views\Districts\Index.cshtml" />
+    <Content Include="Views\Villages\Create.cshtml" />
+    <Content Include="Views\Villages\Delete.cshtml" />
+    <Content Include="Views\Villages\Details.cshtml" />
+    <Content Include="Views\Villages\Edit.cshtml" />
+    <Content Include="Views\Villages\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
