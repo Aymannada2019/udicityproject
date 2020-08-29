@@ -18,6 +18,7 @@ namespace PrimeMarket.Models
         public SubCategory()
         {
             this.ShowCommodities = new HashSet<ShowCommodity>();
+            this.SubSubCategories = new HashSet<SubSubCategory>();
         }
     
         public decimal SubCategoryId { get; set; }
@@ -28,5 +29,7 @@ namespace PrimeMarket.Models
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ShowCommodity> ShowCommodities { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<SubSubCategory> SubSubCategories { get; set; }
     }
 }

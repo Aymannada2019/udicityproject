@@ -26,6 +26,16 @@
         <AssociationConnector Association="PrimeMarketModel.FK_Account_Village" />
         <AssociationConnector Association="PrimeMarketModel.FK_District_Governorate" />
         <AssociationConnector Association="PrimeMarketModel.FK_Village_District" />
+        <EntityTypeShape EntityType="PrimeMarketModel.AspNetRole" Width="1.5" PointX="3.375" PointY="9.5" />
+        <EntityTypeShape EntityType="PrimeMarketModel.AspNetUserClaim" Width="1.5" PointX="7.875" PointY="10.625" />
+        <EntityTypeShape EntityType="PrimeMarketModel.AspNetUserLogin" Width="1.5" PointX="7.875" PointY="8" />
+        <EntityTypeShape EntityType="PrimeMarketModel.AspNetUser" Width="1.5" PointX="5.625" PointY="8.375" />
+        <EntityTypeShape EntityType="PrimeMarketModel.SubSubCategory" Width="1.5" PointX="3.75" PointY="14" />
+        <AssociationConnector Association="PrimeMarketModel.FK_ShowCommodity_Account" />
+        <AssociationConnector Association="PrimeMarketModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PrimeMarketModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" />
+        <AssociationConnector Association="PrimeMarketModel.FK_SubSubCategory_SubCategory" />
+        <AssociationConnector Association="PrimeMarketModel.AspNetUserRoles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

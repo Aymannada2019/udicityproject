@@ -20,6 +20,7 @@ namespace PrimeMarket.Models
             this.Carts = new HashSet<Cart>();
             this.Orders = new HashSet<Order>();
             this.Orders1 = new HashSet<Order>();
+            this.ShowCommodities = new HashSet<ShowCommodity>();
         }
     
         public decimal AccountId { get; set; }
@@ -38,5 +39,7 @@ namespace PrimeMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders1 { get; set; }
         public virtual Village Village { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ShowCommodity> ShowCommodities { get; set; }
     }
 }

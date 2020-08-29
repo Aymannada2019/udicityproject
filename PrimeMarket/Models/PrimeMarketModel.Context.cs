@@ -35,5 +35,10 @@ namespace PrimeMarket.Models
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Governorate> Governorates { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
+        public virtual DbSet<AspNetRole> AspNetRoles { get; set; }
+        public virtual DbSet<AspNetUserClaim> AspNetUserClaims { get; set; }
+        public virtual DbSet<AspNetUserLogin> AspNetUserLogins { get; set; }
+        public virtual DbSet<AspNetUser> AspNetUsers { get; set; }
+        public virtual DbSet<SubSubCategory> SubSubCategories { get; set; }
     }
 }

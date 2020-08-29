@@ -220,6 +220,18 @@
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AspNetRole.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUser.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserClaim.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AspNetUserLogin.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Cart.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -259,6 +271,9 @@
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SubCategory.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SubSubCategory.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Village.cs">
