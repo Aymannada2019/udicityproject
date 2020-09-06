@@ -1,11 +1,11 @@
 ﻿@model IEnumerable<PrimeMarket.Models.SubCategory>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "catfilter";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-
-<h2>Index</h2>
+<h2>catfilter</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -30,14 +30,8 @@
             @Html.DisplayFor(modelItem => item.SubCategory1)
         </td>
         <td>
-@if (item.ImagePath != null) { 
-    <img src="~/img/categories/@Html.DisplayFor(modelItem => item.ImagePath)" id="subcatimage" style="height:40px;width:40px;" name="subcatimage" />
-    //    onmouseover = "subcatimage.width = '300'; subcatimage.height = '200';"
-    //onmouseout = "subcatimage.width = '150'; subcatimage.height = '100';" 
-}
-else {
             @Html.DisplayFor(modelItem => item.ImagePath)
-}      </td>
+        </td>
         <td>
             @Html.DisplayFor(modelItem => item.Category.Category1)
         </td>

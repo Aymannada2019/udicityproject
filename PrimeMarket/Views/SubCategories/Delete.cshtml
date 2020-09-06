@@ -24,7 +24,13 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImagePath)
+@if (Model.ImagePath != null)
+{
+    <img src="~/img/categories/@Html.DisplayFor(model => model.ImagePath)" style="height:200px;width:250px;" />
+    <p>
+        @Html.DisplayFor(model => model.ImagePath)
+    </p>
+}
         </dd>
 
         <dt>

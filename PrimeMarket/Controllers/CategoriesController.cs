@@ -50,6 +50,15 @@ namespace PrimeMarket.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+                if (file != null)
+                {
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        + "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    category.ImagePath = "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    // subCategory.CategoryId = 8;
+                }
                 db.Categories.Add(category);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +92,21 @@ namespace PrimeMarket.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(category).State = EntityState.Modified;
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+
+                if (file != null)
+                {
+                    //delete old  image file
+                    string oldimageFilePath = Server.MapPath(@"~/img/categories/" + category.ImagePath);
+                   // if(oldimageFilePath!="")
+                    System.IO.File.Delete(oldimageFilePath);
+                    //upload new file
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        +  "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    category.ImagePath = "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

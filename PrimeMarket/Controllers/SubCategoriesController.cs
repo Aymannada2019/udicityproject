@@ -20,7 +20,17 @@ namespace PrimeMarket.Controllers
             var subCategories = db.SubCategories.Include(s => s.Category);
             return View(subCategories.ToList());
         }
+        public ActionResult catfilter(decimal CategoryId)
+        {
+           
+            var subCategories = db.SubCategories.Where(rs => rs.CategoryId == CategoryId);
+            if (subCategories == null)
+            {
+                return HttpNotFound();
+            }
 
+            return View(subCategories.ToList());
+        }
         // GET: SubCategories/Details/5
         public ActionResult Details(decimal id)
         {
@@ -52,6 +62,15 @@ namespace PrimeMarket.Controllers
         {
             if (ModelState.IsValid)
             {
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+                if (file != null)
+                {
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        + "SubCat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    subCategory.ImagePath = "SubCat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                  
+                }
                 db.SubCategories.Add(subCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -87,6 +106,19 @@ namespace PrimeMarket.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(subCategory).State = EntityState.Modified;
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+                if (file != null)
+                {
+                    //delete old  image file
+                    string oldimageFilePath = Server.MapPath(@"~/img/categories/" + subCategory.ImagePath);
+                    System.IO.File.Delete(oldimageFilePath);
+                    //upload new file
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        + "catid" + subCategory.CategoryId + "SubCat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    subCategory.ImagePath = "catid" + subCategory.CategoryId + "SubCat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

@@ -508,6 +508,7 @@
     <Content Include="Views\Villages\Details.cshtml" />
     <Content Include="Views\Villages\Edit.cshtml" />
     <Content Include="Views\Villages\Index.cshtml" />
+    <Content Include="Views\SubCategories\catfilter.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
