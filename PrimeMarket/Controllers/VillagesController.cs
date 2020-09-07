@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace PrimeMarket.Controllers
 {
     public class VillagesController : Controller
@@ -15,14 +16,24 @@ namespace PrimeMarket.Controllers
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
         // GET: Villages
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var villages = db.Villages.Include(v => v.District);
-            return View(villages.ToList());
+            return View(villages.ToList().ToPagedList(page ?? 1, 5));
         }
+        public ActionResult Villagesfilter(decimal DistrictId, int? page)
+        {
 
+            var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
+            if (villages == null)
+            {
+                return HttpNotFound();
+            }
+
+            return View(villages.ToList().ToPagedList(page ?? 1, 5));
+        }
         // GET: Villages/Details/5
-        public ActionResult Details(decimal id)
+        public ActionResult Details(decimal? id)
         {
             if (id == null)
             {
@@ -52,6 +63,10 @@ namespace PrimeMarket.Controllers
         {
             if (ModelState.IsValid)
             {
+                // get last record
+                decimal max = db.Villages.Max(p => p.VillageId);
+                // add 1 to get new record id                         
+                village.VillageId = (decimal)(max + 1);
                 db.Villages.Add(village);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -1,5 +1,6 @@
-﻿@model IEnumerable<PrimeMarket.Models.Governorate>
-
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<PrimeMarket.Models.Governorate>
 @{
     ViewBag.Title = "Index";
 }
@@ -7,12 +8,16 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create" )
 </p>
+@using(Html.BeginForm("Index", "Governorates", FormMethod.Get))
+{
+    <p><b>Search By:</b>@Html.TextBox("search") <input type="submit" value="Search" /></p>
+}
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Governorate1)
+            @Html.DisplayNameFor(model => model.First().Governorate1)
         </th>
         <th></th>
     </tr>
@@ -25,9 +30,11 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.GovernorateId }) |
             @Html.ActionLink("Details", "Details", new { id=item.GovernorateId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GovernorateId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.GovernorateId })|
+            @Html.ActionLink("Districts", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, htmlAttributes: null)
         </td>
     </tr>
 }
 
 </table>
+@Html.PagedListPager(Model,page => Url.Action("Index",new { page, search=Request.QueryString["search"] }))

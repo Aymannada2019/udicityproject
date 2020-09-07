@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace PrimeMarket.Controllers
 {
     public class SubCategoriesController : Controller
@@ -15,12 +16,12 @@ namespace PrimeMarket.Controllers
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
         // GET: SubCategories
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
             var subCategories = db.SubCategories.Include(s => s.Category);
-            return View(subCategories.ToList());
+            return View(subCategories.ToList().ToPagedList(page ?? 1, 5));
         }
-        public ActionResult catfilter(decimal CategoryId)
+        public ActionResult catfilter(decimal CategoryId, int? page)
         {
            
             var subCategories = db.SubCategories.Where(rs => rs.CategoryId == CategoryId);
@@ -29,7 +30,7 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
 
-            return View(subCategories.ToList());
+            return View(subCategories.ToList().ToPagedList(page ?? 1, 5));
         }
         // GET: SubCategories/Details/5
         public ActionResult Details(decimal id)

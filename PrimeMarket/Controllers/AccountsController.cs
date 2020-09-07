@@ -49,7 +49,15 @@ namespace PrimeMarket.Controllers
         public ActionResult Create([Bind(Include = "AccountId,Full_name,Address,Phones,Email,PassWord,ImagePath")] Account account)
         {
             if (ModelState.IsValid)
-            {
+            {//user image file
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+                if (file != null)
+                {
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        + "User" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    account.ImagePath = "User" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                }
                 db.Accounts.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -83,6 +91,19 @@ namespace PrimeMarket.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(account).State = EntityState.Modified;
+                HttpPostedFileBase file = Request.Files["ImagePath"];
+                if (file != null)
+                {
+                    //delete old  image file
+                    string oldimageFilePath = Server.MapPath(@"~/img/categories/" + account.ImagePath);
+                    System.IO.File.Delete(oldimageFilePath);
+                    //upload new file
+                    var fileext = file.FileName.Split('.');
+                    file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
+                                                        +  "User" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    account.ImagePath = "User" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+
+                }
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

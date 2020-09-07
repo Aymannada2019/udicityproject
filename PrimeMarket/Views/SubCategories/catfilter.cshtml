@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PrimeMarket.Models.SubCategory>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<PrimeMarket.Models.SubCategory>
 
 @{
     ViewBag.Title = "catfilter";
@@ -13,13 +15,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.SubCategory1)
+            @Html.DisplayNameFor(model => model.First().SubCategory1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
+            @Html.DisplayNameFor(model => model.First().ImagePath)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category.Category1)
+            @Html.DisplayNameFor(model => model.First().Category.Category1)
         </th>
         <th></th>
     </tr>
@@ -44,3 +46,5 @@
 }
 
 </table>
+
+@Html.PagedListPager(Model, page => Url.Action("catfilter", new { page }))

@@ -50,12 +50,22 @@
             @Html.DisplayFor(modelItem => item.PassWord)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.ImagePath)
+
+            @if (item.ImagePath != null)
+            {
+                <img src="~/img/categories/@Html.DisplayFor(modelItem => item.ImagePath)" id="userimage" style="height:40px;width:40px;" name="userimage" />              
+            }
+            else
+            {
+                @Html.DisplayFor(modelItem => item.ImagePath)
+            }
+            @*@Html.DisplayFor(modelItem => item.ImagePath)*@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.AccountId }) |
             @Html.ActionLink("Details", "Details", new { id=item.AccountId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.AccountId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.AccountId })|
+            @Html.ActionLink("Block", "Block", new { id = item.AccountId }) |
         </td>
     </tr>
 }

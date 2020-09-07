@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace PrimeMarket.Controllers
 {
     public class CategoriesController : Controller
@@ -15,9 +16,9 @@ namespace PrimeMarket.Controllers
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
         // GET: Categories
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
-            return View(db.Categories.ToList());
+            return View(db.Categories.ToList().ToPagedList(page ?? 1, 5));
         }
 
         // GET: Categories/Details/5
@@ -57,7 +58,7 @@ namespace PrimeMarket.Controllers
                     file.SaveAs(HttpContext.Server.MapPath("~/img/categories/")
                                                         + "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
                     category.ImagePath = "Cat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
-                    // subCategory.CategoryId = 8;
+                    
                 }
                 db.Categories.Add(category);
                 db.SaveChanges();

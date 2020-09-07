@@ -241,6 +241,10 @@ E:\Projects\2019\newprime\PrimeMarket\bin\Microsoft.Owin.Security.OAuth.xml
 E:\Projects\2019\newprime\PrimeMarket\bin\Microsoft.Owin.Security.Google.xml
 E:\Projects\2019\newprime\PrimeMarket\bin\Microsoft.Owin.Security.Twitter.xml
 E:\Projects\2019\newprime\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-E:\Projects\2019\newprime\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
 E:\Projects\2019\newprime\PrimeMarket\obj\Debug\PrimeMarket.dll
 E:\Projects\2019\newprime\PrimeMarket\obj\Debug\PrimeMarket.pdb
+E:\Projects\2019\newprime\PrimeMarket\bin\PagedList.dll
+E:\Projects\2019\newprime\PrimeMarket\bin\PagedList.Mvc.dll
+E:\Projects\2019\newprime\PrimeMarket\bin\PagedList.xml
+E:\Projects\2019\newprime\PrimeMarket\bin\PagedList.Mvc.xml
+E:\Projects\2019\newprime\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
