@@ -87,7 +87,9 @@ namespace PrimeMarket.Controllers
             {
                 var tobeupdatedAccount = db.AspNetUsers.Where(u => u.Id == account.Id).FirstOrDefault(); //extendit fun.
                 //var xx = (from u in db.AspNetUsers where u.Id == account.Id orderby u.Email select u).FirstOrDefault();//sql like
+
                 tobeupdatedAccount.FullName = account.FullName;
+                tobeupdatedAccount.Address = account.Address;
                 tobeupdatedAccount.PhoneNumber = account.PhoneNumber;
 
                 db.Entry(tobeupdatedAccount).State = EntityState.Modified;

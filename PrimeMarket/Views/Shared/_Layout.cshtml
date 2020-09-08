@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -49,7 +51,7 @@
                     <li>@Html.ActionLink("السلع التى تم إضافتها للعربة", "Index", "Carts")</li>
 
                     <li>@Html.ActionLink("أوامر الشراء", "Index", "Orders")</li>
-                    <li>@Html.ActionLink("حسابى", "Details/1", "Accounts")</li>
+                    <li>@Html.ActionLink("حسابى", "Details/"+ User.Identity.GetUserId(), "Accounts")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

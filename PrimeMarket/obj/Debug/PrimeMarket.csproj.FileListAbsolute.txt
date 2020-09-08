@@ -326,3 +326,7 @@ G:\PRIMEMarket\PrimeMarket\bin\Microsoft.Owin.Security.OAuth.xml
 G:\PRIMEMarket\PrimeMarket\bin\Microsoft.Owin.Security.Google.xml
 G:\PRIMEMarket\PrimeMarket\bin\Microsoft.Owin.Security.Twitter.xml
 G:\PRIMEMarket\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+G:\PRIMEMarket\PrimeMarket\bin\PagedList.dll
+G:\PRIMEMarket\PrimeMarket\bin\PagedList.Mvc.dll
+G:\PRIMEMarket\PrimeMarket\bin\PagedList.xml
+G:\PRIMEMarket\PrimeMarket\bin\PagedList.Mvc.xml
