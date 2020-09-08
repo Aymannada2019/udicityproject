@@ -1,4 +1,4 @@
-﻿@model PrimeMarket.Models.Account
+﻿@model PrimeMarket.Models.AspNetUser
 
 @{
     ViewBag.Title = "Delete";
@@ -12,11 +12,11 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Full_name)
+            @Html.DisplayNameFor(model => model.FullName)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Full_name)
+            @Html.DisplayFor(model => model.FullName)
         </dd>
 
         <dt>
@@ -28,11 +28,11 @@
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Phones)
+            @Html.DisplayNameFor(model => model.PhoneNumber)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Phones)
+            @Html.DisplayFor(model => model.PhoneNumber)
         </dd>
 
         <dt>
@@ -43,30 +43,20 @@
             @Html.DisplayFor(model => model.Email)
         </dd>
 
-        <dt>
+        @*<dt>
             @Html.DisplayNameFor(model => model.PassWord)
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.PassWord)
-        </dd>
+        </dd>*@
 
         <dt>
             @Html.DisplayNameFor(model => model.ImagePath)
         </dt>
 
         <dd>
-            @if (Model.ImagePath != "")
-            {
-
-                <img src="~/img/categories/@Html.DisplayFor(model => model.ImagePath)" style="height:200px;width:200px;" name="subcatimage" onmouseover="subcatimage.width = '500'; subcatimage.height = '400';"
-                     onmouseout="subcatimage.width = '250'; subcatimage.height = '200';" />
-            }
-            else
-            {
-                @Html.DisplayFor(model => model.ImagePath)
-            }
-            @*@Html.DisplayFor(model => model.ImagePath)*@
+            @Html.DisplayFor(model => model.ImagePath)
         </dd>
 
     </dl>

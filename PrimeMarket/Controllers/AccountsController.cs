@@ -89,7 +89,7 @@ namespace PrimeMarket.Controllers
                 //var xx = (from u in db.AspNetUsers where u.Id == account.Id orderby u.Email select u).FirstOrDefault();//sql like
                 tobeupdatedAccount.FullName = account.FullName;
                 tobeupdatedAccount.PhoneNumber = account.PhoneNumber;
-                
+
                 db.Entry(tobeupdatedAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
