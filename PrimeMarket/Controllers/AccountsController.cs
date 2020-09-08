@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
+using System.Data.Entity.Validation;
 
 namespace PrimeMarket.Controllers
 {
@@ -17,17 +18,17 @@ namespace PrimeMarket.Controllers
         // GET: Accounts
         public ActionResult Index()
         {
-            return View(db.Accounts.ToList());
+            return View(db.AspNetUsers.ToList());
         }
 
         // GET: Accounts/Details/5
-        public ActionResult Details(decimal id)
+        public ActionResult Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Find(id);
+            AspNetUser account = db.AspNetUsers.Find(id);
             if (account == null)
             {
                 return HttpNotFound();
@@ -46,11 +47,12 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AccountId,Full_name,Address,Phones,Email,PassWord,ImagePath")] Account account)
+        //public ActionResult Create([Bind(Include = "AccountId,FullName,Address,Phones,Email,PassWord,ImagePath")] Account account)
+        public ActionResult Create(AspNetUser account)
         {
             if (ModelState.IsValid)
             {
-                db.Accounts.Add(account);
+                db.AspNetUsers.Add(account);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -59,13 +61,13 @@ namespace PrimeMarket.Controllers
         }
 
         // GET: Accounts/Edit/5
-        public ActionResult Edit(decimal id)
+        public ActionResult Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Find(id);
+            AspNetUser account = db.AspNetUsers.Find(id);
             if (account == null)
             {
                 return HttpNotFound();
@@ -78,11 +80,17 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AccountId,Full_name,Address,Phones,Email,PassWord,ImagePath")] Account account)
+        //public ActionResult Edit([Bind(Include = "Id,FullName,Address,Phones,Email,PassWord,ImagePath")] AspNetUser account)
+        public ActionResult Edit(AspNetUser account)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(account).State = EntityState.Modified;
+                var tobeupdatedAccount = db.AspNetUsers.Where(u => u.Id == account.Id).FirstOrDefault(); //extendit fun.
+                //var xx = (from u in db.AspNetUsers where u.Id == account.Id orderby u.Email select u).FirstOrDefault();//sql like
+                tobeupdatedAccount.FullName = account.FullName;
+                tobeupdatedAccount.PhoneNumber = account.PhoneNumber;
+
+                db.Entry(tobeupdatedAccount).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -90,13 +98,13 @@ namespace PrimeMarket.Controllers
         }
 
         // GET: Accounts/Delete/5
-        public ActionResult Delete(decimal id)
+        public ActionResult Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Account account = db.Accounts.Find(id);
+            AspNetUser account = db.AspNetUsers.Find(id);
             if (account == null)
             {
                 return HttpNotFound();
@@ -107,10 +115,10 @@ namespace PrimeMarket.Controllers
         // POST: Accounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(decimal id)
+        public ActionResult DeleteConfirmed(string id)
         {
-            Account account = db.Accounts.Find(id);
-            db.Accounts.Remove(account);
+            AspNetUser account = db.AspNetUsers.Find(id);
+            db.AspNetUsers.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

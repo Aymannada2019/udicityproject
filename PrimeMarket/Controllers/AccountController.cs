@@ -149,6 +149,8 @@ namespace PrimeMarket.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Register(RegisterViewModel model)
         {
+            PrimeMarketEntities db = new PrimeMarketEntities();
+
             if (ModelState.IsValid)
             {
                 var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
@@ -156,12 +158,33 @@ namespace PrimeMarket.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    /*
+                    Account a = new Account();
+                    //"AccountId,FullName,Address,Phones,Email,PassWord,ImagePath"
+                    a.AccountId = 5;
+                    a.FullName = "FromCode";// model.Email;
+                    //a.Address = "aaaaaaaaa";
+                    a.Phones = "000";
+                    //a.Email = model.Email;
+                    a.PassWord = "Default";
+                    //return RedirectToAction("Create", "Accounts", new { account = a });
+
+                    db.Accounts.Add(a);
+                    //db.Accounts.Create()
+                    //return RedirectToAction("Index", "Accounts");  //okkkkkkkkkkkk
+
+                    //return RedirectToAction("Details", "Accounts", new { id = 2 }); //a.AccountId //okkkkkkkkkkk
+                    //return Redirect("/Accounts/Details/2");  //okkkkkkkkkkk
+                    */
+
+
 
                     return RedirectToAction("Index", "Home");
                 }
