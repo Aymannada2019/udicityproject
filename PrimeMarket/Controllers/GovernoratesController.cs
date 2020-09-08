@@ -7,7 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using PrimeMarket.Models;
-
+using PagedList;
+using PagedList.Mvc;
 namespace PrimeMarket.Controllers
 {
     public class GovernoratesController : Controller
@@ -15,11 +16,40 @@ namespace PrimeMarket.Controllers
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
         // GET: Governorates
-        public ActionResult Index()
+        public ActionResult Index(string search, int? page)
         {
-            return View(db.Governorates.ToList());
+            // return View(this.GetGovernorates(1));
+            if (search != null && search !="") 
+            return View(db.Governorates.Where(x => x.Governorate1.StartsWith(search) || search==null). ToList().ToPagedList(page ?? 1, 5));
+            else
+                return View(db.Governorates.ToList().ToPagedList(page ?? 1, 5));
         }
+       // [HttpPost]
+        //public ActionResult Index(int currentPageIndex)
+        //{
+        //    return View(this.GetGovernorates(currentPageIndex));
+        //}
+        //private GovernorateModel GetGovernorates(int currentPage)
+        //{
+        //    int maxRows = 2;
+        //    using (PrimeMarketEntities entities = new PrimeMarketEntities())
+        //    {
+        //        GovernorateModel GovModel = new GovernorateModel();
 
+        //        GovModel.Governorates = (from governorates in entities.Governorates
+        //                                   select governorates)
+        //                    .OrderBy(governorates => governorates.GovernorateId)
+        //                    .Skip((currentPage - 1) * maxRows)
+        //                    .Take(maxRows).ToList();
+
+        //        double pageCount = (double)((decimal)entities.Governorates.Count() / Convert.ToDecimal(maxRows));
+        //        GovModel.PageCount = (int)Math.Ceiling(pageCount);
+
+        //        GovModel.CurrentPageIndex = currentPage;
+
+        //        return GovModel;
+        //    }
+        //}
         // GET: Governorates/Details/5
         public ActionResult Details(short? id)
         {
@@ -50,7 +80,12 @@ namespace PrimeMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Governorates.Add(governorate);
+                
+                // get last record
+                int max = db.Governorates.Max(p => p.GovernorateId);
+ // add 1 to get new record id                         
+                governorate.GovernorateId = (short)(max + 1);
+db.Governorates.Add(governorate);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }

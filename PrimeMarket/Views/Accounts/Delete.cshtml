@@ -56,7 +56,17 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImagePath)
+            @if (Model.ImagePath != "")
+            {
+
+                <img src="~/img/categories/@Html.DisplayFor(model => model.ImagePath)" style="height:200px;width:200px;" name="subcatimage" onmouseover="subcatimage.width = '500'; subcatimage.height = '400';"
+                     onmouseout="subcatimage.width = '250'; subcatimage.height = '200';" />
+            }
+            else
+            {
+                @Html.DisplayFor(model => model.ImagePath)
+            }
+            @*@Html.DisplayFor(model => model.ImagePath)*@
         </dd>
 
     </dl>

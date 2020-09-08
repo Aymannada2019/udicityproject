@@ -1,4 +1,6 @@
-﻿@model IEnumerable<PrimeMarket.Models.Category>
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<PrimeMarket.Models.Category>
 
 @{
     ViewBag.Title = "Index";
@@ -8,15 +10,15 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Add New")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Category1)
+            @Html.DisplayNameFor(model => model.First().Category1)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.ImagePath)
+            @Html.DisplayNameFor(model => model.First().ImagePath)
         </th>
         <th></th>
     </tr>
@@ -50,3 +52,4 @@
 }
 
 </table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))

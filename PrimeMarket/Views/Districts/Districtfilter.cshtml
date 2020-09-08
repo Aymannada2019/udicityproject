@@ -3,7 +3,7 @@
 @model IPagedList<PrimeMarket.Models.District>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Districtfilter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -15,32 +15,29 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().Governorate.Governorate1)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.First().District1)
         </th>
-      
+        <th>
+            @Html.DisplayNameFor(model => model.First().Governorate.Governorate1)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.District1)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Governorate.Governorate1)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.District1)
-        </td>
-     
-        <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.DistrictId }) |
             @Html.ActionLink("Details", "Details", new { id=item.DistrictId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DistrictId })|
-            @Html.ActionLink("Villages", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId }, htmlAttributes: null)
+            @Html.ActionLink("Delete", "Delete", new { id=item.DistrictId })
         </td>
     </tr>
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Districtfilter", new { page }))

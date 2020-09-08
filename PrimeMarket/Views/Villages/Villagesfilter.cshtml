@@ -3,7 +3,7 @@
 @model IPagedList<PrimeMarket.Models.Village>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Villagesfilter";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <br /><br /><br />
@@ -15,24 +15,22 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.First().District.District1)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.First().Village1)
         </th>
-      
+        <th>
+            @Html.DisplayNameFor(model => model.First().District.District1)
+        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.District.District1)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Village1)
         </td>
-      
+        <td>
+            @Html.DisplayFor(modelItem => item.District.District1)
+        </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.VillageId }) |
             @Html.ActionLink("Details", "Details", new { id=item.VillageId }) |
@@ -42,4 +40,4 @@
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page }))
