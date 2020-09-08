@@ -17,7 +17,7 @@ namespace PrimeMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Village()
         {
-            this.Accounts = new HashSet<Account>();
+            this.AspNetUsers = new HashSet<AspNetUser>();
         }
     
         public decimal VillageId { get; set; }
@@ -25,7 +25,7 @@ namespace PrimeMarket.Models
         public Nullable<int> DistrictId { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Account> Accounts { get; set; }
+        public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual District District { get; set; }
     }
 }

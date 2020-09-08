@@ -17,7 +17,7 @@ namespace PrimeMarket.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.Account).Include(o => o.Account1).Include(o => o.OrderStatu).Include(o => o.ShowCommodity);
+            var orders = db.Orders.Include(o => o.AspNetUser).Include(o => o.AspNetUser).Include(o => o.OrderStatu).Include(o => o.Commodity);
             return View(orders.ToList());
         }
 
@@ -39,10 +39,10 @@ namespace PrimeMarket.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.SellerId = new SelectList(db.Accounts, "AccountId", "Full_name");
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name");
+            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus");
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title");
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title");
             return View();
         }
 
@@ -60,10 +60,10 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SellerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.CustomerId);
+            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", order.ShowCommodityId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
             return View(order);
         }
 
@@ -79,10 +79,10 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SellerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.CustomerId);
+            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", order.ShowCommodityId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
             return View(order);
         }
 
@@ -99,10 +99,10 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SellerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", order.CustomerId);
+            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", order.ShowCommodityId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
             return View(order);
         }
 

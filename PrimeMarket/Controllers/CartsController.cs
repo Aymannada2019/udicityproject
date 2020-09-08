@@ -17,7 +17,7 @@ namespace PrimeMarket.Controllers
         // GET: Carts
         public ActionResult Index()
         {
-            var carts = db.Carts.Include(c => c.Account).Include(c => c.ShowCommodity);
+            var carts = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity);
             return View(carts.ToList());
         }
 
@@ -39,8 +39,8 @@ namespace PrimeMarket.Controllers
         // GET: Carts/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name");
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title");
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title");
             return View();
         }
 
@@ -58,8 +58,8 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", cart.ShowCommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 
@@ -75,8 +75,8 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", cart.ShowCommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 
@@ -93,8 +93,8 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.Accounts, "AccountId", "Full_name", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.ShowCommodities, "ShowCommodityId", "Title", cart.ShowCommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
+            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 

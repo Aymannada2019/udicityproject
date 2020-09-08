@@ -12,34 +12,33 @@ namespace PrimeMarket.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Account
+    public partial class Commodity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Account()
+        public Commodity()
         {
             this.Carts = new HashSet<Cart>();
             this.Orders = new HashSet<Order>();
-            this.Orders1 = new HashSet<Order>();
-            this.ShowCommodities = new HashSet<ShowCommodity>();
         }
     
-        public decimal AccountId { get; set; }
-        public string Full_name { get; set; }
-        public string Address { get; set; }
-        public string Phones { get; set; }
-        public string Email { get; set; }
-        public string PassWord { get; set; }
+        public decimal CommodityId { get; set; }
+        public string Title { get; set; }
+        public string Details { get; set; }
+        public Nullable<decimal> SubCategoryId { get; set; }
+        public string SellerId { get; set; }
+        public Nullable<double> Price { get; set; }
+        public string PriceNote { get; set; }
         public string ImagePath { get; set; }
-        public Nullable<decimal> VillageId { get; set; }
+        public bool Available { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
+        public Nullable<int> Rating { get; set; }
+        public Nullable<System.DateTime> ExpireDate { get; set; }
     
+        public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cart> Carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Order> Orders { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Order> Orders1 { get; set; }
-        public virtual Village Village { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShowCommodity> ShowCommodities { get; set; }
+        public virtual SubCategory SubCategory { get; set; }
     }
 }

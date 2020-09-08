@@ -12,13 +12,12 @@ namespace PrimeMarket.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class SubSubCategory
+    public partial class sysdiagram
     {
-        public decimal SubSubCategoryId { get; set; }
-        public string SubSubCategory1 { get; set; }
-        public Nullable<decimal> SubCategoryId { get; set; }
-        public string ImagePath { get; set; }
-    
-        public virtual SubCategory SubCategory { get; set; }
+        public string name { get; set; }
+        public int principal_id { get; set; }
+        public int diagram_id { get; set; }
+        public Nullable<int> version { get; set; }
+        public byte[] definition { get; set; }
     }
 }

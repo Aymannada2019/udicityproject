@@ -17,7 +17,7 @@ namespace PrimeMarket.Controllers
         // GET: ShowCommodities
         public ActionResult Index()
         {
-            var showCommodities = db.ShowCommodities.Include(s => s.SubCategory);
+            var showCommodities = db.Commodities.Include(s => s.SubCategory);
             return View(showCommodities.ToList());
         }
 
@@ -28,7 +28,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShowCommodity showCommodity = db.ShowCommodities.Find(id);
+            Commodity showCommodity = db.Commodities.Find(id);
             if (showCommodity == null)
             {
                 return HttpNotFound();
@@ -48,11 +48,11 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ShowCommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceNote,ImagePath,Available,CreationDate,Rating,ExpireDate")] ShowCommodity showCommodity)
+        public ActionResult Create([Bind(Include = "ShowCommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceNote,ImagePath,Available,CreationDate,Rating,ExpireDate")] Commodity showCommodity)
         {
             if (ModelState.IsValid)
             {
-                db.ShowCommodities.Add(showCommodity);
+                db.Commodities.Add(showCommodity);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -68,7 +68,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShowCommodity showCommodity = db.ShowCommodities.Find(id);
+            Commodity showCommodity = db.Commodities.Find(id);
             if (showCommodity == null)
             {
                 return HttpNotFound();
@@ -82,7 +82,7 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ShowCommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceNote,ImagePath,Available,CreationDate,Rating,ExpireDate")] ShowCommodity showCommodity)
+        public ActionResult Edit([Bind(Include = "ShowCommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceNote,ImagePath,Available,CreationDate,Rating,ExpireDate")] Commodity showCommodity)
         {
             if (ModelState.IsValid)
             {
@@ -101,7 +101,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ShowCommodity showCommodity = db.ShowCommodities.Find(id);
+            Commodity showCommodity = db.Commodities.Find(id);
             if (showCommodity == null)
             {
                 return HttpNotFound();
@@ -114,8 +114,8 @@ namespace PrimeMarket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            ShowCommodity showCommodity = db.ShowCommodities.Find(id);
-            db.ShowCommodities.Remove(showCommodity);
+            Commodity showCommodity = db.Commodities.Find(id);
+            db.Commodities.Remove(showCommodity);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

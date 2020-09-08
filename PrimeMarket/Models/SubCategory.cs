@@ -17,8 +17,7 @@ namespace PrimeMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public SubCategory()
         {
-            this.ShowCommodities = new HashSet<ShowCommodity>();
-            this.SubSubCategories = new HashSet<SubSubCategory>();
+            this.Commodities = new HashSet<Commodity>();
         }
     
         public decimal SubCategoryId { get; set; }
@@ -28,8 +27,6 @@ namespace PrimeMarket.Models
     
         public virtual Category Category { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ShowCommodity> ShowCommodities { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubSubCategory> SubSubCategories { get; set; }
+        public virtual ICollection<Commodity> Commodities { get; set; }
     }
 }

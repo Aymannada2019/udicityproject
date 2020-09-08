@@ -16,9 +16,9 @@ namespace PrimeMarket.Models
     {
         public decimal OrderId { get; set; }
         public Nullable<decimal> OrderStatusId { get; set; }
-        public Nullable<decimal> CustomerId { get; set; }
-        public Nullable<decimal> SellerId { get; set; }
-        public Nullable<decimal> ShowCommodityId { get; set; }
+        public string CustomerId { get; set; }
+        public string SellerId { get; set; }
+        public Nullable<decimal> CommodityId { get; set; }
         public Nullable<decimal> Quantity { get; set; }
         public Nullable<System.DateTime> RequestDate { get; set; }
         public Nullable<System.DateTime> DeliveryDate { get; set; }
@@ -27,9 +27,9 @@ namespace PrimeMarket.Models
         public Nullable<int> SellerRating { get; set; }
         public Nullable<int> CustomerRating { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual Account Account1 { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
+        public virtual Commodity Commodity { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }
-        public virtual ShowCommodity ShowCommodity { get; set; }
     }
 }

@@ -15,12 +15,12 @@ namespace PrimeMarket.Models
     public partial class Cart
     {
         public decimal CartId { get; set; }
-        public Nullable<decimal> CustomerId { get; set; }
-        public Nullable<decimal> ShowCommodityId { get; set; }
+        public string CustomerId { get; set; }
+        public Nullable<decimal> CommodityId { get; set; }
         public Nullable<System.DateTime> CartDate { get; set; }
         public Nullable<double> Quantity { get; set; }
     
-        public virtual Account Account { get; set; }
-        public virtual ShowCommodity ShowCommodity { get; set; }
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual Commodity Commodity { get; set; }
     }
 }
