@@ -6,74 +6,100 @@
     <EntitySet Name="AspNetUserLogins" EntityType="PrimeMarketModel.AspNetUserLogin" />
     <EntitySet Name="AspNetUsers" EntityType="PrimeMarketModel.AspNetUser" />
     <EntitySet Name="Carts" EntityType="PrimeMarketModel.Cart" />
+    <EntitySet Name="CartStatus" EntityType="PrimeMarketModel.CartStatu" />
     <EntitySet Name="Categories" EntityType="PrimeMarketModel.Category" />
     <EntitySet Name="Commodities" EntityType="PrimeMarketModel.Commodity" />
+    <EntitySet Name="CommodityImages" EntityType="PrimeMarketModel.CommodityImage" />
+    <EntitySet Name="CommodityRatings" EntityType="PrimeMarketModel.CommodityRating" />
     <EntitySet Name="Districts" EntityType="PrimeMarketModel.District" />
     <EntitySet Name="Governorates" EntityType="PrimeMarketModel.Governorate" />
     <EntitySet Name="Orders" EntityType="PrimeMarketModel.Order" />
+    <EntitySet Name="OrderItems" EntityType="PrimeMarketModel.OrderItem" />
     <EntitySet Name="OrderStatus" EntityType="PrimeMarketModel.OrderStatu" />
+    <EntitySet Name="PaymentMethods" EntityType="PrimeMarketModel.PaymentMethod" />
+    <EntitySet Name="PriceUnits" EntityType="PrimeMarketModel.PriceUnit" />
     <EntitySet Name="SubCategories" EntityType="PrimeMarketModel.SubCategory" />
-    <EntitySet Name="sysdiagrams" EntityType="PrimeMarketModel.sysdiagram" />
+    <EntitySet Name="UserRatings" EntityType="PrimeMarketModel.UserRating" />
     <EntitySet Name="Villages" EntityType="PrimeMarketModel.Village" />
-    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="PrimeMarketModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <AssociationSet Name="FK__AspNetUse__UserI__7D439ABD" Association="PrimeMarketModel.FK__AspNetUse__UserI__7D439ABD">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserClaim" EntitySet="AspNetUserClaims" />
     </AssociationSet>
-    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="PrimeMarketModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <AssociationSet Name="FK__AspNetUse__UserI__7E37BEF6" Association="PrimeMarketModel.FK__AspNetUse__UserI__7E37BEF6">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="AspNetUserLogin" EntitySet="AspNetUserLogins" />
     </AssociationSet>
-    <AssociationSet Name="FK_AspNetUsers_Village" Association="PrimeMarketModel.FK_AspNetUsers_Village">
+    <AssociationSet Name="FK__AspNetUse__Villa__01142BA1" Association="PrimeMarketModel.FK__AspNetUse__Villa__01142BA1">
       <End Role="Village" EntitySet="Villages" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <AssociationSet Name="FK_Cart_AspNetUsers" Association="PrimeMarketModel.FK_Cart_AspNetUsers">
+    <AssociationSet Name="FK__Cart__CustomerId__02084FDA" Association="PrimeMarketModel.FK__Cart__CustomerId__02084FDA">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="Cart" EntitySet="Carts" />
     </AssociationSet>
-    <AssociationSet Name="FK_Commodity_AspNetUsers" Association="PrimeMarketModel.FK_Commodity_AspNetUsers">
+    <AssociationSet Name="FK__Commodity__Revie__07C12930" Association="PrimeMarketModel.FK__Commodity__Revie__07C12930">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="CommodityRating" EntitySet="CommodityRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Commodity__Selle__03F0984C" Association="PrimeMarketModel.FK__Commodity__Selle__03F0984C">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="Commodity" EntitySet="Commodities" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_AspNetUsers" Association="PrimeMarketModel.FK_Order_AspNetUsers">
+    <AssociationSet Name="FK__Order__CustomerI__0A9D95DB" Association="PrimeMarketModel.FK__Order__CustomerI__0A9D95DB">
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
       <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_AspNetUsers1" Association="PrimeMarketModel.FK_Order_AspNetUsers1">
-      <End Role="AspNetUser" EntitySet="AspNetUsers" />
-      <End Role="Order" EntitySet="Orders" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Cart_ShowCommodity" Association="PrimeMarketModel.FK_Cart_ShowCommodity">
+    <AssociationSet Name="FK__Cart__CommodityI__02FC7413" Association="PrimeMarketModel.FK__Cart__CommodityI__02FC7413">
       <End Role="Commodity" EntitySet="Commodities" />
       <End Role="Cart" EntitySet="Carts" />
     </AssociationSet>
-    <AssociationSet Name="FK_SubCategory_Category" Association="PrimeMarketModel.FK_SubCategory_Category">
+    <AssociationSet Name="FK__SubCatego__Categ__0E6E26BF" Association="PrimeMarketModel.FK__SubCatego__Categ__0E6E26BF">
       <End Role="Category" EntitySet="Categories" />
       <End Role="SubCategory" EntitySet="SubCategories" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_ShowCommodity" Association="PrimeMarketModel.FK_Order_ShowCommodity">
+    <AssociationSet Name="FK__Commodity__Commo__06CD04F7" Association="PrimeMarketModel.FK__Commodity__Commo__06CD04F7">
       <End Role="Commodity" EntitySet="Commodities" />
-      <End Role="Order" EntitySet="Orders" />
+      <End Role="CommodityImage" EntitySet="CommodityImages" />
     </AssociationSet>
-    <AssociationSet Name="FK_ShowCommodity_SubCategory" Association="PrimeMarketModel.FK_ShowCommodity_SubCategory">
+    <AssociationSet Name="FK__Commodity__Commo__08B54D69" Association="PrimeMarketModel.FK__Commodity__Commo__08B54D69">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="CommodityRating" EntitySet="CommodityRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Commodity__Price__04E4BC85" Association="PrimeMarketModel.FK__Commodity__Price__04E4BC85">
+      <End Role="PriceUnit" EntitySet="PriceUnits" />
+      <End Role="Commodity" EntitySet="Commodities" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Commodity__SubCa__05D8E0BE" Association="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE">
       <End Role="SubCategory" EntitySet="SubCategories" />
       <End Role="Commodity" EntitySet="Commodities" />
     </AssociationSet>
-    <AssociationSet Name="FK_District_Governorate" Association="PrimeMarketModel.FK_District_Governorate">
+    <AssociationSet Name="FK__OrderItem__Commo__0C85DE4D" Association="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D">
+      <End Role="Commodity" EntitySet="Commodities" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
+    </AssociationSet>
+    <AssociationSet Name="FK__District__Govern__09A971A2" Association="PrimeMarketModel.FK__District__Govern__09A971A2">
       <End Role="Governorate" EntitySet="Governorates" />
       <End Role="District" EntitySet="Districts" />
     </AssociationSet>
-    <AssociationSet Name="FK_Village_District1" Association="PrimeMarketModel.FK_Village_District1">
+    <AssociationSet Name="FK__Village__Distric__0F624AF8" Association="PrimeMarketModel.FK__Village__Distric__0F624AF8">
       <End Role="District" EntitySet="Districts" />
       <End Role="Village" EntitySet="Villages" />
     </AssociationSet>
-    <AssociationSet Name="FK_Order_OrderStatus" Association="PrimeMarketModel.FK_Order_OrderStatus">
+    <AssociationSet Name="FK__Order__OrderStat__0B91BA14" Association="PrimeMarketModel.FK__Order__OrderStat__0B91BA14">
       <End Role="OrderStatu" EntitySet="OrderStatus" />
       <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+    <AssociationSet Name="FK__OrderItem__Order__0D7A0286" Association="PrimeMarketModel.FK__OrderItem__Order__0D7A0286">
+      <End Role="Order" EntitySet="Orders" />
+      <End Role="OrderItem" EntitySet="OrderItems" />
     </AssociationSet>
     <AssociationSet Name="AspNetUserRoles" Association="PrimeMarketModel.AspNetUserRoles">
       <End Role="AspNetRole" EntitySet="AspNetRoles" />
       <End Role="AspNetUser" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Order__PaymentMe__10566F31" Association="PrimeMarketModel.FK__Order__PaymentMe__10566F31">
+      <End Role="PaymentMethod" EntitySet="PaymentMethods" />
+      <End Role="Order" EntitySet="Orders" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
@@ -92,7 +118,7 @@
     <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__AspNetUse__UserI__7D439ABD" FromRole="AspNetUserClaim" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUserLogin">
     <Key>
@@ -103,7 +129,7 @@
     <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="UserId" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__AspNetUse__UserI__7E37BEF6" FromRole="AspNetUserLogin" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="AspNetUser">
     <Key>
@@ -125,13 +151,13 @@
     <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="VillageId" Type="Decimal" Precision="18" Scale="0" />
-    <NavigationProperty Name="AspNetUserClaims" Relationship="PrimeMarketModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
-    <NavigationProperty Name="AspNetUserLogins" Relationship="PrimeMarketModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
-    <NavigationProperty Name="Village" Relationship="PrimeMarketModel.FK_AspNetUsers_Village" FromRole="AspNetUser" ToRole="Village" />
-    <NavigationProperty Name="Carts" Relationship="PrimeMarketModel.FK_Cart_AspNetUsers" FromRole="AspNetUser" ToRole="Cart" />
-    <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK_Commodity_AspNetUsers" FromRole="AspNetUser" ToRole="Commodity" />
-    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK_Order_AspNetUsers" FromRole="AspNetUser" ToRole="Order" />
-    <NavigationProperty Name="Orders1" Relationship="PrimeMarketModel.FK_Order_AspNetUsers1" FromRole="AspNetUser" ToRole="Order" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="PrimeMarketModel.FK__AspNetUse__UserI__7D439ABD" FromRole="AspNetUser" ToRole="AspNetUserClaim" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="PrimeMarketModel.FK__AspNetUse__UserI__7E37BEF6" FromRole="AspNetUser" ToRole="AspNetUserLogin" />
+    <NavigationProperty Name="Village" Relationship="PrimeMarketModel.FK__AspNetUse__Villa__01142BA1" FromRole="AspNetUser" ToRole="Village" />
+    <NavigationProperty Name="Carts" Relationship="PrimeMarketModel.FK__Cart__CustomerId__02084FDA" FromRole="AspNetUser" ToRole="Cart" />
+    <NavigationProperty Name="CommodityRatings" Relationship="PrimeMarketModel.FK__Commodity__Revie__07C12930" FromRole="AspNetUser" ToRole="CommodityRating" />
+    <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK__Commodity__Selle__03F0984C" FromRole="AspNetUser" ToRole="Commodity" />
+    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__CustomerI__0A9D95DB" FromRole="AspNetUser" ToRole="Order" />
     <NavigationProperty Name="AspNetRoles" Relationship="PrimeMarketModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
   </EntityType>
   <EntityType Name="Cart">
@@ -143,8 +169,16 @@
     <Property Name="CommodityId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="CartDate" Type="DateTime" Precision="0" />
     <Property Name="Quantity" Type="Double" />
-    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK_Cart_AspNetUsers" FromRole="Cart" ToRole="AspNetUser" />
-    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK_Cart_ShowCommodity" FromRole="Cart" ToRole="Commodity" />
+    <Property Name="CartStatusId" Type="Byte" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__Cart__CustomerId__02084FDA" FromRole="Cart" ToRole="AspNetUser" />
+    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__Cart__CommodityI__02FC7413" FromRole="Cart" ToRole="Commodity" />
+  </EntityType>
+  <EntityType Name="CartStatu">
+    <Key>
+      <PropertyRef Name="CartStatusId" />
+    </Key>
+    <Property Name="CartStatusId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CartStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Category">
     <Key>
@@ -153,7 +187,7 @@
     <Property Name="CategoryId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Category1" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="SubCategories" Relationship="PrimeMarketModel.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+    <NavigationProperty Name="SubCategories" Relationship="PrimeMarketModel.FK__SubCatego__Categ__0E6E26BF" FromRole="Category" ToRole="SubCategory" />
   </EntityType>
   <EntityType Name="Commodity">
     <Key>
@@ -165,16 +199,43 @@
     <Property Name="SubCategoryId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="SellerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Price" Type="Double" />
+    <Property Name="PriceUnitId" Type="Byte" />
     <Property Name="PriceNote" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="ImagePath" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Available" Type="Boolean" Nullable="false" />
+    <Property Name="Publish" Type="Boolean" />
     <Property Name="CreationDate" Type="DateTime" Precision="0" />
-    <Property Name="Rating" Type="Int32" />
     <Property Name="ExpireDate" Type="DateTime" Precision="0" />
-    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK_Commodity_AspNetUsers" FromRole="Commodity" ToRole="AspNetUser" />
-    <NavigationProperty Name="Carts" Relationship="PrimeMarketModel.FK_Cart_ShowCommodity" FromRole="Commodity" ToRole="Cart" />
-    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK_Order_ShowCommodity" FromRole="Commodity" ToRole="Order" />
-    <NavigationProperty Name="SubCategory" Relationship="PrimeMarketModel.FK_ShowCommodity_SubCategory" FromRole="Commodity" ToRole="SubCategory" />
+    <Property Name="IsFeatured" Type="Boolean" />
+    <Property Name="OriginalPrice" Type="Double" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__Commodity__Selle__03F0984C" FromRole="Commodity" ToRole="AspNetUser" />
+    <NavigationProperty Name="Carts" Relationship="PrimeMarketModel.FK__Cart__CommodityI__02FC7413" FromRole="Commodity" ToRole="Cart" />
+    <NavigationProperty Name="CommodityImages" Relationship="PrimeMarketModel.FK__Commodity__Commo__06CD04F7" FromRole="Commodity" ToRole="CommodityImage" />
+    <NavigationProperty Name="CommodityRatings" Relationship="PrimeMarketModel.FK__Commodity__Commo__08B54D69" FromRole="Commodity" ToRole="CommodityRating" />
+    <NavigationProperty Name="PriceUnit" Relationship="PrimeMarketModel.FK__Commodity__Price__04E4BC85" FromRole="Commodity" ToRole="PriceUnit" />
+    <NavigationProperty Name="SubCategory" Relationship="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE" FromRole="Commodity" ToRole="SubCategory" />
+    <NavigationProperty Name="OrderItems" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="Commodity" ToRole="OrderItem" />
+  </EntityType>
+  <EntityType Name="CommodityImage">
+    <Key>
+      <PropertyRef Name="CommodityImageId" />
+    </Key>
+    <Property Name="CommodityImageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ImagePath" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CommodityId" Type="Decimal" Precision="18" Scale="0" />
+    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__Commodity__Commo__06CD04F7" FromRole="CommodityImage" ToRole="Commodity" />
+  </EntityType>
+  <EntityType Name="CommodityRating">
+    <Key>
+      <PropertyRef Name="CommodityRatingId" />
+    </Key>
+    <Property Name="CommodityRatingId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="CommodityId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Rating" Type="Byte" />
+    <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__Commodity__Revie__07C12930" FromRole="CommodityRating" ToRole="AspNetUser" />
+    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__Commodity__Commo__08B54D69" FromRole="CommodityRating" ToRole="Commodity" />
+    <Property Name="CreationDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="District">
     <Key>
@@ -183,8 +244,8 @@
     <Property Name="DistrictId" Type="Int32" Nullable="false" />
     <Property Name="District1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="GovernorateId" Type="Int16" />
-    <NavigationProperty Name="Governorate" Relationship="PrimeMarketModel.FK_District_Governorate" FromRole="District" ToRole="Governorate" />
-    <NavigationProperty Name="Villages" Relationship="PrimeMarketModel.FK_Village_District1" FromRole="District" ToRole="Village" />
+    <NavigationProperty Name="Governorate" Relationship="PrimeMarketModel.FK__District__Govern__09A971A2" FromRole="District" ToRole="Governorate" />
+    <NavigationProperty Name="Villages" Relationship="PrimeMarketModel.FK__Village__Distric__0F624AF8" FromRole="District" ToRole="Village" />
   </EntityType>
   <EntityType Name="Governorate">
     <Key>
@@ -192,36 +253,63 @@
     </Key>
     <Property Name="GovernorateId" Type="Int16" Nullable="false" />
     <Property Name="Governorate1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Districts" Relationship="PrimeMarketModel.FK_District_Governorate" FromRole="Governorate" ToRole="District" />
+    <NavigationProperty Name="Districts" Relationship="PrimeMarketModel.FK__District__Govern__09A971A2" FromRole="Governorate" ToRole="District" />
   </EntityType>
   <EntityType Name="Order">
     <Key>
       <PropertyRef Name="OrderId" />
     </Key>
     <Property Name="OrderId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderStatusId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="OrderStatusId" Type="Byte" />
     <Property Name="CustomerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="SellerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="CommodityId" Type="Decimal" Precision="18" Scale="0" />
-    <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="RequestDate" Type="DateTime" Precision="0" />
-    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
     <Property Name="CancelDate" Type="DateTime" Precision="0" />
     <Property Name="Notes" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
-    <Property Name="SellerRating" Type="Int32" />
-    <Property Name="CustomerRating" Type="Int32" />
-    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK_Order_AspNetUsers" FromRole="Order" ToRole="AspNetUser" />
-    <NavigationProperty Name="AspNetUser1" Relationship="PrimeMarketModel.FK_Order_AspNetUsers1" FromRole="Order" ToRole="AspNetUser" />
-    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK_Order_ShowCommodity" FromRole="Order" ToRole="Commodity" />
-    <NavigationProperty Name="OrderStatu" Relationship="PrimeMarketModel.FK_Order_OrderStatus" FromRole="Order" ToRole="OrderStatu" />
+    <Property Name="Total" Type="Double" />
+    <Property Name="PaymentMethodId" Type="Byte" />
+    <Property Name="isPaid" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__Order__CustomerI__0A9D95DB" FromRole="Order" ToRole="AspNetUser" />
+    <NavigationProperty Name="OrderStatu" Relationship="PrimeMarketModel.FK__Order__OrderStat__0B91BA14" FromRole="Order" ToRole="OrderStatu" />
+    <NavigationProperty Name="OrderItems" Relationship="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" FromRole="Order" ToRole="OrderItem" />
+    <NavigationProperty Name="PaymentMethod" Relationship="PrimeMarketModel.FK__Order__PaymentMe__10566F31" FromRole="Order" ToRole="PaymentMethod" />
+  </EntityType>
+  <EntityType Name="OrderItem">
+    <Key>
+      <PropertyRef Name="OrderItemId" />
+    </Key>
+    <Property Name="OrderItemId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CommodityId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="DeliveryDate" Type="DateTime" Precision="0" />
+    <Property Name="CancelDate" Type="DateTime" Precision="0" />
+    <Property Name="OrderId" Type="Decimal" Precision="18" Scale="0" />
+    <Property Name="PaymentMethod" Type="Int32" />
+    <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="OrderItem" ToRole="Commodity" />
+    <NavigationProperty Name="Order" Relationship="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" FromRole="OrderItem" ToRole="Order" />
   </EntityType>
   <EntityType Name="OrderStatu">
     <Key>
       <PropertyRef Name="OrderStatusId" />
     </Key>
-    <Property Name="OrderStatusId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+    <Property Name="OrderStatusId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK_Order_OrderStatus" FromRole="OrderStatu" ToRole="Order" />
+    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__OrderStat__0B91BA14" FromRole="OrderStatu" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="PaymentMethodId" />
+    </Key>
+    <Property Name="PaymentMethodId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentMethod1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__PaymentMe__10566F31" FromRole="PaymentMethod" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="PriceUnit">
+    <Key>
+      <PropertyRef Name="PriceUnitId" />
+    </Key>
+    <Property Name="PriceUnitId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PriceUnit1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK__Commodity__Price__04E4BC85" FromRole="PriceUnit" ToRole="Commodity" />
   </EntityType>
   <EntityType Name="SubCategory">
     <Key>
@@ -231,18 +319,18 @@
     <Property Name="CategoryId" Type="Decimal" Precision="18" Scale="0" />
     <Property Name="SubCategory1" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ImagePath" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="Category" Relationship="PrimeMarketModel.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
-    <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK_ShowCommodity_SubCategory" FromRole="SubCategory" ToRole="Commodity" />
+    <NavigationProperty Name="Category" Relationship="PrimeMarketModel.FK__SubCatego__Categ__0E6E26BF" FromRole="SubCategory" ToRole="Category" />
+    <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE" FromRole="SubCategory" ToRole="Commodity" />
   </EntityType>
-  <EntityType Name="sysdiagram">
+  <EntityType Name="UserRating">
     <Key>
-      <PropertyRef Name="diagram_id" />
+      <PropertyRef Name="UserRatingId" />
     </Key>
-    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+    <Property Name="UserRatingId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReviewerId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="Rating" Type="Byte" />
+    <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="Village">
     <Key>
@@ -251,10 +339,10 @@
     <Property Name="VillageId" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
     <Property Name="Village1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="DistrictId" Type="Int32" />
-    <NavigationProperty Name="AspNetUsers" Relationship="PrimeMarketModel.FK_AspNetUsers_Village" FromRole="Village" ToRole="AspNetUser" />
-    <NavigationProperty Name="District" Relationship="PrimeMarketModel.FK_Village_District1" FromRole="Village" ToRole="District" />
+    <NavigationProperty Name="AspNetUsers" Relationship="PrimeMarketModel.FK__AspNetUse__Villa__01142BA1" FromRole="Village" ToRole="AspNetUser" />
+    <NavigationProperty Name="District" Relationship="PrimeMarketModel.FK__Village__Distric__0F624AF8" FromRole="Village" ToRole="District" />
   </EntityType>
-  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+  <Association Name="FK__AspNetUse__UserI__7D439ABD">
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -268,7 +356,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+  <Association Name="FK__AspNetUse__UserI__7E37BEF6">
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -282,7 +370,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_AspNetUsers_Village">
+  <Association Name="FK__AspNetUse__Villa__01142BA1">
     <End Type="PrimeMarketModel.Village" Role="Village" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
     <ReferentialConstraint>
@@ -294,7 +382,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Cart_AspNetUsers">
+  <Association Name="FK__Cart__CustomerId__02084FDA">
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Cart" Role="Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -306,7 +394,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Commodity_AspNetUsers">
+  <Association Name="FK__Commodity__Revie__07C12930">
+    <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.CommodityRating" Role="CommodityRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="CommodityRating">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Commodity__Selle__03F0984C">
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -318,7 +418,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_AspNetUsers">
+  <Association Name="FK__Order__CustomerI__0A9D95DB">
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -330,19 +430,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_AspNetUsers1">
-    <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
-    <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUser">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Order">
-        <PropertyRef Name="SellerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Cart_ShowCommodity">
+  <Association Name="FK__Cart__CommodityI__02FC7413">
     <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Cart" Role="Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -354,7 +442,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_SubCategory_Category">
+  <Association Name="FK__SubCatego__Categ__0E6E26BF">
     <End Type="PrimeMarketModel.Category" Role="Category" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.SubCategory" Role="SubCategory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -366,19 +454,43 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_ShowCommodity">
+  <Association Name="FK__Commodity__Commo__06CD04F7">
     <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="0..1" />
-    <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="*" />
+    <End Type="PrimeMarketModel.CommodityImage" Role="CommodityImage" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Commodity">
         <PropertyRef Name="CommodityId" />
       </Principal>
-      <Dependent Role="Order">
+      <Dependent Role="CommodityImage">
         <PropertyRef Name="CommodityId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_ShowCommodity_SubCategory">
+  <Association Name="FK__Commodity__Commo__08B54D69">
+    <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.CommodityRating" Role="CommodityRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="CommodityRating">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Commodity__Price__04E4BC85">
+    <End Type="PrimeMarketModel.PriceUnit" Role="PriceUnit" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PriceUnit">
+        <PropertyRef Name="PriceUnitId" />
+      </Principal>
+      <Dependent Role="Commodity">
+        <PropertyRef Name="PriceUnitId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Commodity__SubCa__05D8E0BE">
     <End Type="PrimeMarketModel.SubCategory" Role="SubCategory" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -390,7 +502,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_District_Governorate">
+  <Association Name="FK__OrderItem__Commo__0C85DE4D">
+    <End Type="PrimeMarketModel.Commodity" Role="Commodity" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Commodity">
+        <PropertyRef Name="CommodityId" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="CommodityId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__District__Govern__09A971A2">
     <End Type="PrimeMarketModel.Governorate" Role="Governorate" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.District" Role="District" Multiplicity="*" />
     <ReferentialConstraint>
@@ -402,7 +526,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Village_District1">
+  <Association Name="FK__Village__Distric__0F624AF8">
     <End Type="PrimeMarketModel.District" Role="District" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Village" Role="Village" Multiplicity="*" />
     <ReferentialConstraint>
@@ -414,7 +538,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Order_OrderStatus">
+  <Association Name="FK__Order__OrderStat__0B91BA14">
     <End Type="PrimeMarketModel.OrderStatu" Role="OrderStatu" Multiplicity="0..1" />
     <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -426,8 +550,32 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__OrderItem__Order__0D7A0286">
+    <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.OrderItem" Role="OrderItem" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Order">
+        <PropertyRef Name="OrderId" />
+      </Principal>
+      <Dependent Role="OrderItem">
+        <PropertyRef Name="OrderId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="AspNetUserRoles">
     <End Type="PrimeMarketModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <Association Name="FK__Order__PaymentMe__10566F31">
+    <End Type="PrimeMarketModel.PaymentMethod" Role="PaymentMethod" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.Order" Role="Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="PaymentMethod">
+        <PropertyRef Name="PaymentMethodId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="PaymentMethodId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

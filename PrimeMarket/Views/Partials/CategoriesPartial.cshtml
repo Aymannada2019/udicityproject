@@ -1,0 +1,13 @@
+﻿@model IEnumerable<PrimeMarket.Models.Category>
+
+<ul>
+    @foreach (var cat in Model)
+    {
+        <li>
+            <a href="~/shop/index/@cat.CategoryId">
+                @cat.Category1
+            </a>
+        </li>
+    }
+</ul>
+

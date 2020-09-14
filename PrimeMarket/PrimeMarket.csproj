@@ -209,7 +209,7 @@
     <Compile Include="Areas\front_end\front_endAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
-    <Compile Include="Controllers\CartsController.cs" />
+    <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\DistrictsController.cs" />
     <Compile Include="Controllers\GovernoratesController.cs" />
@@ -217,6 +217,8 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\OrderStatusController.cs" />
+    <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ShowCommoditiesController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
@@ -239,10 +241,19 @@
     <Compile Include="Models\Cart.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CartStatu.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Category.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Commodity.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommodityImage.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CommodityRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\District.cs">
@@ -257,7 +268,16 @@
     <Compile Include="Models\Order.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\OrderItem.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\OrderStatu.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PaymentMethod.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PriceUnit.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PrimeMarketModel.Context.cs">
@@ -278,7 +298,10 @@
     <Compile Include="Models\SubCategory.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\sysdiagram.cs">
+    <Compile Include="Models\UIViewModel\CartViewModel.cs" />
+    <Compile Include="Models\UIViewModel\ItemDetailsViewModel.cs" />
+    <Compile Include="Models\UIViewModel\ShopViewModel.cs" />
+    <Compile Include="Models\UserRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Village.cs">
@@ -299,6 +322,7 @@
     <Content Include="Content\css\slicknav.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\SiteScripts\Cart.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -484,16 +508,6 @@
     <Content Include="Views\ShowCommodities\Details.cshtml" />
     <Content Include="Views\ShowCommodities\Edit.cshtml" />
     <Content Include="Views\ShowCommodities\Index.cshtml" />
-    <Content Include="Views\Carts\Create.cshtml" />
-    <Content Include="Views\Carts\Delete.cshtml" />
-    <Content Include="Views\Carts\Details.cshtml" />
-    <Content Include="Views\Carts\Edit.cshtml" />
-    <Content Include="Views\Carts\Index.cshtml" />
-    <Content Include="Views\Orders\Create.cshtml" />
-    <Content Include="Views\Orders\Delete.cshtml" />
-    <Content Include="Views\Orders\Details.cshtml" />
-    <Content Include="Views\Orders\Edit.cshtml" />
-    <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Accounts\Delete.cshtml" />
     <Content Include="Views\Accounts\Details.cshtml" />
@@ -517,6 +531,21 @@
     <Content Include="Views\SubCategories\catfilter.cshtml" />
     <Content Include="Views\Districts\Districtfilter.cshtml" />
     <Content Include="Views\Villages\Villagesfilter.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Cart\Create.cshtml" />
+    <Content Include="Views\Cart\Delete.cshtml" />
+    <Content Include="Views\Cart\Details.cshtml" />
+    <Content Include="Views\Cart\Edit.cshtml" />
+    <Content Include="Views\Cart\Index.cshtml" />
+    <Content Include="Views\Shared\_LayoutShop.cshtml" />
+    <Content Include="Views\Shop\Index.cshtml" />
+    <Content Include="Views\Partials\CategoriesPartial.cshtml" />
+    <Content Include="Views\Shop\ItemDetails.cshtml" />
+    <Content Include="Views\ShoppingCart\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

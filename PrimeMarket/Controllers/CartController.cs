@@ -10,18 +10,18 @@ using PrimeMarket.Models;
 
 namespace PrimeMarket.Controllers
 {
-    public class CartsController : Controller
+    public class CartController : Controller
     {
         private PrimeMarketEntities db = new PrimeMarketEntities();
 
-        // GET: Carts
+        // GET: Cart
         public ActionResult Index()
         {
             var carts = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity);
             return View(carts.ToList());
         }
 
-        // GET: Carts/Details/5
+        // GET: Cart/Details/5
         public ActionResult Details(decimal id)
         {
             if (id == null)
@@ -36,20 +36,20 @@ namespace PrimeMarket.Controllers
             return View(cart);
         }
 
-        // GET: Carts/Create
+        // GET: Cart/Create
         public ActionResult Create()
         {
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title");
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email");
+            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title");
             return View();
         }
 
-        // POST: Carts/Create
+        // POST: Cart/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CartId,CustomerId,ShowCommodityId,CartDate,Quantity")] Cart cart)
+        public ActionResult Create([Bind(Include = "CartId,CustomerId,CommodityId,CartDate,Quantity,CartStatusId")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -58,12 +58,12 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", cart.CustomerId);
+            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 
-        // GET: Carts/Edit/5
+        // GET: Cart/Edit/5
         public ActionResult Edit(decimal id)
         {
             if (id == null)
@@ -75,17 +75,17 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", cart.CustomerId);
+            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 
-        // POST: Carts/Edit/5
+        // POST: Cart/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CartId,CustomerId,ShowCommodityId,CartDate,Quantity")] Cart cart)
+        public ActionResult Edit([Bind(Include = "CartId,CustomerId,CommodityId,CartDate,Quantity,CartStatusId")] Cart cart)
         {
             if (ModelState.IsValid)
             {
@@ -93,12 +93,12 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", cart.CustomerId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", cart.CommodityId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", cart.CustomerId);
+            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", cart.CommodityId);
             return View(cart);
         }
 
-        // GET: Carts/Delete/5
+        // GET: Cart/Delete/5
         public ActionResult Delete(decimal id)
         {
             if (id == null)
@@ -113,7 +113,7 @@ namespace PrimeMarket.Controllers
             return View(cart);
         }
 
-        // POST: Carts/Delete/5
+        // POST: Cart/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)

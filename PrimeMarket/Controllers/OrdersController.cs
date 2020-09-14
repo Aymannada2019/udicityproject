@@ -17,7 +17,7 @@ namespace PrimeMarket.Controllers
         // GET: Orders
         public ActionResult Index()
         {
-            var orders = db.Orders.Include(o => o.AspNetUser).Include(o => o.AspNetUser).Include(o => o.OrderStatu).Include(o => o.Commodity);
+            var orders = db.Orders.Include(o => o.AspNetUser).Include(o => o.OrderStatu).Include(o => o.PaymentMethod);
             return View(orders.ToList());
         }
 
@@ -39,19 +39,18 @@ namespace PrimeMarket.Controllers
         // GET: Orders/Create
         public ActionResult Create()
         {
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName");
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus");
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title");
+            ViewBag.PaymentMethodId = new SelectList(db.PaymentMethods, "PaymentMethodId", "PaymentMethod1");
             return View();
         }
 
         // POST: Orders/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "OrderId,OrderStatusId,CustomerId,SellerId,ShowCommodityId,Quantity,RequestDate,DeliveryDate,CancelDate,Notes,SellerRating,CustomerRating")] Order order)
+        public ActionResult Create([Bind(Include = "OrderId,OrderStatusId,CustomerId,RequestDate,CancelDate,Notes,Total,PaymentMethodId,isPaid")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -60,10 +59,9 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
+            ViewBag.PaymentMethodId = new SelectList(db.PaymentMethods, "PaymentMethodId", "PaymentMethod1", order.PaymentMethodId);
             return View(order);
         }
 
@@ -79,19 +77,18 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
+            ViewBag.PaymentMethodId = new SelectList(db.PaymentMethods, "PaymentMethodId", "PaymentMethod1", order.PaymentMethodId);
             return View(order);
         }
 
         // POST: Orders/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "OrderId,OrderStatusId,CustomerId,SellerId,ShowCommodityId,Quantity,RequestDate,DeliveryDate,CancelDate,Notes,SellerRating,CustomerRating")] Order order)
+        public ActionResult Edit([Bind(Include = "OrderId,OrderStatusId,CustomerId,RequestDate,CancelDate,Notes,Total,PaymentMethodId,isPaid")] Order order)
         {
             if (ModelState.IsValid)
             {
@@ -99,10 +96,9 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.SellerId);
-            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "AccountId", "FullName", order.CustomerId);
+            ViewBag.CustomerId = new SelectList(db.AspNetUsers, "Id", "Email", order.CustomerId);
             ViewBag.OrderStatusId = new SelectList(db.OrderStatus, "OrderStatusId", "OrderStatus", order.OrderStatusId);
-            ViewBag.ShowCommodityId = new SelectList(db.Commodities, "ShowCommodityId", "Title", order.CommodityId);
+            ViewBag.PaymentMethodId = new SelectList(db.PaymentMethods, "PaymentMethodId", "PaymentMethod1", order.PaymentMethodId);
             return View(order);
         }
 
