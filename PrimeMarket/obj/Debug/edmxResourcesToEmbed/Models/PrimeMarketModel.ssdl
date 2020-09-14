@@ -154,11 +154,11 @@
     </Key>
     <Property Name="OrderItemId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="CommodityId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="Quantity" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Quantity" Type="float" />
     <Property Name="DeliveryDate" Type="smalldatetime" />
     <Property Name="CancelDate" Type="smalldatetime" />
     <Property Name="OrderId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="PaymentMethod" Type="int" />
+    <Property Name="PaymentMethodId" Type="int" />
   </EntityType>
   <EntityType Name="OrderStatus">
     <Key>
@@ -207,6 +207,49 @@
     <Property Name="VillageId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="Village" Type="nvarchar" MaxLength="50" />
     <Property Name="DistrictId" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PrimeMarket.dbo.View_Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Cart">
+    <Key>
+      <PropertyRef Name="CartId" />
+      <PropertyRef Name="Title" />
+    </Key>
+    <Property Name="CartId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="CustomerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+    <Property Name="CommodityId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="CartDate" Type="smalldatetime" />
+    <Property Name="Quantity" Type="float" />
+    <Property Name="CartStatusId" Type="tinyint" />
+    <Property Name="CartStatus" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="View_Commodity">
+    <Key>
+      <PropertyRef Name="CommodityId" />
+      <PropertyRef Name="Title" />
+      <PropertyRef Name="Available" />
+      <PropertyRef Name="SubCategory" />
+    </Key>
+    <Property Name="CommodityId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Details" Type="nvarchar(max)" />
+    <Property Name="SubCategoryId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="SellerId" Type="nvarchar" MaxLength="128" />
+    <Property Name="Price" Type="float" />
+    <Property Name="PriceUnitId" Type="tinyint" />
+    <Property Name="PriceNote" Type="nvarchar" MaxLength="250" />
+    <Property Name="Publish" Type="bit" />
+    <Property Name="Available" Type="bit" Nullable="false" />
+    <Property Name="CreationDate" Type="smalldatetime" />
+    <Property Name="ExpireDate" Type="smalldatetime" />
+    <Property Name="IsFeatured" Type="bit" />
+    <Property Name="OriginalPrice" Type="float" />
+    <Property Name="SubCategory" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="100" />
   </EntityType>
   <Association Name="FK__AspNetUse__RoleI__7F2BE32F">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
@@ -273,6 +316,18 @@
       </Principal>
       <Dependent Role="AspNetUsers">
         <PropertyRef Name="VillageId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cart__CartStatus__02084FDA">
+    <End Role="CartStatus" Type="Self.CartStatus" Multiplicity="0..1" />
+    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CartStatus">
+        <PropertyRef Name="CartStatusId" />
+      </Principal>
+      <Dependent Role="Cart">
+        <PropertyRef Name="CartStatusId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -468,6 +523,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Function Name="SP_Commodity_Count" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="PrimeUser">
+    <Parameter Name="StartDate" Type="smalldatetime" Mode="In" />
+    <Parameter Name="EndDate" Type="smalldatetime" Mode="In" />
+  </Function>
   <EntityContainer Name="PrimeMarketModelStoreContainer">
     <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRoles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaims" Schema="dbo" store:Type="Tables" />
@@ -490,6 +549,39 @@
     <EntitySet Name="SubCategory" EntityType="Self.SubCategory" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserRating" EntityType="Self.UserRating" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Village" EntityType="Self.Village" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="View_Cart" EntityType="Self.View_Cart" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Cart].[CartId] AS [CartId], 
+    [View_Cart].[CustomerId] AS [CustomerId], 
+    [View_Cart].[FullName] AS [FullName], 
+    [View_Cart].[CommodityId] AS [CommodityId], 
+    [View_Cart].[Title] AS [Title], 
+    [View_Cart].[CartDate] AS [CartDate], 
+    [View_Cart].[Quantity] AS [Quantity], 
+    [View_Cart].[CartStatusId] AS [CartStatusId], 
+    [View_Cart].[CartStatus] AS [CartStatus]
+    FROM [dbo].[View_Cart] AS [View_Cart]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="View_Commodity" EntityType="Self.View_Commodity" store:Type="Views" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [View_Commodity].[CommodityId] AS [CommodityId], 
+    [View_Commodity].[Title] AS [Title], 
+    [View_Commodity].[Details] AS [Details], 
+    [View_Commodity].[SubCategoryId] AS [SubCategoryId], 
+    [View_Commodity].[SellerId] AS [SellerId], 
+    [View_Commodity].[Price] AS [Price], 
+    [View_Commodity].[PriceUnitId] AS [PriceUnitId], 
+    [View_Commodity].[PriceNote] AS [PriceNote], 
+    [View_Commodity].[Publish] AS [Publish], 
+    [View_Commodity].[Available] AS [Available], 
+    [View_Commodity].[CreationDate] AS [CreationDate], 
+    [View_Commodity].[ExpireDate] AS [ExpireDate], 
+    [View_Commodity].[IsFeatured] AS [IsFeatured], 
+    [View_Commodity].[OriginalPrice] AS [OriginalPrice], 
+    [View_Commodity].[SubCategory] AS [SubCategory], 
+    [View_Commodity].[FullName] AS [FullName]
+    FROM [dbo].[View_Commodity] AS [View_Commodity]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK__AspNetUse__RoleI__7F2BE32F" Association="Self.FK__AspNetUse__RoleI__7F2BE32F">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
@@ -509,6 +601,10 @@
     <AssociationSet Name="FK__AspNetUse__Villa__01142BA1" Association="Self.FK__AspNetUse__Villa__01142BA1">
       <End Role="Village" EntitySet="Village" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cart__CartStatus__02084FDA" Association="Self.FK__Cart__CartStatus__02084FDA">
+      <End Role="CartStatus" EntitySet="CartStatus" />
+      <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
     <AssociationSet Name="FK__Cart__CommodityI__02FC7413" Association="Self.FK__Cart__CommodityI__02FC7413">
       <End Role="Commodity" EntitySet="Commodity" />

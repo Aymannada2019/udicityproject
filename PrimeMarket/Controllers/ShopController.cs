@@ -35,13 +35,14 @@ namespace PrimeMarket.Controllers
         {
             var CommodityId = Request.Form["hdn_CommodityId"].ToString();
             var comment = Request.Form["txt_comment"].ToString();
+            string CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
             CommodityRating comRate = new CommodityRating()
             {
                 CommodityId = int.Parse(CommodityId),
                 Comment = comment,
                 CreationDate = DateTime.Now,
                 Rating = 4,
-                ReviewerId = "0a9d78ba-edfc-4cd3-b100-7dde0c987024"
+                ReviewerId = CustomerId
             };
             db.CommodityRatings.Add(comRate);
             db.SaveChanges();
@@ -52,21 +53,73 @@ namespace PrimeMarket.Controllers
         [HttpPost]
         public ActionResult AddToCart()
         {
-            var CommodityId = Request.Form["hdn_CommodityId"].ToString();
-            var Quantity = Request.Form["txt_quantity"].ToString();
-            Cart cart = new Cart()
+            try
             {
-                CommodityId = int.Parse(CommodityId),
-                Quantity = int.Parse(Quantity),
-                CustomerId = "0a9d78ba-edfc-4cd3-b100-7dde0c987024",
-                CartDate=DateTime.Now,
-                CartStatusId=1
-            };
-            db.Carts.Add(cart);
-            db.SaveChanges();
+                var CommodityId = int.Parse(Request.Form["hdn_CommodityId"].ToString());
+                var Quantity = int.Parse(Request.Form["txt_quantity"].ToString().Trim());
+                string CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+                var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
+                if (cart == null)
+                {
+                    Cart newCart = new Cart()
+                    {
+                        CommodityId = CommodityId,
+                        Quantity = Quantity,
+                        CustomerId = CustomerId,
+                        CartDate = DateTime.Now,
+                        CartStatusId = 1
+                    };
+                    db.Carts.Add(newCart);
+                }
+                else
+                {
+                    cart.Quantity += Quantity;
+                }
 
+                db.SaveChanges();
+            }
+            catch
+            { }
             return RedirectToAction("Index", "ShoppingCart");
         }
+
+        [HttpPost]
+        public ActionResult DeleteFromCart()
+        {
+            try
+            {
+                var CartId = int.Parse(Request.Form["hdn_CartId"].ToString());
+                var cart = db.Carts.Where(c => c.CartId == CartId).FirstOrDefault();
+                if (cart != null)
+                {
+                    db.Carts.Remove(cart);
+                }
+                db.SaveChanges();
+            }
+            catch
+            { }
+            return RedirectToAction("Index", "ShoppingCart");
+        }
+
+        [HttpPost]
+        public ActionResult UpdateCart()
+        {
+            try
+            {
+                var CartId = int.Parse(Request.Form["hdn_CartId"].ToString());
+                var Quantity = int.Parse(Request.Form["txt_Quantity"].ToString().Trim());
+                var cart = db.Carts.Where(c => c.CartId == CartId).FirstOrDefault();
+                if (cart != null)
+                {
+                    cart.Quantity = Quantity;
+                }
+                db.SaveChanges();
+            }
+            catch
+            { }
+            return RedirectToAction("Index", "ShoppingCart");
+        }
+
         
     }
 }

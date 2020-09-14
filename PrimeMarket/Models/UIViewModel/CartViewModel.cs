@@ -14,7 +14,7 @@ namespace PrimeMarket.Models.UIViewModel
         public List<Cart> cartItems = new List<Cart>();
         public CartViewModel()
         {
-            var UserId = "0a9d78ba-edfc-4cd3-b100-7dde0c987024"; // logged in user
+            var UserId = "8ac3f426-e76d-4ed8-94c1-835addf528bc"; // logged in user
             cartItems = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity).Where(c => c.CustomerId == UserId).ToList();
         }
     }

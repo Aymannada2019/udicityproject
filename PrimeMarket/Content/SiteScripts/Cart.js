@@ -3,9 +3,22 @@
 $(document).ready(function () {
 
     $('#txt_Quantity').change(function () {
-        alert('v');
-        var v = $('#txt_Quantity').value;
-        alert(v);
+        var txtQuantity = $(this);
+        var Quantity = txtQuantity.val().trim();
+        if ($.isNumeric(Quantity)) {
+            if (Quantity > 0) {
+                txtQuantity.closest("form").submit();
+            }
+            else
+            {
+                alert("أدخل كمية صحيحة");
+            }
+        }
+        else
+        {
+            alert("أدخل كمية صحيحة");
+        }
+        
     //    $.ajax({
     //    url: 'https://api.joind.in/v2.1/talks/10889',
     //    data: {
@@ -26,16 +39,5 @@ $(document).ready(function () {
     //});
     });
     
-    
-    var itemClose = $('.shoping__cart__item__close');
-    itemClose.on('click', '.icon_close', function () {
-        var closebutton = $(this);
-        var CartId = closebutton.parent().find('#hdn_CartId').val();
-        // ---- call ajax to delete this item from cart -----------
-        alert('CartId=' + CartId);
-    });
-
-
-
-
+        
 });

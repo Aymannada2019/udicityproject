@@ -51,11 +51,11 @@ public partial class Order
 
     public virtual OrderStatu OrderStatu { get; set; }
 
+    public virtual PaymentMethod PaymentMethod { get; set; }
+
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
 
     public virtual ICollection<OrderItem> OrderItems { get; set; }
-
-    public virtual PaymentMethod PaymentMethod { get; set; }
 
 }
 

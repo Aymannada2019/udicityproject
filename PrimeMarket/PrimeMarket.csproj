@@ -304,6 +304,12 @@
     <Compile Include="Models\UserRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\View_Cart.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\View_Commodity.cs">
+      <DependentUpon>PrimeMarketModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Village.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -546,6 +552,7 @@
     <Content Include="Views\Partials\CategoriesPartial.cshtml" />
     <Content Include="Views\Shop\ItemDetails.cshtml" />
     <Content Include="Views\ShoppingCart\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\Checkout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

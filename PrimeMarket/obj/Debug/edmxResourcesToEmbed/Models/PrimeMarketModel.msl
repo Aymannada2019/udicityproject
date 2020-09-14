@@ -155,7 +155,7 @@
     <EntitySetMapping Name="OrderItems">
       <EntityTypeMapping TypeName="PrimeMarketModel.OrderItem">
         <MappingFragment StoreEntitySet="OrderItems">
-          <ScalarProperty Name="PaymentMethod" ColumnName="PaymentMethod" />
+          <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
           <ScalarProperty Name="DeliveryDate" ColumnName="DeliveryDate" />
@@ -219,6 +219,43 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="View_Cart">
+      <EntityTypeMapping TypeName="PrimeMarketModel.View_Cart">
+        <MappingFragment StoreEntitySet="View_Cart">
+          <ScalarProperty Name="CartStatus" ColumnName="CartStatus" />
+          <ScalarProperty Name="CartStatusId" ColumnName="CartStatusId" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="CartDate" ColumnName="CartDate" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="CustomerId" ColumnName="CustomerId" />
+          <ScalarProperty Name="CartId" ColumnName="CartId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="View_Commodity">
+      <EntityTypeMapping TypeName="PrimeMarketModel.View_Commodity">
+        <MappingFragment StoreEntitySet="View_Commodity">
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="SubCategory" ColumnName="SubCategory" />
+          <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
+          <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
+          <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Available" ColumnName="Available" />
+          <ScalarProperty Name="Publish" ColumnName="Publish" />
+          <ScalarProperty Name="PriceNote" ColumnName="PriceNote" />
+          <ScalarProperty Name="PriceUnitId" ColumnName="PriceUnitId" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="SellerId" ColumnName="SellerId" />
+          <ScalarProperty Name="SubCategoryId" ColumnName="SubCategoryId" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <AssociationSetMapping Name="AspNetUserRoles" TypeName="PrimeMarketModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
       <EndProperty Name="AspNetUser">
         <ScalarProperty Name="Id" ColumnName="UserId" />
@@ -227,5 +264,6 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <FunctionImportMapping FunctionImportName="SP_Commodity_Count" FunctionName="PrimeMarketModel.Store.SP_Commodity_Count" />
   </EntityContainerMapping>
 </Mapping>

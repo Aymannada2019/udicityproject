@@ -40,7 +40,7 @@
                     <p>
                         @Model.ThisCommodity.Details
                     </p>
-                    <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                   <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
                         <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@Model.ThisCommodity.CommodityId" />
                         <div class="product__details__quantity">
                             <div class="quantity">
@@ -51,7 +51,7 @@
                         </div>
                         @*<a href="#" class="primary-btn">ADD TO CART</a>*@
                         <input type="submit" value="ADD TO CARD" class="primary-btn" />
-                        </form>
+                   </form>
 
 
 

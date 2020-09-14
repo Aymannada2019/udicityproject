@@ -15,27 +15,26 @@ namespace PrimeMarket.Models
 using System;
     using System.Collections.Generic;
     
-public partial class CartStatu
+public partial class View_Cart
 {
 
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-    public CartStatu()
-    {
+    public decimal CartId { get; set; }
 
-        this.Carts = new HashSet<Cart>();
+    public string CustomerId { get; set; }
 
-    }
+    public string FullName { get; set; }
 
+    public Nullable<decimal> CommodityId { get; set; }
 
-    public byte CartStatusId { get; set; }
+    public string Title { get; set; }
+
+    public Nullable<System.DateTime> CartDate { get; set; }
+
+    public Nullable<double> Quantity { get; set; }
+
+    public Nullable<byte> CartStatusId { get; set; }
 
     public string CartStatus { get; set; }
-
-
-
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-
-    public virtual ICollection<Cart> Carts { get; set; }
 
 }
 

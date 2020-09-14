@@ -17,6 +17,9 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 
+using System.Data.Entity.Core.Objects;
+using System.Linq;
+
 
 public partial class PrimeMarketEntities : DbContext
 {
@@ -71,6 +74,27 @@ public partial class PrimeMarketEntities : DbContext
     public virtual DbSet<UserRating> UserRatings { get; set; }
 
     public virtual DbSet<Village> Villages { get; set; }
+
+    public virtual DbSet<View_Cart> View_Cart { get; set; }
+
+    public virtual DbSet<View_Commodity> View_Commodity { get; set; }
+
+
+    public virtual ObjectResult<Nullable<int>> SP_Commodity_Count(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
+    {
+
+        var startDateParameter = startDate.HasValue ?
+            new ObjectParameter("StartDate", startDate) :
+            new ObjectParameter("StartDate", typeof(System.DateTime));
+
+
+        var endDateParameter = endDate.HasValue ?
+            new ObjectParameter("EndDate", endDate) :
+            new ObjectParameter("EndDate", typeof(System.DateTime));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("SP_Commodity_Count", startDateParameter, endDateParameter);
+    }
 
 }
 

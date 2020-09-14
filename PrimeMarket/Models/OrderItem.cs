@@ -22,7 +22,7 @@ public partial class OrderItem
 
     public Nullable<decimal> CommodityId { get; set; }
 
-    public Nullable<decimal> Quantity { get; set; }
+    public Nullable<double> Quantity { get; set; }
 
     public Nullable<System.DateTime> DeliveryDate { get; set; }
 
@@ -30,7 +30,7 @@ public partial class OrderItem
 
     public Nullable<decimal> OrderId { get; set; }
 
-    public Nullable<int> PaymentMethod { get; set; }
+    public Nullable<int> PaymentMethodId { get; set; }
 
 
 

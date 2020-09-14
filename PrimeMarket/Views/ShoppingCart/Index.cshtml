@@ -24,36 +24,43 @@
                             @{ double CartTotal = 0.0;}
                             @foreach (var item in Model.cartItems)
                             {
-                            <tr>
-                                <td class="shoping__cart__item">
-                                    <img src="@item.Commodity.CommodityImages.FirstOrDefault().ImagePath" alt="">
-                                    <h5>@item.Commodity.Title</h5>
-                                </td>
-                                <td class="shoping__cart__price">
-                                    @item.Commodity.Price LE
-                                </td>
-                                <td class="shoping__cart__quantity">
-                                    <div class="quantity">
-                                        <div class="pro-qty">
-                                            <input type="text" id="txt_Quantity" name="txt_Quantity" value="@item.Quantity">
+                                <tr>
+                                    <td class="shoping__cart__item">
+                                        <img src="@item.Commodity.CommodityImages.FirstOrDefault().ImagePath" style="width:100px;" alt="">
+                                        <h5>@item.Commodity.Title</h5>
+                                    </td>
+                                    <td class="shoping__cart__price">
+                                        @item.Commodity.Price LE
+                                    </td>
+                                    <td class="shoping__cart__quantity">
+                                        <div class="quantity">
+                                            <form name="UpdateCartForm" method="post" action="/Shop/UpdateCart">
+                                                <input type="hidden" id="hdn_CartId" name="hdn_CartId" value="@item.CartId" />
+                                                <div class="pro-qty">
+                                                    <input type="text" id="txt_Quantity" name="txt_Quantity" value="@item.Quantity">
+                                                </div>
+                                            </form>
                                         </div>
-                                    </div>
-                                </td>
-                                <td class="shoping__cart__total">
-                                    @{
-                                        var itemTotal = item.Commodity.Price * item.Quantity;
-                                        CartTotal += (double)itemTotal;
+                                    </td>
+                                    <td class="shoping__cart__total">
+                                        @{
+                                            var itemTotal = item.Commodity.Price * item.Quantity;
+                                            CartTotal += (double)itemTotal;
                                         }
-                                      @itemTotal LE
-                                          </td>
-          
-                                          <td class="shoping__cart__item__close">
-                                              <input type="hidden" id="hdn_CartId" name="hdn_CartId" value="@item.CartId" />
-                                    <span class="icon_close"></span>
-                                </td>
-                            </tr>
-                            }
-                            
+                                        @itemTotal LE
+                                    </td>
+
+                                    <td class="shoping__cart__item__close">
+                                        <form name="DeleteFromCartForm" method="post" action="/Shop/DeleteFromCart">
+                                            <input type="hidden" id="hdn_CartId" name="hdn_CartId" value="@item.CartId" />
+                                            <span class="icon_close DeleteFromCart"></span>
+                                        </form>
+
+
+                                    </td>
+                                </tr>
+                                            }
+
                         </tbody>
                     </table>
                 </div>
@@ -62,24 +69,24 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__btns">
-                    <a href="#" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
-                    <a href="#" class="primary-btn cart-btn cart-btn-right">
+                    <a href="~/shop/index" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
+                    @*<a href="#" class="primary-btn cart-btn cart-btn-right">
                         <span class="icon_loading"></span>
-                        Upadate Cart
-                    </a>
+                        Update Cart
+                    </a>*@
                 </div>
             </div>
             @*<div class="col-lg-6">
-                <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        <h5>Discount Codes</h5>
-                        <form action="#">
-                            <input type="text" placeholder="Enter your coupon code">
-                            <button type="submit" class="site-btn">APPLY COUPON</button>
-                        </form>
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Discount Codes</h5>
+                            <form action="#">
+                                <input type="text" placeholder="Enter your coupon code">
+                                <button type="submit" class="site-btn">APPLY COUPON</button>
+                            </form>
+                        </div>
                     </div>
-                </div>
-            </div>*@
+                </div>*@
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>Cart Total</h5>
@@ -87,7 +94,7 @@
                         <li>Subtotal <span>@CartTotal LE</span></li>
                         <li>Total <span>@CartTotal LE</span></li>
                     </ul>
-                    <a href="#" class="primary-btn">PROCEED TO CHECKOUT</a>
+                    <a href="~/shoppingcart/Checkout" class="primary-btn">PROCEED TO CHECKOUT</a>
                 </div>
             </div>
         </div>
@@ -95,7 +102,16 @@
 </section>
 <!-- Shoping Cart Section End -->
 @section Scripts{
-<script src="~/Content/SiteScripts/Cart.js"></script>
-    }
+    <script src="~/Content/SiteScripts/Cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".DeleteFromCart").click(function () {
+                var deletebtn = $(this);
+                //alert('aaaa');
+                deletebtn.closest("form").submit();
+            });
+        });
+    </script>
+}
 
 

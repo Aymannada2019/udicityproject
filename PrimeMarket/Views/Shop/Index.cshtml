@@ -5,6 +5,12 @@
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
 
+<style>
+    a.addtocart{
+        cursor:pointer;
+    }
+</style>
+
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -123,7 +129,7 @@
                                                     for (int j = i; j < i + 3; j++)
                                                     {
                                                         var latestItem = Model.LatestItems[j];
-                                                        <a href="#" class="latest-product__item">
+                                                        <a href="~/shop/ItemDetails?CommodityId=@latestItem.CommodityId" class="latest-product__item">
                                                             <div class="latest-product__item__pic">
                                                                 <img src="@latestItem.CommodityImages.FirstOrDefault().ImagePath" alt="">
                                                             </div>
@@ -157,20 +163,28 @@
                                 <div class="product__discount__slider owl-carousel">
                                     @foreach (var saleItem in Model.SaleOffItems)
                                     {
+                                        var discount = ((saleItem.OriginalPrice / saleItem.Price) - 1.0) * 100.0;
+                                        var strdiscount = string.Format("{0:00}", discount);
                                         <div class="col-lg-4">
                                             <div class="product__discount__item">
                                                 <div class="product__discount__item__pic set-bg"
                                                      data-setbg="@saleItem.CommodityImages.FirstOrDefault().ImagePath">
-                                                    <div class="product__discount__percent">-20%</div>
-                                                    <ul class="product__item__pic__hover">
-                                                        @*<li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>*@
-                                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                                    </ul>
+                                                    <div class="product__discount__percent">@strdiscount%</div>
+
+
+                                                    <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                                        <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@saleItem.CommodityId" />
+                                                        <input type="hidden" id="txt_quantity" name="txt_quantity" value="1" />
+                                                        <ul class="product__item__pic__hover">
+                                                            <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+                                                    </form>
+
+                                                    
                                                 </div>
                                                 <div class="product__discount__item__text">
                                                     <span>@saleItem.SubCategory.SubCategory1</span>
-                                                    <h5><a href="#">@saleItem.Title</a></h5>
+                                                    <h5><a href="~/shop/ItemDetails?CommodityId=@saleItem.CommodityId">@saleItem.Title</a></h5>
                                                     <div class="product__item__price">@saleItem.Price LE <span>@saleItem.OriginalPrice LE</span></div>
                                                 </div>
                                             </div>
@@ -214,11 +228,13 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@item.CommodityImages.FirstOrDefault().ImagePath">
-                                    <ul class="product__item__pic__hover">
-                                        @*<li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                            <li><a href="#"><i class="fa fa-retweet"></i></a></li>*@
-                                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                                    </ul>
+                                    <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                        <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@item.CommodityId" />
+                                        <input type="hidden" id="txt_quantity" name="txt_quantity" value="1" />
+                                        <ul class="product__item__pic__hover">
+                                            <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                                        </ul>
+                                    </form>
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="~/shop/ItemDetails?CommodityId=@item.CommodityId">@item.Title</a></h6>
@@ -240,3 +256,14 @@
         </div>
 </div>
 </section>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $(".addtocart").click(function () {
+                var addbtn = $(this);
+                addbtn.closest("form").submit();
+            });
+        });
+    </script>
+    }

@@ -34,6 +34,8 @@ public partial class Cart
 
     public virtual AspNetUser AspNetUser { get; set; }
 
+    public virtual CartStatu CartStatu { get; set; }
+
     public virtual Commodity Commodity { get; set; }
 
 }
