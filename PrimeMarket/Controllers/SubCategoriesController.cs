@@ -18,13 +18,13 @@ namespace PrimeMarket.Controllers
         // GET: SubCategories
         public ActionResult Index(int? page)
         {
-            var subCategories = db.SubCategories.Include(s => s.Category);
+            var subCategories =db.SubCategories.Include(s => s.Category);
             return View(subCategories.ToList().ToPagedList(page ?? 1, 5));
         }
         public ActionResult catfilter(decimal CategoryId, int? page)
         {
            
-            var subCategories = db.SubCategories.Where(rs => rs.CategoryId == CategoryId);
+            var subCategories =db.SubCategories.Where(rs => rs.CategoryId == CategoryId);
             if (subCategories == null)
             {
                 return HttpNotFound();
@@ -39,7 +39,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = db.SubCategories.Find(id);
+            SubCategory subCategory =db.SubCategories.Find(id);
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -72,7 +72,7 @@ namespace PrimeMarket.Controllers
                     subCategory.ImagePath = "SubCat" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
                   
                 }
-                db.SubCategories.Add(subCategory);
+               db.SubCategories.Add(subCategory);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -88,7 +88,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = db.SubCategories.Find(id);
+            SubCategory subCategory =db.SubCategories.Find(id);
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -134,7 +134,7 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            SubCategory subCategory = db.SubCategories.Find(id);
+            SubCategory subCategory =db.SubCategories.Find(id);
             if (subCategory == null)
             {
                 return HttpNotFound();
@@ -147,8 +147,11 @@ namespace PrimeMarket.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(decimal id)
         {
-            SubCategory subCategory = db.SubCategories.Find(id);
-            db.SubCategories.Remove(subCategory);
+            SubCategory subCategory =db.SubCategories.Find(id);
+            //delete old  image file
+            string oldimageFilePath = Server.MapPath(@"~/img/categories/" + subCategory.ImagePath);
+            System.IO.File.Delete(oldimageFilePath);
+           db.SubCategories.Remove(subCategory);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -210,7 +210,10 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AccountsController.cs" />
     <Compile Include="Controllers\CartController.cs" />
+    <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
+    <Compile Include="Controllers\CommoditiesController.cs" />
+    <Compile Include="Controllers\CommodityImagesController.cs" />
     <Compile Include="Controllers\DistrictsController.cs" />
     <Compile Include="Controllers\GovernoratesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -557,6 +560,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\front_end\Models\" />
+    <Folder Include="Views\Carts\" />
+    <Folder Include="Views\Commodities\" />
+    <Folder Include="Views\CommodityImages\" />
+    <Folder Include="Views\PriceUnits\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

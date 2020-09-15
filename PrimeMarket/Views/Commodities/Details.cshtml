@@ -1,0 +1,164 @@
+﻿@model PrimeMarket.Models.Commodity
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Commodity</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategory.SubCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategory.SubCategory1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceUnitId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceUnitId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publish)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFeatured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUsers.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUsers.Email)
+        </dd>
+
+       
+
+        <dt>
+            @Html.LabelFor(model => model.CommodityImages, htmlAttributes: new { @class = "control-label col-md-2" })
+        </dt>
+        <dd><div class="form-group">
+   
+    <div class="col-md-10">
+        @if (Model.CommodityImages.Select(x => x.CommodityId == Model.CommodityId) != null)
+        {
+            <table style="background-color:lightgreen; border:solid 2px black;">
+                <tr>
+                    <td>
+                        <b>Id</b>
+                    </td>
+                    <td>
+                        <b>Image</b>
+                    </td>
+                  
+                </tr>
+                @foreach (var file in (from s in Model.CommodityImages where s.CommodityId ==  Model.CommodityId  select new { s.CommodityId, s.ImagePath, s.CommodityImageId }).ToList())
+                {
+                    <tr>
+                        <td>
+                            @file.CommodityImageId
+                        </td>
+                        <td>
+                            <img src="~/img/commodities/@file.ImagePath" style="height:200px;width:200px;" />
+
+                        </td>
+                      
+
+                    </tr>
+
+                }
+
+            </table>
+        }
+       
+
+       
+    </div>
+</div></dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommodityId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

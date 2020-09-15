@@ -34,7 +34,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.DistrictId }) |
             @Html.ActionLink("Details", "Details", new { id=item.DistrictId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DistrictId })
+            @Html.ActionLink("Delete", "Delete", new { id = item.DistrictId })|
+            @Html.ActionLink("Villages", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId }, htmlAttributes: null)
         </td>
     </tr>
 }

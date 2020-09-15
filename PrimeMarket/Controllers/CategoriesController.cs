@@ -135,8 +135,14 @@ namespace PrimeMarket.Controllers
         public ActionResult DeleteConfirmed(decimal id)
         {
             Category category = db.Categories.Find(id);
+            //delete old  image file
+            string oldimageFilePath = Server.MapPath(@"~/img/categories/" + category.ImagePath);
+            // if(oldimageFilePath!="")
+            System.IO.File.Delete(oldimageFilePath);
             db.Categories.Remove(category);
+
             db.SaveChanges();
+           
             return RedirectToAction("Index");
         }
 

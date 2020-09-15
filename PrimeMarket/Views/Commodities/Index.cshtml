@@ -1,0 +1,153 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<PrimeMarket.Models.Commodity>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script type="text/javascript">
+   
+   
+    function checkradio(id)
+    {
+        for (var i = 1; i <= 3; i++) {
+            var id = 'check' + i;
+            // alert(id);
+            var t = document.getElementById(id);
+            alert(t.id);
+            if (id = i)
+                t.prop('checked', true);
+            else
+                t.prop('checked', false);
+
+            //if (id = i.tostring())
+            //    t.style.display = chkYes.checked ? "block" : "none";
+            //else
+            //    t.style.display = chkYes.checked ? "block" : "none";
+            //t.onclick = function () {
+            //    if (setCheck != this) {
+            //        setCheck = this;
+            //    } else {
+            //        this.checked = false;
+            //        setCheck = null;
+            //    }
+            //};
+        }
+    }
+</script>
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+@using (Html.BeginForm("Index", "Commodities", FormMethod.Get))
+{
+    <p><b> Status: </b> <select asp-for="Publish" asp-items="Model.Commodity">
+    <option value="1">All</option>
+    <option value="2">Published</option>
+    <option value="3">UnPublished</option>
+</select><b>Search By:</b>@Html.TextBox("search") <input type="submit" value="Search" />
+        
+    
+     
+    </p>
+}
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Details)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().SubCategory.SubCategory1)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Price)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PriceUnitId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().PriceNote)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Available)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().Publish)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ExpireDate)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.First().IsFeatured)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().OriginalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().AspNetUsers.Email)
+        </th>*@
+      
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Details)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SubCategory.SubCategory1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceUnitId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PriceNote)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Available)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Publish)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpireDate)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.IsFeatured)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OriginalPrice)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AspNetUsers.Email)
+        </td>*@
+      
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommodityId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommodityId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CommodityId })|
+            @Html.ActionLink("Images", "Index", "CommodityImages", new { CommodityId = item.CommodityId }, htmlAttributes: null)
+        </td>
+    </tr>
+}
+    <script src="~/bin/jquery.min.js"></script>
+</table>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))

@@ -1,0 +1,42 @@
+﻿@model PrimeMarket.Models.CommodityImage
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CommodityImages</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ImagePath)
+        </dt>
+
+        <dd>
+            @if (Model.ImagePath != "" && Model.ImagePath != null)
+            {
+                <img src="~/img/commodities/@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
+            }
+            else
+            {
+            @Html.DisplayFor(model => model.ImagePath)
+            }
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Commodity.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Commodity.Title)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.CommodityImageId }) |
+    @Html.ActionLink("Back to List", "Index", new { CommodityId = Model.CommodityId }, htmlAttributes: null)
+</p>

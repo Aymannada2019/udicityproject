@@ -1,0 +1,52 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<PrimeMarket.Models.CommodityImage>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("New Image ", "Create", new { CommodityId = Request["CommodityId"] }, htmlAttributes: null)
+</p>
+<table class="table">
+    <tr>
+       
+        <th>
+            @Html.DisplayNameFor(model => model.First().Commodity.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.First().ImagePath)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Commodity.Title)
+        </td>
+        <td>
+            @if (item.ImagePath != "" && item.ImagePath!=null)
+            {
+                <img src="~/img/commodities/@Html.DisplayFor(modelItem => item.ImagePath)" id="commidityimage" style="height:40px;width:40px;" name="commidityimage" />
+            }
+            else
+            {
+            @Html.DisplayFor(modelItem => item.ImagePath)}
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommodityImageId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommodityImageId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.CommodityImageId })
+        </td>
+    </tr>
+}
+
+</table>
+<p>@Html.ActionLink("Back to Commodity", "Index", "Commodities")</p>
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
