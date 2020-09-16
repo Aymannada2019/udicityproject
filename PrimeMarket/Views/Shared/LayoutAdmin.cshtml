@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
-                    <div class="header__logo">
+                    <div class="header__logo" style="margin-left:100px;margin-right:100px;">
                         <a href="./index.html"><img src="~/img/logo.png" alt=""></a>
                         <a href="#"><i class="fa fa-user"></i> Login</a>
                     </div>
@@ -49,14 +49,15 @@
                     <nav class="header__menu mobile-menu">
                         <ul>
                             
-                            <li><a href="./index.html">الصفحة الرئيسية</a></li>
+                        
+                            <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Shop")</li>
                             <li class="active"><a href="./shop-grid.html">إحصائيات</a></li>
                             <li>
                                 <a href="#">بيانات جغرافية</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">المحافظة</a></li>
-                                    <li><a href="./shoping-cart.html">المركز</a></li>
-                                    <li><a href="./checkout.html">القرية-المدينة</a></li>
+                                    <li>@Html.ActionLink("المحافظات", "Index", "Governorates")</li>
+                                    <li>@Html.ActionLink("المراكز", "Index", "Districts")</li>
+                                    <li>@Html.ActionLink("القرى-المدى", "Index", "Villages")</li>
                                  
                                 </ul>
                             </li>
@@ -64,13 +65,13 @@
                             <li>
                                 <a href="#"> تصنيف المنتجات</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">تصنيف رئيسى</a></li>
-                                    <li><a href="./shoping-cart.html">فرعى</a></li>
-                         
+                                    <li>@Html.ActionLink("تصنيف رئيسى", "Index", "Categories")</li>
+                                    <li>@Html.ActionLink("فرعى", "Index", "SubCategories")</li>
+
 
                                 </ul>
                             </li>
-                           
+                            <li>@Html.ActionLink("السلع", "Index", "Commodities")</li>
                             <li><a href="./contact.html">مستخدمين</a></li>
                         </ul>
                     </nav>
