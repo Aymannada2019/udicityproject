@@ -5,22 +5,22 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>تفاصيل</h2>
 
 <div>
-    <h4>Category</h4>
+    <h4>منتج رئيسى</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Category1)
+        <dt>اسم المنتج
+            @*@Html.DisplayNameFor(model => model.Category1)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Category1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
+        <dt>الصور
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
         </dt>
 
         <dd>
@@ -39,6 +39,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CategoryId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.CategoryId }) |
+    @Html.ActionLink("عودة للنتجات الرئيسية", "Index")
 </p>

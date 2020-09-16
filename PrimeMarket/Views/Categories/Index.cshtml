@@ -7,18 +7,18 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>المنتجات الرئيسية</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("اضافة منتج رئيسى", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Category1)
+        <th> المنتج الرئيسى
+            @*@Html.DisplayNameFor(model => model.First().Category1)*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().ImagePath)
+        <th>الصور
+            @*@Html.DisplayNameFor(model => model.First().ImagePath)*@
         </th>
         <th></th>
     </tr>
@@ -43,10 +43,10 @@
             
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CategoryId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.CategoryId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.CategoryId })|
-            @Html.ActionLink("Sub Categories", "catfilter", "SubCategories", new { CategoryId = item.CategoryId }, htmlAttributes: null)
+            @Html.ActionLink("تعديل", "Edit", new { id=item.CategoryId }) |
+            @Html.ActionLink("تفاصيل", "Details", new { id=item.CategoryId }) |
+            @Html.ActionLink("حذف", "Delete", new { id = item.CategoryId })|
+            @Html.ActionLink("المنتجات الفرعية", "catfilter", "SubCategories", new { CategoryId = item.CategoryId }, htmlAttributes: null)
         </td>
     </tr>
 }

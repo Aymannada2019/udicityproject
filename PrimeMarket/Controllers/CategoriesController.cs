@@ -18,7 +18,7 @@ namespace PrimeMarket.Controllers
         // GET: Categories
         public ActionResult Index(int? page)
         {
-            return View(db.Categories.ToList().ToPagedList(page ?? 1, 5));
+            return View(db.Categories.ToList().ToPagedList(page ?? 1, 20));
         }
 
         // GET: Categories/Details/5

@@ -19,7 +19,7 @@ namespace PrimeMarket.Controllers
         public ActionResult Index(int? page)
         {
             var subCategories =db.SubCategories.Include(s => s.Category);
-            return View(subCategories.ToList().ToPagedList(page ?? 1, 5));
+            return View(subCategories.ToList().ToPagedList(page ?? 1, 20));
         }
         public ActionResult catfilter(decimal CategoryId, int? page)
         {
@@ -30,7 +30,7 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
 
-            return View(subCategories.ToList().ToPagedList(page ?? 1, 5));
+            return View(subCategories.ToList().ToPagedList(page ?? 1, 20));
         }
         // GET: SubCategories/Details/5
         public ActionResult Details(decimal id)

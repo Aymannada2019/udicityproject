@@ -3,22 +3,22 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
-<h2>Details</h2>
+<h2>تفاصيل</h2>
 
 <div>
-    <h4>SubCategory</h4>
+    <h4>منتج فرعى</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.SubCategory1)
+        <dt>المنتج الفرعى
+            @*@Html.DisplayNameFor(model => model.SubCategory1)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.SubCategory1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
+        <dt>الصور
+            @*@Html.DisplayNameFor(model => model.ImagePath)*@
         </dt>
 
         <dd>
@@ -34,8 +34,8 @@
             }
 </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Category.Category1)
+        <dt>المنتج الرئيسى
+            @*@Html.DisplayNameFor(model => model.Category.Category1)*@
         </dt>
 
         <dd>
@@ -45,6 +45,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.SubCategoryId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.SubCategoryId }) |
+    @Html.ActionLink("عودة للمنتجات الفرعية", "Index")
 </p>

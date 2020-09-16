@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Edit</h2>
+<h2>تعديل</h2>
 
 <script type="text/javascript">
     function fileCheck(obj) {
@@ -37,29 +37,29 @@
 {
     @Html.AntiForgeryToken()
 <div class="form-horizontal">
-        <h4>SubCategory</h4>
+        <h4>منتج فرعى</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.SubCategoryId)
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.CategoryId, "CategoryId", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.CategoryId, "منتج رئيسى", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("CategoryId", null, htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.SubCategory1, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.SubCategory1, "منتج فرعى", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.SubCategory1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.SubCategory1, "", new { @class = "text-danger" })
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.ImagePath, "الصور", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                
               
@@ -67,11 +67,11 @@
              {  
               <img src="~/img/categories/@Html.DisplayFor(model => model.ImagePath)" style="height:200px;width:200px;" />
               <br />@Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control", @style = "display: none" } })
-                <label title="To change Image">change Image</label>
+                <label title="To change Image">لتغيير الصورة</label>
                     @*<button  id="btn-upload"  onclick="displyaddimg"  title="Change Image"/>*@
              }
               
-                <input id="ImagePath" title="Upload a product image"
+                <input id="ImagePath" title="تحميل صورة لمنتج فرعى"
                        type="file" name="ImagePath" onchange="fileCheck(this);" />
             
                 @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
@@ -80,14 +80,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="تعديل" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("عودة للمنتجات الفرعية", "Index")
 </div>
 
 @section Scripts {
