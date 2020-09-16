@@ -7,18 +7,18 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
+<h2>المراكز</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("أضافة مركز جديد", "Create", new { GovernorateId =  Request["GovernorateId"] })
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Governorate.Governorate1)
+        <th>المحافظة
+            @*@Html.DisplayNameFor(model => model.First().Governorate.Governorate1)*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().District1)
+        <th>المركز
+            @*@Html.DisplayNameFor(model => model.First().District1)*@
         </th>
       
         <th></th>
@@ -34,13 +34,18 @@
         </td>
      
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.DistrictId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.DistrictId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.DistrictId })|
-            @Html.ActionLink("Villages", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId }, htmlAttributes: null)
+          
+            @Html.ActionLink("تعديل", "Edit", new { id=item.DistrictId }) |
+            @Html.ActionLink("تفاصيل", "Details", new { id=item.DistrictId }) |
+            @Html.ActionLink("حذف", "Delete", new { id = item.DistrictId })|
+            @Html.ActionLink("القرى", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId, GovernorateId = item.GovernorateId }, htmlAttributes: null)
+         
         </td>
     </tr>
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Index", new { page , GovernorateId = Request["GovernorateId"]  }))
+<div>
+    @Html.ActionLink("عودة للمحافظات",  "Index", "Governorates")
+</div>

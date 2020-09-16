@@ -5,23 +5,23 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Delete</h2>
+<h2>حذف</h2>
 
-<h3>Are you sure you want to delete this?</h3>
+<h3>هل انت متأكد من حذف هذه؟</h3>
 <div>
-    <h4>Village</h4>
+    <h4>القرية</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Village1)
+        <dt>اسم القرية
+            @*@Html.DisplayNameFor(model => model.Village1)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Village1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.District.District1)
+        <dt>المركز
+            @*@Html.DisplayNameFor(model => model.District.District1)*@
         </dt>
 
         <dd>
@@ -34,8 +34,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("عودة للقرى", "Villagesfilter", new { DistrictId = Model.DistrictId, GovernorateId = Request["GovernorateId"] })
         </div>
     }
 </div>

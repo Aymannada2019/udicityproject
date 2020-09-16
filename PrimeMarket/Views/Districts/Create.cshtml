@@ -5,32 +5,33 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Create</h2>
+<h2>أضافة </h2>
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>District</h4>
+        <h4>مركز جديد</h4>
         <hr />
+        <div class="form-group row">
+            @Html.LabelFor(model => model.GovernorateId, "المحافظة", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("GovernorateId", null, htmlAttributes: new { @class = "form-control", @style= "float:right !important;" })
+                @Html.ValidationMessageFor(model => model.GovernorateId, "", new { @class = "text-danger" })
+            </div>
+        </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.DistrictId, htmlAttributes: new { @class = "control-label col-md-2", @style = "display: none" })
+        <div class="form-group row">
+            @Html.LabelFor(model => model.DistrictId,"اسم المركز", htmlAttributes: new { @class = "control-label col-md-2", @style = "display: none" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.DistrictId, new { htmlAttributes = new { @class = "form-control", @style = "display: none",@Value="5" } })
                 @Html.ValidationMessageFor(model => model.DistrictId, "", new { @class = "text-danger" })
             </div>
         </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.GovernorateId, "GovernorateId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("GovernorateId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.GovernorateId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-        <div class="form-group">
-            @Html.LabelFor(model => model.District1, htmlAttributes: new { @class = "control-label col-md-2" })
+      
+        <div class="form-group row">
+            @Html.LabelFor(model => model.District1,"اسم المركز", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.District1, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.District1, "", new { @class = "text-danger" })
@@ -41,12 +42,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input type="submit" value="حفظ" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("عودة للمراكز", "Districtfilter", new { GovernorateId = Request["GovernorateId"] })
 </div>

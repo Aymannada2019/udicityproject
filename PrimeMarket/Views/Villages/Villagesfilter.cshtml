@@ -7,37 +7,50 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 <br /><br /><br />
-<h2>Index</h2>
+<h2>القرى</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+  @if (Request["DistrictId"] != null)
+  {
+    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] })
+  }
+  else
+  {
+    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = 1, GovernorateId = Request["GovernorateId"] })
+  }
 </p>
 <table class="table">
     <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Village1)
+        <th>القرية/النجع
+            @*@Html.DisplayNameFor(model => model.First().Village1)*@
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.First().District.District1)
+        <th>المركز
+            @*@Html.DisplayNameFor(model => model.First().District.District1)*@
         </th>
+     
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
+            
             @Html.DisplayFor(modelItem => item.Village1)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.District.District1)
+           
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.VillageId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.VillageId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.VillageId })
+            @Html.ActionLink("تعديل", "Edit", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] }) |
+            @Html.ActionLink("تفاصيل", "Details", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] }) |
+            @Html.ActionLink("حذف", "Delete", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] })
         </td>
     </tr>
 }
 
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page }))
+@Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page, DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] }))
+<div>
+    @Html.ActionLink("عودة للمراكز", "Index", "Districts",   new { GovernorateId = Request["GovernorateId"] })
+</div>

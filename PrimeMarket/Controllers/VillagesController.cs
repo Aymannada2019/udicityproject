@@ -19,7 +19,27 @@ namespace PrimeMarket.Controllers
         public ActionResult Index(int? page)
         {
             var villages = db.Villages.Include(v => v.District);
-            return View(villages.ToList().ToPagedList(page ?? 1, 5));
+           // var model = new VillageGov();
+          //  return View(model);
+            //var villages1 = (from d in db.Districts
+            //                 join g in db.Governorates on d.GovernorateId equals g.GovernorateId
+            //                 join v in db.Villages on d.DistrictId equals v.DistrictId
+            //                 select new
+            //                 {
+            //                     Governorate1 = g.Governorate1,
+            //                     GovernorateId = g.GovernorateId,
+            //                     District1 = d.District1,
+            //                     DistrictId = d.DistrictId,
+            //                     Village1 = v.Village1,
+            //                     VillageId = v.VillageId,
+            //                     District= v.District
+            //                 }).Include(v => v.District);
+
+        //    var villages = villages1.Include(v => v.District);
+
+        //}
+
+            return View(villages.ToList().ToPagedList(page ?? 1, 20));
         }
         public ActionResult Villagesfilter(decimal DistrictId, int? page)
         {
@@ -30,7 +50,7 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
 
-            return View(villages.ToList().ToPagedList(page ?? 1, 5));
+            return View(villages.ToList().ToPagedList(page ?? 1, 20));
         }
         // GET: Villages/Details/5
         public ActionResult Details(decimal? id)
@@ -48,9 +68,13 @@ namespace PrimeMarket.Controllers
         }
 
         // GET: Villages/Create
-        public ActionResult Create()
+        public ActionResult Create(decimal DistrictId)
         {
-            ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1");
+
+            var dist =  db.Districts.Where(d => d.DistrictId == DistrictId).ToList();
+            ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", DistrictId);
+           // var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
+         
             return View();
         }
 
@@ -64,9 +88,9 @@ namespace PrimeMarket.Controllers
             if (ModelState.IsValid)
             {
                 // get last record
-                decimal max = db.Villages.Max(p => p.VillageId);
+               // decimal max = db.Villages.Max(p => p.VillageId);
                 // add 1 to get new record id                         
-                village.VillageId = (decimal)(max + 1);
+               // village.VillageId = (decimal)(max + 1);
                 db.Villages.Add(village);
                 db.SaveChanges();
                 return RedirectToAction("Index");

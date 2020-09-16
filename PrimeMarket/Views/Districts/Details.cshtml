@@ -5,22 +5,22 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>تفاصيل</h2>
 
 <div>
-    <h4>District</h4>
+    <h4>المركز</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.District1)
+        <dt>المركز
+            @*@Html.DisplayNameFor(model => model.District1)*@
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.District1)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Governorate.Governorate1)
+        <dt>المحافظة
+            @*@Html.DisplayNameFor(model => model.Governorate.Governorate1)*@
         </dt>
 
         <dd>
@@ -30,6 +30,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.DistrictId }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.DistrictId }) |
+    @Html.ActionLink("عودة للمراكز", "Districtfilter", new { GovernorateId = Model.GovernorateId })
 </p>
