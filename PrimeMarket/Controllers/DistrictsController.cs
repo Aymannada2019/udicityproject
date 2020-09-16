@@ -19,18 +19,18 @@ namespace PrimeMarket.Controllers
         public ActionResult Index(int? page)
         {
             var districts = db.Districts.Include(d => d.Governorate);
-            return View(districts.ToList().ToPagedList(page ?? 1, 5));
+            return View(districts.ToList().ToPagedList(page ?? 1, 20));
         }
         public ActionResult Districtfilter(decimal GovernorateId, int? page)
         {
 
-            var districts = db.Districts.Where(rs => rs.DistrictId == GovernorateId);
+            var districts = db.Districts.Where(rs => rs.GovernorateId == GovernorateId);
             if (districts == null)
             {
                 return HttpNotFound();
             }
 
-            return View(districts.ToList().ToPagedList(page ?? 1, 5));
+            return View(districts.ToList().ToPagedList(page ?? 1, 10));
         }
         // GET: Districts/Details/5
         public ActionResult Details(int? id)

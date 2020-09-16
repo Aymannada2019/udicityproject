@@ -6,36 +6,44 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Index</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create" )
-</p>
-@using(Html.BeginForm("Index", "Governorates", FormMethod.Get))
-{
-    <p><b>Search By:</b>@Html.TextBox("search") <input type="submit" value="Search" /></p>
-}
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.First().Governorate1)
-        </th>
-        <th></th>
-    </tr>
+<div class="col-lg-4" >
+    <h2>المحافظات</h2>
+     <p >
+        @Html.ActionLink("اضافة محافظة", "Create")
+    </p>
+    @using (Html.BeginForm("Index", "Governorates", FormMethod.Get))
+    {
+        <p><b>بحث ب:</b>@Html.TextBox("Search") <input type="submit" value="بحث" /></p>
+    }
+</div>
+<div class="col-lg-8"></div>
+<div class="col-lg-8">
+    <table class="table">
+        <tr>
+            <th>المحافظة
+                @*@Html.DisplayNameFor(model => model.First().Governorate1,,,"المحافظة")*@
+            </th>
+            <th></th>
+        </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Governorate1)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.GovernorateId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.GovernorateId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.GovernorateId })|
-            @Html.ActionLink("Districts", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, htmlAttributes: null)
-        </td>
-    </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Governorate1)
+                </td>
+                <td>
+                 
+                    @Html.ActionLink("تعديل", "Edit", new { id = item.GovernorateId }) |
+                    @Html.ActionLink("تفاصيل", "Details", new { id = item.GovernorateId }) |
+                    @Html.ActionLink("حذف", "Delete", new { id = item.GovernorateId })  |
+                    @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, htmlAttributes: null)
+                </td>
+            </tr>
+        }
 
-</table>
-@Html.PagedListPager(Model,page => Url.Action("Index",new { page, search=Request.QueryString["search"] }))
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))
+
+</div>

@@ -20,9 +20,9 @@ namespace PrimeMarket.Controllers
         {
             // return View(this.GetGovernorates(1));
             if (search != null && search !="") 
-            return View(db.Governorates.Where(x => x.Governorate1.StartsWith(search) || search==null). ToList().ToPagedList(page ?? 1, 5));
+            return View(db.Governorates.Where(x => x.Governorate1.StartsWith(search) || search==null). ToList().ToPagedList(page ?? 1, 20));
             else
-                return View(db.Governorates.ToList().ToPagedList(page ?? 1, 5));
+                return View(db.Governorates.ToList().ToPagedList(page ?? 1, 20));
         }
        // [HttpPost]
         //public ActionResult Index(int currentPageIndex)
