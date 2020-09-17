@@ -24,7 +24,7 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
 
-            return View(commodityImages.ToList().ToPagedList(page ?? 1, 5));
+            return View(commodityImages.ToList().ToPagedList(page ?? 1, 20));
             //var commodityImages =db.CommodityImages.Include(c => c.Commodity);
             //return View(commodityImages.ToList());
         }

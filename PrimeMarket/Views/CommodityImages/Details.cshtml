@@ -2,41 +2,48 @@
 
 @{
     ViewBag.Title = "Details";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>Details</h2>
+<h2>تفاصيل</h2>
 
 <div>
-    <h4>CommodityImages</h4>
+    <h4>الصورة</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>
-
-        <dd>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                السلعة
+                @*@Html.DisplayNameFor(model => model.Commodity.Title)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.Commodity.Title)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                الصورة
+                @*@Html.DisplayNameFor(model => model.ImagePath)*@
+            </b>
+        </div><div class="col-md-10">
             @if (Model.ImagePath != "" && Model.ImagePath != null)
             {
                 <img src="~/img/commodities/@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
             }
             else
             {
-            @Html.DisplayFor(model => model.ImagePath)
+                @Html.DisplayFor(model => model.ImagePath)
             }
-        </dd>
+        </div>
+    </div>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Commodity.Title)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.Commodity.Title)
-        </dd>
 
-    </dl>
+   
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.CommodityImageId }) |
-    @Html.ActionLink("Back to List", "Index", new { CommodityId = Model.CommodityId }, htmlAttributes: null)
-</p>
+
+        <p>
+            @Html.ActionLink("تعديل", "Edit", new { id = Model.CommodityImageId }) |
+            @Html.ActionLink("عودة لقائمة الصور", "Index", new { CommodityId = Model.CommodityId }, htmlAttributes: null)
+        </p>

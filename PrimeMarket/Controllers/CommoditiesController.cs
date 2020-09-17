@@ -21,12 +21,12 @@ namespace PrimeMarket.Controllers
             if (search != null && search != "")
             {
                 var commodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c=>c.PriceUnit);
-                return View(commodity.Where(x => x.Title.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 5));
+                return View(commodity.Where(x => x.Title.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 20));
             }
             else
             {
                 var commodity1 = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c => c.PriceUnit);
-                return View(commodity1.ToList().ToPagedList(page ?? 1, 5));
+                return View(commodity1.ToList().ToPagedList(page ?? 1, 20));
             }
             //var commodity = db.Commodities.Include(c => c.AspNetUsers).Include(c => c.SubCategory);
             //return View(commodity.ToList());
@@ -116,6 +116,7 @@ namespace PrimeMarket.Controllers
             }
             ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
             return View(commodity);
         }
 
