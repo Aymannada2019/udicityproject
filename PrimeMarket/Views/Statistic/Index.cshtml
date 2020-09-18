@@ -42,7 +42,7 @@
         <div class="col-md-3">
         <input id="Button1" type="button" onclick="displaylistcommcounts()" value="@Html.DisplayFor(model => model.CommodityCount) " /> </div>
         <div class="col-md-7">
-            
+            @if (Model.CommodityCount > 0) { 
             <table id="listcommcounts">
                 <tr>
                     <td>
@@ -77,6 +77,7 @@
         </tr>
     }
             </table>
+            }
         </div>
     </div>
     <div class="row">
