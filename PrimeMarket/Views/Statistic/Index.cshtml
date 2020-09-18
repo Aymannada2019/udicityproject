@@ -1,0 +1,44 @@
+﻿@model PrimeMarket.Models.StatisticsModel
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>اعداد</h2>
+
+<div>
+    <h4>الاحصائيات</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt> عدد العارضين
+            @*@Html.DisplayNameFor(model => model.CommodityId)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityCount)
+        </dd>
+       
+        <dt>
+            كمية السلع المعروضة
+            @*@Html.DisplayNameFor(model => model.CommodityId)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommodityQCount)
+        </dd>
+        <dt>
+            عدد حالات الشراء
+            @*@Html.DisplayNameFor(model => model.CommodityId)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PurchaseCount)
+        </dd>
+      
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Back to List", "Index")*@
+</p>
