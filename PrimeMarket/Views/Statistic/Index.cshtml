@@ -4,41 +4,107 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Styles.Render("~/Content/themes/base/css", "~/Content/css")
+<script type="text/javascript">
+    function displaylistcommcounts()
+    {
+       // var t = document.getElementById(listcommcounts);
+       // alert($("#listcommcounts").is(':visible'));
+        if ($("#listcommcounts").is(':visible') == true)
+            $("#listcommcounts").is(':visible') == false;
+        else
+            $("#listcommcounts").is(':visible') = true;
+    }
+  
+</script>
+@section scripts{
+    <script>
 
+        $("#datefrom").datepicker();
+       $("#dateto").datepicker();
+         clear();
+    </script>
+}
 <h2>اعداد</h2>
 
 <div>
     <h4>الاحصائيات</h4>
+@using (Html.BeginForm("Index", "Statistic", FormMethod.Get))
+{
+    <div class="row"><div class="col-md-12"><b> الفترة من</b> @Html.Editor("datefrom", new { htmlAttributes = new { placeholder = "اضغط لادخال بداية الفترة.", @Id = "datefrom" } })@Html.ValidationMessage("datefrom","*", new { @class = "text-danger" })     الى: @Html.Editor("dateto", new { htmlAttributes = new { placeholder = "اضغط لادخال نهاية الفترة.", @Id = "dateto" } }) @Html.ValidationMessage("dateto","*", new { @class = "text-danger" })   <input type="submit" value="بحث"  /></div></div>
+}
     <hr />
-    <dl class="dl-horizontal">
-        <dt> عدد العارضين
-            @*@Html.DisplayNameFor(model => model.CommodityId)*@
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CommodityCount)
-        </dd>
-       
-        <dt>
-            كمية السلع المعروضة
-            @*@Html.DisplayNameFor(model => model.CommodityId)*@
-        </dt>
+    <div class="row">
+        <div class="col-md-2"><b> عدد العارضين</b></div>
+        <div class="col-md-3">
+        <input id="Button1" type="button" onclick="displaylistcommcounts()" value="@Html.DisplayFor(model => model.CommodityCount) " /> </div>
+        <div class="col-md-7">
+            
+            <table id="listcommcounts">
+                <tr>
+                    <td>
+                        <b>السلعة</b>
+                    </td>
+                    <td>
+                        <b>العارض</b>
+                    </td>
+                    <td>
+                        <b>المحافظة</b>
+                    </td>
+                    <td>
+                        <b>تاريخ العرض</b>
+                    </td>
+                </tr>
 
-        <dd>
+                @foreach (var item in Model.ItemsResults)
+    {
+        <tr>
+            <td>
+                @item.Title
+            </td>
+            <td>
+                @item.AspNetUser.FullName
+            </td>
+            <td>
+                @item.AspNetUser.VillageId
+            </td>
+            <td>
+                @item.CreationDate
+            </td>
+        </tr>
+    }
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                كمية السلع المعروضة
+                @*@Html.DisplayNameFor(model => model.CommodityId)*@
+            </b>
+        </div>
+        <div class="col-md-3">
             @Html.DisplayFor(model => model.CommodityQCount)
-        </dd>
-        <dt>
-            عدد حالات الشراء
-            @*@Html.DisplayNameFor(model => model.CommodityId)*@
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.PurchaseCount)
-        </dd>
-      
-    </dl>
-</div>
-<p>
-    @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    @Html.ActionLink("Back to List", "Index")*@
-</p>
+        </div>
+        <div class="col-md-7"></div>
+    </div>   <div class="row">
+                    <div class="col-md-2">
+                        <b>
+                            عدد حالات الشراء
+                            @*@Html.DisplayNameFor(model => model.CommodityId)*@
+                        </b>
+                    </div>
+                    <div class="col-md-3">
+                        @Html.DisplayFor(model => model.PurchaseCount)
+                    </div> 
+                    <div class="col-md-7"></div>
+                    </div>
+        
+    </div>
+                    <p>
+                        @*@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+                    @Html.ActionLink("Back to List", "Index")*@
+                    </p>
