@@ -48,9 +48,12 @@ namespace PrimeMarket.Controllers
         }
 
         // GET: Districts/Create
-        public ActionResult Create(decimal GovernorateId)
+        public ActionResult Create(decimal? GovernorateId)
         {
+            if(GovernorateId != null)
             ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", GovernorateId);
+            else
+                ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1");
             return View();
         }
 
