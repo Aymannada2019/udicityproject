@@ -267,6 +267,7 @@
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GovernorateModel.cs" />
+    <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Order.cs">
@@ -561,6 +562,7 @@
     <Content Include="Views\ShoppingCart\Checkout.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
+    <Content Include="Views\ShoppingCart\OrderDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

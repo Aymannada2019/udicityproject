@@ -29,6 +29,9 @@ namespace PrimeMarket.Models
         public Nullable<double> Total { get; set; }
         public Nullable<byte> PaymentMethodId { get; set; }
         public bool isPaid { get; set; }
+        public string ShippingAddress { get; set; }
+        public string Phone { get; set; }
+        public string ShippingNotes { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         public virtual OrderStatu OrderStatu { get; set; }

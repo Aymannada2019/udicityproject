@@ -285,6 +285,9 @@
     <NavigationProperty Name="OrderStatu" Relationship="PrimeMarketModel.FK__Order__OrderStat__0B91BA14" FromRole="Order" ToRole="OrderStatu" />
     <NavigationProperty Name="PaymentMethod" Relationship="PrimeMarketModel.FK__Order__PaymentMe__10566F31" FromRole="Order" ToRole="PaymentMethod" />
     <NavigationProperty Name="OrderItems" Relationship="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" FromRole="Order" ToRole="OrderItem" />
+    <Property Name="ShippingAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Phone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ShippingNotes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <EntityType Name="OrderItem">
     <Key>

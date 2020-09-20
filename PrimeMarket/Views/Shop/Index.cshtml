@@ -5,19 +5,13 @@
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
 
-<style>
-    a.addtocart{
-        cursor:pointer;
-    }
-</style>
-
 <section class="product spad">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-5">
                 <div class="sidebar">
                     <div class="sidebar__item">
-                        <h4>Department</h4>
+                        <h4>القسم</h4>
 
 
                         <ul>
@@ -33,7 +27,7 @@
 
                     </div>
                     <div class="sidebar__item">
-                        <h4>Price</h4>
+                        <h4>السعر</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
                                  data-min="10" data-max="540">
@@ -120,7 +114,7 @@
                         {
                             <div class="sidebar__item">
                                 <div class="latest-product__text">
-                                    <h4>Latest Products</h4>
+                                    <h4>أضيف حديثاً</h4>
                                     <div class="latest-product__slider owl-carousel">
                                         @for (int i = 0; i < Model.LatestItems.Count; i += 3)
                                         {
@@ -135,7 +129,7 @@
                                                             </div>
                                                             <div class="latest-product__item__text">
                                                                 <h6>@latestItem.Title</h6>
-                                                                <span>@latestItem.Price LE</span>
+                                                                <span style="direction:rtl;">@latestItem.Price ج.م /@latestItem.PriceUnit.PriceUnit1</span>
                                                             </div>
                                                         </a>
 
@@ -157,7 +151,7 @@
                     {
                         <div class="product__discount">
                             <div class="section-title product__discount__title">
-                                <h2>Sale Off</h2>
+                                <h2>العروض</h2>
                             </div>
                             <div class="row">
                                 <div class="product__discount__slider owl-carousel">
@@ -167,14 +161,16 @@
                                         var strdiscount = string.Format("{0:00}", discount);
                                         <div class="col-lg-4">
                                             <div class="product__discount__item">
+
                                                 <div class="product__discount__item__pic set-bg"
                                                      data-setbg="@saleItem.CommodityImages.FirstOrDefault().ImagePath">
                                                     <div class="product__discount__percent">@strdiscount%</div>
 
 
-                                                    <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                                    <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
                                                         <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@saleItem.CommodityId" />
-                                                        <input type="hidden" id="txt_quantity" name="txt_quantity" value="1" />
+                                                        <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
+                                                        
                                                         <ul class="product__item__pic__hover">
                                                             <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
                                                         </ul>
@@ -185,7 +181,7 @@
                                                 <div class="product__discount__item__text">
                                                     <span>@saleItem.SubCategory.SubCategory1</span>
                                                     <h5><a href="~/shop/ItemDetails?CommodityId=@saleItem.CommodityId">@saleItem.Title</a></h5>
-                                                    <div class="product__item__price">@saleItem.Price LE <span>@saleItem.OriginalPrice LE</span></div>
+                                                    <div class="product__item__price" style="direction:rtl;">@saleItem.Price ج.م/@saleItem.PriceUnit.PriceUnit1 &nbsp;<span>@saleItem.OriginalPrice </span></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -200,7 +196,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
-                                <span>Sort By</span>
+                                <span>الترتيب حسب</span>
                                 <select>
                                     <option value="1">وصل حديثاً</option>
                                     <option value="2">الأعلى تقييماً</option>
@@ -211,7 +207,7 @@
                         </div>
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>@Model.Items.Count</span> Products found</h6>
+                                <h6><span>@Model.Items.Count</span> منتج موجود</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
@@ -228,9 +224,9 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@item.CommodityImages.FirstOrDefault().ImagePath">
-                                    <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                    <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
                                         <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@item.CommodityId" />
-                                        <input type="hidden" id="txt_quantity" name="txt_quantity" value="1" />
+                                        <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
                                         <ul class="product__item__pic__hover">
                                             <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
                                         </ul>
@@ -238,7 +234,7 @@
                                 </div>
                                 <div class="product__item__text">
                                     <h6><a href="~/shop/ItemDetails?CommodityId=@item.CommodityId">@item.Title</a></h6>
-                                    <h5>@item.Price LE</h5>
+                                    <h5>@item.Price ج.م/@item.PriceUnit.PriceUnit1</h5>
                                 </div>
                             </div>
                         </div>

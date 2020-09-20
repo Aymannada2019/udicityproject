@@ -141,6 +141,9 @@
     <EntitySetMapping Name="Orders">
       <EntityTypeMapping TypeName="PrimeMarketModel.Order">
         <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="ShippingNotes" ColumnName="ShippingNotes" />
+          <ScalarProperty Name="Phone" ColumnName="Phone" />
+          <ScalarProperty Name="ShippingAddress" ColumnName="ShippingAddress" />
           <ScalarProperty Name="isPaid" ColumnName="isPaid" />
           <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
           <ScalarProperty Name="Total" ColumnName="Total" />

@@ -20,9 +20,9 @@ namespace PrimeMarket.Models.UIViewModel
         {
             try
             {
-                Items = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u=>u.Available==true).OrderByDescending(u => u.CreationDate).ToList();
-                SaleOffItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.OriginalPrice>u.Price).OrderBy(u => u.CreationDate).Take(9).ToList();
-                LatestItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true).OrderByDescending(u => u.CreationDate).Take(9).ToList();
+                Items = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Include(u=>u.PriceUnit).Where(u=>u.Available==true && u.Publish==true).OrderByDescending(u => u.CreationDate).ToList();
+                SaleOffItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.OriginalPrice>u.Price).OrderBy(u => u.CreationDate).Take(9).ToList();
+                LatestItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true).OrderByDescending(u => u.CreationDate).Take(9).ToList();
                 CategoryList = db.Categories.Include(c => c.SubCategories).ToList();
             }
             catch
@@ -34,9 +34,9 @@ namespace PrimeMarket.Models.UIViewModel
         {
             try
             {
-                Items = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.SubCategoryId== SubCategoryId).OrderByDescending(u => u.CreationDate).ToList();
-                SaleOffItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.SubCategoryId == SubCategoryId && u.OriginalPrice > u.Price).OrderBy(u => u.CreationDate).Take(9).ToList();
-                LatestItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.SubCategoryId == SubCategoryId).OrderByDescending(u => u.CreationDate).Take(9).ToList();
+                Items = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.SubCategoryId== SubCategoryId).OrderByDescending(u => u.CreationDate).ToList();
+                SaleOffItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.SubCategoryId == SubCategoryId && u.OriginalPrice > u.Price).OrderBy(u => u.CreationDate).Take(9).ToList();
+                LatestItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.SubCategoryId == SubCategoryId).OrderByDescending(u => u.CreationDate).Take(9).ToList();
                 CategoryList = db.Categories.Include(c => c.SubCategories).ToList();
             }
             catch

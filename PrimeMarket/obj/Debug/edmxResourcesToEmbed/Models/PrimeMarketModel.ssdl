@@ -148,6 +148,9 @@
     <Property Name="Total" Type="float" />
     <Property Name="PaymentMethodId" Type="tinyint" />
     <Property Name="isPaid" Type="bit" Nullable="false" />
+    <Property Name="ShippingAddress" Type="nvarchar(max)" />
+    <Property Name="Phone" Type="nvarchar(max)" />
+    <Property Name="ShippingNotes" Type="nvarchar(max)" />
   </EntityType>
   <EntityType Name="OrderItems">
     <Key>

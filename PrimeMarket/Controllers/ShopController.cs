@@ -56,12 +56,13 @@ namespace PrimeMarket.Controllers
             try
             {
                 var CommodityId = int.Parse(Request.Form["hdn_CommodityId"].ToString());
-                var Quantity = int.Parse(Request.Form["txt_quantity"].ToString().Trim());
+                var commidity = db.Commodities.Where(c => c.CommodityId == CommodityId).FirstOrDefault();
+                var Quantity = int.Parse(Request.Form["txt_Quantity"].ToString().Trim());
                 string CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
                 var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
                 if (cart == null)
                 {
-                    Cart newCart = new Cart()
+                    cart = new Cart()
                     {
                         CommodityId = CommodityId,
                         Quantity = Quantity,
@@ -69,14 +70,16 @@ namespace PrimeMarket.Controllers
                         CartDate = DateTime.Now,
                         CartStatusId = 1
                     };
-                    db.Carts.Add(newCart);
+                    db.Carts.Add(cart);
                 }
                 else
                 {
                     cart.Quantity += Quantity;
                 }
-
-                db.SaveChanges();
+                if (cart.Quantity <= commidity.Quantity)
+                {
+                    db.SaveChanges();
+                }
             }
             catch
             { }
@@ -109,11 +112,15 @@ namespace PrimeMarket.Controllers
                 var CartId = int.Parse(Request.Form["hdn_CartId"].ToString());
                 var Quantity = int.Parse(Request.Form["txt_Quantity"].ToString().Trim());
                 var cart = db.Carts.Where(c => c.CartId == CartId).FirstOrDefault();
+                var commidity = db.Commodities.Where(c => c.CommodityId == cart.CommodityId).FirstOrDefault();
                 if (cart != null)
                 {
                     cart.Quantity = Quantity;
                 }
-                db.SaveChanges();
+                if (cart.Quantity <= commidity.Quantity)
+                {
+                    db.SaveChanges();
+                }
             }
             catch
             { }

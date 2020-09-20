@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace PrimeMarket.Controllers
 {
@@ -23,12 +24,23 @@ namespace PrimeMarket.Controllers
             var model = new CartViewModel();
             return View(model);
         }
+
+        public ActionResult OrderDetails(int OrderId)
+        {
+            var model = db.Orders.Where(x => x.OrderId == OrderId).FirstOrDefault();
+            return View();
+        }
+
         [HttpPost]
         public ActionResult PlaceOrder()
         {
             var userOrder = new Order();
             try
             {
+                var ShippingAddress = Request.Form["txt_ShippingAddress"].ToString();
+                var ShippingNotes = Request.Form["txt_ShippingNotes"].ToString();
+                var Notes = Request.Form["txt_Notes"].ToString();
+                var phone = Request.Form["txt_phone"].ToString();
                 // mahmoud Bakr
                 var CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
                 var cart = db.Carts.Where(c => c.CustomerId == CustomerId).ToList();
@@ -41,6 +53,10 @@ namespace PrimeMarket.Controllers
                 userOrder.PaymentMethodId = 1;
                 userOrder.RequestDate = DateTime.Now;
                 userOrder.Total = total;
+                userOrder.Notes = Notes;
+                userOrder.ShippingAddress = ShippingAddress;
+                userOrder.ShippingNotes = ShippingNotes;
+                userOrder.Phone = phone;
                 db.Orders.Add(userOrder);
                 db.SaveChanges();
 

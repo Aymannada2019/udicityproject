@@ -1,7 +1,7 @@
 ﻿@model PrimeMarket.Models.UIViewModel.ItemDetailsViewModel
 
 @{
-    ViewBag.Title = "ItemDetails";
+    ViewBag.Title = "تفاصيل السلعة";
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
 
@@ -19,7 +19,7 @@
                     <div class="product__details__pic__slider owl-carousel">
                         @foreach (var commodityImage in Model.ThisCommodity.CommodityImages)
                         {
-                            <img data-imgbigurl="img/product/details/product-details-2.jpg"
+                            <img data-imgbigurl="@commodityImage.ImagePath"
                                  src="@commodityImage.ImagePath" alt="">
                         }
                     </div>
@@ -34,23 +34,30 @@
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star"></i>
                         <i class="fa fa-star-half-o"></i>
-                        <span>(@Model.ThisCommodityRatings.Count reviews)</span>
+                        <span>(@Model.ThisCommodityRatings.Count تقييم)</span>
                     </div>
-                    <div class="product__details__price">@Model.ThisCommodity.Price LE</div>
+                    <div class="product__details__price">@Model.ThisCommodity.Price ج.م/@Model.ThisCommodity.PriceUnit.PriceUnit1</div>
+                    <p style="font-size:10pt;">
+                    الكمية المتاحة: <strong> @Model.ThisCommodity.Quantity @Model.ThisCommodity.PriceUnit.PriceUnit1</strong> من عند  &nbsp;
+                        <span style="color:#0094ff;cursor:pointer;"> @Model.ThisCommodity.AspNetUser.FullName</span>
+                    </p>
+                    
                     <p>
                         @Model.ThisCommodity.Details
                     </p>
-                   <form name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                   <form id="AddToCartForm_Details" name="AddToCartForm_Details" method="post" action="/Shop/AddToCart">
                         <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@Model.ThisCommodity.CommodityId" />
+                       
                         <div class="product__details__quantity">
                             <div class="quantity">
                                 <div class="pro-qty">
-                                    <input type="text" id="txt_quantity" name="txt_quantity" value="1">
+                                    <input type="text" id="txt_Quantity" name="txt_Quantity" class="txt_Quantity_Details" value="1">
+                                    <input type="hidden" id="StockAmount" name="StockAmount" value="@Model.ThisCommodity.Quantity" />
                                 </div>
                             </div>
                         </div>
                         @*<a href="#" class="primary-btn">ADD TO CART</a>*@
-                        <input type="submit" value="ADD TO CARD" class="primary-btn" />
+                        <input type="submit" value="أضف إلى السلة" class="primary-btn" />
                    </form>
 
 
@@ -62,7 +69,7 @@
                 <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                 <li><b>Weight</b> <span>0.5 kg</span></li>*@
                             <li>
-                                <b>Share on</b>
+                                <b>المشاركة عبر</b>
                                 <div class="share">
                                     <a href="#"><i class="fa fa-facebook"></i></a>
                                     <a href="#"><i class="fa fa-twitter"></i></a>
@@ -78,21 +85,21 @@
                     <ul class="nav nav-tabs" role="tablist">
                         <li class="nav-item">
                             <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab"
-                               aria-selected="true">Description</a>
+                               aria-selected="true">الوصف</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab"
-                               aria-selected="false">Information</a>
+                               aria-selected="false">التفاصيل</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
-                               aria-selected="false">Reviews<span>(@Model.ThisCommodityReviews.Count)</span></a>
+                               aria-selected="false">التقييمات<span>(@Model.ThisCommodityReviews.Count)</span></a>
                         </li>
                     </ul>
                     <div class="tab-content">
                         <div class="tab-pane active" id="tabs-1" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Products Description</h6>
+                                <h6>الوصف</h6>
                                 <p>
                                     @Model.ThisCommodity.Details
                                 </p>
@@ -101,7 +108,7 @@
                         </div>
                         <div class="tab-pane" id="tabs-2" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                <h6>Products Infomation</h6>
+                                <h6>التفاصيل</h6>
                                 <p>
                                     Vestibulum ac diam sit amet quam vehicula elementum sed sit amet dui.
                                     Pellentesque in ipsum id orci porta dapibus. Proin eget tortor risus.
@@ -128,19 +135,19 @@
                             <div class="product__details__tab__desc">
                                 @foreach (var review in Model.ThisCommodityReviews)
                                 {
-                                <p>By <strong>@review.AspNetUser.FullName</strong> in <i>@string.Format("{0:dd/MM/yyyy hh:mm tt}",review.CreationDate)</i></p>
+                                <p>بواسطة <strong>@review.AspNetUser.FullName</strong> بتاريخ <i>@string.Format("{0:dd/MM/yyyy hh:mm tt}",review.CreationDate)</i></p>
                                 <p>
                                     @review.Comment
                                 </p>
                                 <hr />
                                 }
                             </div>
-                            <h4 style="text-decoration:underline;">Add your Review:</h4>
+                            <h4 style="text-decoration:underline;">أضف تقييمك:</h4>
 
                                                             <form name="AddCommentForm" method="post" action="/Shop/AddComment">
                                                                 <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@Model.ThisCommodity.CommodityId" />
                                                                 <div class="form-group">
-                                                                    <label class="control-label">Your Comment:</label>
+                                                                    <label class="control-label">تعليقك:</label>
                                                                     <div class="col-md-10">
                                                                         <input id="txt_comment" name="txt_comment" type="text" class="form-control" />
                                                                     </div>
@@ -152,19 +159,6 @@
                                                                     </div>
                                                                 </div>
                                                             </form> 
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                         </div>
@@ -181,7 +175,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title related__product__title">
-                    <h2>Related Product</h2>
+                    <h2>منتجات ذات صلة</h2>
                 </div>
             </div>
         </div>
@@ -191,13 +185,19 @@
             <div class="col-lg-3 col-md-4 col-sm-6">
                 <div class="product__item">
                     <div class="product__item__pic set-bg" data-setbg="@relatedItem.CommodityImages.FirstOrDefault().ImagePath">
-                        <ul class="product__item__pic__hover">
-                            <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                        </ul>
+                        
+                        <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                            <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@relatedItem.CommodityId" />
+                            <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
+
+                            <ul class="product__item__pic__hover">
+                                <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                            </ul>
+                        </form>
                     </div>
                     <div class="product__item__text">
                         <h6><a href="~/shop/itemdetails?CommodityId=@relatedItem.CommodityId">@relatedItem.Title</a></h6>
-                        <h5>@relatedItem.Price LE</h5>
+                        <h5>@relatedItem.Price ج.م/@relatedItem.PriceUnit.PriceUnit1</h5>
                     </div>
                 </div>
             </div>
@@ -207,3 +207,14 @@
 </section>
 <!-- Related Product Section End -->
 
+@section Scripts{
+<script src="/Content/SiteScripts/Cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".addtocart").click(function () {
+                var addbtn = $(this);
+                addbtn.closest("form").submit();
+            });
+        });
+    </script>
+}

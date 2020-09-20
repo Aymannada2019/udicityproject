@@ -1,4 +1,4 @@
-/*  ---------------------------------------------------
+﻿/*  ---------------------------------------------------
     Template Name: Ogani
     Description:  Ogani eCommerce  HTML Template
     Author: Colorlib
@@ -207,7 +207,8 @@
     proQty.append('<span class="inc qtybtn">+</span>');
     proQty.on('click', '.qtybtn', function () {
         var $button = $(this);
-        var oldValue = $button.parent().find('input').val();
+        var oldValue = $button.parent().find('#txt_Quantity').val();
+        // alert('oldvalue: ' + oldValue);
         if ($button.hasClass('inc')) {
             var newVal = parseFloat(oldValue) + 1;
         } else {
@@ -218,9 +219,15 @@
                 newVal = 1;
             }
         }
-        $button.parent().find('input').val(newVal);
+        var StockAmount = $button.parent().find('#StockAmount').val();
+        if (newVal > StockAmount)
+        {
+            alert('الكمية المطلوبة غير متاحة');
+            return;
+        }
+        $button.parent().find('#txt_Quantity').val(newVal);
         // ---- update cart values -----------
-        $button.closest("form").submit();
+        $button.closest("#AddToCartForm").submit();
     });
 
 })(jQuery);

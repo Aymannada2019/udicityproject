@@ -17,8 +17,8 @@ namespace PrimeMarket.Models.UIViewModel
         double Rank = 0;
         public ItemDetailsViewModel(int CommodityId)
         {
-            ThisCommodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.CommodityImages).Include(c => c.CommodityRatings).Include(c => c.PriceUnit).Include(c => c.SubCategory).Where(c => c.CommodityId == CommodityId).FirstOrDefault();
-            RelatedItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.SubCategoryId==ThisCommodity.SubCategoryId).OrderByDescending(u => u.CreationDate).Take(4).ToList();
+            ThisCommodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.CommodityImages).Include(c => c.CommodityRatings).Include(c => c.PriceUnit).Include(c => c.SubCategory).Where(c => c.CommodityId == CommodityId && c.Available==true && c.Publish == true ).FirstOrDefault();
+            RelatedItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.SubCategoryId==ThisCommodity.SubCategoryId).OrderByDescending(u => u.CreationDate).Take(4).ToList();
             ThisCommodityRatings = ThisCommodity.CommodityRatings.Where(r => r.Rating != null).ToList();
             ThisCommodityReviews = ThisCommodity.CommodityRatings.Where(r => r.Comment != null).OrderByDescending(r=>r.CreationDate).ToList();
             Rank = (double)ThisCommodityRatings.Sum(r => r.Rating) / (double)ThisCommodityRatings.Count;
