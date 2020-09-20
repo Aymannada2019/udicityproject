@@ -55,12 +55,14 @@
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.ImagePath)
+            @*@Html.DisplayFor(model => model.ImagePath)*@
+            <img id="img_UserImage" src="~/img/Users/@Html.DisplayFor(model => model.ImagePath)" style="height:200px;width:200px;" />
         </dd>
 
     </dl>
 </div>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Change Password", "ChangePassword", "Manage", null, null) |
     @Html.ActionLink("Back to List", "Index")
 </p>

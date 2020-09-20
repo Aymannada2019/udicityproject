@@ -11,6 +11,7 @@ using PagedList;
 using PagedList.Mvc;
 namespace PrimeMarket.Controllers
 {
+    [Authorize]
     public class GovernoratesController : Controller
     {
         private PrimeMarketEntities db = new PrimeMarketEntities();

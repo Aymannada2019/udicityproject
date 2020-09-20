@@ -223,6 +223,7 @@
     <Compile Include="Controllers\ShopController.cs" />
     <Compile Include="Controllers\ShoppingCartController.cs" />
     <Compile Include="Controllers\ShowCommoditiesController.cs" />
+    <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +299,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PrimeMarketModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\StatisticsModel.cs" />
     <Compile Include="Models\SubCategory.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -330,6 +332,7 @@
     <Content Include="Content\css\owl.carousel.min.css" />
     <Content Include="Content\css\slicknav.min.css" />
     <Content Include="Content\css\style.css" />
+    <Content Include="Content\css\style_ar.css" />
     <Content Include="Content\PagedList.css" />
     <Content Include="Content\SiteScripts\Cart.js" />
     <Content Include="favicon.ico" />
@@ -557,6 +560,7 @@
     <Content Include="Views\ShoppingCart\Index.cshtml" />
     <Content Include="Views\ShoppingCart\Checkout.cshtml" />
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
+    <Content Include="Views\Statistic\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -99,6 +99,7 @@
     <Property Name="ExpireDate" Type="smalldatetime" />
     <Property Name="IsFeatured" Type="bit" />
     <Property Name="OriginalPrice" Type="float" />
+    <Property Name="Quantity" Type="float" />
   </EntityType>
   <EntityType Name="CommodityImages">
     <Key>

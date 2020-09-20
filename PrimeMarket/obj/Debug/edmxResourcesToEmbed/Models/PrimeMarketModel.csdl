@@ -226,6 +226,7 @@
     <NavigationProperty Name="PriceUnit" Relationship="PrimeMarketModel.FK__Commodity__Price__04E4BC85" FromRole="Commodity" ToRole="PriceUnit" />
     <NavigationProperty Name="SubCategory" Relationship="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE" FromRole="Commodity" ToRole="SubCategory" />
     <NavigationProperty Name="OrderItems" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="Commodity" ToRole="OrderItem" />
+    <Property Name="Quantity" Type="Double" />
   </EntityType>
   <EntityType Name="CommodityImage">
     <Key>

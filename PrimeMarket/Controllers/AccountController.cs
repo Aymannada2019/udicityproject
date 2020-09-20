@@ -10,6 +10,10 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using PrimeMarket.Models;
 
+//using Microsoft.Owin.Logging;
+using System.Net.Mail;
+using System.Configuration;
+
 namespace PrimeMarket.Controllers
 {
     [Authorize]
@@ -17,15 +21,17 @@ namespace PrimeMarket.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        //private ILogger logger;
 
         public AccountController()
         {
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)//, ILogger Plogger)
         {
             UserManager = userManager;
             SignInManager = signInManager;
+            //this.logger = Plogger;
         }
 
         public ApplicationSignInManager SignInManager
@@ -161,10 +167,10 @@ namespace PrimeMarket.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
+                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                                        
                     /*
                     Account a = new Account();
                     //"AccountId,FullName,Address,Phones,Email,PassWord,ImagePath"
@@ -210,6 +216,7 @@ namespace PrimeMarket.Controllers
 
         //
         // GET: /Account/ForgotPassword
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult ForgotPassword()
         {
@@ -225,23 +232,49 @@ namespace PrimeMarket.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await UserManager.FindByNameAsync(model.Email);
-                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //var user = await UserManager.FindByNameAsync(model.Email);
+                var user = await UserManager.FindByEmailAsync(model.Email);
+                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                if (user == null)  //to ignore the mail confirmation by (moh said)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
-                    return View("ForgotPasswordConfirmation");
+                    //return View("ForgotPasswordConfirmation");
+                    return View("Error");
                 }
-
+                
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                
+                //*var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { email = model.Email, code = code }, protocol: Request.Url.Scheme);
+                
+                //*await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                string EmailBody = "Please, reset your password by clicking on the following link " + callbackUrl;
+                SendEmail(model.Email, EmailBody, "Reset Password");
+
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        private void SendEmail(string recipientMail, string emailBody, string mailSubject)
+        {
+            // Specify the from and to email address
+            string MailSender = ConfigurationManager.AppSettings["MailSender"];
+            MailMessage mailMessage = new MailMessage(MailSender, recipientMail);
+            // Specify the email body
+            mailMessage.Body = emailBody;
+            // Specify the email Subject
+            mailMessage.Subject = mailSubject;
+
+            // No need to specify the SMTP settings as these 
+            // are already specified in web.config
+            SmtpClient smtpClient = new SmtpClient();
+            // Finall send the email message using Send() method
+            smtpClient.Send(mailMessage);
         }
 
         //
@@ -254,6 +287,7 @@ namespace PrimeMarket.Controllers
 
         //
         // GET: /Account/ResetPassword
+        [HttpGet]
         [AllowAnonymous]
         public ActionResult ResetPassword(string code)
         {
@@ -271,7 +305,8 @@ namespace PrimeMarket.Controllers
             {
                 return View(model);
             }
-            var user = await UserManager.FindByNameAsync(model.Email);
+            //*var user = await UserManager.FindByNameAsync(model.Email);
+            var user = await UserManager.FindByEmailAsync(model.Email);
             if (user == null)
             {
                 // Don't reveal that the user does not exist

@@ -82,6 +82,7 @@
     <EntitySetMapping Name="Commodities">
       <EntityTypeMapping TypeName="PrimeMarketModel.Commodity">
         <MappingFragment StoreEntitySet="Commodity">
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
           <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
           <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />

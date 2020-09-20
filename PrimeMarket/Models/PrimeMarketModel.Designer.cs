@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\Models\PrimeMarketModel.edmx'. 
+﻿// T4 code generation is enabled for model 'D:\PrimeFinal\PrimeMarket\Models\PrimeMarketModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

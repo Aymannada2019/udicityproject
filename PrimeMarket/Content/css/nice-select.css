@@ -100,7 +100,7 @@
     pointer-events: none;
     position: absolute;
     top: 100%;
-    left: 0;
+    right: 0;                                                       /*khmonir // left*/
     -webkit-transform-origin: 50% 0;
         -ms-transform-origin: 50% 0;
             transform-origin: 50% 0;
@@ -121,7 +121,7 @@
     outline: none;
     padding-left: 18px;
     padding-right: 29px;
-    text-align: left;
+    text-align: right;                                                      /*khmonir // left*/
     -webkit-transition: all 0.2s;
     transition: all 0.2s; }
     .nice-select .option:hover, .nice-select .option.focus, .nice-select .option.selected.focus {

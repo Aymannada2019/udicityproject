@@ -31,8 +31,8 @@ namespace PrimeMarket.Models
                 LatestItems = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true).OrderByDescending(u => u.CreationDate).Take(9).ToList();
                 CommodityQ = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true).ToList();
                 CommodityCount = ItemsResults.ToList().Count;
-                for (int i = 0; i < CommodityQ.Count; i++)
-                    CommodityQCount = CommodityCount + CommodityQ[i].Quantity.Value;
+             //   for (int i = 0; i < CommodityQ.Count; i++)
+             //       CommodityQCount = CommodityCount + CommodityQ[i].Quantity.Value;
                 PurchaseCount = PurchasItemsResults.Count;
             }
             catch { }
