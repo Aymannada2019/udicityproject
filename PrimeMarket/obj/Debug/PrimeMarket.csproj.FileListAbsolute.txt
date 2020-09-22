@@ -587,3 +587,4 @@ D:\PrimeFinal\PrimeMarket\bin\Microsoft.Owin.Security.Twitter.xml
 D:\PrimeFinal\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.dll
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.pdb
+D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache

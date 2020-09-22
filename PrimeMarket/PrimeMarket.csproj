@@ -567,6 +567,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\front_end\Models\" />
+    <Folder Include="img\users\" />
     <Folder Include="Views\Carts\" />
     <Folder Include="Views\Commodities\" />
     <Folder Include="Views\CommodityImages\" />
