@@ -270,6 +270,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaData_AspNetUser.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -563,6 +564,7 @@
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\ShoppingCart\OrderDetails.cshtml" />
+    <Content Include="Views\Accounts\ChangeImage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
