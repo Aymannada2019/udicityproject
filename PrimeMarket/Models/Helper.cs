@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using PrimeMarket.Models;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
@@ -8,6 +11,7 @@ namespace PrimeMarket.Models
 {
     public class Helper
     {
+        // ApplicationDbContext db = new ApplicationDbContext();
         public static void SendEmail(string To,string Subject, string Body)
         {
             try
@@ -33,5 +37,27 @@ namespace PrimeMarket.Models
 
             }
         }
+
+        public static bool isInRole(string UserName, string rolename)
+        {
+            PrimeMarketEntities db = new PrimeMarketEntities();
+            AspNetRole R = db.AspNetRoles.Where(x => x.Name == rolename).FirstOrDefault();
+            if(R!=null)
+            {
+                var RoleId = R.Id;
+                //var userRole = db.AspNetUser
+            }
+            return false;
+        }
+        public static string getUserFullName(string UserName)
+        {
+            PrimeMarketEntities db = new PrimeMarketEntities();
+            AspNetUser user = db.AspNetUsers.Where(x => x.UserName == UserName).FirstOrDefault();
+            if (user != null)
+                return user.FullName;
+            return string.Empty;
+        }
+
+
     }
 }

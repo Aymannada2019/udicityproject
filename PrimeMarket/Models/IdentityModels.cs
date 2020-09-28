@@ -9,10 +9,9 @@ namespace PrimeMarket.Models
     // You can add profile data for the user by adding more properties to your ApplicationUser class, please visit http://go.microsoft.com/fwlink/?LinkID=317594 to learn more.
     public class ApplicationUser : IdentityUser
     {
-        //
-        // Summary:
-        //     /// User name ///
+        //*** add by moh.said 23/9/2020 to add fullName in user register
         public virtual string FullName { get; set; }
+        //***
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {

@@ -208,7 +208,7 @@
     <Compile Include="Areas\front_end\Controllers\FECategoriesController.cs" />
     <Compile Include="Areas\front_end\front_endAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />
@@ -522,11 +522,11 @@
     <Content Include="Views\ShowCommodities\Details.cshtml" />
     <Content Include="Views\ShowCommodities\Edit.cshtml" />
     <Content Include="Views\ShowCommodities\Index.cshtml" />
-    <Content Include="Views\Accounts\Create.cshtml" />
-    <Content Include="Views\Accounts\Delete.cshtml" />
-    <Content Include="Views\Accounts\Details.cshtml" />
-    <Content Include="Views\Accounts\Edit.cshtml" />
-    <Content Include="Views\Accounts\Index.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
     <Content Include="Views\Governorates\Create.cshtml" />
     <Content Include="Views\Governorates\Delete.cshtml" />
     <Content Include="Views\Governorates\Details.cshtml" />
@@ -564,7 +564,10 @@
     <Content Include="Views\Shared\LayoutAdmin.cshtml" />
     <Content Include="Views\Statistic\Index.cshtml" />
     <Content Include="Views\ShoppingCart\OrderDetails.cshtml" />
-    <Content Include="Views\Accounts\ChangeImage.cshtml" />
+    <Content Include="Views\AspNetUsers\ChangeImage.cshtml" />
+    <Content Include="Views\Account\EmailNotConfirmed_moh.cshtml" />
+    <Content Include="Views\Account\EmailNotExist_moh.cshtml" />
+    <Content Include="Views\Account\RegisterConfirmation_moh.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
