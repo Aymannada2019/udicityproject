@@ -1,0 +1,25 @@
+﻿@model PrimeMarket.Models.AspNetUser
+@{
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>المستخدم</title>
+</head>
+<body>
+    <div> 
+        @*@ CurId = Request["id"];*@
+        @*@Html.Hidden("CurId", Request["id"])*@
+        @*@Html.Label("CurId", "L:" + Request.Form.Get("id"))*@
+
+        @Html.ActionLink("تعديل", "Edit", new { id = Request["id"] }) <br />
+        @Html.ActionLink("تعديل الصورة", "ChangeImage", new { id = Request["id"] }) <br />
+        @Html.ActionLink("تعديل كلمة السر", "ChangePassword", new { id = Request["id"] })
+
+    </div>
+</body>
+</html>

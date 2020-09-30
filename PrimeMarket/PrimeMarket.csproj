@@ -225,6 +225,7 @@
     <Compile Include="Controllers\ShowCommoditiesController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -568,6 +569,8 @@
     <Content Include="Views\Account\EmailNotConfirmed_moh.cshtml" />
     <Content Include="Views\Account\EmailNotExist_moh.cshtml" />
     <Content Include="Views\Account\RegisterConfirmation_moh.cshtml" />
+    <Content Include="Views\UserProfile\Index.cshtml" />
+    <Content Include="Views\UserProfile\Edit.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
