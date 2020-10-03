@@ -1,7 +1,7 @@
 ﻿@using Microsoft.AspNet.Identity
 
 <!DOCTYPE html>
-<html lang="zxx">
+<html lang="ar">
 
 <head>
     <meta charset="UTF-8">
@@ -9,7 +9,7 @@
     <meta name="keywords" content="Ogani, unica, creative, html">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ogani | Template</title>
+    <title>شاري | الصفحة الرئيسية</title>
 
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
@@ -23,9 +23,13 @@
     <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <style>
         a.addtocart {
             cursor: pointer;
+        }
+        .ui-menu .ui-widget .ui-widget-content .ui-autocomplete .ui-front{
+            font-size:12pt !important;
         }
     </style>
 
@@ -44,14 +48,11 @@
             <a href="#"><img src="img/logo.png" alt=""></a>
         </div>
         <div class="humberger__menu__cart">
-            <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-            </ul>
-            <div class="header__cart__price">item: <span>$150.00</span></div>
+            @Html.Partial("~/views/shared/_HeaderCartPartial.cshtml", new PrimeMarket.Models.UIViewModel.CartSummaryViewModel())
         </div>
+
         <div class="humberger__menu__widget">
-            <div class="header__top__right__language">
+            @*<div class="header__top__right__language">
                 <img src="img/language.png" alt="">
                 <div>English</div>
                 <span class="arrow_carrot-down"></span>
@@ -59,26 +60,26 @@
                     <li><a href="#">Spanis</a></li>
                     <li><a href="#">English</a></li>
                 </ul>
-            </div>
+            </div>*@
             <div class="header__top__right__auth">
                 <a href="#"><i class="fa fa-user"></i> Login</a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
-                <li class="active"><a href="./index.html">Home</a></li>
-                <li><a href="./shop-grid.html">Shop</a></li>
+                <li class="active"><a href="/shop/index">الرئيسية</a></li>
+                <li><a href="/shop/index">المنتجات</a></li>
                 <li>
                     <a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
-                        <li><a href="./shop-details.html">Shop Details</a></li>
-                        <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                        <li><a href="./checkout.html">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog Details</a></li>
+                        <li><a href="#">Shop Details</a></li>
+                        <li><a href="#">Shoping Cart</a></li>
+                        <li><a href="#">Check Out</a></li>
+                        <li><a href="#">Blog Details</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="#">من نحن</a></li>
+                <li><a href="#">إتصل بنا</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -117,7 +118,7 @@
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><i class="fa fa-pinterest-p"></i></a>
                             </div>
-                            <div class="header__top__right__language">
+                            @*<div class="header__top__right__language">
                                 <img src="img/language.png" alt="">
                                 <div>English</div>
                                 <span class="arrow_carrot-down"></span>
@@ -125,7 +126,7 @@
                                     <li><a href="#">Spanis</a></li>
                                     <li><a href="#">English</a></li>
                                 </ul>
-                            </div>
+                            </div>*@
                             <div class="header__top__right__auth">
                                 <a href="#"><i class="fa fa-user"></i> Login</a>
                             </div>
@@ -138,37 +139,38 @@
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
+                        <a href="/shop/index"><img src="/img/logo.png" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop-grid.html">Shop</a></li>
+                            <li class="active"><a href="/shop/index">الرئيسية</a></li>
+                            <li><a href="/shop/index">المنتجات</a></li>
                             <li>
                                 <a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shoping-cart.html">Shoping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
+                                    <li><a href="#">Shop Details</a></li>
+                                    <li><a href="#">Shoping Cart</a></li>
+                                    <li><a href="#">Check Out</a></li>
+                                    <li><a href="#">Blog Details</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contact</a></li>
+                            <li><a href="#">من نحن</a></li>
+                            <li><a href="#">إتصل بنا</a></li>
                         </ul>
                     </nav>
                 </div>
                 <div class="col-lg-3">
                     <div class="header__cart">
-                        <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="#"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
-                        </ul>
-                        <div class="header__cart__price">item: <span>$150.00</span></div>
+                        @Html.Partial("~/views/shared/_HeaderCartPartial.cshtml", new PrimeMarket.Models.UIViewModel.CartSummaryViewModel())
+    @*<ul>
+        <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
+        <li><a href="/ShoppingCart"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+    </ul>
+    <div class="header__cart__price">item: <span>$150.00</span></div>*@
+            </div>
                     </div>
-                </div>
             </div>
             <div class="humberger__open">
                 <i class="fa fa-bars"></i>
@@ -184,10 +186,10 @@
                     <div class="hero__categories">
                         <div class="hero__categories__all">
                             <i class="fa fa-bars"></i>
-                            <span>All departments</span>
+                            <span>جميع الأقسام</span>
                         </div>
                         <ul>
-                            <li><a href="#">Fresh Meat 000</a></li>
+                            <li><a href="#">Fresh Meat</a></li>
                             <li><a href="#">Vegetables</a></li>
                             <li><a href="#">Fruit & Nut Gifts</a></li>
                             <li><a href="#">Fresh Berries</a></li>
@@ -204,13 +206,21 @@
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
+                            <form id="SearchForm" name="SearchForm" action="/shop/search">
                                 <div class="hero__search__categories">
-                                    All Categories
-                                    <span class="arrow_carrot-down"></span>
+                                    
+                                    @*<span class="arrow_carrot-down"></span>*@
+                                    @*<select class="form-control">
+                                        <option value="0">All Categories</option>
+                                        <option value="1">Fresh Meat</option>
+                                        <option value="2">Vegetables</option>
+                                        <option value="3">Fruit & Nut Gifts</option>
+                                        <option value="4">Fresh Berries</option>
+                                    </select>*@
                                 </div>
-                                <input type="text" placeholder="What do yo u need?">
-                                <button type="submit" class="site-btn">SEARCH</button>
+                                
+                                <input id="txt_search" name="txt_search" type="text" placeholder="ما الذي تبحث عنه">
+                                <button type="submit" class="site-btn">بحث</button>
                             </form>
                         </div>
                         <div class="hero__search__phone">
@@ -326,12 +336,55 @@
     <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/js/bootstrap.min.js"></script>
     <script src="~/Scripts/js/jquery.nice-select.min.js"></script>
-    <script src="~/Scripts/js/jquery-ui.min.js"></script>
+    @*<script src="~/Scripts/js/jquery-ui.min.js"></script>*@
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/Scripts/js/jquery.slicknav.js"></script>
     <script src="~/Scripts/js/mixitup.min.js"></script>
     <script src="~/Scripts/js/owl.carousel.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
 
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#txt_search").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: "/shop/GetCommodities",
+                        type: "POST",
+                        dataType: "json",
+                        data: { Prefix: request.term },
+                        success: function (data) {
+                            //alert('data:' + JSON.stringify(data));
+                            response($.map(data, function (item) {
+                                return { label: item.Title, value: item.Title };
+                            }))
+
+                        }
+                    })
+                },
+                select: function (event, ui) {
+                    var label = ui.item.label;
+                    var value = ui.item.value;
+                    //alert(value);
+                    $('#SearchForm').submit();
+
+                },
+                messages: {
+                    noResults: "",
+                    results: function (count) {
+                        return count + (count > 1 ? ' results' : ' result ') + ' found';
+                    }
+                }
+            });
+        })
+    </script>
+    <script>
+        $(document).ready(function () {
+            //$(".ui-menu-item-wrapper").click(function () {
+            //    alert(0);
+            //    $('#SearchForm').submit();
+            //});
+        });
+    </script>
     @RenderSection("Scripts", false);
 
 </body>

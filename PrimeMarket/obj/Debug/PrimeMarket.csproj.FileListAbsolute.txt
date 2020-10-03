@@ -330,7 +330,6 @@ G:\PRIMEMarket\PrimeMarket\bin\PagedList.dll
 G:\PRIMEMarket\PrimeMarket\bin\PagedList.Mvc.dll
 G:\PRIMEMarket\PrimeMarket\bin\PagedList.xml
 G:\PRIMEMarket\PrimeMarket\bin\PagedList.Mvc.xml
-D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\ApplicationInsights.config
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\roslyn\csc.exe
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -588,3 +587,4 @@ D:\PrimeFinal\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.dll
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.pdb
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
+D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache

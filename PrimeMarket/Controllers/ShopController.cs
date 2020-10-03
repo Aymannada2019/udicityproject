@@ -127,6 +127,26 @@ namespace PrimeMarket.Controllers
             return RedirectToAction("Index", "ShoppingCart");
         }
 
-        
+        [HttpPost]
+        public JsonResult GetCommodities(string Prefix)
+        {
+
+            var commodities = (from c in db.Commodities
+                             where c.Title.StartsWith(Prefix)
+                             select new { c.Title}).Distinct();
+            return Json(commodities, JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult Search()
+        {
+            if (Request["txt_search"] == null)
+            {
+                return RedirectToAction("Index", "Shop");
+            }
+            
+            var term = Request["txt_search"].ToString().ToLower().Replace("#", "");
+            var model = new SearchViewModel(term);
+            return View(model);
+        }
     }
 }

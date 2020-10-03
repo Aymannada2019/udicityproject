@@ -1,0 +1,7 @@
+﻿@model PrimeMarket.Models.UIViewModel.CartSummaryViewModel
+
+    <ul>
+        @*<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>*@
+        <li><a href="/ShoppingCart"><i class="fa fa-shopping-bag"></i> <span>@Model.CartItemsCount</span></a></li>
+    </ul>
+    <div class="header__cart__price">الإجمالي: <span>@Model.CartTotal ج.م</span></div>
