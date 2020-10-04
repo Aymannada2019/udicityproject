@@ -51,7 +51,7 @@
                     <li>@Html.ActionLink("السلع التى تم إضافتها للعربة", "Index", "Carts")</li>
 
                     <li>@Html.ActionLink("أوامر الشراء", "Index", "Orders")</li>
-                    <li>@Html.ActionLink("حسابى", "Details/"+ User.Identity.GetUserId(), "Accounts")</li>
+                    <li>@Html.ActionLink("حسابى", "Details/"+ User.Identity.GetUserId(), "AspNetUsers")</li>
 
                 </ul>
                 @Html.Partial("_LoginPartial")

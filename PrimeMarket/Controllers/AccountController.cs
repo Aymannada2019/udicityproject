@@ -79,6 +79,21 @@ namespace PrimeMarket.Controllers
                 return View(model);
             }
 
+            //prevent login to the not confirmed email 
+            //by moh said 26/9/2020
+            var user = await UserManager.FindByEmailAsync(model.Email);
+            //if  we want ID direct [var userid = UserManager.FindByEmail(model.Email).Id;]
+            if (user == null)
+            {
+                return View("EmailNotExist_moh");
+                //return RedirectToAction("EmailNotExist_moh", "Account"); //لازم وجود function
+            }
+            else if(!UserManager.IsEmailConfirmed(user.Id))
+            {
+                return View("EmailNotConfirmed_moh");
+                //return RedirectToAction("RegisterConfirmation_moh", "Account");
+            }
+            
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
             var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
@@ -159,7 +174,7 @@ namespace PrimeMarket.Controllers
 
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, FullName=model.FullName };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -167,32 +182,15 @@ namespace PrimeMarket.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    //string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    //await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                                        
-                    /*
-                    Account a = new Account();
-                    //"AccountId,FullName,Address,Phones,Email,PassWord,ImagePath"
-                    a.AccountId = 5;
-                    a.FullName = "FromCode";// model.Email;
-                    //a.Address = "aaaaaaaaa";
-                    a.Phones = "000";
-                    //a.Email = model.Email;
-                    a.PassWord = "Default";
-                    //return RedirectToAction("Create", "Accounts", new { account = a });
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = model.Email, code = code }, protocol: Request.Url.Scheme);
+                    //*await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string EmailBody = "Please confirm your account by clicking on following link " + callbackUrl;
+                    SendEmail(model.Email, EmailBody, "Confirm your account");
 
-                    db.Accounts.Add(a);
-                    //db.Accounts.Create()
-                    //return RedirectToAction("Index", "Accounts");  //okkkkkkkkkkkk
-
-                    //return RedirectToAction("Details", "Accounts", new { id = 2 }); //a.AccountId //okkkkkkkkkkk
-                    //return Redirect("/Accounts/Details/2");  //okkkkkkkkkkk
-                    */
-
-
-
-                    return RedirectToAction("Index", "Home");
+                    //*return RedirectToAction("Index", "Home");
+                    return RedirectToAction("RegisterConfirmation_moh", "Account");
                 }
                 AddErrors(result);
             }
@@ -212,6 +210,12 @@ namespace PrimeMarket.Controllers
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+
+        [AllowAnonymous]
+        public ActionResult RegisterConfirmation_moh()
+        {
+            return View();
         }
 
         //
@@ -234,8 +238,8 @@ namespace PrimeMarket.Controllers
             {
                 //var user = await UserManager.FindByNameAsync(model.Email);
                 var user = await UserManager.FindByEmailAsync(model.Email);
-                //if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
-                if (user == null)  //to ignore the mail confirmation by (moh said)
+                if (user == null || !(await UserManager.IsEmailConfirmedAsync(user.Id)))
+                //if (user == null)  //to ignore the mail confirmation by (moh said)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     //return View("ForgotPasswordConfirmation");

@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "الحساب غير مسجل";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+<div>
+    <p>
+        @*Please check your email to reset your password.*@
+        هذا البريد غير مسجل ... 
+        برجاء @Html.ActionLink("التسجيل", "Register", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" }) اولا 
+    </p>
+</div>
+	
