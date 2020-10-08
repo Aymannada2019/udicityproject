@@ -72,9 +72,10 @@ namespace PrimeMarket.Controllers
         {
 
             var dist =  db.Districts.Where(d => d.DistrictId == DistrictId).ToList();
+         //   var governorates = db.Governorates.ToList();
             ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", DistrictId);
-           // var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
-         
+            // var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
+            ViewBag.GovernoratesList = new SelectList(db.Governorates,"GovernorateId","Governorate1","1");
             return View();
         }
 
@@ -88,9 +89,11 @@ namespace PrimeMarket.Controllers
             if (ModelState.IsValid)
             {
                 // get last record
-               // decimal max = db.Villages.Max(p => p.VillageId);
+                Int64 max = (Int64)db.Villages.Max(p => p.VillageId)+1;
                 // add 1 to get new record id                         
-               // village.VillageId = (decimal)(max + 1);
+             //   string TempId="1000"+ (max + 1);
+          //      village.VillageId = (double)village.DistrictId + (max + 1);
+                village.VillageId = max;
                 db.Villages.Add(village);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -166,6 +169,13 @@ namespace PrimeMarket.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        public JsonResult getDistrictList(int GovernorateId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<District> DistrictList = db.Districts.Where(district => district.GovernorateId == GovernorateId).ToList();
+            return Json(DistrictList,JsonRequestBehavior.AllowGet);
         }
     }
 }

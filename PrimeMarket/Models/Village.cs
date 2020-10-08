@@ -23,7 +23,8 @@ namespace PrimeMarket.Models
         public decimal VillageId { get; set; }
         public string Village1 { get; set; }
         public Nullable<int> DistrictId { get; set; }
-    
+        public Nullable<int> GovernoratetId { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetUser> AspNetUsers { get; set; }
         public virtual District District { get; set; }

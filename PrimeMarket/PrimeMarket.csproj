@@ -208,7 +208,7 @@
     <Compile Include="Areas\front_end\Controllers\FECategoriesController.cs" />
     <Compile Include="Areas\front_end\front_endAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
-    <Compile Include="Controllers\AccountsController.cs" />
+    <Compile Include="Controllers\AspNetUsersController.cs" />
     <Compile Include="Controllers\CartController.cs" />
     <Compile Include="Controllers\CartsController.cs" />
     <Compile Include="Controllers\CategoriesController.cs" />

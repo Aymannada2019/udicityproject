@@ -52,5 +52,8 @@
 </table>
 @Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page, DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] }))
 <div>
-    @Html.ActionLink("عودة للمراكز", "Index", "Districts",   new { GovernorateId = Request["GovernorateId"] })
+
+    @*@Html.RouteLink("عودة للمراكز", "Districts","Districtfilter", new { GovernorateId = Request["GovernorateId"] })*@
+
+   @Html.RouteLink("عودة للمراكز", "Default", new { Controller = "Districts", Action = "Districtfilter", GovernorateId = Request["GovernorateId"] });
 </div>
