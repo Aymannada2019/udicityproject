@@ -46,13 +46,19 @@ namespace PrimeMarket.Controllers
             }
             return View(commodity);
         }
-
+        public JsonResult getSubCategoryList(decimal CategoryId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<SubCategory> SubCategoryList = db.SubCategories.Where(subcategory => subcategory.CategoryId == CategoryId).ToList();
+            return Json(SubCategoryList, JsonRequestBehavior.AllowGet);
+        }
         // GET: Commodities1/Create
         public ActionResult Create()
         {
             ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1");
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1");
+            ViewBag.CategoriesList = new SelectList(db.Categories, "CategoryId", "Category1", "1");
             return View();
         }
 
@@ -101,7 +107,7 @@ namespace PrimeMarket.Controllers
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
             return View(commodity);
         }
-
+     
         // GET: Commodities1/Edit/5
         public ActionResult Edit(decimal id)
         {
@@ -115,8 +121,9 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
             ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1");
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
+            ViewBag.CategoriesList = new SelectList(db.Categories, "CategoryId", "Category1", "1");
             return View(commodity);
         }
 

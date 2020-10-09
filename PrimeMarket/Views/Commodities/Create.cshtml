@@ -1,12 +1,11 @@
 ﻿@model PrimeMarket.Models.Commodity
-
 @{
     ViewBag.Title = "Create";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
-@Styles.Render("~/Content/themes/base/css", "~/Content/css")
+@*@Styles.Render("~/Content/themes/base/css", "~/Content/css")*@
 <h2>تسجيل</h2>
 <script type="text/javascript">
     function fileCheck(obj) {
@@ -16,11 +15,11 @@
         }
     };
 
-    $(document).ready(function () {
-        $('.datetimepicker').datetimepicker({
-            format: 'lll'
-        });
-    });
+    //$(document).ready(function () {
+    //    $('.datetimepicker').datetimepicker({
+    //        format: 'lll'
+    //    });
+    //});
 </script>
 @section scripts{
 
@@ -31,22 +30,37 @@
          clear();
     </script>
 }
-@using (Html.BeginForm("Create", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" })) 
+@using (Html.BeginForm("Create", "Commodities", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <h4>سلعة جديدة</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group row">
-            @Html.LabelFor(model => model.Title, "اسم السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CategoryId, "المنتج الرئيسى", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                @Html.DropDownList("CategoriesList", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.SubCategoryId, "المنتج الفرعى", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.SubCategoryId, new SelectList(""), "اختر المنتج الفرعى",new { @class = "form-control" })
+                @*@Html.DropDownList("SubCategoryId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.ValidationMessageFor(model => model.SubCategoryId, "*", new { @class = "text-danger" })
             </div>
         </div>
 
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Title, "اسم السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "*", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group row">
             @Html.LabelFor(model => model.Details, " تفاصيل السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -54,17 +68,6 @@
                 @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.SubCategoryId, "المنتج الفرعى", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @*@Html.DropDownListFor(m => m.SubCategoryId,null, "-Please select-")*@
-              @*  @Html.DropDownListFor(x => x.SubCategoryId, ViewBag.SubCategoryId  as SelectList, htmlAttributes: new { @class = "form-control" })*@
-    @Html.DropDownList("SubCategoryId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.SellerId, "البائع", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -72,19 +75,12 @@
                 @Html.ValidationMessageFor(model => model.SellerId, "", new { @class = "text-danger" })
             </div>
         </div>
-
-        <div class="form-group row">
-            @Html.LabelFor(model => model.Price, " السعر/جنيه", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
-            </div>
-        </div>
+       
         <div class="form-group row">
             @Html.LabelFor(model => model.Quantity, " الكمية", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Quantity, "*", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group row">
@@ -95,7 +91,13 @@
                 @Html.ValidationMessageFor(model => model.PriceUnitId, "", new { @class = "text-danger" })
             </div>
         </div>
-
+        <div class="form-group row">
+            @Html.LabelFor(model => model.Price, " السعر/جنيه", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+            </div>
+        </div>
         <div class="form-group row">
             @Html.LabelFor(model => model.PriceNote, " ملاحظات على السعر", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -103,7 +105,6 @@
                 @Html.ValidationMessageFor(model => model.PriceNote, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.Available, "الاتاحة", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -113,7 +114,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.Publish, "النشر", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -123,7 +123,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.CreationDate, " تاريخ التنفيذ", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -131,7 +130,6 @@
                 @Html.ValidationMessageFor(model => model.CreationDate, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.ExpireDate, "تاريخ الانتهاء", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -139,7 +137,6 @@
                 @Html.ValidationMessageFor(model => model.ExpireDate, "", new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.IsFeatured, "متوفرة" , htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -149,7 +146,6 @@
                 </div>
             </div>
         </div>
-
         <div class="form-group row">
             @Html.LabelFor(model => model.OriginalPrice, "السعر الاصلى", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
@@ -162,7 +158,7 @@
             <div class="col-md-10">
                 <input id="ImagePath" title="Upload a product images"
                        type="file" name="files" onchange="fileCheck(this);" multiple  />
-                     
+
                 @Html.ValidationMessageFor(model => model.CommodityImages, "", new { @class = "text-danger" })
             </div>
             </div>*@
@@ -185,3 +181,23 @@
 @*@section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }*@
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+console.log("Hello world!");
+    $(document).ready(function () {
+        $("#CategoriesList").change(function () {
+          
+            $.get("getSubCategoryList", { CategoryId: $(CategoriesList).val() }, function (data) {
+                $("#SubCategoryId").empty();
+
+
+                $.each(data, function (index, row) {
+                    $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategory1 + "</option>")
+                   //$("#DistrictId").append()("<option value='" + row.DistrictId + "'>" + row.District1+"</option>")
+                });
+            });
+
+        });
+           });
+
+</script>

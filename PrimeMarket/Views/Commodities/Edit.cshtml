@@ -6,9 +6,9 @@
 }
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
-@Styles.Render("~/Content/themes/base/css", "~/Content/css")
+@*@Styles.Render("~/Content/themes/base/css", "~/Content/css")*@
 <h2>تعديل</h2>
-@section scripts{
+@*@section scripts{  }*@
   
    <script>
         
@@ -16,7 +16,7 @@
        $("#ExpireDate").datepicker();
          clear();
     </script>
-     }
+   
     <script type="text/javascript">
      
     function fileCheck(obj) {
@@ -40,56 +40,72 @@
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.CommodityId)
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Title," اسم السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+                @*<div class="form-group row">
+                    @Html.LabelFor(model => model.CategoryId, "المنتج الرئيسى", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+                        @Html.DropDownList("CategoriesList", null, htmlAttributes: new { @class = "form-control col-md-10" })
+                        @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger" })
                     </div>
-                </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Details, "تفاصيل السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                </div>*@
 
                 <div class="form-group row">
                     @Html.LabelFor(model => model.SubCategoryId, "المنتج الفرعى", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("SubCategoryId", null, htmlAttributes: new { @class = "form-control col-md-10" })
-                        @Html.ValidationMessageFor(model => model.SubCategoryId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
+                        @Html.DropDownList("SubCategoryId", null, htmlAttributes: new { @class = "form-control col-md-8" })
+              @*     @Html.DropDownListFor(model => model.SubCategoryId, "", new { @class = "form-control" })
+    @Html.DropDownList("SubCategoryId",new SelectList(""), "اختر المنتج الفرعى", htmlAttributes: new { @class = "form-control col-md-10" })*@
+            @Html.ValidationMessageFor(model => model.SubCategoryId, "*", new { @class = "text-danger" })
+        </div>
+    </div>
 
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Title," اسم السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Title, "*", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.Details, "تفاصيل السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.Details, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.Details, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+    <div class="form-group row">
+        @Html.LabelFor(model => model.SellerId, "البائع", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("SellerId", null, htmlAttributes: new { @class = "form-control col-md-10" })
+            @Html.ValidationMessageFor(model => model.SellerId, "", new { @class = "text-danger" })
+        </div>
+    </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.SellerId, "البائع", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Quantity, "الكمية", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.DropDownList("SellerId", null, htmlAttributes: new { @class = "form-control col-md-10" })
-                        @Html.ValidationMessageFor(model => model.SellerId, "", new { @class = "text-danger" })
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Quantity, "*", new { @class = "text-danger" })
                     </div>
                 </div>
+   
 
+    <div class="form-group row">
+        @Html.LabelFor(model => model.PriceUnitId, "وحدة السعر", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @*@Html.EditorFor(model => model.PriceUnitId, new { htmlAttributes = new { @class = "form-control" } })*@
+                        @Html.DropDownList("PriceUnitId", null, htmlAttributes: new { @class = "form-control col-md-10" })
+                        @Html.ValidationMessageFor(model => model.PriceUnitId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.Price, "السعر", htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.Price, "السعر/جنيه", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
                         @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                     </div>
                 </div>
-
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.PriceUnitId, "وحدة السعر", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @*@Html.EditorFor(model => model.PriceUnitId, new { htmlAttributes = new { @class = "form-control" } })*@
-                        @Html.DropDownList("PriceUnitId", null, htmlAttributes: new { @class = "form-control col-md-10" })
-                        @Html.ValidationMessageFor(model => model.PriceUnitId, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-
                 <div class="form-group row">
                     @Html.LabelFor(model => model.PriceNote, "ملاحظات على السعر", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
@@ -152,67 +168,8 @@
                         @Html.ValidationMessageFor(model => model.OriginalPrice, "", new { @class = "text-danger" })
                     </div>
                 </div>
-                <div class="form-group row">
-                    @Html.LabelFor(model => model.Quantity, "الكمية", htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                @*@using (Html.BeginForm("DeleteImage", "Commodities1", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                    {*@
-
-                @*<div class="form-group">
-                                @Html.LabelFor(model => model.CommodityImages, htmlAttributes: new { @class = "control-label col-md-2" })
-                                <div class="col-md-10">
-                               @if (Model.CommodityImages.Select(x => x.CommodityId == Model.CommodityId) != null)
-                               {
-                                <table style="background-color:lightgreen; border:solid 2px black;">
-                                  <tr>
-                                        <td>
-                                            <b>Id</b>
-                                        </td>
-                                        <td>
-                                            <b>Image</b>
-                                        </td>
-                                        <td>
-                                            <b>Action </b>
-                                        </td>
-                                    </tr>
-                                    @foreach (var file in (from s in Model.CommodityImages where s.CommodityId == Model.CommodityId select new { s.CommodityId, s.ImagePath, s.CommodityImageId }).ToList())
-                                    {
-                                    <tr>
-                                        <td>
-                                           @file.CommodityImageId
-                                        </td>
-                                        <td>
-                                            <img src="~/img/commodities/@file.ImagePath" style="height:200px;width:200px;"  id="@file.CommodityImageId"/>
-
-                                        </td>
-                                        <td>
-                                            @using (Html.BeginForm("DeleteImage", "Commodities", FormMethod.Get))
-                                            {
-                                                <p>@Html.TextBox("search",  @file.CommodityImageId )
-                                             <input type="submit" value="Delete" /></p>
-                                            }
-
-
-
-                                        </td>
-
-                                    </tr>
-
-                                    }
-                                    <tr><td colspan="3"><label title="To Add Image">Add Image/Images</label></td></tr>
-                                    </table>
-                               }
-                                    <input id="ImagePath" title="Upload a product images"
-                                           type="file" name="files" onchange="fileCheck(this);" multiple />
-
-                                    @Html.ValidationMessageFor(model => model.CommodityImages, "", new { @class = "text-danger" })
-                    </div>
-                            </div>*@
-                @*}*@
+               
+              
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
                         <input type="submit" value="تعديل" class="btn btn-default" />
@@ -227,6 +184,24 @@
     @Html.ActionLink("عودة للسلع", "Index")
 </div>
 
-@*@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}*@
+@*<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $("#CategoriesList").change(function () {
+      
+            $.get("getEditSubCategoryList", { CategoryId: $(CategoriesList).val() }, function (data) {
+                alert(data);
+                $("#SubCategoryId").empty();
+
+
+                $.each(data, function (index, row) {
+                    $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategory1 + "</option>")
+                
+                });
+            });
+
+        });
+           });
+
+</script>*@
