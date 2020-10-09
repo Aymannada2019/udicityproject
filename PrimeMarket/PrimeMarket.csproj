@@ -567,13 +567,15 @@
     <Content Include="Views\ShoppingCart\OrderDetails.cshtml" />
     <Content Include="Views\Shop\Search.cshtml" />
     <Content Include="Views\Shared\_HeaderCartPartial.cshtml" />
+    <Content Include="Views\Commodities\Create.cshtml" />
+    <Content Include="Views\Commodities\Edit.cshtml" />
+    <Content Include="Views\Commodities\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\front_end\Models\" />
     <Folder Include="img\users\" />
     <Folder Include="Views\Carts\" />
-    <Folder Include="Views\Commodities\" />
     <Folder Include="Views\CommodityImages\" />
     <Folder Include="Views\PriceUnits\" />
   </ItemGroup>
