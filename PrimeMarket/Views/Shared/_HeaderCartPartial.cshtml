@@ -1,7 +1,15 @@
-﻿@model PrimeMarket.Models.UIViewModel.CartSummaryViewModel
+﻿@using Microsoft.AspNet.Identity
 
+@model PrimeMarket.Models.UIViewModel.CartSummaryViewModel
     <ul>
         @*<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>*@
-        <li><a href="/ShoppingCart"><i class="fa fa-shopping-bag"></i> <span>@Model.CartItemsCount</span></a></li>
+   <li>
+        @if (Request.IsAuthenticated)
+        {
+            @Html.ActionLink("" + PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name), "Edit", "AspNetUsers", new { id = User.Identity.GetUserId() }, null)
+          }
+       &nbsp; &nbsp;
+
+        <a href="/ShoppingCart"><i class="fa fa-shopping-bag"></i> <span>@Model.CartItemsCount</span></a></li>
     </ul>
     <div class="header__cart__price">الإجمالي: <span>@Model.CartTotal ج.م</span></div>

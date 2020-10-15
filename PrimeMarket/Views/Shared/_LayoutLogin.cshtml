@@ -1,0 +1,45 @@
+﻿@using Microsoft.AspNet.Identity
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+
+
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
+</head>
+<body>
+   
+    <div class="container">
+
+        <div class="row" style="text-align:right !important;">
+            <div class="col-lg-12">
+                <a href="~/Shop"><img src="/img/logo.png" alt=""></a>
+
+
+            </div>
+
+        </div>
+    
+    <div class="row" style="text-align:right !important;">
+
+        <div class="col-lg-12">
+
+            @RenderBody()
+        </div>
+
+    </div>
+    </div>
+
+
+    @RenderSection("Scripts", false);
+</body>
+</html>

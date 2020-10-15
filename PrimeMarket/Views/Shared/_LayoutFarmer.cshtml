@@ -1,0 +1,99 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Ogani Template">
+    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>برايم</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
+
+
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script></head>
+
+<body>
+
+
+    <!-- Humberger Begin -->
+    <div class="humberger__menu__overlay"></div>
+    <div class="humberger__menu__wrapper">
+                <div id="mobile-menu-wrap"></div>
+        </div>
+    <!-- Humberger End -->
+    <!-- Header Section Begin -->
+    <header class="header">
+     
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="header__logo" style="margin-left:100px;margin-right:100px;">
+                        <a href="./index.html"><img src="~/img/logo.png" alt=""></a>
+                        @*<a href="~/Account/Login"><i class="fa fa-user"></i> Login</a>*@
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            
+                        
+                            <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Shop")</li>
+                            <li>@Html.ActionLink("منتجاتى/سلعى", "Index", "Commodities")</li>
+                           </ul>
+                    </nav>
+                </div>
+
+            </div>
+            <div class="humberger__open">
+                <i class="fa fa-bars"></i>
+            </div>
+        </div>
+    </header>
+    <!-- Header Section End -->
+    <div class="container">
+        <div class="row" style="text-align:right !important;">
+       
+            <div class="col-lg-12">
+
+                @RenderBody()
+            </div>
+            
+        </div>
+    </div>
+ 
+  <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+  <script src="~/Scripts/js/bootstrap.min.js"></script>
+    <script src="~/Scripts/js/jquery.nice-select.min.js"></script>
+    <script src="~/Scripts/js/jquery-ui.min.js"></script>
+    <script src="~/Scripts/js/jquery.slicknav.js"></script>
+   <script src="~/Scripts/js/mixitup.min.js"></script>
+    
+  
+      @*<script src="~/Scripts/js/owl.carousel.min.js"></script>
+    <script src="~/Scripts/js/main.js"></script>
+    *@
+    @RenderSection("Scripts", false);
+
+</body>
+
+</html>

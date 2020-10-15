@@ -47,7 +47,8 @@ namespace PrimeMarket.Controllers
         // GET: CommodityImages/Create
         public ActionResult Create()
         {
-            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", Request["CommodityId"].ToString());
+            decimal ComId = Int64.Parse(Request["CommodityId"].ToString());
+            ViewBag.CommodityId = new SelectList(db.Commodities.Where(x=> x.CommodityId== ComId), "CommodityId", "Title", Request["CommodityId"].ToString());
             //ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title");
             return View();
         }
@@ -71,12 +72,15 @@ namespace PrimeMarket.Controllers
 
                 }
               // commodityImages.CommodityId =decimal.Parse(Request["CommodityId"].ToString());
-               db.CommodityImages.Add(commodityImages);
+                db.CommodityImages.Add(commodityImages);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //   Response.Redirect("/CommodityImages?CommodityId="+ commodityImages.CommodityId);
+                //  Response.RedirectToRoute("commodityImages",new { CommodityId = commodityImages.CommodityId});
+                return RedirectToRoute("Default", new { controller = "commodityImages", action = "Index", CommodityId = commodityImages.CommodityId  });
+                //  return View(commodityImages);
             }
 
-            ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", commodityImages.CommodityId);
+          //  ViewBag.CommodityId = new SelectList(db.Commodities, "CommodityId", "Title", commodityImages.CommodityId);
             return View(commodityImages);
         }
 

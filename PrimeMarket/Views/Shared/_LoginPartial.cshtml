@@ -8,10 +8,12 @@
     <ul class="nav navbar-nav navbar-right">
         <li>
             @*@Html.ActionLink("مرحباً " + PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name) + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })*@
-            @Html.ActionLink("مرحباً " + PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name), "Index", "UserProfile", new { id = User.Identity.GetUserId()},null)
-            @*@User.Identity.GetUserId()*@
+            @Html.ActionLink("" + PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name), "Edit", "AspNetUsers", new { id = User.Identity.GetUserId()},null)
+
+
+                @*@User.Identity.GetUserId()*@
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
+             <li><a href="javascript:document.getElementById('logoutForm').submit()">خروج</a></li>
     </ul>
     }
 }

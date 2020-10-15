@@ -10,6 +10,8 @@ namespace PrimeMarket.Controllers
     {
         public ActionResult Index()
         {
+          //  return View();
+            Response.Redirect("~/Shop");
             return View();
         }
 

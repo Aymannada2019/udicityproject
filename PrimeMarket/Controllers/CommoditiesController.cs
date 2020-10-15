@@ -9,24 +9,80 @@ using System.Web.Mvc;
 using PrimeMarket.Models;
 using PagedList;
 using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+
+using System;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+using Microsoft.Owin;
+using Microsoft.Owin.Security.Cookies;
+using Microsoft.Owin.Security.Google;
+using Owin;
+using PrimeMarket.Models;
+using Microsoft.AspNet.Identity.EntityFramework;
+
 namespace PrimeMarket.Controllers
-{
+{[Authorize]
     public class CommoditiesController : Controller
     {
-        private PrimeMarketEntities db = new PrimeMarketEntities();
+       private PrimeMarketEntities db = new PrimeMarketEntities();
+        /// <summary>
+        /// For checking the user is logged in and he is an admin. 
+        /// </summary>
+        /// <returns></returns>
+
+        public decimal GetParentGategory(decimal subCategoryId)
+        {
+
+            decimal CategoryId = 0;
+            var subCategory = db.SubCategories.Where(x => x.SubCategoryId == subCategoryId);
+            foreach (var item in subCategory)
+            {
+                CategoryId = (decimal)item.CategoryId;
+
+
+            }
+                return CategoryId;
+        }
+
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+               
+                if (s.Count>0 && s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
+        }
 
         // GET: Commodities1
         public ActionResult Index(string search, int? page)
         {
+            
+            string UserId= User.Identity.GetUserId();
+            var commodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c => c.PriceUnit);
+            if (!isAdminUser())
+                commodity = commodity.Where(x => x.SellerId== UserId);
             if (search != null && search != "")
             {
-                var commodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c=>c.PriceUnit);
-                return View(commodity.Where(x => x.Title.StartsWith(search) || search == null).ToList().ToPagedList(page ?? 1, 20));
+                return View(commodity.Where(x => x.Title.StartsWith(search) || search == null).OrderByDescending(x=>x.CommodityId).ToList().ToPagedList(page ?? 1, 20));
             }
             else
             {
-                var commodity1 = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c => c.PriceUnit);
-                return View(commodity1.ToList().ToPagedList(page ?? 1, 20));
+
+                return View(commodity.OrderByDescending(x => x.CommodityId).ToList().ToPagedList(page ?? 1, 20));
             }
             //var commodity = db.Commodities.Include(c => c.AspNetUsers).Include(c => c.SubCategory);
             //return View(commodity.ToList());
@@ -59,6 +115,36 @@ namespace PrimeMarket.Controllers
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1");
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1");
             ViewBag.CategoriesList = new SelectList(db.Categories, "CategoryId", "Category1", "1");
+           // if(isAdminUser)
+            ViewBag.IsUserAdmin = isAdminUser();
+/////////////////////////////////////////////////////////////////////////////////////////////
+
+            //     if (User.Identity.IsAuthenticated)
+            //     {
+            //         var user = User.Identity;
+
+            //    // ApplicationDbContext context = new ApplicationDbContext();
+            //  //   var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+            ////     var result1 = UserManager.AddToRole(user.GetUserId(), "Admin");
+            //     ViewBag.displayMenu = "No";
+
+            //        if (isAdminUser())
+            //       {
+            //             ViewBag.displayMenu = "Yes";
+            //       }
+            //         return View();
+            //     }
+            //     else
+            //     {
+            //         ViewBag.Name = "Not Logged IN";
+            //     }
+            // return View();
+
+
+
+            ////////////////////////////////////////////////////////////
+
+
             return View();
         }
 
@@ -67,7 +153,7 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceUnitId,PriceNote,Available,Publish,CreationDate,ExpireDate,IsFeatured,OriginalPrice")] Commodity commodity)
+        public ActionResult Create([Bind(Include = "CommodityId,Title,Details,SubCategoryId,SellerId,Quantity,Price,PriceUnitId,PriceNote,Available,Publish,CreationDate,ExpireDate,IsFeatured,OriginalPrice")] Commodity commodity)
         {//, IEnumerable<HttpPostedFileBase> files
             if (ModelState.IsValid)
             {
@@ -77,7 +163,10 @@ namespace PrimeMarket.Controllers
                     ModelState.AddModelError("FinishDate", "Finish Date needs to be after the Start Date!");
                     return View(commodity);
                 }
-      
+                DateTime today = DateTime.Now.Date;
+                commodity.CreationDate = today;
+                var user = User.Identity;
+                commodity.SellerId = user.GetUserId();
                 db.Commodities.Add(commodity);
                 db.SaveChanges();
                 //var i = 1;
@@ -102,10 +191,11 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
-            ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
-            return View(commodity);
+           // ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
+          //  ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+          //  ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
+           return View(commodity);
+
         }
      
         // GET: Commodities1/Edit/5
@@ -120,11 +210,20 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1");
-            ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
-            ViewBag.CategoriesList = new SelectList(db.Categories, "CategoryId", "Category1", "1");
-            return View(commodity);
+
+                  
+            ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1",commodity.PriceUnitId);
+            commodity.CategoryId = GetParentGategory((decimal)commodity.SubCategoryId);
+
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.CategoryId.ToString());
+            var subCategory = db.SubCategories.Where(x => x.CategoryId == commodity.CategoryId);
+            ViewBag.SubCategoryId = new SelectList(subCategory, "SubCategoryId", "SubCategory1", commodity.SubCategoryId.ToString());
+
+            ViewBag.SelectedSubCategoryId = commodity.SubCategoryId.ToString();
+          
+     
+           ViewBag.IsUserAdmin = isAdminUser();
+           return View(commodity);
         }
 
         // POST: Commodities1/Edit/5
@@ -132,7 +231,7 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CommodityId,Title,Details,SubCategoryId,SellerId,Price,PriceUnitId,PriceNote,Available,Publish,CreationDate,ExpireDate,IsFeatured,OriginalPrice")] Commodity commodity)
+        public ActionResult Edit([Bind(Include = "CommodityId,Title,Details,SubCategoryId,SellerId,Quantity,Price,PriceUnitId,PriceNote,Available,Publish,CreationDate,ExpireDate,IsFeatured,OriginalPrice")] Commodity commodity)
         {//, IEnumerable<HttpPostedFileBase> files
             if (ModelState.IsValid)
             {
@@ -145,7 +244,7 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
+           // ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
             //var i = 1;
             //foreach (var file1 in files)

@@ -1,0 +1,337 @@
+﻿@model PrimeMarket.Models.Commodity
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>حذف</h2>
+
+<h3>هل أنت متأكد من حذف هذة؟</h3>
+<div>
+    <h4>السلعة</h4>
+    <hr />
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                @*<dt>*@اسم السلعة
+                @*@Html.DisplayNameFor(model => model.Title)*@
+                @*</dt>*@
+            </b>
+        </div><div class="col-md-10">
+            @*<dd>*@
+            @Html.DisplayFor(model => model.Title)
+            @*</dd>*@
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                تفاصيل السلعة
+                @*@Html.DisplayNameFor(model => model.Details)*@
+            </b>
+        </div><div class="col-md-10">
+
+
+            @Html.DisplayFor(model => model.Details)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                المنتج الفرعى
+                @*@Html.DisplayNameFor(model => model.SubCategory.SubCategory1)*@
+            </b>
+        </div><div class="col-md-10">
+
+
+            @Html.DisplayFor(model => model.SubCategory.SubCategory1)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                السعر/جنيه
+                @*@Html.DisplayNameFor(model => model.Price)*@
+            </b>
+        </div><div class="col-md-10">
+
+
+            @Html.DisplayFor(model => model.Price)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                الكمية
+                @*@Html.DisplayNameFor(model => model.Quantity)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.Quantity)    @Html.DisplayFor(model => model.PriceUnit.PriceUnit1)
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                وحدة السعر
+                @*@Html.DisplayNameFor(model => model.PriceUnitId)*@
+            </b>
+        </div><div class="col-md-10">
+
+
+            @Html.DisplayFor(model => model.PriceUnit.PriceUnit1)
+        </div>
+    </div>
+
+    @*<div class="row">
+            <div class="col-md-2">
+                <b>
+                    ملاحظات على السعر
+                    @Html.DisplayNameFor(model => model.PriceNote)
+                </b>
+            </div><div class="col-md-10">
+                @Html.DisplayFor(model => model.PriceNote)
+            </div>
+        </div>*@
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                الاتاحة
+                @*@Html.DisplayNameFor(model => model.Available)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.Available)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                النشر
+                @*@Html.DisplayNameFor(model => model.Publish)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.Publish)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                تاريخ التنفيذ
+                @*@Html.DisplayNameFor(model => model.CreationDate)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.CreationDate)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                تاريخ الانتهاء
+                @*@Html.DisplayNameFor(model => model.ExpireDate)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.ExpireDate)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                توافر السلعة
+                @*@Html.DisplayNameFor(model => model.IsFeatured)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.IsFeatured)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                السعر الاصلى
+                @*@Html.DisplayNameFor(model => model.OriginalPrice)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.OriginalPrice)
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                البائع
+                @*@Html.DisplayNameFor(model => model.AspNetUsers.Email)*@
+            </b>
+        </div><div class="col-md-10">
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-2">
+            <b>
+                @Html.LabelFor(model => model.CommodityImages, "صور السلعة", htmlAttributes: new { @class = "control-label col-md-2" })
+            </b>
+        </div><div class="col-md-10">
+            <div class="form-group">
+
+                <div class="col-md-10">
+                    @if (Model.CommodityImages.Select(x => x.CommodityId == Model.CommodityId) != null)
+                    {
+                        <table style="background-color:lightgreen; border:solid 2px black;">
+                            <tr>
+                                <td>
+                                    <b>Id</b>
+                                </td>
+                                <td>
+                                    <b>الصورة</b>
+                                </td>
+
+                            </tr>
+                            @foreach (var file in (from s in Model.CommodityImages where s.CommodityId == Model.CommodityId select new { s.CommodityId, s.ImagePath, s.CommodityImageId }).ToList())
+                            {
+                                <tr>
+                                    <td>
+                                        @file.CommodityImageId
+                                    </td>
+                                    <td>
+                                        <img src="~/img/commodities/@file.ImagePath" style="height:200px;width:200px;" />
+
+                                    </td>
+
+
+                                </tr>
+
+                            }
+
+                        </table>
+                    }
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    @*<dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Title)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Title)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Details)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Details)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.SubCategory.SubCategory1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.SubCategory.SubCategory1)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceUnitId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceUnitId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PriceNote)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PriceNote)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Available)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Available)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Publish)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Publish)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpireDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpireDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsFeatured)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsFeatured)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OriginalPrice)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OriginalPrice)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AspNetUser.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AspNetUser.Email)
+        </dd>
+
+      
+
+    </dl>*@
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("عودة للسلع", "Index")
+        </div>
+    }
+</div>

@@ -1,113 +1,154 @@
-﻿@using Microsoft.AspNet.Identity
+﻿@using System;
+@using System.Data.Entity;
+@using Microsoft.AspNet.Identity;
+@using Microsoft.AspNet.Identity.EntityFramework;
+@using PrimeMarket.Models;
+@functions{  public Boolean isAdminUser()
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    var user = User.Identity;
+                    ApplicationDbContext context = new ApplicationDbContext();
+                    var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                    var s = UserManager.GetRoles(user.GetUserId());
 
-<!DOCTYPE html>
-<html lang="zxx">
+                    if (s.Count > 0 && s[0].ToString() == "Admin")
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+                return false;
+            }
+        }
+        <!DOCTYPE html>
+        <html lang="zxx">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <head>
+            <meta charset="UTF-8">
+            <meta name="description" content="Ogani Template">
+            <meta name="keywords" content="Ogani, unica, creative, html">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-    <title>برايم</title>
+            <title>برايم</title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
+            <!-- Google Font -->
+            <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
-    <!-- Css Styles -->
-    <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
-</head>
-
-<body>
+            <!-- Css Styles -->
+            <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
+            <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
 
 
-    <!-- Humberger Begin -->
-    <div class="humberger__menu__overlay"></div>
-    <div class="humberger__menu__wrapper">
+
+            <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+            <script src="~/Scripts/jquery.validate.min.js"></script>
+            <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+        </head>
+
+        <body>
+
+
+            <!-- Humberger Begin -->
+            <div class="humberger__menu__overlay"></div>
+            <div class="humberger__menu__wrapper">
                 <div id="mobile-menu-wrap"></div>
-        </div>
-    <!-- Humberger End -->
-    <!-- Header Section Begin -->
-    <header class="header">
-     
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="header__logo" style="margin-left:100px;margin-right:100px;">
-                        <a href="./index.html"><img src="~/img/logo.png" alt=""></a>
-                        @*<a href="~/Account/Login"><i class="fa fa-user"></i> Login</a>*@
-                        @Html.Partial("_LoginPartial")
+            </div>
+            <!-- Humberger End -->
+            <!-- Header Section Begin -->
+            <header class="header">
+
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="header__logo" style="margin-left:100px;margin-right:100px;">
+                                <a href="./index.html"><img src="~/img/logo.png" alt=""></a>
+                                @*<a href="~/Account/Login"><i class="fa fa-user"></i> Login</a>*@
+                                @Html.Partial("_LoginPartial")
+                            </div>
+                        </div>
+                        <div class="col-lg-9">
+                            <nav class="header__menu mobile-menu">
+                                <ul>
+
+
+                                    <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Shop")</li>
+                                   @if (isAdminUser()) { 
+                                     <li>@Html.ActionLink("إحصائيات", "Index", "Statistic")</li>
+
+
+                                    <li>
+                                        <a href="#">بيانات جغرافية</a>
+                                        <ul class="header__menu__dropdown">
+                                            <li>@Html.ActionLink("المحافظات", "Index", "Governorates")</li>
+                                            <li>@Html.ActionLink("المراكز", "Index", "Districts")</li>
+                                            <li>@Html.ActionLink("القرى-المدى", "Index", "Villages")</li>
+
+                                        </ul>
+                                    </li>
+                                    <li>
+                                        <a href="#"> تصنيف المنتجات</a>
+                                        <ul class="header__menu__dropdown">
+                                            <li>@Html.ActionLink("تصنيف رئيسى", "Index", "Categories")</li>
+                                            <li>@Html.ActionLink("فرعى", "Index", "SubCategories")</li>
+
+
+                                        </ul>
+                                    </li>
+                                    <li>@Html.ActionLink("مستخدمين", "Index", "AspNetUsers")</li>
+                                   }
+
+                                       
+                                   
+
+                                    
+                                    <li>@Html.ActionLink("السلع", "Index", "Commodities")</li>
+                                   
+                                </ul>
+                            </nav>
+                        </div>
+
+                    </div>
+                    <div class="humberger__open">
+                        <i class="fa fa-bars"></i>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            
-                        
-                            <li>@Html.ActionLink("الصفحة الرئيسية", "Index", "Shop")</li>
-                            <li>@Html.ActionLink("إحصائيات", "Index", "Statistic")</li>
-                            @*<li class="active"><a href="./shop-grid.html">إحصائيات</a></li>*@
-                            <li>
-                                <a href="#">بيانات جغرافية</a>
-                                <ul class="header__menu__dropdown">
-                                    <li>@Html.ActionLink("المحافظات", "Index", "Governorates")</li>
-                                    <li>@Html.ActionLink("المراكز", "Index", "Districts")</li>
-                                    <li>@Html.ActionLink("القرى-المدى", "Index", "Villages")</li>
-                                 
-                                </ul>
-                            </li>
+            </header>
+            <!-- Header Section End -->
+            <div class="container">
+                <div class="row" style="text-align:right !important;">
 
-                            <li>
-                                <a href="#"> تصنيف المنتجات</a>
-                                <ul class="header__menu__dropdown">
-                                    <li>@Html.ActionLink("تصنيف رئيسى", "Index", "Categories")</li>
-                                    <li>@Html.ActionLink("فرعى", "Index", "SubCategories")</li>
+                    <div class="col-lg-12">
 
+                        @RenderBody()
+                    </div>
 
-                                </ul>
-                            </li>
-                            <li>@Html.ActionLink("السلع", "Index", "Commodities")</li>
-                           <li>@Html.ActionLink("مستخدمين", "Index", "AspNetUsers")</li>
-                           </ul>
-                    </nav>
                 </div>
-
             </div>
-            <div class="humberger__open">
-                <i class="fa fa-bars"></i>
-            </div>
-        </div>
-    </header>
-    <!-- Header Section End -->
-    <div class="container">
-        <div class="row" style="text-align:right !important;">
-       
-            <div class="col-lg-12">
 
-                @RenderBody()
-            </div>
-            
-        </div>
-    </div>
-  <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
-  <script src="~/Scripts/js/bootstrap.min.js"></script>
-    <script src="~/Scripts/js/jquery.nice-select.min.js"></script>
-    <script src="~/Scripts/js/jquery-ui.min.js"></script>
-    <script src="~/Scripts/js/jquery.slicknav.js"></script>
-   <script src="~/Scripts/js/mixitup.min.js"></script>
-    @*<script src="~/Scripts/js/owl.carousel.min.js"></script>
-    <script src="~/Scripts/js/main.js"></script>
-    *@
-    @RenderSection("Scripts", false);
+            <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
+            <script src="~/Scripts/js/bootstrap.min.js"></script>
+            <script src="~/Scripts/js/jquery.nice-select.min.js"></script>
+            <script src="~/Scripts/js/jquery-ui.min.js"></script>
+            <script src="~/Scripts/js/jquery.slicknav.js"></script>
+            <script src="~/Scripts/js/mixitup.min.js"></script>
 
-</body>
 
-</html>
+            @*<script src="~/Scripts/js/owl.carousel.min.js"></script>
+                <script src="~/Scripts/js/main.js"></script>
+            *@
+            @RenderSection("Scripts", false);
+
+        </body>
+
+    </html>
