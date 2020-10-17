@@ -24,6 +24,8 @@ namespace PrimeMarket.Models
             this.Commodities = new HashSet<Commodity>();
             this.Orders = new HashSet<Order>();
             this.AspNetRoles = new HashSet<AspNetRole>();
+            this.UserRatings = new HashSet<UserRating>();
+            this.UserRatings1 = new HashSet<UserRating>();
         }
     
         public string Id { get; set; }
@@ -58,5 +60,9 @@ namespace PrimeMarket.Models
         public virtual ICollection<Order> Orders { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AspNetRole> AspNetRoles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRating> UserRatings { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<UserRating> UserRatings1 { get; set; }
     }
 }

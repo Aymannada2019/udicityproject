@@ -206,6 +206,7 @@
     <EntitySetMapping Name="UserRatings">
       <EntityTypeMapping TypeName="PrimeMarketModel.UserRating">
         <MappingFragment StoreEntitySet="UserRating">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
           <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="UserId" ColumnName="UserId" />

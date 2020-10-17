@@ -111,6 +111,14 @@
       <Parameter Name="StartDate" Mode="In" Type="DateTime" />
       <Parameter Name="EndDate" Mode="In" Type="DateTime" />
     </FunctionImport>
+    <AssociationSet Name="FK__UserRatin__Revie__3864608B" Association="PrimeMarketModel.FK__UserRatin__Revie__3864608B">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserRating" EntitySet="UserRatings" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRatin__UserI__395884C4" Association="PrimeMarketModel.FK__UserRatin__UserI__395884C4">
+      <End Role="AspNetUser" EntitySet="AspNetUsers" />
+      <End Role="UserRating" EntitySet="UserRatings" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="AspNetRole">
     <Key>
@@ -169,6 +177,8 @@
     <NavigationProperty Name="Commodities" Relationship="PrimeMarketModel.FK__Commodity__Selle__03F0984C" FromRole="AspNetUser" ToRole="Commodity" />
     <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__CustomerI__0A9D95DB" FromRole="AspNetUser" ToRole="Order" />
     <NavigationProperty Name="AspNetRoles" Relationship="PrimeMarketModel.AspNetUserRoles" FromRole="AspNetUser" ToRole="AspNetRole" />
+    <NavigationProperty Name="UserRatings" Relationship="PrimeMarketModel.FK__UserRatin__Revie__3864608B" FromRole="AspNetUser" ToRole="UserRating" />
+    <NavigationProperty Name="UserRatings1" Relationship="PrimeMarketModel.FK__UserRatin__UserI__395884C4" FromRole="AspNetUser" ToRole="UserRating" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -214,10 +224,10 @@
     <Property Name="PriceUnitId" Type="Byte" />
     <Property Name="PriceNote" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="Available" Type="Boolean" Nullable="false" />
-    <Property Name="Publish" Type="Boolean" />
+    <Property Name="Publish" Type="Boolean" Nullable="false" />
     <Property Name="CreationDate" Type="DateTime" Precision="0" />
     <Property Name="ExpireDate" Type="DateTime" Precision="0" />
-    <Property Name="IsFeatured" Type="Boolean" />
+    <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
     <Property Name="OriginalPrice" Type="Double" />
     <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__Commodity__Selle__03F0984C" FromRole="Commodity" ToRole="AspNetUser" />
     <NavigationProperty Name="Carts" Relationship="PrimeMarketModel.FK__Cart__CommodityI__02FC7413" FromRole="Commodity" ToRole="Cart" />
@@ -347,6 +357,9 @@
     <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
     <Property Name="Rating" Type="Byte" />
     <Property Name="Comment" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="AspNetUser" Relationship="PrimeMarketModel.FK__UserRatin__Revie__3864608B" FromRole="UserRating" ToRole="AspNetUser" />
+    <NavigationProperty Name="AspNetUser1" Relationship="PrimeMarketModel.FK__UserRatin__UserI__395884C4" FromRole="UserRating" ToRole="AspNetUser" />
   </EntityType>
   <EntityType Name="Village">
     <Key>
@@ -644,5 +657,29 @@
   <Association Name="AspNetUserRoles">
     <End Type="PrimeMarketModel.AspNetRole" Role="AspNetRole" Multiplicity="*" />
     <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="*" />
+  </Association>
+  <Association Name="FK__UserRatin__Revie__3864608B">
+    <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.UserRating" Role="UserRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRating">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRatin__UserI__395884C4">
+    <End Type="PrimeMarketModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+    <End Type="PrimeMarketModel.UserRating" Role="UserRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUser">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRating">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
   </Association>
 </Schema>

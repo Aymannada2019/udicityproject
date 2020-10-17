@@ -1,0 +1,133 @@
+﻿@model PrimeMarket.Models.UIViewModel.UserItemsViewModel
+@{
+    ViewBag.Title = "UserItems";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<!-- Product Details Section Begin -->
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-3" style="text-align:center;">
+                        <img src="@Model.ThisUser.ImagePath" alt="" style="">
+                    </div>
+            
+            <div class="col-lg-9 col-md-9">
+                <div class="product__details__text">
+                    <h3>@Model.ThisUser.FullName</h3>
+                    <div class="product__details__rating">
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star"></i>
+                        <i class="fa fa-star-half-o"></i>
+                        <span>(@Model.ThisUserRatings.Count تقييم)</span>
+                    </div>
+                    <div class="product__details__price">عدد المنتجات: @Model.UserItems.Count</div>
+                    <p style="font-size:12pt;">
+                        البريد الالكتروني: <strong> @Model.ThisUser.Email</strong>
+                    <br />
+                        تليفون: <strong> @Model.ThisUser.PhoneNumber</strong>
+                    <br />
+                        العنوان: <strong> @Model.ThisUser.Address</strong>
+                    </p>
+                    
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <div class="product__details__tab">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab"
+                               aria-selected="false">التقييمات<span>(@Model.ThisUserReviews.Count)</span></a>
+                        </li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__tab__desc">
+                                @foreach (var review in Model.ThisUserReviews)
+                                {
+                                    <p>بواسطة <strong>@review.AspNetUser.FullName</strong> بتاريخ <i>@string.Format("{0:dd/MM/yyyy hh:mm tt}", review.CreationDate)</i></p>
+                                    <p>
+                                        @review.Comment
+                                    </p>
+                                    <hr />
+                                }
+                            </div>
+                            <h4 style="text-decoration:underline;">أضف تقييمك:</h4>
+
+                            <form name="AddCommentForm" method="post" action="/Shop/AddUserComment">
+                                <input type="hidden" id="hdn_UserId" name="hdn_UserId" value="@Model.ThisUser.Id" />
+                                <div class="form-group">
+                                    <label class="control-label">تعليقك:</label>
+                                    <div class="col-md-10">
+                                        <input id="txt_comment" name="txt_comment" type="text" class="form-control" />
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-offset-2 col-md-10">
+                                        <input type="submit" value="Save" class="btn primary-btn" />
+                                    </div>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Details Section End -->
+<!-- Related Product Section Begin -->
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>منتجاته</h2>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @foreach (var Item in Model.UserItems)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="@Item.CommodityImages.FirstOrDefault().ImagePath">
+
+                            <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@Item.CommodityId" />
+                                <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
+
+                                <ul class="product__item__pic__hover">
+                                    <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                            </form>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><a href="~/shop/itemdetails?CommodityId=@Item.CommodityId">@Item.Title</a></h6>
+                            <h5>@Item.Price ج.م/@Item.PriceUnit.PriceUnit1</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
+
+@section Scripts{
+    <script src="/Content/SiteScripts/Cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".addtocart").click(function () {
+                var addbtn = $(this);
+                addbtn.closest("form").submit();
+            });
+        });
+    </script>
+}
+

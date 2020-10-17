@@ -1,5 +1,4 @@
 ﻿@using Microsoft.AspNet.Identity
-@using Microsoft.AspNet.Identity
 
 <!DOCTYPE html>
 <html lang="ar">
@@ -33,7 +32,12 @@
             font-size:12pt !important;
         }
     </style>
-
+    <script>
+        function Logout()
+        {
+            document.getElementById("LogoutForm").submit(); 
+        }
+    </script>
 </head>
 
 <body>
@@ -103,35 +107,60 @@
         <div class="header__top">
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-6">
+                    <div class="col-lg-6 col-md-6">
+                        <div class="header__top__right">
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                            var fullName = PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name);
+                            <div class="header__top__right__language">
+                                <div>مرحبا: @fullName</div>
+                                <span class="arrow_carrot-down"></span>
+                                <ul>
+                                    <li><a href="/userAccount/UserOrders/?UserId=@User.Identity.GetUserId()">طلبات العملاء</a></li>
+                                    <li><a href="/userAccount/MyOrders/?UserId=@User.Identity.GetUserId()">طلباتي</a></li>
+                                    <li><a href="/userAccount/UserProducts/?UserId=@User.Identity.GetUserId()">منتجاتي</a></li>
+                                    <li><a href="/userAccount/UserProfile/?UserId=@User.Identity.GetUserId()">حسابي</a></li>
+                                </ul>
+                            </div>
+                            <div class="header__top__right__auth">
+                                <form name="LogoutForm" id="LogoutForm" action="/Account/LogOff" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <a onclick="Logout()" style="cursor:pointer;">
+                                        <i class="fa fa-user"></i>
+                                        تسجيل خروج
+                                    </a>
+                                </form>
+                                
+                            </div>
+                            }
+                            else
+                            {
+                                <div class="header__top__right__language">
+                                    <a href="/Account/Login"><i class="fa fa-user"></i> تسجيل دخول</a>
+                                    &nbsp;&nbsp;&nbsp;
+                                    <a href="/Account/Register"><i class="fa fa-envelope"></i> حساب جديد</a>
+                                   </div>
+                                    <div class="header__top__right__auth">
+                                    </div>
+                           }
+
+
+                                </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                             
-                                
-                                @if (!Request.IsAuthenticated)
-                                {
-                                <li>
-                                    @Html.RouteLink("إنشاء حساب", "Default", new { Controller = "Account", Action = "Login" })</li>
-                                }
-                                <li>@Html.RouteLink("بيع عندنا", "Default", new { Controller = "Commodities", Action = "" })</li>
-                               <li>.</li>
-                                @*<li>
-                                @Html.RouteLink("مشترياتى", "Default", new { Controller = "Orders", Action = "" })
-                                </li>*@
-                           
+                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
+                                <li>Free Shipping for all Order of $99</li>
                             </ul>
                         </div>
                     </div>
-                    <div class="col-lg-6">
-                        <div class="header__top__right">
-                             <div class="header__top__right__auth">
-                                                             
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>
+
+        
         <div class="container">
             <div class="row">
                 <div class="col-lg-3">
@@ -185,19 +214,7 @@
                             <i class="fa fa-bars"></i>
                             <span>جميع الأقسام</span>
                         </div>
-                        <ul>
-                            <li><a href="#">Fresh Meat</a></li>
-                            <li><a href="#">Vegetables</a></li>
-                            <li><a href="#">Fruit & Nut Gifts</a></li>
-                            <li><a href="#">Fresh Berries</a></li>
-                            <li><a href="#">Ocean Foods</a></li>
-                            <li><a href="#">Butter & Eggs</a></li>
-                            <li><a href="#">Fastfood</a></li>
-                            <li><a href="#">Fresh Onion</a></li>
-                            <li><a href="#">Papayaya & Crisps</a></li>
-                            <li><a href="#">Oatmeal</a></li>
-                            <li><a href="#">Fresh Bananas</a></li>
-                        </ul>
+                        @Html.Partial("~/views/shared/_CategoriesPartial.cshtml", new PrimeMarket.Models.UIViewModel.CategoriesViewModel())
                     </div>
                 </div>
                 <div class="col-lg-9">

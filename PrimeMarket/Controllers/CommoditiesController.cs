@@ -213,10 +213,10 @@ namespace PrimeMarket.Controllers
 
                   
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1",commodity.PriceUnitId);
-            commodity.CategoryId = GetParentGategory((decimal)commodity.SubCategoryId);
+            commodity.SubCategoryId = GetParentGategory((decimal)commodity.SubCategoryId);
 
-            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.CategoryId.ToString());
-            var subCategory = db.SubCategories.Where(x => x.CategoryId == commodity.CategoryId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.SubCategoryId.ToString());
+            var subCategory = db.SubCategories.Where(x => x.CategoryId == commodity.SubCategoryId);
             ViewBag.SubCategoryId = new SelectList(subCategory, "SubCategoryId", "SubCategory1", commodity.SubCategoryId.ToString());
 
             ViewBag.SelectedSubCategoryId = commodity.SubCategoryId.ToString();

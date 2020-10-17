@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
+
 
 namespace PrimeMarket.Controllers
 {
@@ -148,5 +150,35 @@ namespace PrimeMarket.Controllers
             var model = new SearchViewModel(term);
             return View(model);
         }
+
+        public ActionResult UserItems(string UserId)
+        {
+            var model = new UserItemsViewModel(UserId);
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult AddUserComment()
+        {
+            var UserId = Request.Form["hdn_UserId"].ToString();
+            var comment = Request.Form["txt_comment"].ToString();
+            string CustomerId = User.Identity.GetUserId();
+            
+            UserRating userRate = new UserRating()
+            {
+                UserId = UserId,
+                Comment = comment,
+                CreationDate = DateTime.Now,
+                Rating = 4,
+                ReviewerId = CustomerId
+            };
+            db.UserRatings.Add(userRate);
+            db.SaveChanges();
+
+            return RedirectToAction("UserItems", "Shop", new { UserId = UserId });
+        }
+        
+
+
     }
 }

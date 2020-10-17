@@ -94,10 +94,10 @@
     <Property Name="PriceUnitId" Type="tinyint" />
     <Property Name="PriceNote" Type="nvarchar" MaxLength="250" />
     <Property Name="Available" Type="bit" Nullable="false" />
-    <Property Name="Publish" Type="bit" />
+    <Property Name="Publish" Type="bit" Nullable="false" />
     <Property Name="CreationDate" Type="smalldatetime" />
     <Property Name="ExpireDate" Type="smalldatetime" />
-    <Property Name="IsFeatured" Type="bit" />
+    <Property Name="IsFeatured" Type="bit" Nullable="false" />
     <Property Name="OriginalPrice" Type="float" />
     <Property Name="Quantity" Type="float" />
   </EntityType>
@@ -203,6 +203,7 @@
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
     <Property Name="Rating" Type="tinyint" />
     <Property Name="Comment" Type="nvarchar" MaxLength="250" />
+    <Property Name="CreationDate" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="Village">
     <Key>
@@ -216,8 +217,8 @@
 warning 6002: The table/view 'PrimeMarket.dbo.View_Cart' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="View_Cart">
     <Key>
-      <PropertyRef Name="CartId" />
       <PropertyRef Name="Title" />
+      <PropertyRef Name="CartId" />
     </Key>
     <Property Name="CartId" Type="numeric" Precision="18" Scale="0" Nullable="false" />
     <Property Name="CustomerId" Type="nvarchar" MaxLength="128" />
@@ -515,6 +516,30 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__UserRatin__Revie__3864608B">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRating">
+        <PropertyRef Name="ReviewerId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__UserRatin__UserI__395884C4">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+    <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="UserRating">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__Village__Distric__0F624AF8">
     <End Role="District" Type="Self.District" Multiplicity="0..1" />
     <End Role="Village" Type="Self.Village" Multiplicity="*" />
@@ -669,6 +694,14 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
     <AssociationSet Name="FK__SubCatego__Categ__0E6E26BF" Association="Self.FK__SubCatego__Categ__0E6E26BF">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRatin__Revie__3864608B" Association="Self.FK__UserRatin__Revie__3864608B">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserRating" EntitySet="UserRating" />
+    </AssociationSet>
+    <AssociationSet Name="FK__UserRatin__UserI__395884C4" Association="Self.FK__UserRatin__UserI__395884C4">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="UserRating" EntitySet="UserRating" />
     </AssociationSet>
     <AssociationSet Name="FK__Village__Distric__0F624AF8" Association="Self.FK__Village__Distric__0F624AF8">
       <End Role="District" EntitySet="District" />

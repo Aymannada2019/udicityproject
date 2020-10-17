@@ -48,6 +48,8 @@
         <AssociationConnector Association="PrimeMarketModel.FK__Order__PaymentMe__10566F31" />
         <AssociationConnector Association="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" />
         <AssociationConnector Association="PrimeMarketModel.AspNetUserRoles" />
+        <AssociationConnector Association="PrimeMarketModel.FK__UserRatin__Revie__3864608B" />
+        <AssociationConnector Association="PrimeMarketModel.FK__UserRatin__UserI__395884C4" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

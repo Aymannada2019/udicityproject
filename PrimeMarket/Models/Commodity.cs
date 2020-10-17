@@ -11,8 +11,7 @@ namespace PrimeMarket.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Commodity
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -27,7 +26,6 @@ namespace PrimeMarket.Models
         public decimal CommodityId { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
-        public Nullable<decimal> CategoryId { get; set; }
         public Nullable<decimal> SubCategoryId { get; set; }
         public string SellerId { get; set; }
         public Nullable<double> Price { get; set; }
@@ -49,7 +47,6 @@ namespace PrimeMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommodityRating> CommodityRatings { get; set; }
         public virtual PriceUnit PriceUnit { get; set; }
-        public virtual Category Category { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }

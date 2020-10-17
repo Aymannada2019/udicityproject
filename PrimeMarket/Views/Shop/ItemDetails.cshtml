@@ -39,7 +39,7 @@
                     <div class="product__details__price">@Model.ThisCommodity.Price ج.م/@Model.ThisCommodity.PriceUnit.PriceUnit1</div>
                     <p style="font-size:10pt;">
                     الكمية المتاحة: <strong> @Model.ThisCommodity.Quantity @Model.ThisCommodity.PriceUnit.PriceUnit1</strong> من عند  &nbsp;
-                        <span style="color:#0094ff;cursor:pointer;"> @Model.ThisCommodity.AspNetUser.FullName</span>
+                        <span style="color:#0094ff;cursor:pointer;"><a href="/shop/UserItems/?UserId=@Model.ThisCommodity.AspNetUser.Id"> @Model.ThisCommodity.AspNetUser.FullName</a></span>
                     </p>
                     
                     <p>

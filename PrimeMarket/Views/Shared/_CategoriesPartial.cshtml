@@ -1,0 +1,12 @@
+﻿@model PrimeMarket.Models.UIViewModel.CategoriesViewModel
+    
+<ul>
+    @foreach (var cat in Model.CategoryList)
+    {
+        <li>
+            <a href="~/shop/indx/@cat.CategoryId">
+                @cat.Category1
+            </a>
+        </li>
+    }
+</ul>

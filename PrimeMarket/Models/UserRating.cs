@@ -19,5 +19,9 @@ namespace PrimeMarket.Models
         public string UserId { get; set; }
         public Nullable<byte> Rating { get; set; }
         public string Comment { get; set; }
+        public Nullable<System.DateTime> CreationDate { get; set; }
+    
+        public virtual AspNetUser AspNetUser { get; set; }
+        public virtual AspNetUser AspNetUser1 { get; set; }
     }
 }

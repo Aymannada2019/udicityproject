@@ -4,11 +4,10 @@
     <ul>
         @*<li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>*@
    <li>
-        @if (Request.IsAuthenticated)
+        @*@if (Request.IsAuthenticated)
         {
             @Html.ActionLink("" + PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name), "Edit", "AspNetUsers", new { id = User.Identity.GetUserId() }, null)
-          }
-       &nbsp; &nbsp;
+          }*@
 
         <a href="/ShoppingCart"><i class="fa fa-shopping-bag"></i> <span>@Model.CartItemsCount</span></a></li>
     </ul>

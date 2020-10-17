@@ -1,0 +1,51 @@
+﻿@model PrimeMarket.Models.UIViewModel.UserProductsViewModel
+@{
+    ViewBag.Title = "UserItems";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+
+<section class="related-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title related__product__title">
+                    <h2>منتجاتي</h2>
+                </div>
+            </div>
+            <div class="col-lg-12">
+                <a style="float:right;margin-bottom:15px;" href="/Commodities/Create/" class="site-btn">إضافة سلعة جديدة</a>
+                </div>
+            </div>
+        <div class="row">
+            @foreach (var Item in Model.UserItems)
+            {
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="product__item">
+                        <a href="~/UserAccount/productdetails?CommodityId=@Item.CommodityId">
+                            <div class="product__item__pic set-bg" data-setbg="@Item.CommodityImages.FirstOrDefault().ImagePath">
+                            </div>
+                        </a>
+                        <div class="product__item__text">
+                            <h6><a href="~/UserAccount/productdetails?CommodityId=@Item.CommodityId">@Item.Title</a></h6>
+                            <h5>@Item.Price ج.م/@Item.PriceUnit.PriceUnit1</h5>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+<!-- Related Product Section End -->
+
+@section Scripts{
+    <script src="/Content/SiteScripts/Cart.js"></script>
+    <script>
+        $(document).ready(function () {
+            $(".addtocart").click(function () {
+                var addbtn = $(this);
+                addbtn.closest("form").submit();
+            });
+        });
+    </script>
+}
+

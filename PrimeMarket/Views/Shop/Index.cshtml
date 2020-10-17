@@ -120,9 +120,11 @@
                                         {
                                             <div class="latest-prdouct__slider__item">
                                                 @{
-                                                    for (int j = i; j < i + 3; j++)
-                                                    {
-                                                        var latestItem = Model.LatestItems[j];
+                                                        int count = ((i + 3) > Model.LatestItems.Count) ? Model.LatestItems.Count : (i + 3);
+
+                                                        for (int j = i; j < count; j++)
+                                                        {
+                                                            var latestItem = Model.LatestItems[j];
                                                         <a href="~/shop/ItemDetails?CommodityId=@latestItem.CommodityId" class="latest-product__item">
                                                             <div class="latest-product__item__pic">
                                                                 <img src="@latestItem.CommodityImages.FirstOrDefault().ImagePath" alt="">
