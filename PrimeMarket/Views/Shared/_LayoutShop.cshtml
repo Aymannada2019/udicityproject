@@ -15,15 +15,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/content/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/nice-select.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/jquery-ui.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css" />
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
     <style>
         a.addtocart {
             cursor: pointer;
@@ -32,6 +33,7 @@
             font-size:12pt !important;
         }
     </style>
+    
     <script>
         function Logout()
         {
@@ -96,8 +98,7 @@
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                <li>Free Shipping for all Order of $99</li>
+                <li>@Html.RouteLink("بيع عندنا", "Default", new { Controller = "Commodities", Action = "" })</li>
             </ul>
         </div>
     </div>
@@ -150,8 +151,7 @@
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i> hello@colorlib.com</li>
-                                <li>Free Shipping for all Order of $99</li>
+                                <li>@Html.RouteLink("بيع عندنا", "Default", new { Controller = "Commodities", Action = "" })</li>
                             </ul>
                         </div>
                     </div>
@@ -350,13 +350,12 @@
     <script src="~/Scripts/js/jquery-3.3.1.min.js"></script>
     <script src="~/Scripts/js/bootstrap.min.js"></script>
     <script src="~/Scripts/js/jquery.nice-select.min.js"></script>
-    @*<script src="~/Scripts/js/jquery-ui.min.js"></script>*@
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="~/Scripts/js/jquery.slicknav.js"></script>
     <script src="~/Scripts/js/mixitup.min.js"></script>
     <script src="~/Scripts/js/owl.carousel.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
-
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#txt_search").autocomplete({
@@ -400,6 +399,12 @@
         });
     </script>
     @RenderSection("Scripts", false);
+
+    <script>
+        $(document).ready(function () {
+            $('#myorders').DataTable();
+        });
+    </script>
 
 </body>
 

@@ -168,13 +168,14 @@
           <Property Name="CancelDate" Type="smalldatetime" />
           <Property Name="OrderId" Type="numeric" Precision="18" Scale="0" />
           <Property Name="PaymentMethodId" Type="int" />
+          <Property Name="UnitPrice" Type="float" />
         </EntityType>
         <EntityType Name="OrderStatus">
           <Key>
             <PropertyRef Name="OrderStatusId" />
           </Key>
-          <Property Name="OrderStatusId" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="OrderStatus" Type="nvarchar" MaxLength="50" />
+          <Property Name="OrderStatusId" Type="tinyint" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="OrderStatus" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="PaymentMethod">
           <Key>
@@ -461,7 +462,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__Order__OrderStat__0B91BA14">
+        <Association Name="FK__Order__OrderStat__3F115E1A">
           <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
           <End Role="Order" Type="Self.Order" Multiplicity="*" />
           <ReferentialConstraint>
@@ -680,7 +681,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
             <End Role="AspNetUsers" EntitySet="AspNetUsers" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
-          <AssociationSet Name="FK__Order__OrderStat__0B91BA14" Association="Self.FK__Order__OrderStat__0B91BA14">
+          <AssociationSet Name="FK__Order__OrderStat__3F115E1A" Association="Self.FK__Order__OrderStat__3F115E1A">
             <End Role="OrderStatus" EntitySet="OrderStatus" />
             <End Role="Order" EntitySet="Order" />
           </AssociationSet>
@@ -1029,13 +1030,14 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
           <Property Name="PaymentMethodId" Type="Int32" />
           <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="OrderItem" ToRole="Commodity" />
           <NavigationProperty Name="Order" Relationship="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" FromRole="OrderItem" ToRole="Order" />
+          <Property Name="UnitPrice" Type="Double" />
         </EntityType>
         <EntityType Name="OrderStatu">
           <Key>
             <PropertyRef Name="OrderStatusId" />
           </Key>
           <Property Name="OrderStatusId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OrderStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__OrderStat__0B91BA14" FromRole="OrderStatu" ToRole="Order" />
         </EntityType>
         <EntityType Name="PaymentMethod">
@@ -1563,6 +1565,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
           <EntitySetMapping Name="OrderItems">
             <EntityTypeMapping TypeName="PrimeMarketModel.OrderItem">
               <MappingFragment StoreEntitySet="OrderItems">
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
                 <ScalarProperty Name="OrderId" ColumnName="OrderId" />
                 <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />

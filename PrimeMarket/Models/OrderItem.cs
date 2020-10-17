@@ -21,6 +21,7 @@ namespace PrimeMarket.Models
         public Nullable<System.DateTime> CancelDate { get; set; }
         public Nullable<decimal> OrderId { get; set; }
         public Nullable<int> PaymentMethodId { get; set; }
+        public Nullable<double> UnitPrice { get; set; }
     
         public virtual Commodity Commodity { get; set; }
         public virtual Order Order { get; set; }

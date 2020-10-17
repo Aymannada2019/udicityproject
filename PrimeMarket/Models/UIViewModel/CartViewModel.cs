@@ -1,11 +1,12 @@
-﻿using System;
+﻿using PrimeMarket.Models;
+using PrimeMarket.Models.UIViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Data.Entity;
 using System.Web;
-using PrimeMarket.Models;
-
+using System.Web.Mvc;
+using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 namespace PrimeMarket.Models.UIViewModel
 {
     public class CartViewModel
@@ -14,7 +15,7 @@ namespace PrimeMarket.Models.UIViewModel
         public List<Cart> cartItems = new List<Cart>();
         public CartViewModel()
         {
-            var UserId = "8ac3f426-e76d-4ed8-94c1-835addf528bc"; // logged in user
+            var UserId = System.Web.HttpContext.Current.User.Identity.GetUserId(); // logged in user
             cartItems = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity).Where(c => c.CustomerId == UserId).ToList();
         }
     }

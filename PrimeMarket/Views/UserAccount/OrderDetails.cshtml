@@ -1,0 +1,115 @@
+﻿@model PrimeMarket.Models.UIViewModel.OrderDetailsViewModel
+@{
+    ViewBag.Title = "Order Details";
+    Layout = "~/Views/Shared/_LayoutShop.cshtml";
+}
+<style>
+    .order-header {
+        width: 100%;
+        vertical-align: middle;
+        text-align: right;
+    }
+
+    .order-items {
+        margin-top: 20px;
+        width: 100%;
+        vertical-align: middle;
+        text-align: right;
+    }
+    table.order-items td{
+        border: 1px solid #ccc;
+        padding:5px;
+    }
+    table.order-items th {
+        border: 1px solid #808080;
+        background: #ccc;
+        padding:5px;
+    }
+    
+    .boldtext {
+        font-weight: 700 !important;
+    }
+</style>
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="section-title related__product__title">
+                    <h2>تفاصيل الطلب رقم  @Model.ThisOrder.OrderId</h2>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-11 col-md-11">
+                <table class="order-header">
+                    <tr>
+                        <td class="boldtext">اسم المشتري</td>
+                        <td>@Model.ThisOrder.AspNetUser.FullName</td>
+                        <td class="boldtext">رقم الطلب</td>
+                        <td>@Model.ThisOrder.OrderId</td>
+                    </tr>
+                    <tr>
+                        <td class="boldtext">تاريخ الطلب</td>
+                        <td>@string.Format("{0:yyyy/MM/dd}", Model.ThisOrder.RequestDate)</td>
+                        <td class="boldtext">قيمة الطلب</td>
+                        <td>@Model.ThisOrder.Total</td>
+                    </tr>
+                    <tr>
+                        <td class="boldtext">حالة الطلب</td>
+                        <td>@Model.ThisOrder.OrderStatu.OrderStatus</td>
+                        <td class="boldtext">عدد المنتجات</td>
+                        <td>@Model.ThisOrder.OrderItems.Count</td>
+                    </tr>
+                    <tr>
+                        <td class="boldtext"> عنوان الاستلام</td>
+                        <td>@Model.ThisOrder.ShippingAddress</td>
+                        <td class="boldtext"> تليفون</td>
+                        <td>@Model.ThisOrder.Phone</td>
+                    </tr>
+                    <tr>
+                        <td class="boldtext">ملاحظات الاستلام</td>
+                        <td>@Model.ThisOrder.ShippingNotes</td>
+                        <td class="boldtext">ملاحظات</td>
+                        <td>@Model.ThisOrder.Notes</td>
+                    </tr>
+                </table>
+                <table class="order-items">
+                    <tr>
+                        <th>مسلسل</th>
+                        <th>رقم المنتج</th>
+                        <th>اسم المنتج</th>
+                        <th>سعر الوحدة (ج.م)</th>
+                        <th>الوحدة</th>
+                        <th>الكمية</th>
+                        <th>المجموع</th>
+                        <th>البائع</th>
+                        @*<th>تاريخ الاستلام</th>*@
+
+                    </tr>
+                    @{
+                        var serial = 0;
+                        foreach (var orderItem in Model.ThisOrder.OrderItems)
+                        {
+                            serial++;
+                            var ItemTotal = orderItem.UnitPrice * orderItem.Quantity;
+                            <tr>
+                                <td>@serial</td>
+                                <td>@orderItem.CommodityId</td>
+                                <td>@orderItem.Commodity.Title</td>
+                                <td>@orderItem.UnitPrice</td>
+                                <td>@orderItem.Commodity.PriceUnit.PriceUnit1</td>
+                                <td>@orderItem.Quantity</td>
+                                <td>@ItemTotal</td>
+                                <td><a href="/shop/UserItems/?UserId=@orderItem.Commodity.SellerId" target="_blank">@orderItem.Commodity.AspNetUser.FullName</a></td>
+                                @*<td>@string.Format("{0:yyyy/MM/dd}", orderItem.DeliveryDate)</td>*@
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>

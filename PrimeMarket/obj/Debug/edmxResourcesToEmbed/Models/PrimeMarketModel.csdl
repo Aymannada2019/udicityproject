@@ -312,13 +312,14 @@
     <Property Name="PaymentMethodId" Type="Int32" />
     <NavigationProperty Name="Commodity" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="OrderItem" ToRole="Commodity" />
     <NavigationProperty Name="Order" Relationship="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" FromRole="OrderItem" ToRole="Order" />
+    <Property Name="UnitPrice" Type="Double" />
   </EntityType>
   <EntityType Name="OrderStatu">
     <Key>
       <PropertyRef Name="OrderStatusId" />
     </Key>
     <Property Name="OrderStatusId" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="OrderStatus" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OrderStatus" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="Orders" Relationship="PrimeMarketModel.FK__Order__OrderStat__0B91BA14" FromRole="OrderStatu" ToRole="Order" />
   </EntityType>
   <EntityType Name="PaymentMethod">

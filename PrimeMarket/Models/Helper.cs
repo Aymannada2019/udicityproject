@@ -64,7 +64,7 @@ namespace PrimeMarket.Models
             double total = 0;
             CartItemsCount = 0;
             PrimeMarketEntities context = new PrimeMarketEntities();
-            var CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+            var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             try
             {
                 var cart = context.Carts.Where(c => c.CustomerId == CustomerId).ToList();

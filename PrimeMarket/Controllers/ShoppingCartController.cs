@@ -6,7 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
-
+using Microsoft.AspNet.Identity;
 namespace PrimeMarket.Controllers
 {
     public class ShoppingCartController : Controller
@@ -42,7 +42,7 @@ namespace PrimeMarket.Controllers
                 var Notes = Request.Form["txt_Notes"].ToString();
                 var phone = Request.Form["txt_phone"].ToString();
                 // mahmoud Bakr
-                var CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+                var CustomerId = User.Identity.GetUserId();
                 var cart = db.Carts.Where(c => c.CustomerId == CustomerId).ToList();
                 double total = getCartTotal();
                 
@@ -67,6 +67,7 @@ namespace PrimeMarket.Controllers
                     orderItem.OrderId = userOrder.OrderId;
                     orderItem.PaymentMethodId = 1;
                     orderItem.Quantity = item.Quantity;
+                    orderItem.UnitPrice = item.Commodity.Price;
                     db.OrderItems.Add(orderItem);
                 }
                 db.SaveChanges();
@@ -75,14 +76,14 @@ namespace PrimeMarket.Controllers
             catch(Exception ex)
             { }
             ViewBag.OrderId = userOrder.OrderId;
-            //return RedirectToAction("OrderDetails", "ShoppingCart");
-            return RedirectToAction("Index", "Shop");
+            return RedirectToAction("OrderDetails", "UserAccount",new { OrderId= userOrder.OrderId });
+            //return RedirectToAction("Index", "Shop");
         }
 
         public static void ClearCart()
         {
             PrimeMarketEntities context = new PrimeMarketEntities();
-            var CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+            var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             try
             {
                 var cart = context.Carts.RemoveRange(context.Carts.Where(c => c.CustomerId == CustomerId).ToList());
@@ -95,7 +96,7 @@ namespace PrimeMarket.Controllers
         {
             double total = 0;
             PrimeMarketEntities context = new PrimeMarketEntities();
-            var CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+            var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
             try
             {
                 var cart = context.Carts.Where(c => c.CustomerId == CustomerId).ToList();

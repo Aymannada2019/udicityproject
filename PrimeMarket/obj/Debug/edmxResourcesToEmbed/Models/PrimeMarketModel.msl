@@ -159,6 +159,7 @@
     <EntitySetMapping Name="OrderItems">
       <EntityTypeMapping TypeName="PrimeMarketModel.OrderItem">
         <MappingFragment StoreEntitySet="OrderItems">
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
           <ScalarProperty Name="PaymentMethodId" ColumnName="PaymentMethodId" />
           <ScalarProperty Name="OrderId" ColumnName="OrderId" />
           <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />

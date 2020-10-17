@@ -37,7 +37,7 @@ namespace PrimeMarket.Controllers
         {
             var CommodityId = Request.Form["hdn_CommodityId"].ToString();
             var comment = Request.Form["txt_comment"].ToString();
-            string CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+            string CustomerId = User.Identity.GetUserId();
             CommodityRating comRate = new CommodityRating()
             {
                 CommodityId = int.Parse(CommodityId),
@@ -60,7 +60,11 @@ namespace PrimeMarket.Controllers
                 var CommodityId = int.Parse(Request.Form["hdn_CommodityId"].ToString());
                 var commidity = db.Commodities.Where(c => c.CommodityId == CommodityId).FirstOrDefault();
                 var Quantity = int.Parse(Request.Form["txt_Quantity"].ToString().Trim());
-                string CustomerId = "8ac3f426-e76d-4ed8-94c1-835addf528bc";
+                string CustomerId = User.Identity.GetUserId();
+                if(CustomerId == commidity.SellerId)
+                {
+                    return RedirectToAction("Index", "ShoppingCart");
+                }
                 var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
                 if (cart == null)
                 {

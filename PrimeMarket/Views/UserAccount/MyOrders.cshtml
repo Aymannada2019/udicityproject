@@ -1,8 +1,74 @@
-﻿
+﻿@model PrimeMarket.Models.UIViewModel.MyOrdersViewModel
 @{
-    ViewBag.Title = "MyOrders";
+    ViewBag.Title = "My Orders";
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
 
-<h2>MyOrders</h2>
+<section class="product-details spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="section-title related__product__title">
+                    <h2>طلباتي</h2>
+                </div>
+                
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+
+                <table id="myorders" class="display">
+                    <thead>
+                        <tr>
+                            <th>رقم الطلب</th>
+                            <th>تاريخ الطلب</th>
+                            <th>قيمة الطلب</th>
+                            <th>حالة الطلب</th>
+                            <th>عدد المنتجات</th>
+                            <th> تليفون</th>
+                            <th> عنوان الاستلام</th>
+                            <th>ملاحظات الاستلام</th>
+                            <th>ملاحظات</th>
+                            <th>خيارات</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var order in Model.MyOrders)
+                        {
+                            <tr>
+                                <td>@order.OrderId</td>
+                                <td>@string.Format("{0:yyyy/MM/dd}", order.RequestDate)</td>
+                                <td>@order.Total</td>
+                                <td>@order.OrderStatu.OrderStatus</td>
+                                <td>@order.OrderItems.Count</td>
+                                <td>@order.Phone</td>
+                                <td>@order.ShippingAddress</td>
+                                <td>@order.ShippingNotes</td>
+                                <td>@order.Notes</td>
+                                <td>
+                                    <a href="/UserAccount/OrderDetails/?OrderId=@order.OrderId" class="btn-default">تفاصيل</a>
+
+                                    @if (order.OrderStatusId < 3)
+                                    {
+                                        <form method="post" action="/useraccount/CancelOrder">
+                                            <input type="hidden" id="OrderId" name="OrderId" value="@order.OrderId" />
+                                            <input type="hidden" id="CustomerId" name="CustomerId" value="@order.CustomerId" />
+                                            <input type="submit" class="btn-danger" value="إلغاء" onclick="return window.confirm('هل تريد إلغاء الطلب؟');" />
+                                        </form>
+                                    }
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+
 
