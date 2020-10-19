@@ -10,7 +10,7 @@ using PrimeMarket.Models;
 using System.Data.Entity.Validation;
 
 using Microsoft.AspNet.Identity;
-
+using Microsoft.AspNet.Identity.EntityFramework;
 
 namespace PrimeMarket.Controllers
 {
@@ -24,7 +24,12 @@ namespace PrimeMarket.Controllers
         // GET: AspNetUsers
         public ActionResult Index()
         {
-            
+            if (!isAdminUser())  //certain user
+            {
+                string Cid = User.Identity.GetUserId();
+                return View(db.AspNetUsers.Where(x => x.Id == Cid).ToList());
+            }
+            //admin user
             return View(db.AspNetUsers.ToList());
         }
 
@@ -81,8 +86,8 @@ namespace PrimeMarket.Controllers
             }
             ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId,"-Select Village-");
             //ViewBag.VillageId = new SelectList(m=>m.Villages,SelectList(model.)
-            
 
+            ViewBag.IsUserAdmin = isAdminUser();
             return View(account);
         }
 
@@ -204,6 +209,27 @@ namespace PrimeMarket.Controllers
             db.AspNetUsers.Remove(account);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public Boolean isAdminUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var user = User.Identity;
+                ApplicationDbContext context = new ApplicationDbContext();
+                var UserManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(context));
+                var s = UserManager.GetRoles(user.GetUserId());
+
+                if (s.Count > 0 && s[0].ToString() == "Admin")
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return false;
         }
 
         protected override void Dispose(bool disposing)

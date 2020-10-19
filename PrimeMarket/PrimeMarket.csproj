@@ -225,6 +225,7 @@
     <Compile Include="Controllers\ShowCommoditiesController.cs" />
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
+    <Compile Include="Controllers\UserAccountController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -251,6 +252,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryCommidity.cs" />
     <Compile Include="Models\Commoditymeta.cs" />
     <Compile Include="Models\Commodity.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
@@ -261,6 +263,7 @@
     <Compile Include="Models\CommodityRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -271,6 +274,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaData_AspNetUser.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -307,9 +311,16 @@
     </Compile>
     <Compile Include="Models\UIViewModel\CartSummaryViewModel.cs" />
     <Compile Include="Models\UIViewModel\CartViewModel.cs" />
+    <Compile Include="Models\UIViewModel\CategoriesViewModel.cs" />
     <Compile Include="Models\UIViewModel\ItemDetailsViewModel.cs" />
+    <Compile Include="Models\UIViewModel\MyOrdersViewModel.cs" />
+    <Compile Include="Models\UIViewModel\OrderDetailsViewModel.cs" />
+    <Compile Include="Models\UIViewModel\ProductDetailsViewModel.cs" />
     <Compile Include="Models\UIViewModel\SearchViewModel.cs" />
     <Compile Include="Models\UIViewModel\ShopViewModel.cs" />
+    <Compile Include="Models\UIViewModel\UserItemsViewModel.cs" />
+    <Compile Include="Models\UIViewModel\UserOrdersViewModel.cs" />
+    <Compile Include="Models\UIViewModel\UserProductsViewModel.cs" />
     <Compile Include="Models\UserRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -573,6 +584,20 @@
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutFarmer.cshtml" />
+    <Content Include="Views\AspNetUsers\ChangeImage.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\UserAccount\MyOrders.cshtml" />
+    <Content Include="Views\UserAccount\OrderDetails.cshtml" />
+    <Content Include="Views\UserAccount\ProductDetails.cshtml" />
+    <Content Include="Views\UserAccount\UserOrders.cshtml" />
+    <Content Include="Views\UserAccount\UserProducts.cshtml" />
+    <Content Include="Views\UserAccount\UserProfile.cshtml" />
+    <Content Include="Views\Commodities\Delete.cshtml" />
+    <Content Include="Views\Commodities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -622,7 +647,6 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
-
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
