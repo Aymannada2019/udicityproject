@@ -226,7 +226,6 @@
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
-    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,6 +263,7 @@
     <Compile Include="Models\CommodityRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -584,6 +584,20 @@
     <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutFarmer.cshtml" />
+    <Content Include="Views\AspNetUsers\ChangeImage.cshtml" />
+    <Content Include="Views\AspNetUsers\Create.cshtml" />
+    <Content Include="Views\AspNetUsers\Delete.cshtml" />
+    <Content Include="Views\AspNetUsers\Details.cshtml" />
+    <Content Include="Views\AspNetUsers\Edit.cshtml" />
+    <Content Include="Views\AspNetUsers\Index.cshtml" />
+    <Content Include="Views\UserAccount\MyOrders.cshtml" />
+    <Content Include="Views\UserAccount\OrderDetails.cshtml" />
+    <Content Include="Views\UserAccount\ProductDetails.cshtml" />
+    <Content Include="Views\UserAccount\UserOrders.cshtml" />
+    <Content Include="Views\UserAccount\UserProducts.cshtml" />
+    <Content Include="Views\UserAccount\UserProfile.cshtml" />
+    <Content Include="Views\Commodities\Delete.cshtml" />
+    <Content Include="Views\Commodities\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
