@@ -11,6 +11,11 @@ namespace PrimeMarket.Models
     [MetadataType(typeof(MetaData_AspNetUser))]
     public partial class AspNetUser
     {
+        public decimal GovernoratetId { get; set; }
+        public virtual Governorate Governorate { get; set; }
+
+        public decimal DistrictId { get; set; }
+        public virtual District District { get; set; }
     }
     public class MetaData_AspNetUser
     {

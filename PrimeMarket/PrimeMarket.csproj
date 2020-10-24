@@ -481,10 +481,6 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Views\Accounts\Delete.cshtml" />
-    <Content Include="Views\Accounts\Details.cshtml" />
-    <Content Include="Views\Accounts\Edit.cshtml" />
-    <Content Include="Views\Accounts\Index.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -581,7 +577,6 @@
     <Content Include="Views\Commodities\Create.cshtml" />
     <Content Include="Views\Commodities\Edit.cshtml" />
     <Content Include="Views\Commodities\Index.cshtml" />
-    <Content Include="Views\Accounts\Create.cshtml" />
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Shared\_LayoutFarmer.cshtml" />
     <Content Include="Views\AspNetUsers\ChangeImage.cshtml" />

@@ -41,12 +41,12 @@ namespace PrimeMarket.Models
 
     public class ChangePasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ادخل كلمة السر الحالية")]
         [DataType(DataType.Password)]
         [Display(Name = "كلمة السر الحالية")]
         public string OldPassword { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ادخل كلمة السر الجديدة")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "كلمة السر الجديدة")]
@@ -54,7 +54,7 @@ namespace PrimeMarket.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "تأكيد كلمة السر الجديدة")]
-        [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+        [Compare("NewPassword", ErrorMessage = "كلمة المرور وكلمة المرور التأكيدية غير متطابقين")]
         public string ConfirmPassword { get; set; }
     }
 

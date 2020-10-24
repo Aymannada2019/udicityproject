@@ -66,14 +66,14 @@
             </div>
         </div>
 
-        <div class="form-group">
+        @*<div class="form-group">
             @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })*@
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @readonly = "readonly" } })
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
-        </div>
+        </div>*@
 
         @*<div class="form-group">
             @Html.LabelFor(model => model.PassWord, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -83,10 +83,29 @@
             </div>
         </div>*@
 
+
+        <div class="form-group row">
+            @Html.LabelFor(model => model.GovernoratetId, "المحافظة", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*@Html.DropDownList("GovernoratetId", null, htmlAttributes: new { @class = "form-control" })*@
+                @Html.DropDownList("GovernorateId", null, "اختر المحافظة", htmlAttributes: new { @class = "form-control" })
+                
+            </div>
+        </div>
+        <div class="form-group row">
+            @Html.LabelFor(model => model.DistrictId, "المركز", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("DistrictId", null, "اختر المركز", new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.DistrictId, "", new { @class = "text-danger" })
+                <input id="SelectedDistrictId" value='@ViewBag.SelectedDistrictId' type="hidden" />
+            </div>
+        </div>
+
+
         <div class="form-group">
             @Html.LabelFor(model => model.VillageId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("VillageId", null,"- Select Village -", htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("VillageId", null,"- اختر القرية -", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VillageId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,3 +147,26 @@
         @Html.ActionLink("عودة لقائمة المستخدمين", "Index")
     </div>
 }
+
+
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    console.log("Hello world!");
+    $(document).ready(function () {
+        $("#GovernoratetId").change(function () {
+
+            $.get("/AspNetUsers/getDistrictList", { GovernoratetId: $(GovernoratetId).val() }, function (data) {
+                $("#DistrictId").empty();
+                $.each(data, function (index, row) {
+                    console.log($("#SelectedDistrictId").val());
+                    if ($("#SelectedDistrictId").val() == row.SubCategoryId)
+                        $("#DistrictId").append("<option value='" + row.DistrictId + "' selected>" + row.District1 + "</option>")
+                    else
+                        $("#DistrictId").append("<option value='" + row.DistrictId + "'>" + row.District1 + "</option>")
+                });
+            });
+
+        });
+    });
+
+</script>

@@ -84,6 +84,28 @@ namespace PrimeMarket.Controllers
             {
                 return HttpNotFound();
             }
+
+            //translate
+            //account.Governorate
+            //commodity.SubCategoryId = GetParentGategory((decimal)commodity.SubCategoryId);
+            account.DistrictId = GetGovernorate((decimal)account.DistrictId);
+            
+            //ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.SubCategoryId.ToString());
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.DistrictId.ToString());
+
+            //var subCategory = db.SubCategories.Where(x => x.CategoryId == commodity.SubCategoryId);
+            var District = db.Districts.Where(x => x.GovernorateId == account.DistrictId);
+
+            //ViewBag.SubCategoryId = new SelectList(subCategory, "SubCategoryId", "SubCategory1", commodity.SubCategoryId.ToString());
+            ViewBag.DistrictId = new SelectList(District, "DistrictId", "District1", account.DistrictId.ToString());
+
+            //ViewBag.SelectedSubCategoryId = commodity.SubCategoryId.ToString();
+            ViewBag.SelectedDistrictId = account.DistrictId.ToString();
+
+
+
+
+
             ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId,"-Select Village-");
             //ViewBag.VillageId = new SelectList(m=>m.Villages,SelectList(model.)
 
@@ -130,6 +152,9 @@ namespace PrimeMarket.Controllers
                 ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId, "-Select Village-");
                 return RedirectToAction("Index");
             }
+            //translate
+            //ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "DistrictId", account.DistrictId);
             return View(account);
         }
 
@@ -240,5 +265,25 @@ namespace PrimeMarket.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public JsonResult getDistrictList(int GovernorateId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<District> DistrictList = db.Districts.Where(district => district.GovernorateId == GovernorateId).ToList();
+            return Json(DistrictList, JsonRequestBehavior.AllowGet);
+        }
+
+        public decimal GetGovernorate(decimal DistrictId)  //public decimal GetParentGategory(decimal subCategoryId)
+        {
+            decimal GovernorateId = 0;
+            var District = db.Districts.Where(x => x.DistrictId == DistrictId);
+            foreach (var item in District)
+            {
+                GovernorateId = (decimal)item.GovernorateId;
+            }
+            return GovernorateId;
+        }
+        
+
     }
 }
