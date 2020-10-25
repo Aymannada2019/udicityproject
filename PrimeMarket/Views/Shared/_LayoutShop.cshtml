@@ -76,7 +76,7 @@
             <ul>
                 <li class="active"><a href="/shop/index">الرئيسية</a></li>
                 <li><a href="/shop/index">المنتجات</a></li>
-                <li>
+                @*<li>
                     <a href="#">Pages</a>
                     <ul class="header__menu__dropdown">
                         <li><a href="#">Shop Details</a></li>
@@ -84,7 +84,7 @@
                         <li><a href="#">Check Out</a></li>
                         <li><a href="#">Blog Details</a></li>
                     </ul>
-                </li>
+                </li>*@
                 <li><a href="#">من نحن</a></li>
                 <li><a href="#">إتصل بنا</a></li>
             </ul>
@@ -120,7 +120,7 @@
                                     <li><a href="/userAccount/UserOrders/?UserId=@User.Identity.GetUserId()">طلبات العملاء</a></li>
                                     <li><a href="/userAccount/MyOrders/?UserId=@User.Identity.GetUserId()">طلباتي</a></li>
                                     <li><a href="/userAccount/UserProducts/?UserId=@User.Identity.GetUserId()">منتجاتي</a></li>
-                                    <li><a href="/userAccount/UserProfile/?UserId=@User.Identity.GetUserId()">حسابي</a></li>
+                                    <li><a href="/AspNetUsers/Edit/@User.Identity.GetUserId()">حسابي</a></li>
                                 </ul>
                             </div>
                             <div class="header__top__right__auth">
@@ -173,7 +173,7 @@
                         <ul>
                             <li class="active"><a href="/shop/index">الرئيسية</a></li>
                             <li><a href="/shop/index">المنتجات</a></li>
-                            <li>
+                            @*<li>
                                 <a href="#">Pages</a>
                                 <ul class="header__menu__dropdown">
                                     <li><a href="#">Shop Details</a></li>
@@ -181,7 +181,7 @@
                                     <li><a href="#">Check Out</a></li>
                                     <li><a href="#">Blog Details</a></li>
                                 </ul>
-                            </li>
+                            </li>*@
                             <li><a href="#">من نحن</a></li>
                             <li><a href="#">إتصل بنا</a></li>
                         </ul>
@@ -242,8 +242,8 @@
                                 <i class="fa fa-phone"></i>
                             </div>
                             <div class="hero__search__phone__text">
-                                <h5>+65 11.188.888</h5>
-                                <span>support 24/7 time</span>
+                                <h5 dir="ltr">+201023456789</h5>
+                                <span>خدمة متميزة 24/7</span>
                             </div>
                         </div>
                     </div>
@@ -280,44 +280,41 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-6">
                     <div class="footer__about">
-                        <div class="footer__about__logo">
-                            <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                        </div>
-                        <ul>
-                            <li>Address: 60-49 Road 11378 New York</li>
-                            <li>Phone: +65 11.188.888</li>
-                            <li>Email: hello@colorlib.com</li>
+                        @*<div class="footer__about__logo">
+                            <a href="/"><img src="img/logo.png" alt=""></a>
+                        </div>*@
+                        <ul style="font-size:14px;">
+                            <li>من أجل التواصل الفعال بين البائع والمشتري نوفر لك خدمة تسويق منتجاتك.</li>
+                            <li>البريد الالكتروني: info@souq-prime.com</li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
-                        <h6>Useful Links</h6>
+                        <h6>روابط هامة</h6>
                         <ul>
-                            <li><a href="#">About Us</a></li>
-                            <li><a href="#">About Our Shop</a></li>
-                            <li><a href="#">Secure Shopping</a></li>
-                            <li><a href="#">Delivery infomation</a></li>
-                            <li><a href="#">Privacy Policy</a></li>
-                            <li><a href="#">Our Sitemap</a></li>
+                            <li><a href="#">من نحن</a></li>
+                            <li><a href="#">اتصل بنا</a></li>
+                            <li><a href="#">المنتجات</a></li>
+                            <li><a href="#">تسجيل حساب</a></li>
+                            <li><a href="#">بيع عندنا</a></li>
                         </ul>
                         <ul>
-                            <li><a href="#">Who We Are</a></li>
-                            <li><a href="#">Our Services</a></li>
-                            <li><a href="#">Projects</a></li>
-                            <li><a href="#">Contact</a></li>
-                            <li><a href="#">Innovation</a></li>
-                            <li><a href="#">Testimonials</a></li>
+                            <li><a href="#">من نحن</a></li>
+                            <li><a href="#">اتصل بنا</a></li>
+                            <li><a href="#">المنتجات</a></li>
+                            <li><a href="#">تسجيل حساب</a></li>
+                            <li><a href="#">بيع عندنا</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
                     <div class="footer__widget">
-                        <h6>Join Our Newsletter Now</h6>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h6>انضم لخدمة النشرة البريدية</h6>
+                        <p>سوف تصلك رسالة بريدية بأحدث عروضنا ومنتجاتنا</p>
                         <form action="#">
-                            <input type="text" placeholder="Enter your mail">
-                            <button type="submit" class="site-btn">Subscribe</button>
+                            <input type="text" placeholder="أكتب بريدك الالكتروني">
+                            <button type="submit" class="site-btn">اشتراك</button>
                         </form>
                         <div class="footer__widget__social">
                             <a href="#"><i class="fa fa-facebook"></i></a>
@@ -335,8 +332,7 @@
                             <p>
                                 <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                                 Copyright &copy;
-                                <script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                                <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                                <script>document.write(new Date().getFullYear());</script> CCICREES All rights reserved.
                             </p>
                         </div>
                         <div class="footer__copyright__payment"><img src="img/payment-item.png" alt=""></div>
@@ -405,7 +401,7 @@
             $('#myorders').DataTable();
         });
     </script>
-
+    
 </body>
 
 </html>

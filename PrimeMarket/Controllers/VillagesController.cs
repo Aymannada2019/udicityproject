@@ -96,11 +96,17 @@ namespace PrimeMarket.Controllers
                 village.VillageId = max;
                 db.Villages.Add(village);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                //return RedirectToAction("Index");
+                var village2 = db.Villages.Include(x=>x.District).Where(x=>x.VillageId==village.VillageId).FirstOrDefault();
+                var GovernorateId = village2.District.GovernorateId;
+                var DistrictId = village2.DistrictId;
+                return RedirectToAction("Villagesfilter", "Villages", new { DistrictId = DistrictId, GovernorateId = GovernorateId });
             }
-
+            
             ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", village.DistrictId);
+            http://localhost:58090/Villages/Villagesfilter?DistrictId=206&GovernorateId=2
             return View(village);
+            //return RedirectToAction("Villagesfilter", "Villages", new { DistrictId= ViewBag.DistrictId, GovernorateId = GovernorateId });
         }
 
         // GET: Villages/Edit/5
