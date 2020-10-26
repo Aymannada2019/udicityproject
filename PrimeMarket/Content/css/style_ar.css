@@ -3531,3 +3531,18 @@ ol {
 		font-size: 24px;
 	}
 }
+
+/* Back End Styles */                     /*khmonir*/
+
+#loginForm {
+	border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
+@media only screen and (max-width: 767px)	{
+#loginForm {
+	margin: auto 2%;
+	background-color: #D8D8B3;
+    }
+}
