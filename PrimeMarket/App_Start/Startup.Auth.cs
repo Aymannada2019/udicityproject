@@ -66,7 +66,7 @@ namespace PrimeMarket
             //});
 
             /////////////Abdelrahman//////////////////////
-           //createRolesandUsers();
+         createRolesandUsers();
 
         }
         /// Abdelrahman
@@ -97,7 +97,7 @@ namespace PrimeMarket
                 user.UserName = "suadmin";
                 user.Email = "abdo_19_77@hotmail.com";
 
-                string userPWD = "Admin.2020";
+                string userPWD = "Test1234!";
 
                var chkUser = UserManager.Create(user, userPWD);
 
@@ -105,7 +105,7 @@ namespace PrimeMarket
                if (chkUser.Succeeded)
                {
                   var result1 = UserManager.AddToRole(user.Id, "Admin"); 
-                   //      var result1 = UserManager.AddToRole("f67cc1dc - df7e - 4848 - ac5b - ff5acbeb37e8", "Admin"); 
+              //        var result1 = UserManager.AddToRole("f67cc1dc - df7e - 4848 - ac5b - ff5acbeb37e8", "Admin"); 
                }
             }
 

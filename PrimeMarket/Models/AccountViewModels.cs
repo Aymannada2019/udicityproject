@@ -41,19 +41,19 @@ namespace PrimeMarket.Models
 
     public class ForgotViewModel
     {
-        [Required]
+        [Required (ErrorMessage ="ادخل البريد الالكترونى")]
         [Display(Name = "Email")]
         public string Email { get; set; }
     }
 
     public class LoginViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ادخل البريد الالكترونى")]
         [Display(Name = "البريد الالكترونى")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ادخل كلمة السر")]
         [DataType(DataType.Password)]
         [Display(Name = "كلمة السر")]
         public string Password { get; set; }
@@ -64,16 +64,16 @@ namespace PrimeMarket.Models
 
     public class RegisterViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ادخل البريد الالكترونى")]
         [EmailAddress]
         [Display(Name = "البريد الالكترونى")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ادخل الاسم بالكامل")]
         [Display(Name = "الاسم بالكامل")]
         public string FullName { get; set; }
-        
-        [Required]
+
+        [Required(ErrorMessage = "ادخل كلمة السر")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "كلمة السر")]
@@ -81,18 +81,18 @@ namespace PrimeMarket.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "تأكيد كلمة السر")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "كلمة المرور وكلمة المرور التأكيدية غير متطابقين")]
         public string ConfirmPassword { get; set; }
     }
 
     public class ResetPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ادخل البريد الالكترونى")]
         [EmailAddress]
         [Display(Name = "البريد الالكترونى")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "ادخل كلمة السر")]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
         [Display(Name = "كلمة السر")]
@@ -100,7 +100,7 @@ namespace PrimeMarket.Models
 
         [DataType(DataType.Password)]
         [Display(Name = "تأكيد كلمة السر")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessage = "كلمة المرور وكلمة المرور التأكيدية غير متطابقين")]
         public string ConfirmPassword { get; set; }
 
         public string Code { get; set; }
@@ -108,7 +108,7 @@ namespace PrimeMarket.Models
 
     public class ForgotPasswordViewModel
     {
-        [Required]
+        [Required(ErrorMessage = "ادخل البريد الالكترونى")]
         [EmailAddress]
         [Display(Name = "البريد الالكترونى")]
         public string Email { get; set; }

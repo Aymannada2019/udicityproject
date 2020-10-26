@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="bfab5abd2f884a13bd5d22dc466711f6" Name="Diagram1" ZoomLevel="131">
+      <Diagram DiagramId="bfab5abd2f884a13bd5d22dc466711f6" Name="Diagram1" ZoomLevel="148">
         <EntityTypeShape EntityType="PrimeMarketModel.AspNetRole" Width="1.5" PointX="5.25" PointY="8.875" />
         <EntityTypeShape EntityType="PrimeMarketModel.AspNetUserClaim" Width="1.5" PointX="9.75" PointY="29.875" />
         <EntityTypeShape EntityType="PrimeMarketModel.AspNetUserLogin" Width="1.5" PointX="9.75" PointY="27.375" />
@@ -23,7 +23,7 @@
         <EntityTypeShape EntityType="PrimeMarketModel.PaymentMethod" Width="1.5" PointX="7.5" PointY="19.125" />
         <EntityTypeShape EntityType="PrimeMarketModel.PriceUnit" Width="1.5" PointX="10.5" PointY="8.375" />
         <EntityTypeShape EntityType="PrimeMarketModel.SubCategory" Width="1.5" PointX="10.5" PointY="5.5" />
-        <EntityTypeShape EntityType="PrimeMarketModel.UserRating" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="PrimeMarketModel.UserRating" Width="1.5" PointX="0.5" PointY="0.875" />
         <EntityTypeShape EntityType="PrimeMarketModel.Village" Width="1.5" PointX="5.25" PointY="11.75" />
         <EntityTypeShape EntityType="PrimeMarketModel.View_Cart" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="PrimeMarketModel.View_Commodity" Width="1.5" PointX="4.75" PointY="0.75" />

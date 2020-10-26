@@ -1,11 +1,12 @@
-﻿using Microsoft.AspNet.Identity;
-using PrimeMarket.Models;
+﻿using PrimeMarket.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Net.Mail;
 using System.Web;
+using Microsoft.AspNet.Identity;
+
 
 namespace PrimeMarket.Models
 {
@@ -78,6 +79,8 @@ namespace PrimeMarket.Models
             { }
             return total;
         }
+
+        
     }
     
 }
