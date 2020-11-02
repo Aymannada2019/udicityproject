@@ -266,6 +266,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaData_AspNetUser.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>

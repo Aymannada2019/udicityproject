@@ -26,8 +26,8 @@ namespace PrimeMarket.Controllers
         {
             if (!isAdminUser())  //certain user
             {
-                string Cid = User.Identity.GetUserId();
-                return View(db.AspNetUsers.Where(x => x.Id == Cid).ToList());
+                string loginId = User.Identity.GetUserId();
+                return View(db.AspNetUsers.Where(x => x.Id == loginId).ToList());
             }
             //admin user
             return View(db.AspNetUsers.ToList());
@@ -40,6 +40,11 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
+            //to check the user
+            string loginId = User.Identity.GetUserId();
+            if (id != loginId)
+                return RedirectToAction("LogOff", "Account");
             AspNetUser account = db.AspNetUsers.Find(id);
             if (account == null)
             {
@@ -85,29 +90,29 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
 
-            //translate
-            //account.Governorate
-            //commodity.SubCategoryId = GetParentGategory((decimal)commodity.SubCategoryId);
-            account.DistrictId = GetGovernorate((decimal)account.DistrictId);
-            
-            //ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.SubCategoryId.ToString());
-            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.DistrictId.ToString());
+            //old code without village
+            /*
+            account.GovernoratetId = GetGovernorate((decimal)account.DistrictId);
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.GovernoratetId.ToString());
 
-            //var subCategory = db.SubCategories.Where(x => x.CategoryId == commodity.SubCategoryId);
             var District = db.Districts.Where(x => x.GovernorateId == account.DistrictId);
-
-            //ViewBag.SubCategoryId = new SelectList(subCategory, "SubCategoryId", "SubCategory1", commodity.SubCategoryId.ToString());
             ViewBag.DistrictId = new SelectList(District, "DistrictId", "District1", account.DistrictId.ToString());
-
-            //ViewBag.SelectedSubCategoryId = commodity.SubCategoryId.ToString();
             ViewBag.SelectedDistrictId = account.DistrictId.ToString();
 
+            ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId);
+            */
 
 
+            //new code with village
+            account.DistrictId = GetDistrict((decimal)account.VillageId);
+            account.GovernoratetId = GetGovernorate((decimal)account.DistrictId);
 
+            ViewBag.DistrictId = new SelectList(db.Districts.Where(x=>x.GovernorateId == account.GovernoratetId) , "DistrictId", "District1", account.DistrictId.ToString());
+            ViewBag.SelectedDistrictId = account.DistrictId.ToString();
 
-            ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId,"-Select Village-");
-            //ViewBag.VillageId = new SelectList(m=>m.Villages,SelectList(model.)
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.GovernoratetId.ToString());
+            ViewBag.VillageId = new SelectList(db.Villages.Where(x => x.DistrictId == account.DistrictId) , "VillageId", "Village1", account.VillageId);
+            
 
             ViewBag.IsUserAdmin = isAdminUser();
             return View(account);
@@ -152,9 +157,13 @@ namespace PrimeMarket.Controllers
                 ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId, "-Select Village-");
                 return RedirectToAction("Index");
             }
+            
             //translate
-            //ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            account.DistrictId = GetGovernorate((decimal)account.DistrictId);
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.DistrictId.ToString());
             ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "DistrictId", account.DistrictId);
+            ViewBag.VillageId = new SelectList(db.Villages, "VillageId", "Village1", account.VillageId);
+            ViewBag.IsUserAdmin = isAdminUser();
             return View(account);
         }
 
@@ -273,6 +282,15 @@ namespace PrimeMarket.Controllers
             return Json(DistrictList, JsonRequestBehavior.AllowGet);
         }
 
+        public JsonResult getVillageList(int DistrictId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            List<Village> VillageList = db.Villages.Where(village => village.DistrictId == DistrictId).ToList();
+            return Json(VillageList, JsonRequestBehavior.AllowGet);
+        }
+
+        //pub
+        
         public decimal GetGovernorate(decimal DistrictId)  //public decimal GetParentGategory(decimal subCategoryId)
         {
             decimal GovernorateId = 0;
@@ -283,7 +301,18 @@ namespace PrimeMarket.Controllers
             }
             return GovernorateId;
         }
-        
+
+        public decimal GetDistrict(decimal VillageId) 
+        {
+            decimal DistrictsId = 0;
+            var Village = db.Villages.Where(x => x.VillageId == VillageId);
+            foreach (var item in Village)
+            {
+                DistrictsId = (decimal)item.DistrictId;
+            }
+            return DistrictsId;
+        }
+
 
     }
 }
