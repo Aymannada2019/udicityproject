@@ -3228,10 +3228,32 @@ ol {
 	}
 }
 
+/* Tablet = 991px */                    /*khmonir*/
+
+@media only screen and (max-width: 991px){
+	.header__logo {
+		float: unset;
+		display: flex;
+		justify-content: center !important;
+	}	
+}
+
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
-	.hero__categories {
+	/*========= khmonir ===========*/
+        /*Hide sidebar menu*/
+    .sidebar__item:first-child{
+		display: none;
+	}
+
+	/*move price menu to top*/
+	.sidebar__item:nth-child(2){
+		margin-top: -70px;
+	}
+    /*===============================*/
+
+    .hero__categories {
 		margin-bottom: 30px;
 	}
 	.hero__search {
@@ -3541,6 +3563,22 @@ ol {
 	border-radius: 15px;
 	background-color: #D8D8B3;
 	padding: 5px;
+}
+
+form[action$="Register"] {
+	border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
+#RegConfirm{
+    border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 55px;
+    text-align: center;
+    font-size:medium;
+    font-weight:bolder;
+    color:red;
 }
 
 #ForgotPassForm {
