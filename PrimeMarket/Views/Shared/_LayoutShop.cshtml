@@ -125,7 +125,8 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <form name="LogoutForm" id="LogoutForm" action="/Account/LogOff" method="post">
-                                                                 <a onclick="Logout()" style="cursor:pointer;">
+								@Html.AntiForgeryToken()
+                                       <a onclick="Logout()" style="cursor:pointer;">
                                         <i class="fa fa-user"></i>
                                         تسجيل خروج
                                     </a>
@@ -277,7 +278,7 @@
     <footer class="footer spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer__about">
                         @*<div class="footer__about__logo">
                             <a href="/"><img src="img/logo.png" alt=""></a>
@@ -288,23 +289,18 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer__widget">
                         <h6>روابط هامة</h6>
                         <ul>
                             <li><a href="#">من نحن</a></li>
                             <li><a href="#">اتصل بنا</a></li>
-                            <li><a href="#">المنتجات</a></li>
-                            <li><a href="#">تسجيل حساب</a></li>
-                            <li><a href="#">بيع عندنا</a></li>
+                            <li><a href="/Shop">المنتجات</a></li>
+                            <li><a href="/Account/Register">تسجيل حساب</a></li>
+                            <li><a href="/Commodities">بيع عندنا</a></li>
                         </ul>
-                        <ul>
-                            <li><a href="#">من نحن</a></li>
-                            <li><a href="#">اتصل بنا</a></li>
-                            <li><a href="#">المنتجات</a></li>
-                            <li><a href="#">تسجيل حساب</a></li>
-                            <li><a href="#">بيع عندنا</a></li>
-                        </ul>
+						
+                        
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
