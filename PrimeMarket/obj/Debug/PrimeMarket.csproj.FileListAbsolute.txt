@@ -571,7 +571,6 @@ D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\Microsoft.Owin.Security
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\Microsoft.Owin.Security.Google.xml
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\Microsoft.Owin.Security.Twitter.xml
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.dll
 D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.pdb
 D:\PrimeFinal\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
@@ -647,3 +646,4 @@ D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\New_PRIME_Site\PrimeMarket\bin
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\New_PRIME_Site\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\New_PRIME_Site\PrimeMarket\obj\Debug\PrimeMarket.dll
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\New_PRIME_Site\PrimeMarket\obj\Debug\PrimeMarket.pdb
+D:\Work\CLAES\PrimeMarket\NewPrimeMaeket\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
