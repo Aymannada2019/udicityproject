@@ -127,6 +127,7 @@
                                 <form name="LogoutForm" id="LogoutForm" action="/Account/LogOff" method="post">
                                                                  <a onclick="Logout()" style="cursor:pointer;">
                                         <i class="fa fa-user"></i>
+                                        @Html.AntiForgeryToken()
                                         تسجيل خروج
                                     </a>
                                 </form>

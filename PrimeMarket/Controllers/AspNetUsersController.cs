@@ -107,12 +107,14 @@ namespace PrimeMarket.Controllers
             account.DistrictId = GetDistrict((decimal)account.VillageId);
             account.GovernoratetId = GetGovernorate((decimal)account.DistrictId);
 
+            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.GovernoratetId.ToString());
+            ViewBag.SelectedGovernorateId = account.GovernoratetId.ToString();
+
             ViewBag.DistrictId = new SelectList(db.Districts.Where(x=>x.GovernorateId == account.GovernoratetId) , "DistrictId", "District1", account.DistrictId.ToString());
             ViewBag.SelectedDistrictId = account.DistrictId.ToString();
 
-            ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", account.GovernoratetId.ToString());
             ViewBag.VillageId = new SelectList(db.Villages.Where(x => x.DistrictId == account.DistrictId) , "VillageId", "Village1", account.VillageId);
-            
+            ViewBag.SelectedVillageId = account.VillageId.ToString();
 
             ViewBag.IsUserAdmin = isAdminUser();
             return View(account);

@@ -36,6 +36,7 @@ namespace PrimeMarket.Models
         [Display(Name = "صورة الملف الشخصي")]
         public string ImagePath { get; set; }
 
+        [Required(ErrorMessage = "اختر القرية")]
         [Display(Name = "القرية")]
         public Nullable<decimal> VillageId { get; set; }
     }
