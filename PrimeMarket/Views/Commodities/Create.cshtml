@@ -80,7 +80,7 @@
         <div class="form-group row">
             @Html.LabelFor(model => model.Quantity, " الكمية", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                 @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -95,7 +95,7 @@
         <div class="form-group row">
             @Html.LabelFor(model => model.Price, " السعر/جنيه", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                 @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -128,7 +128,7 @@
         <div class="form-group row">
             @Html.LabelFor(model => model.ExpireDate, "تاريخ الانتهاء", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", @Id = "ExpireDate", @style = "width:20%", @dir = "ltr" } })
+                @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", @Id = "ExpireDate", @style = "width:40%", @dir = "rtl" } })
                 @Html.ValidationMessageFor(model => model.ExpireDate, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -161,7 +161,7 @@
         <div class="form-group row">
             @Html.LabelFor(model => model.OriginalPrice, "السعر الاصلى", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                @Html.EditorFor(model => model.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                 @Html.ValidationMessageFor(model => model.OriginalPrice, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -180,14 +180,15 @@
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
+                    <input type="submit" value="حفظ" class="site-btn" />
+                    @Html.ActionLink("عودة للسلع", "Index",null, new { @class = "site-btn" })
                 </div>
             </div>
         </div>
 }
 
 <div>
-    @Html.ActionLink("عودة للسلع", "Index")
+  
 </div>
 
 @*@section Scripts {
@@ -195,14 +196,14 @@
 }*@
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
-console.log("Hello world!");
+//console.log("Hello world!");
     $(document).ready(function () {
         $("#CategoriesList").change(function () {
           
             $.get("getSubCategoryList", { CategoryId: $(CategoriesList).val() }, function (data) {
                 $("#SubCategoryId").empty();
 
-
+                $("#SubCategoryId").append("<option value='0'>أختر منتج فرعى</option>");
                 $.each(data, function (index, row) {
                     $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "'>" + row.SubCategory1 + "</option>")
                    //$("#DistrictId").append()("<option value='" + row.DistrictId + "'>" + row.District1+"</option>")

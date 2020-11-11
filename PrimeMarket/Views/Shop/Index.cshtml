@@ -1,19 +1,10 @@
 ﻿@model PrimeMarket.Models.UIViewModel.ShopViewModel
-@using PagedList.Mvc;
+
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
-<style>
-    li.selectedCat {
-        background: #8fcb95;
-        font-weight: 700;
-    }
-    li.selectedCat a{
-        color:#fff !important;
-        padding-right:5px;
-    }
-</style>
+
 <section class="product spad">
     <div class="container">
         <div class="row">
@@ -21,70 +12,13 @@
                 <div class="sidebar">
                     <div class="sidebar__item">
                         <h4>القسم</h4>
-                        @if (Model.SelectedCategory != null)
-                        {
-                            <input type="hidden" name="hdn_CatId" id="hdn_CatId" value="@Model.SelectedCategory.CategoryId" />
-                        }
-                        @if (Request["subCatId"] != null)
-                        {
-                            <input type="hidden" name="hdn_subCatId" id="hdn_subCatId" value="@Request["subCatId"].ToString()" />
-                        }
-                        @if (Request["sortField"] != null)
-                        {
-                            <input type="hidden" name="hdn_sortField" id="hdn_sortField" value="@Request["sortField"].ToString()" />
-                        }
-                        else
-                        {
-                            <input type="hidden" name="hdn_sortField" id="hdn_sortField" value="1" />
-                        }
-                        @if (Request["crntPage"] != null)
-                        {
-                            <input type="hidden" name="hdn_crntPage" id="hdn_crntPage" value="@Request["crntPage"].ToString()" />
-                        }
-                        else
-                        {
-                            <input type="hidden" name="hdn_crntPage" id="hdn_crntPage" value="1" />
-                        }
-                        @if (Request["pageSize"] != null)
-                        {
-                            <input type="hidden" name="hdn_pageSize" id="hdn_pageSize" value="@Request["pageSize"].ToString()" />
-                        }
-                        else
-                        {
-                            <input type="hidden" name="hdn_pageSize" id="hdn_pageSize" value="9" />
-                        }
 
-                        @if (Request["minPrice"] != null)
-                        {
-                            <input type="hidden" name="hdn_minPrice" id="hdn_minPrice" value="@Request["minPrice"].ToString()" />
-                        }
-                        else
-                        {
-                            <input type="hidden" name="hdn_minPrice" id="hdn_minPrice" value="1" />
-                        }
-                        @if (Request["maxPrice"] != null)
-                        {
-                            <input type="hidden" name="hdn_maxPrice" id="hdn_maxPrice" value="@Request["maxPrice"].ToString()" />
-                        }
-                        else
-                        {
-                            <input type="hidden" name="hdn_maxPrice" id="hdn_maxPrice" value="@Model.MaxCommodityPrice" />
-                        }
 
                         <ul>
                             @foreach (var cat in Model.CategoryList)
                             {
-                                var selectedClass = "";
-                                if(Model.SelectedCategory!=null)
-                                {
-                                    if(cat.CategoryId==Model.SelectedCategory.CategoryId)
-                                    {
-                                        selectedClass = "selectedCat";
-                                    }
-                                    
-                                }
-                                <li class="@selectedClass">
-                                    <a href="~/shop/indx/?id=@cat.CategoryId">
+                                <li>
+                                    <a href="~/shop/indx/@cat.CategoryId">
                                         @cat.Category1
                                     </a>
                                 </li>
@@ -92,56 +26,89 @@
                         </ul>
 
                     </div>
-                    @{ 
-                        if (Model.SelectedCategory != null)
-                        {
-                    <div class="sidebar__item">
-                        <h4> القسم الفرعي</h4>
-                        
-                        <ul>
-                            @foreach (var subCat in Model.SelectedCategory.SubCategories)
-                            {
-                                var selectedClass = "";
-                                if (Model.SelectedSubCategory != null)
-                                {
-                                    if (subCat.SubCategoryId == Model.SelectedSubCategory.SubCategoryId)
-                                    {
-                                        selectedClass = "selectedCat";
-                                    }
-                                }
-                                <li class="@selectedClass">
-                                    <a href="~/shop/indx/?id=@subCat.CategoryId&subCatId=@subCat.SubCategoryId">
-                                        @subCat.SubCategory1
-                                    </a>
-                                </li>
-                            }
-                        </ul>
-
-                    </div>
-                            }
-                        }
-
-
                     <div class="sidebar__item">
                         <h4>السعر</h4>
                         <div class="price-range-wrap">
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                 data-min="1" data-max="@Model.MaxCommodityPrice">
+                                 data-min="10" data-max="540">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                             </div>
                             <div class="range-slider">
                                 <div class="price-input">
-                                    <input type="text" id="maxamount"><span> ج.م</span>
-                                    &nbsp;&nbsp;&nbsp;
-                                    <input type="text" id="minamount"><span> ج.م</span>
+                                    <input type="text" id="minamount">
+                                    <input type="text" id="maxamount">
                                 </div>
                             </div>
-                            <input type="button" class="site-btn" value="تصفية" id="btn_filterPrice" />
                         </div>
                     </div>
-                    
+                    @*<div class="sidebar__item sidebar__item__color--option">
+                            <h4>Colors</h4>
+                            <div class="sidebar__item__color sidebar__item__color--white">
+                                <label for="white">
+                                    White
+                                    <input type="radio" id="white">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--gray">
+                                <label for="gray">
+                                    Gray
+                                    <input type="radio" id="gray">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--red">
+                                <label for="red">
+                                    Red
+                                    <input type="radio" id="red">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--black">
+                                <label for="black">
+                                    Black
+                                    <input type="radio" id="black">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--blue">
+                                <label for="blue">
+                                    Blue
+                                    <input type="radio" id="blue">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__color sidebar__item__color--green">
+                                <label for="green">
+                                    Green
+                                    <input type="radio" id="green">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="sidebar__item">
+                            <h4>Popular Size</h4>
+                            <div class="sidebar__item__size">
+                                <label for="large">
+                                    Large
+                                    <input type="radio" id="large">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="medium">
+                                    Medium
+                                    <input type="radio" id="medium">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="small">
+                                    Small
+                                    <input type="radio" id="small">
+                                </label>
+                            </div>
+                            <div class="sidebar__item__size">
+                                <label for="tiny">
+                                    Tiny
+                                    <input type="radio" id="tiny">
+                                </label>
+                            </div>
+                        </div>*@
                     @{
                         if (Model.LatestItems.Count > 0)
                         {
@@ -201,15 +168,8 @@
                                                      data-setbg="@saleItem.CommodityImages.FirstOrDefault().ImagePath">
                                                     <div class="product__discount__percent">@strdiscount%</div>
 
-
-                                                    <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
-                                                        <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@saleItem.CommodityId" />
-                                                        <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
-                                                        
-                                                        <ul class="product__item__pic__hover">
-                                                            <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
-                                                        </ul>
-                                                    </form>
+                                                    <!-- Form AddToCartForm Old Position // khmonir-->
+                                                    
 
                                                     
                                                 </div>
@@ -217,6 +177,14 @@
                                                     <span>@saleItem.SubCategory.SubCategory1</span>
                                                     <h5><a href="~/shop/ItemDetails?CommodityId=@saleItem.CommodityId">@saleItem.Title</a></h5>
                                                     <div class="product__item__price" style="direction:rtl;">@saleItem.Price ج.م/@saleItem.PriceUnit.PriceUnit1 &nbsp;<span>@saleItem.OriginalPrice </span></div>
+                                                    <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                                        <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@saleItem.CommodityId" />
+                                                        <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
+
+                                                        <ul class="product__item__pic__hover">
+                                                            <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                                                        </ul>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -229,10 +197,10 @@
                 }
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-5 col-md-5">
+                        <div class="col-lg-4 col-md-5">
                             <div class="filter__sort">
                                 <span>الترتيب حسب</span>
-                                <select id="sortList">
+                                <select>
                                     <option value="1">وصل حديثاً</option>
                                     <option value="2">الأعلى تقييماً</option>
                                     <option value="3">السعر: من الأقل للأكثر</option>
@@ -240,25 +208,15 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-lg-3 col-md-3">
+                        <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>@Model.Items.TotalItemCount</span> منتج موجود</h6>
+                                <h6><span>@Model.Items.Count</span> منتج موجود</h6>
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-3">
-                            @*<div class="filter__option">
+                            <div class="filter__option">
                                 <span class="icon_grid-2x2"></span>
                                 <span class="icon_ul"></span>
-                            </div>*@
-                            <div class="filter__sort">
-                                <span>عرض</span>
-                                <select id="pageSizesList">
-                                    <option value="9">9</option>
-                                    <option value="18">18</option>
-                                    <option value="27">27</option>
-                                    <option value="36">36</option>
-                                </select>
-                                <span>منتجات في الصفحة</span>
                             </div>
                         </div>
                     </div>
@@ -269,6 +227,11 @@
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic set-bg" data-setbg="@item.CommodityImages.FirstOrDefault().ImagePath">
+                                    <!-- Form AddToCartForm Old Position // khmonir-->
+                                </div>
+                                <div class="product__item__text">
+                                    <h6><a href="~/shop/ItemDetails?CommodityId=@item.CommodityId">@item.Title</a></h6>
+                                    <h5>@item.Price ج.م/@item.PriceUnit.PriceUnit1</h5>
                                     <form id="AddToCartForm" name="AddToCartForm" method="post" action="/Shop/AddToCart">
                                         <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@item.CommodityId" />
                                         <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />
@@ -277,34 +240,18 @@
                                         </ul>
                                     </form>
                                 </div>
-                                <div class="product__item__text">
-                                    <h6><a href="~/shop/ItemDetails?CommodityId=@item.CommodityId">@item.Title</a></h6>
-                                    <h5>@item.Price ج.م/@item.PriceUnit.PriceUnit1</h5>
-                                </div>
                             </div>
                         </div>
                     }
 
 
                 </div>
-                @*<div class="product__pagination">
+                <div class="product__pagination">
                     <a href="#">1</a>
                     <a href="#">2</a>
                     <a href="#">3</a>
                     <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                </div>*@
-                <div class="row" dir="rtl">
-                    <div class="col-lg-12">
-                        <p style="text-align:right; direction:rtl;">
-                            صفحة @(Model.Items.PageCount < Model.Items.PageNumber ? 0 : Model.Items.PageNumber) من @Model.Items.PageCount
-                        </p>
-                        @Html.PagedListPager(Model.Items, page => Url.Action("Indx",
-    // new { page, sortOrder = ViewBag.CurrentSort, currentFilter = ViewBag.CurrentFilter }
-    new { id = ViewBag.catId, subCatId = ViewBag.subCatId, minPrice = ViewBag.minPrice, maxPrice = ViewBag.maxPrice, sortField = ViewBag.sortField, crntPage = page, pageSize = ViewBag.pageSize }
-    ))
-                    </div>
                 </div>
-
             </div>
         </div>
 </div>
@@ -317,60 +264,6 @@
                 var addbtn = $(this);
                 addbtn.closest("form").submit();
             });
-
-            function navigate()
-            {
-                var minPrice = $('#minamount').val();
-                var maxPrice = $('#maxamount').val();
-                var CatId = $('#hdn_CatId').val();
-                var subCatId = $('#hdn_subCatId').val();
-                var sortField = $('#hdn_sortField').val();
-                var crntPage = $('#hdn_crntPage').val();
-                var pageSize = $('#hdn_pageSize').val();
-                // similar behavior as an HTTP redirect
-                //window.location.replace("http://stackoverflow.com");
-                // similar behavior as clicking on a link
-                var lnk = "/shop/indx/?";
-                if (!(CatId == null || CatId == "undefined"))
-                    lnk += "id=" + CatId;
-                if (!(subCatId == null || subCatId == "undefined"))
-                    lnk += "&subCatId=" + subCatId;
-                lnk += "&minPrice=" + minPrice + "&maxPrice=" + maxPrice + "&sortField=" + sortField + "&crntPage=" + crntPage + "&pageSize=" + pageSize;
-                //alert(lnk);
-                window.location.href = lnk;
-                //alert(minPrice);
-            }
-
-            $("#btn_filterPrice").click(function () {
-                navigate();
-            });
-
-            $("#sortList").on("change", function () {
-                var sortField = $(this).val();
-                $('#hdn_sortField').val(sortField);
-                navigate();
-            });
-            $("#pageSizesList").on("change", function () {
-                var pageSize = $(this).val();
-                $('#hdn_pageSize').val(pageSize);
-                navigate();
-            });
-
-            var sortF = $('#hdn_sortField').val();
-            $("#sortList").val(sortF);
-
-            var selectedPageSize = $('#hdn_pageSize').val();
-            $('#pageSizesList').val(selectedPageSize);
-            // alert(x);
-            $("#sortList").niceSelect();
-            $('#pageSizesList').niceSelect();
-
-            var minPrice = $('#hdn_minPrice').val();
-            //alert('minPrice = ' + minPrice);
-            $('#minamount').val(minPrice);
-            var maxPrice = $('#hdn_maxPrice').val();
-            //alert('maxPrice = ' + maxPrice);
-            $('#maxamount').val(maxPrice);
         });
     </script>
     }

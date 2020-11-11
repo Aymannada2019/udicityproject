@@ -7,8 +7,9 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
 @*@Styles.Render("~/Content/themes/base/css", "~/Content/css")*@
-<h2>تعديل</h2>
-@*@section scripts{  }*@
+<h3> تعديل السلع</h3>
+<h4></h4>
+@section scripts{  
 
 <script>
 
@@ -16,7 +17,7 @@
        $("#ExpireDate").datepicker();
          clear();
 </script>
-
+}
 <script type="text/javascript">
 
     function fileCheck(obj) {
@@ -36,7 +37,7 @@
             @Html.AntiForgeryToken()
 
             <div class="form-horizontal">
-                <h4>السلع</h4>
+           
                 <hr />
                 @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                 @Html.HiddenFor(model => model.CommodityId)
@@ -94,7 +95,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.Quantity, " الكمية", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                        @Html.EditorFor(model => model.Quantity, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                         @Html.ValidationMessageFor(model => model.Quantity, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -109,7 +110,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.Price, " السعر/جنيه", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                        @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                         @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -142,7 +143,7 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.ExpireDate, "تاريخ الانتهاء", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", @Id = "ExpireDate", @style = "width:20%", @dir = "ltr" } })
+                        @Html.EditorFor(model => model.ExpireDate, new { htmlAttributes = new { @class = "form-control", placeholder = "", @Id = "ExpireDate", @style = "width:40%", @dir = "rtl" } })
                         @Html.ValidationMessageFor(model => model.ExpireDate, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -175,14 +176,15 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.OriginalPrice, "السعر الاصلى", htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @style = "width:20%", @dir = "ltr" } })
+                        @Html.EditorFor(model => model.OriginalPrice, new { htmlAttributes = new { @class = "form-control", @style = "width:40%", @dir = "rtl" } })
                         @Html.ValidationMessageFor(model => model.OriginalPrice, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="تعديل" class="btn btn-default" />
+                        <input type="submit" value="تعديل" class="site-btn" />
+                        @Html.ActionLink("عودة للسلع", "Index", null, new { @class = "site-btn" })
                     </div>
                 </div>
 
@@ -193,12 +195,12 @@
     <div class="col-md-4"></div>
 </div>
 <div>
-    @Html.ActionLink("عودة للسلع", "Index")
+  
 </div>
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
-console.log("Hello world!");
+//.log("Hello world!");
     $(document).ready(function () {
         $("#CategoryId").change(function () {
 

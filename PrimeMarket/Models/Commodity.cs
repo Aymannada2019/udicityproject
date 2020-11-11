@@ -52,7 +52,6 @@ namespace PrimeMarket.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
 
-        public Nullable<decimal> CategoryId { get; set; }
-        public virtual Category Category { get; set; }
+       
     }
 }
