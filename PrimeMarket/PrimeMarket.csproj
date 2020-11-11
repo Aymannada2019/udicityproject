@@ -344,8 +344,11 @@
     <Content Include="Content\css\slicknav.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style_ar.css" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\rateit.css" />
     <Content Include="Content\SiteScripts\Cart.js" />
+    <Content Include="Content\star.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -387,8 +390,7 @@
     <Content Include="img\latest-product\lp-1.jpg" />
     <Content Include="img\latest-product\lp-2.jpg" />
     <Content Include="img\latest-product\lp-3.jpg" />
-    <Content Include="img\Logo.png" />
-    <Content Include="img\__logo.png" />
+    <Content Include="img\logo.png" />
     <Content Include="img\payment-item.png" />
     <Content Include="img\product\details\product-details-1.jpg" />
     <Content Include="img\product\details\product-details-2.jpg" />
@@ -461,6 +463,9 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.rateit.js" />
+    <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

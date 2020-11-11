@@ -3089,7 +3089,7 @@ ol {
         border: 1px solid #1c1c1c;
         cursor: pointer;
         position: absolute;
-        right: 15px;
+        left: 15px;
         top: 22px;
     }
 
@@ -3402,7 +3402,7 @@ ol {
         border: 1px solid #1c1c1c;
         cursor: pointer;
         position: absolute;
-        right: 15px;
+        left: 15px;
         top: 22px;
     }
 

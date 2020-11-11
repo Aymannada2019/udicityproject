@@ -28,12 +28,9 @@
             <div class="col-lg-6 col-md-6">
                 <div class="product__details__text">
                     <h3>@Model.ThisCommodity.Title</h3>
+                    
                     <div class="product__details__rating">
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-o"></i>
+                        <div class="rateit" data-rateit-value="3" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
                         <span>(@Model.ThisCommodityRatings.Count تقييم)</span>
                     </div>
                     <div class="product__details__price">@Model.ThisCommodity.Price ج.م/@Model.ThisCommodity.PriceUnit.PriceUnit1</div>

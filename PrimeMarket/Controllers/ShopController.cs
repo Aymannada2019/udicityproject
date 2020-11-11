@@ -83,6 +83,10 @@ namespace PrimeMarket.Controllers
                 {
                     return RedirectToAction("Index", "ShoppingCart");
                 }
+                if(string.IsNullOrEmpty(CustomerId))
+                {
+                    return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                }
                 var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
                 if (cart == null)
                 {
@@ -105,7 +109,7 @@ namespace PrimeMarket.Controllers
                     db.SaveChanges();
                 }
             }
-            catch
+            catch(Exception ex)
             { }
             return RedirectToAction("Index", "ShoppingCart");
         }
