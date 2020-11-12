@@ -11,16 +11,12 @@ using PagedList;
 using PagedList.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
-
-using System;
-using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using PrimeMarket.Models;
-using Microsoft.AspNet.Identity.EntityFramework;
+
 
 namespace PrimeMarket.Controllers
 {[Authorize]
@@ -114,7 +110,23 @@ namespace PrimeMarket.Controllers
             ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email");
             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1");
             ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1");
-            ViewBag.CategoriesList = new SelectList(db.Categories, "CategoryId", "Category1", "1");
+            //.OrderBy(n => n.CategoryId)
+            List<SelectListItem> categories = db.Categories.AsNoTracking()
+                    
+                         .Select(n =>
+                         new SelectListItem
+                         {
+                             Value = n.CategoryId.ToString(),
+                             Text = n.Category1
+                         }).ToList();
+            var categorytip = new SelectListItem()
+            {
+                Value = "0",
+                Text = "--- اختر منتج ---"
+            };
+            categories.Insert(0, categorytip);
+            ViewBag.CategoriesList = new SelectList(categories, "Value", "Text", "0");
+           // ViewBag.CategoriesList = new SelectList(categories, "CategoryId", "Category1", "1");
            // if(isAdminUser)
             ViewBag.IsUserAdmin = isAdminUser();
 /////////////////////////////////////////////////////////////////////////////////////////////

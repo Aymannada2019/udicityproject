@@ -1582,8 +1582,8 @@ ol {
 
 .product__item__pic__hover {
 	position: absolute;
-	left: 0;
-	bottom: -50px;
+	left: -99px;                                        /*khmnoir // 0*/
+	bottom: 45px;                                       /*khmonir // -50px*/
 	width: 100%;
 	text-align: center;
 	-webkit-transition: all, 0.5s;
@@ -1665,31 +1665,31 @@ ol {
     text-align: right;                                         /*khmonir // new style*/
 }
 
-.product__pagination a,
-.blog__pagination a {
-	display: inline-block;
-	width: 30px;
-	height: 30px;
-	border: 1px solid #b2b2b2;
-	font-size: 14px;
-	color: #b2b2b2;
-	font-weight: 700;
-	line-height: 28px;
-	text-align: center;
-	margin-right: 16px;
-	-webkit-transition: all, 0.3s;
-	-moz-transition: all, 0.3s;
-	-ms-transition: all, 0.3s;
-	-o-transition: all, 0.3s;
-	transition: all, 0.3s;
-}
+    .product__pagination a,
+    .blog__pagination a, .pagination a {
+        display: inline-block;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #b2b2b2;
+        font-size: 14px;
+        color: #b2b2b2;
+        font-weight: 700;
+        line-height: 28px;
+        text-align: center;
+        margin-right: 16px;
+        -webkit-transition: all, 0.3s;
+        -moz-transition: all, 0.3s;
+        -ms-transition: all, 0.3s;
+        -o-transition: all, 0.3s;
+        transition: all, 0.3s;
+    }
 
-.product__pagination a:hover,
-.blog__pagination a:hover {
-	background: #7fad39;
-	border-color: #7fad39;
-	color: #ffffff;
-}
+        .product__pagination a:hover,
+        .blog__pagination a:hover, .pagination a:hover, ul.pagination li.active a {
+            background: #7fad39;
+            border-color: #7fad39;
+            color: #ffffff;
+        }
 
 .product__pagination a:last-child,
 .blog__pagination a:last-child {
@@ -2716,7 +2716,7 @@ ol {
 
 .footer__widget ul {
 	width: 50%;
-	float: left;
+	float: right;
 }
 
 .footer__widget ul li {
@@ -3048,7 +3048,7 @@ ol {
 		border: 1px solid #1c1c1c;
 		cursor: pointer;
 		position: absolute;
-		right: 15px;
+		left: 15px;
 		top: 22px;
 	}
 	.header .container {
@@ -3225,10 +3225,32 @@ ol {
 	}
 }
 
+/* Tablet = 991px */                    /*khmonir*/
+
+@media only screen and (max-width: 991px){
+	.header__logo {
+		float: unset;
+		display: flex;
+		justify-content: center !important;
+	}	
+}
+
 /* Wide Mobile = 480px */
 
 @media only screen and (max-width: 767px) {
-	.hero__categories {
+	/*========= khmonir ===========*/
+        /*Hide sidebar menu*/
+    .sidebar__item:first-child{
+		display: none;
+	}
+
+	/*move price menu to top*/
+	.sidebar__item:nth-child(2){
+		margin-top: -70px;
+	}
+    /*===============================*/
+
+    .hero__categories {
 		margin-bottom: 30px;
 	}
 	.hero__search {
@@ -3306,7 +3328,7 @@ ol {
 		border: 1px solid #1c1c1c;
 		cursor: pointer;
 		position: absolute;
-		right: 15px;
+		left: 15px;
 		top: 22px;
 	}
 	.header .container {
@@ -3540,9 +3562,50 @@ ol {
 	padding: 5px;
 }
 
+form[action$="Register"] {
+	border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
+form[action$="ResetPassword"] {
+	border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
+form[action$="ResetPassword"] {
+	border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
+#RegConfirm{
+    border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 55px;
+    text-align: center;
+    font-size:medium;
+    font-weight:bolder;
+    color:red;
+}
+
+#ForgotPassForm {
+    border-radius: 15px;
+	background-color: #D8D8B3;
+	padding: 5px;
+}
+
 @media only screen and (max-width: 767px)	{
 #loginForm {
 	margin: auto 2%;
 	background-color: #D8D8B3;
     }
+
+#ForgotPassForm {
+    margin: auto 2%;
+	background-color: #D8D8B3;
+    }
 }
+
+

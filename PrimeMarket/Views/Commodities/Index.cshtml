@@ -35,10 +35,11 @@
             }
         }
     </script>
+<center>
     <h2>السلع </h2>
-
+</center>
     <p>
-        @Html.ActionLink("تسجيل سلعة", "Create")
+        @Html.ActionLink("تسجيل سلعة جديدة", "Create",null,new {@class= "glyphicon glyphicon-plus site-btn" })
     </p>
     @using (Html.BeginForm("Index", "Commodities", FormMethod.Get))
     {
@@ -55,23 +56,24 @@
                 <option value="3">لم تنشر</option>
             </select>
         </div><div class="col-md-8">
-    @Html.TextBox("search")<input type="submit" value="بحث" />
+                  
+    @Html.TextBox("search")<input type="submit" value="بحث" /><i class="fa icon_search icon"></i>
 </div>
 
-
+        
 
 </div>
     }
-    <table class="table">
+    <table class="table" height="" >
         <tr>
             <th >
                 اسم السلعة
                 @*@Html.DisplayNameFor(model => model.First().Title)*@
             </th>
-            <th>
+            @*<th>
                 المنتج الرئيسى
-                @*@Html.DisplayNameFor(model => model.First().SubCategory)*@
-            </th>
+               Html.DisplayNameFor(model => model.First().SubCategory)
+            </th>*@
             <th>
                 المنتج الفرعى
                 @*@Html.DisplayNameFor(model => model.First().SubCategory)*@
@@ -89,9 +91,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
             </td>
-            <td>             
+            @*<td>             
                 @Html.DisplayFor(modelItem => item.Category.Category1)
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.SubCategory.SubCategory1)
             </td>
@@ -99,11 +101,12 @@
                 @Html.DisplayFor(modelItem => item.Quantity)
             </td>
             <td>
-                @Html.ActionLink("تعديل", "Edit", new { id=item.CommodityId }) |
-                @Html.ActionLink("تفاصيل", "Details", new { id=item.CommodityId }) |
-                @Html.ActionLink("حذف", "Delete", new { id = item.CommodityId })|
-                @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId }, htmlAttributes: null)
-            </td>
+     @Html.ActionLink("تعديل", "Edit", new { id = item.CommodityId }, new { @class = "btn btn-success ", @style= "font-size:10px !important; " })|
+    @Html.ActionLink("تفاصيل", "Details", new { id = item.CommodityId }, new { @class = "btn btn-success", @style = "font-size:10px !important;" }) |
+    @Html.ActionLink("حذف", "Delete", new { id = item.CommodityId }, new { @class = "btn btn-danger", @style = "font-size:10px !important; background-color:red" })|
+    @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId },  new { @class = "btn btn-default", @style = "font-size:10px !important;" })
+
+</td>
         </tr>
         }
         <script src="~/bin/jquery.min.js"></script>

@@ -237,6 +237,7 @@
     <NavigationProperty Name="SubCategory" Relationship="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE" FromRole="Commodity" ToRole="SubCategory" />
     <NavigationProperty Name="OrderItems" Relationship="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" FromRole="Commodity" ToRole="OrderItem" />
     <Property Name="Quantity" Type="Double" />
+    <Property Name="Rating" Type="Double" />
   </EntityType>
   <EntityType Name="CommodityImage">
     <Key>
@@ -402,11 +403,11 @@
     <Property Name="Price" Type="Double" />
     <Property Name="PriceUnitId" Type="Byte" />
     <Property Name="PriceNote" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
-    <Property Name="Publish" Type="Boolean" />
+    <Property Name="Publish" Type="Boolean" Nullable="false" />
     <Property Name="Available" Type="Boolean" Nullable="false" />
     <Property Name="CreationDate" Type="DateTime" Precision="0" />
     <Property Name="ExpireDate" Type="DateTime" Precision="0" />
-    <Property Name="IsFeatured" Type="Boolean" />
+    <Property Name="IsFeatured" Type="Boolean" Nullable="false" />
     <Property Name="OriginalPrice" Type="Double" />
     <Property Name="SubCategory" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />

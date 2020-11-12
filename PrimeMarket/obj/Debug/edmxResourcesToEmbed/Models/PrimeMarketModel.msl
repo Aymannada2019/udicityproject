@@ -82,6 +82,7 @@
     <EntitySetMapping Name="Commodities">
       <EntityTypeMapping TypeName="PrimeMarketModel.Commodity">
         <MappingFragment StoreEntitySet="Commodity">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="Quantity" ColumnName="Quantity" />
           <ScalarProperty Name="OriginalPrice" ColumnName="OriginalPrice" />
           <ScalarProperty Name="IsFeatured" ColumnName="IsFeatured" />
@@ -270,6 +271,5 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
-    <FunctionImportMapping FunctionImportName="SP_Commodity_Count" FunctionName="PrimeMarketModel.Store.SP_Commodity_Count" />
   </EntityContainerMapping>
 </Mapping>

@@ -15,14 +15,32 @@ namespace PrimeMarket.Controllers
     {
         public PrimeMarketEntities db = new PrimeMarketEntities();
         // GET: Shop
-        public ActionResult Index()
+        public ActionResult Index(int? crntPage, int? pageSize)
         {
-            var model = new ShopViewModel();
+            crntPage = (crntPage ?? 1);
+            pageSize = (pageSize ?? 9);
+            ViewBag.crntPage = crntPage;
+            ViewBag.pageSize = pageSize;
+            var model = new ShopViewModel(crntPage,pageSize);
             return View(model);
         }
-        public ActionResult Indx(int id)
+        public ActionResult Indx(int? id,int? subCatId,int? minPrice,int? maxPrice,int? sortField, int? crntPage, int? pageSize)
         {
-            var model = new ShopViewModel(id);
+            minPrice = (minPrice ?? 1);
+            maxPrice = (maxPrice ?? 999999);
+            sortField = (sortField ?? 1);
+            crntPage = (crntPage ?? 1);
+            pageSize = (pageSize ?? 9);
+
+            ViewBag.catId = id;
+            ViewBag.subCatId = subCatId;
+            ViewBag.minPrice = minPrice;
+            ViewBag.maxPrice = maxPrice;
+            ViewBag.sortField = sortField;
+            ViewBag.crntPage = crntPage;
+            ViewBag.pageSize = pageSize;
+
+            var model = new ShopViewModel(id, subCatId,minPrice,maxPrice,sortField,crntPage,pageSize);
             return View("Index",model);
         }
 
@@ -65,6 +83,10 @@ namespace PrimeMarket.Controllers
                 {
                     return RedirectToAction("Index", "ShoppingCart");
                 }
+                if(string.IsNullOrEmpty(CustomerId))
+                {
+                    return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                }
                 var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
                 if (cart == null)
                 {
@@ -87,7 +109,7 @@ namespace PrimeMarket.Controllers
                     db.SaveChanges();
                 }
             }
-            catch
+            catch(Exception ex)
             { }
             return RedirectToAction("Index", "ShoppingCart");
         }

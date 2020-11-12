@@ -220,6 +220,7 @@
     <Compile Include="Controllers\StatisticController.cs" />
     <Compile Include="Controllers\SubCategoriesController.cs" />
     <Compile Include="Controllers\UserAccountController.cs" />
+    <Compile Include="Controllers\UserProfileController.cs" />
     <Compile Include="Controllers\VillagesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -246,6 +247,7 @@
     <Compile Include="Models\Category.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\CategoryCommidity.cs" />
     <Compile Include="Models\Commoditymeta.cs" />
     <Compile Include="Models\Commodity.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
@@ -256,6 +258,7 @@
     <Compile Include="Models\CommodityRating.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\C__MigrationHistory.cs" />
     <Compile Include="Models\District.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -266,6 +269,7 @@
     <Compile Include="Models\Helper.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\MetaData_AspNetUser.cs" />
     <Compile Include="Models\Order.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
@@ -300,6 +304,7 @@
     <Compile Include="Models\SubCategory.cs">
       <DependentUpon>PrimeMarketModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs" />
     <Compile Include="Models\UIViewModel\CartSummaryViewModel.cs" />
     <Compile Include="Models\UIViewModel\CartViewModel.cs" />
     <Compile Include="Models\UIViewModel\CategoriesViewModel.cs" />
@@ -339,8 +344,11 @@
     <Content Include="Content\css\slicknav.min.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\css\style_ar.css" />
+    <Content Include="Content\delete.gif" />
     <Content Include="Content\PagedList.css" />
+    <Content Include="Content\rateit.css" />
     <Content Include="Content\SiteScripts\Cart.js" />
+    <Content Include="Content\star.gif" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -455,6 +463,9 @@
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <Content Include="Scripts\jquery.rateit.js" />
+    <Content Include="Scripts\jquery.rateit.min.js" />
+    <Content Include="Scripts\jquery.rateit.min.js.map" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />

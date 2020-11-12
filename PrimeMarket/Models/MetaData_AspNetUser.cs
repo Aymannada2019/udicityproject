@@ -11,9 +11,11 @@ namespace PrimeMarket.Models
     [MetadataType(typeof(MetaData_AspNetUser))]
     public partial class AspNetUser
     {
+        [Display(Name = "المحافظة")]
         public decimal GovernoratetId { get; set; }
         public virtual Governorate Governorate { get; set; }
 
+        [Display(Name = "المركز")]
         public decimal DistrictId { get; set; }
         public virtual District District { get; set; }
     }
@@ -34,6 +36,7 @@ namespace PrimeMarket.Models
         [Display(Name = "صورة الملف الشخصي")]
         public string ImagePath { get; set; }
 
+        [Required(ErrorMessage = "اختر القرية")]
         [Display(Name = "القرية")]
         public Nullable<decimal> VillageId { get; set; }
     }

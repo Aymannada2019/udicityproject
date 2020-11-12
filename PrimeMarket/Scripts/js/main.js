@@ -173,17 +173,17 @@
         max: maxPrice,
         values: [minPrice, maxPrice],
         slide: function (event, ui) {
-            minamount.val('$' + ui.values[0]);
-            maxamount.val('$' + ui.values[1]);
+            minamount.val(ui.values[0] );
+            maxamount.val(ui.values[1] );
         }
     });
-    minamount.val('$' + rangeSlider.slider("values", 0));
-    maxamount.val('$' + rangeSlider.slider("values", 1));
+    minamount.val(rangeSlider.slider("values", 0) );
+    maxamount.val(rangeSlider.slider("values", 1) );
 
     /*--------------------------
         Select
     ----------------------------*/
-    $("select").niceSelect();
+    // $("select").niceSelect();
 
     /*------------------
 		Single Product

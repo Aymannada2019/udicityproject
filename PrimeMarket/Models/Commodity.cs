@@ -26,8 +26,6 @@ namespace PrimeMarket.Models
         public decimal CommodityId { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
-        public Nullable<decimal> CategoryId { get; set; }
-        public virtual Category Category { get; set; }
         public Nullable<decimal> SubCategoryId { get; set; }
         public string SellerId { get; set; }
         public Nullable<double> Price { get; set; }
@@ -40,6 +38,7 @@ namespace PrimeMarket.Models
         public bool IsFeatured { get; set; }
         public Nullable<double> OriginalPrice { get; set; }
         public Nullable<double> Quantity { get; set; }
+        public Nullable<double> Rating { get; set; }
     
         public virtual AspNetUser AspNetUser { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -52,5 +51,7 @@ namespace PrimeMarket.Models
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
+
+       
     }
 }

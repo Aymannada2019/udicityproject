@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
+    <link href="/Content/rateit.css" rel="stylesheet" />
     <style>
         a.addtocart {
             cursor: pointer;
@@ -69,7 +70,51 @@
                 </ul>
             </div>*@
             <div class="header__top__right__auth">
-                <a href="#"><i class="fa fa-user"></i> Login</a>
+                
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        var fullName = PrimeMarket.Models.Helper.getUserFullName(User.Identity.Name);
+                        <div class="header__top__right__language">
+                            <div>مرحبا: @fullName</div>
+                            <span class="arrow_carrot-down"></span>
+                            <ul>
+                                <li><a href="/userAccount/UserOrders/?UserId=@User.Identity.GetUserId()">طلبات العملاء</a></li>
+                                <li><a href="/userAccount/MyOrders/?UserId=@User.Identity.GetUserId()">طلباتي</a></li>
+                                <li><a href="/userAccount/UserProducts/?UserId=@User.Identity.GetUserId()">منتجاتي</a></li>
+                                <li><a href="/AspNetUsers/Edit/@User.Identity.GetUserId()">حسابي</a></li>
+                            </ul>
+                        </div>
+                            <div class="header__top__right__auth">
+                                <form name="LogoutForm" id="LogoutForm" action="/Account/LogOff" method="post">
+                                    @Html.AntiForgeryToken()
+                                    <a onclick="Logout()" style="cursor:pointer;">
+                                        <i class="fa fa-user"></i>
+                                        تسجيل خروج
+                                    </a>
+                                </form>
+
+                            </div>
+                    }
+                    else
+                    {
+                        <div class="header__top__right__language">
+                            <a href="/Account/Login"><i class="fa fa-user"></i> تسجيل دخول</a>
+                            &nbsp;&nbsp;&nbsp;
+                            <a href="/Account/Register"><i class="fa fa-envelope"></i> حساب جديد</a>
+                        </div>
+                                <div class="header__top__right__auth">
+                                </div>
+                    }
+
+
+                
+
+
+
+
+
+
+
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -125,7 +170,8 @@
                             </div>
                             <div class="header__top__right__auth">
                                 <form name="LogoutForm" id="LogoutForm" action="/Account/LogOff" method="post">
-                                                                 <a onclick="Logout()" style="cursor:pointer;">
+								@Html.AntiForgeryToken()
+                                       <a onclick="Logout()" style="cursor:pointer;">
                                         <i class="fa fa-user"></i>
                                         تسجيل خروج
                                     </a>
@@ -277,7 +323,7 @@
     <footer class="footer spad">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer__about">
                         @*<div class="footer__about__logo">
                             <a href="/"><img src="img/logo.png" alt=""></a>
@@ -288,23 +334,18 @@
                         </ul>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
+                <div class="col-lg-4 col-md-6 col-sm-6">
                     <div class="footer__widget">
                         <h6>روابط هامة</h6>
                         <ul>
                             <li><a href="#">من نحن</a></li>
                             <li><a href="#">اتصل بنا</a></li>
-                            <li><a href="#">المنتجات</a></li>
-                            <li><a href="#">تسجيل حساب</a></li>
-                            <li><a href="#">بيع عندنا</a></li>
+                            <li><a href="/Shop">المنتجات</a></li>
+                            <li><a href="/Account/Register">تسجيل حساب</a></li>
+                            <li><a href="/Commodities">بيع عندنا</a></li>
                         </ul>
-                        <ul>
-                            <li><a href="#">من نحن</a></li>
-                            <li><a href="#">اتصل بنا</a></li>
-                            <li><a href="#">المنتجات</a></li>
-                            <li><a href="#">تسجيل حساب</a></li>
-                            <li><a href="#">بيع عندنا</a></li>
-                        </ul>
+						
+                        
                     </div>
                 </div>
                 <div class="col-lg-4 col-md-12">
@@ -351,6 +392,7 @@
     <script src="~/Scripts/js/owl.carousel.min.js"></script>
     <script src="~/Scripts/js/main.js"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+    <script src="~/Scripts/jquery.rateit.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
             $("#txt_search").autocomplete({
