@@ -25,6 +25,7 @@
 8.  Latest Product Section
 9.  Contact
 10.  Footer Style
+11. BackEnd Style
 -------------------------------------------------------------------*/
 
 /*----------------------------------------*/
@@ -37,7 +38,7 @@ body {
 	font-family: "Cairo", sans-serif;
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
-    direction: rtl;                                        /*khmonir // new style*/
+    /*direction: rtl;                                        /*khmonir // new style*/
 }
 
 h1,
@@ -2970,6 +2971,12 @@ ol {
 @media only screen and (min-width: 1200px) {
 	.container {
 		max-width: 1170px;
+	}
+}
+
+@media only screen and (min-width: 768px) {  /*khmonir // new style*/
+	body {
+		direction: rtl;
 	}
 }
 
