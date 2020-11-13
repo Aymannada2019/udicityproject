@@ -14,7 +14,6 @@
         <EntityTypeShape EntityType="PrimeMarketModel.Category" Width="1.5" PointX="8.25" PointY="5.625" />
         <EntityTypeShape EntityType="PrimeMarketModel.Commodity" Width="1.5" PointX="12.75" PointY="5.5" />
         <EntityTypeShape EntityType="PrimeMarketModel.CommodityImage" Width="1.5" PointX="15" PointY="13.375" />
-        <EntityTypeShape EntityType="PrimeMarketModel.CommodityRating" Width="1.5" PointX="15" PointY="9.125" />
         <EntityTypeShape EntityType="PrimeMarketModel.District" Width="1.5" PointX="3" PointY="11.75" />
         <EntityTypeShape EntityType="PrimeMarketModel.Governorate" Width="1.5" PointX="0.75" PointY="11.875" />
         <EntityTypeShape EntityType="PrimeMarketModel.Order" Width="1.5" PointX="9.75" PointY="11" />
@@ -23,7 +22,6 @@
         <EntityTypeShape EntityType="PrimeMarketModel.PaymentMethod" Width="1.5" PointX="7.5" PointY="19.125" />
         <EntityTypeShape EntityType="PrimeMarketModel.PriceUnit" Width="1.5" PointX="10.5" PointY="8.375" />
         <EntityTypeShape EntityType="PrimeMarketModel.SubCategory" Width="1.5" PointX="10.5" PointY="5.5" />
-        <EntityTypeShape EntityType="PrimeMarketModel.UserRating" Width="1.5" PointX="0.5" PointY="0.875" />
         <EntityTypeShape EntityType="PrimeMarketModel.Village" Width="1.5" PointX="5.25" PointY="11.75" />
         <EntityTypeShape EntityType="PrimeMarketModel.View_Cart" Width="1.5" PointX="2.75" PointY="0.75" />
         <EntityTypeShape EntityType="PrimeMarketModel.View_Commodity" Width="1.5" PointX="4.75" PointY="0.75" />
@@ -31,14 +29,12 @@
         <AssociationConnector Association="PrimeMarketModel.FK__AspNetUse__UserI__7E37BEF6" />
         <AssociationConnector Association="PrimeMarketModel.FK__AspNetUse__Villa__01142BA1" />
         <AssociationConnector Association="PrimeMarketModel.FK__Cart__CustomerId__02084FDA" />
-        <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Revie__07C12930" />
         <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Selle__03F0984C" />
         <AssociationConnector Association="PrimeMarketModel.FK__Order__CustomerI__0A9D95DB" />
         <AssociationConnector Association="PrimeMarketModel.FK__Cart__CartStatus__02084FDA" />
         <AssociationConnector Association="PrimeMarketModel.FK__Cart__CommodityI__02FC7413" />
         <AssociationConnector Association="PrimeMarketModel.FK__SubCatego__Categ__0E6E26BF" />
         <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Commo__06CD04F7" />
-        <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Commo__08B54D69" />
         <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Price__04E4BC85" />
         <AssociationConnector Association="PrimeMarketModel.FK__Commodity__SubCa__05D8E0BE" />
         <AssociationConnector Association="PrimeMarketModel.FK__OrderItem__Commo__0C85DE4D" />
@@ -48,9 +44,13 @@
         <AssociationConnector Association="PrimeMarketModel.FK__Order__PaymentMe__10566F31" />
         <AssociationConnector Association="PrimeMarketModel.FK__OrderItem__Order__0D7A0286" />
         <AssociationConnector Association="PrimeMarketModel.AspNetUserRoles" />
+        <EntityTypeShape EntityType="PrimeMarketModel.CommodityRating" Width="1.5" PointX="15" PointY="9.5" />
+        <EntityTypeShape EntityType="PrimeMarketModel.UserRating" Width="1.5" PointX="9.75" PointY="18.75" />
+        <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Revie__07C12930" />
         <AssociationConnector Association="PrimeMarketModel.FK__UserRatin__Revie__3864608B" />
         <AssociationConnector Association="PrimeMarketModel.FK__UserRatin__UserI__395884C4" />
-      </Diagram>
+        <AssociationConnector Association="PrimeMarketModel.FK__Commodity__Commo__08B54D69" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

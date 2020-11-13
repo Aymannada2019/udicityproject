@@ -22,11 +22,11 @@ namespace PrimeMarket.Models
         public Nullable<double> Price { get; set; }
         public Nullable<byte> PriceUnitId { get; set; }
         public string PriceNote { get; set; }
-        public bool Publish { get; set; }
+        public Nullable<bool> Publish { get; set; }
         public bool Available { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
         public Nullable<System.DateTime> ExpireDate { get; set; }
-        public bool IsFeatured { get; set; }
+        public Nullable<bool> IsFeatured { get; set; }
         public Nullable<double> OriginalPrice { get; set; }
         public string SubCategory { get; set; }
         public string FullName { get; set; }

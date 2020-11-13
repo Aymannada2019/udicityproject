@@ -4,6 +4,15 @@
     ViewBag.Title = "تفاصيل السلعة";
     Layout = "~/Views/Shared/_LayoutShop.cshtml";
 }
+<style>
+    .dataTables_length, .dataTables_filter, table.dataTable thead .sorting_asc {
+        display: none !important;
+    }
+
+    table.dataTable.no-footer {
+        border-bottom: none !important;
+    }
+</style>
 
 <!-- Product Details Section Begin -->
 <section class="product-details spad">
@@ -30,7 +39,8 @@
                     <h3>@Model.ThisCommodity.Title</h3>
                     
                     <div class="product__details__rating">
-                        <div class="rateit" data-rateit-value="3" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                        <div class="rateit" data-rateit-value="@Math.Round((double)Model.ThisCommodity.Rating,1)" data-rateit-ispreset="true" data-rateit-readonly="true"></div>
+                        <span style="color:#000;">@Math.Round((double)Model.ThisCommodity.Rating,1)</span>
                         <span>(@Model.ThisCommodityRatings.Count تقييم)</span>
                     </div>
                     <div class="product__details__price">@Model.ThisCommodity.Price ج.م/@Model.ThisCommodity.PriceUnit.PriceUnit1</div>
@@ -130,17 +140,31 @@
                         </div>
                         <div class="tab-pane" id="tabs-3" role="tabpanel">
                             <div class="product__details__tab__desc">
-                                @foreach (var review in Model.ThisCommodityReviews)
-                                {
-                                <p>بواسطة <strong>@review.AspNetUser.FullName</strong> بتاريخ <i>@string.Format("{0:dd/MM/yyyy hh:mm tt}",review.CreationDate)</i></p>
-                                <p>
-                                    @review.Comment
-                                </p>
-                                <hr />
-                                }
+                                <table id="commentsTable">
+                                    <thead>
+                                        <tr><th></th></tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var review in Model.ThisCommodityReviews)
+                                        {
+                                            <tr>
+                                                <td>
+                                                    <p>بواسطة <strong>@review.AspNetUser.FullName</strong> بتاريخ <i>@string.Format("{0:dd/MM/yyyy hh:mm tt}", review.CreationDate)</i></p>
+                                                    <p>
+                                                        @review.Comment
+                                                    </p>
+                                                    <hr />
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
                             </div>
-                            <h4 style="text-decoration:underline;">أضف تقييمك:</h4>
-
+                            <h4 style="text-decoration:underline;margin-top:15px;">أضف تقييمك:</h4>
+                            <div id="ProductRate" dir="rtl" style="margin-top:15px; margin-bottom:10px;">
+                                <div data-productid="@Model.ThisCommodity.CommodityId" class="rateit bigstars" data-rateit-starwidth="32" data-rateit-starheight="32" data-rateit-resetable="false" id="rateit11"></div>
+                                
+                            </div>
                                                             <form name="AddCommentForm" method="post" action="/Shop/AddComment">
                                                                 <input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@Model.ThisCommodity.CommodityId" />
                                                                 <div class="form-group">
@@ -212,6 +236,30 @@
                 var addbtn = $(this);
                 addbtn.closest("form").submit();
             });
+
+            $('#ProductRate .rateit').bind('rated reset', function (e) {
+                var ri = $(this);
+
+                //if the use pressed reset, it will get value: 0 (to be compatible with the HTML range control), we could check if e.type == 'reset', and then set the value to  null .
+                var value = ri.rateit('value');
+                var productID = ri.data('productid'); // if the product id was in some hidden field: ri.closest('li').find('input[name="productid"]').val()
+
+                //maybe we want to disable voting?
+                ri.rateit('readonly', true);
+
+                $.ajax({
+                    url: '/Shop/RateProduct', //your server side script
+                    data: { id: productID, value: value }, //our data
+                    type: 'POST',
+                    success: function (data) {
+                        
+                    },
+                    error: function (jxhr, msg, err) {
+                        
+                    }
+                });
+            });
+            $("#rateit11").bind('over', function (event, value) { $(this).attr('title', value); });
         });
     </script>
 }

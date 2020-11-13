@@ -31,6 +31,7 @@
     <EntitySetMapping Name="AspNetUsers">
       <EntityTypeMapping TypeName="PrimeMarketModel.AspNetUser">
         <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
           <ScalarProperty Name="VillageId" ColumnName="VillageId" />
           <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
           <ScalarProperty Name="Address" ColumnName="Address" />
@@ -107,18 +108,6 @@
           <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
           <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
           <ScalarProperty Name="CommodityImageId" ColumnName="CommodityImageId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="CommodityRatings">
-      <EntityTypeMapping TypeName="PrimeMarketModel.CommodityRating">
-        <MappingFragment StoreEntitySet="CommodityRating">
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
-          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
-          <ScalarProperty Name="CommodityRatingId" ColumnName="CommodityRatingId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -205,18 +194,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="UserRatings">
-      <EntityTypeMapping TypeName="PrimeMarketModel.UserRating">
-        <MappingFragment StoreEntitySet="UserRating">
-          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="Rating" ColumnName="Rating" />
-          <ScalarProperty Name="UserId" ColumnName="UserId" />
-          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
-          <ScalarProperty Name="UserRatingId" ColumnName="UserRatingId" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="Villages">
       <EntityTypeMapping TypeName="PrimeMarketModel.Village">
         <MappingFragment StoreEntitySet="Village">
@@ -271,5 +248,29 @@
         <ScalarProperty Name="Id" ColumnName="RoleId" />
       </EndProperty>
     </AssociationSetMapping>
+    <EntitySetMapping Name="CommodityRatings">
+      <EntityTypeMapping TypeName="PrimeMarketModel.CommodityRating">
+        <MappingFragment StoreEntitySet="CommodityRating">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="CommodityId" ColumnName="CommodityId" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+          <ScalarProperty Name="CommodityRatingId" ColumnName="CommodityRatingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserRatings">
+      <EntityTypeMapping TypeName="PrimeMarketModel.UserRating">
+        <MappingFragment StoreEntitySet="UserRating">
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Rating" ColumnName="Rating" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ReviewerId" ColumnName="ReviewerId" />
+          <ScalarProperty Name="UserRatingId" ColumnName="UserRatingId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -17,7 +17,7 @@ namespace PrimeMarket.Models
         public decimal CommodityRatingId { get; set; }
         public string ReviewerId { get; set; }
         public Nullable<decimal> CommodityId { get; set; }
-        public Nullable<byte> Rating { get; set; }
+        public Nullable<double> Rating { get; set; }
         public string Comment { get; set; }
         public Nullable<System.DateTime> CreationDate { get; set; }
     

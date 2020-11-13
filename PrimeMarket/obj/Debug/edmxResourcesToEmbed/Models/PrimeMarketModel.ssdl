@@ -54,6 +54,7 @@
     <Property Name="Address" Type="nvarchar" MaxLength="100" />
     <Property Name="ImagePath" Type="nvarchar" MaxLength="200" />
     <Property Name="VillageId" Type="numeric" Precision="18" Scale="0" />
+    <Property Name="Rating" Type="float" />
   </EntityType>
   <EntityType Name="Cart">
     <Key>
@@ -117,7 +118,7 @@
     <Property Name="CommodityRatingId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ReviewerId" Type="nvarchar" MaxLength="128" />
     <Property Name="CommodityId" Type="numeric" Precision="18" Scale="0" />
-    <Property Name="Rating" Type="tinyint" />
+    <Property Name="Rating" Type="float" />
     <Property Name="Comment" Type="nvarchar" MaxLength="250" />
     <Property Name="CreationDate" Type="smalldatetime" />
   </EntityType>
@@ -203,7 +204,7 @@
     <Property Name="UserRatingId" Type="numeric" Precision="18" Scale="0" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="ReviewerId" Type="nvarchar" MaxLength="128" />
     <Property Name="UserId" Type="nvarchar" MaxLength="128" />
-    <Property Name="Rating" Type="tinyint" />
+    <Property Name="Rating" Type="float" />
     <Property Name="Comment" Type="nvarchar" MaxLength="250" />
     <Property Name="CreationDate" Type="smalldatetime" />
   </EntityType>
@@ -249,16 +250,16 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
     <Property Name="Price" Type="float" />
     <Property Name="PriceUnitId" Type="tinyint" />
     <Property Name="PriceNote" Type="nvarchar" MaxLength="250" />
-    <Property Name="Publish" Type="bit" Nullable="false" />
+    <Property Name="Publish" Type="bit" />
     <Property Name="Available" Type="bit" Nullable="false" />
     <Property Name="CreationDate" Type="smalldatetime" />
     <Property Name="ExpireDate" Type="smalldatetime" />
-    <Property Name="IsFeatured" Type="bit" Nullable="false" />
+    <Property Name="IsFeatured" Type="bit" />
     <Property Name="OriginalPrice" Type="float" />
     <Property Name="SubCategory" Type="nvarchar" MaxLength="200" Nullable="false" />
     <Property Name="FullName" Type="nvarchar" MaxLength="100" />
   </EntityType>
-  <Association Name="FK__AspNetUse__RoleI__5812160E">
+  <Association Name="FK__AspNetUse__RoleI__7F2BE32F">
     <End Role="AspNetRoles" Type="Self.AspNetRoles" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -272,35 +273,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AspNetUse__UserI__5629CD9C">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserClaims">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AspNetUse__UserI__571DF1D5">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
-      <OnDelete Action="Cascade" />
-    </End>
-    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="AspNetUserLogins">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__AspNetUse__UserI__59063A47">
+  <Association Name="FK__AspNetUse__UserI__00200768">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
       <OnDelete Action="Cascade" />
     </End>
@@ -314,7 +287,35 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__AspNetUse__Villa__59FA5E80">
+  <Association Name="FK__AspNetUse__UserI__7D439ABD">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaims" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__UserI__7E37BEF6">
+    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogins" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__AspNetUse__Villa__01142BA1">
     <End Role="Village" Type="Self.Village" Multiplicity="0..1" />
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="*" />
     <ReferentialConstraint>
@@ -326,7 +327,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cart__CartStatus__5AEE82B9">
+  <Association Name="FK__Cart__CartStatus__02084FDA">
     <End Role="CartStatus" Type="Self.CartStatus" Multiplicity="0..1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -338,7 +339,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cart__CommodityI__5BE2A6F2">
+  <Association Name="FK__Cart__CommodityI__02FC7413">
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
     <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
     <ReferentialConstraint>
@@ -350,19 +351,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Cart__CustomerId__5CD6CB2B">
-    <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
-    <End Role="Cart" Type="Self.Cart" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="AspNetUsers">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="Cart">
-        <PropertyRef Name="CustomerId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__Commodity__Commo__60A75C0F">
+  <Association Name="FK__Commodity__Commo__06CD04F7">
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
     <End Role="CommodityImages" Type="Self.CommodityImages" Multiplicity="*" />
     <ReferentialConstraint>
@@ -374,7 +363,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Commodity__Commo__619B8048">
+  <Association Name="FK__Commodity__Commo__08B54D69">
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
     <End Role="CommodityRating" Type="Self.CommodityRating" Multiplicity="*" />
     <ReferentialConstraint>
@@ -386,7 +375,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Commodity__Price__5DCAEF64">
+  <Association Name="FK__Commodity__Price__04E4BC85">
     <End Role="PriceUnit" Type="Self.PriceUnit" Multiplicity="0..1" />
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -398,7 +387,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Commodity__Revie__628FA481">
+  <Association Name="FK__Commodity__Revie__07C12930">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="CommodityRating" Type="Self.CommodityRating" Multiplicity="*" />
     <ReferentialConstraint>
@@ -410,7 +399,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Commodity__Selle__5EBF139D">
+  <Association Name="FK__Commodity__Selle__03F0984C">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -422,7 +411,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Commodity__SubCa__5FB337D6">
+  <Association Name="FK__Commodity__SubCa__05D8E0BE">
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="0..1" />
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="*" />
     <ReferentialConstraint>
@@ -434,7 +423,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__District__Govern__6383C8BA">
+  <Association Name="FK__District__Govern__09A971A2">
     <End Role="Governorate" Type="Self.Governorate" Multiplicity="0..1" />
     <End Role="District" Type="Self.District" Multiplicity="*" />
     <ReferentialConstraint>
@@ -446,7 +435,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Order__CustomerI__6477ECF3">
+  <Association Name="FK__Order__CustomerI__0A9D95DB">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -458,7 +447,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Order__OrderStat__656C112C">
+  <Association Name="FK__Order__OrderStat__3F115E1A">
     <End Role="OrderStatus" Type="Self.OrderStatus" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -470,7 +459,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Order__PaymentMe__66603565">
+  <Association Name="FK__Order__PaymentMe__10566F31">
     <End Role="PaymentMethod" Type="Self.PaymentMethod" Multiplicity="0..1" />
     <End Role="Order" Type="Self.Order" Multiplicity="*" />
     <ReferentialConstraint>
@@ -482,7 +471,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderItem__Commo__6754599E">
+  <Association Name="FK__OrderItem__Commo__0C85DE4D">
     <End Role="Commodity" Type="Self.Commodity" Multiplicity="0..1" />
     <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
     <ReferentialConstraint>
@@ -494,7 +483,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__OrderItem__Order__68487DD7">
+  <Association Name="FK__OrderItem__Order__0D7A0286">
     <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
     <End Role="OrderItems" Type="Self.OrderItems" Multiplicity="*" />
     <ReferentialConstraint>
@@ -506,7 +495,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__SubCatego__Categ__6D0D32F4">
+  <Association Name="FK__SubCatego__Categ__0E6E26BF">
     <End Role="Category" Type="Self.Category" Multiplicity="0..1" />
     <End Role="SubCategory" Type="Self.SubCategory" Multiplicity="*" />
     <ReferentialConstraint>
@@ -518,7 +507,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserRatin__Revie__6E01572D">
+  <Association Name="FK__UserRatin__Revie__3864608B">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
     <ReferentialConstraint>
@@ -530,7 +519,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__UserRatin__UserI__6EF57B66">
+  <Association Name="FK__UserRatin__UserI__395884C4">
     <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
     <End Role="UserRating" Type="Self.UserRating" Multiplicity="*" />
     <ReferentialConstraint>
@@ -542,7 +531,7 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__Village__Distric__6FE99F9F">
+  <Association Name="FK__Village__Distric__0F624AF8">
     <End Role="District" Type="Self.District" Multiplicity="0..1" />
     <End Role="Village" Type="Self.Village" Multiplicity="*" />
     <ReferentialConstraint>
@@ -609,99 +598,95 @@ warning 6002: The table/view 'PrimeMarket.dbo.View_Commodity' does not have a pr
     [View_Commodity].[FullName] AS [FullName]
     FROM [dbo].[View_Commodity] AS [View_Commodity]</DefiningQuery>
     </EntitySet>
-    <AssociationSet Name="FK__AspNetUse__RoleI__5812160E" Association="Self.FK__AspNetUse__RoleI__5812160E">
+    <AssociationSet Name="FK__AspNetUse__RoleI__7F2BE32F" Association="Self.FK__AspNetUse__RoleI__7F2BE32F">
       <End Role="AspNetRoles" EntitySet="AspNetRoles" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK__AspNetUse__UserI__5629CD9C" Association="Self.FK__AspNetUse__UserI__5629CD9C">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AspNetUse__UserI__571DF1D5" Association="Self.FK__AspNetUse__UserI__571DF1D5">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
-    </AssociationSet>
-    <AssociationSet Name="FK__AspNetUse__UserI__59063A47" Association="Self.FK__AspNetUse__UserI__59063A47">
+    <AssociationSet Name="FK__AspNetUse__UserI__00200768" Association="Self.FK__AspNetUse__UserI__00200768">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="AspNetUserRoles" EntitySet="AspNetUserRoles" />
     </AssociationSet>
-    <AssociationSet Name="FK__AspNetUse__Villa__59FA5E80" Association="Self.FK__AspNetUse__Villa__59FA5E80">
+    <AssociationSet Name="FK__AspNetUse__UserI__7D439ABD" Association="Self.FK__AspNetUse__UserI__7D439ABD">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__UserI__7E37BEF6" Association="Self.FK__AspNetUse__UserI__7E37BEF6">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK__AspNetUse__Villa__01142BA1" Association="Self.FK__AspNetUse__Villa__01142BA1">
       <End Role="Village" EntitySet="Village" />
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cart__CartStatus__5AEE82B9" Association="Self.FK__Cart__CartStatus__5AEE82B9">
+    <AssociationSet Name="FK__Cart__CartStatus__02084FDA" Association="Self.FK__Cart__CartStatus__02084FDA">
       <End Role="CartStatus" EntitySet="CartStatus" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cart__CommodityI__5BE2A6F2" Association="Self.FK__Cart__CommodityI__5BE2A6F2">
+    <AssociationSet Name="FK__Cart__CommodityI__02FC7413" Association="Self.FK__Cart__CommodityI__02FC7413">
       <End Role="Commodity" EntitySet="Commodity" />
       <End Role="Cart" EntitySet="Cart" />
     </AssociationSet>
-    <AssociationSet Name="FK__Cart__CustomerId__5CD6CB2B" Association="Self.FK__Cart__CustomerId__5CD6CB2B">
-      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
-      <End Role="Cart" EntitySet="Cart" />
-    </AssociationSet>
-    <AssociationSet Name="FK__Commodity__Commo__60A75C0F" Association="Self.FK__Commodity__Commo__60A75C0F">
+    <AssociationSet Name="FK__Commodity__Commo__06CD04F7" Association="Self.FK__Commodity__Commo__06CD04F7">
       <End Role="Commodity" EntitySet="Commodity" />
       <End Role="CommodityImages" EntitySet="CommodityImages" />
     </AssociationSet>
-    <AssociationSet Name="FK__Commodity__Commo__619B8048" Association="Self.FK__Commodity__Commo__619B8048">
+    <AssociationSet Name="FK__Commodity__Commo__08B54D69" Association="Self.FK__Commodity__Commo__08B54D69">
       <End Role="Commodity" EntitySet="Commodity" />
       <End Role="CommodityRating" EntitySet="CommodityRating" />
     </AssociationSet>
-    <AssociationSet Name="FK__Commodity__Price__5DCAEF64" Association="Self.FK__Commodity__Price__5DCAEF64">
+    <AssociationSet Name="FK__Commodity__Price__04E4BC85" Association="Self.FK__Commodity__Price__04E4BC85">
       <End Role="PriceUnit" EntitySet="PriceUnit" />
       <End Role="Commodity" EntitySet="Commodity" />
     </AssociationSet>
-    <AssociationSet Name="FK__Commodity__Revie__628FA481" Association="Self.FK__Commodity__Revie__628FA481">
+    <AssociationSet Name="FK__Commodity__Revie__07C12930" Association="Self.FK__Commodity__Revie__07C12930">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="CommodityRating" EntitySet="CommodityRating" />
     </AssociationSet>
-    <AssociationSet Name="FK__Commodity__Selle__5EBF139D" Association="Self.FK__Commodity__Selle__5EBF139D">
+    <AssociationSet Name="FK__Commodity__Selle__03F0984C" Association="Self.FK__Commodity__Selle__03F0984C">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Commodity" EntitySet="Commodity" />
     </AssociationSet>
-    <AssociationSet Name="FK__Commodity__SubCa__5FB337D6" Association="Self.FK__Commodity__SubCa__5FB337D6">
+    <AssociationSet Name="FK__Commodity__SubCa__05D8E0BE" Association="Self.FK__Commodity__SubCa__05D8E0BE">
       <End Role="SubCategory" EntitySet="SubCategory" />
       <End Role="Commodity" EntitySet="Commodity" />
     </AssociationSet>
-    <AssociationSet Name="FK__District__Govern__6383C8BA" Association="Self.FK__District__Govern__6383C8BA">
+    <AssociationSet Name="FK__District__Govern__09A971A2" Association="Self.FK__District__Govern__09A971A2">
       <End Role="Governorate" EntitySet="Governorate" />
       <End Role="District" EntitySet="District" />
     </AssociationSet>
-    <AssociationSet Name="FK__Order__CustomerI__6477ECF3" Association="Self.FK__Order__CustomerI__6477ECF3">
+    <AssociationSet Name="FK__Order__CustomerI__0A9D95DB" Association="Self.FK__Order__CustomerI__0A9D95DB">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK__Order__OrderStat__656C112C" Association="Self.FK__Order__OrderStat__656C112C">
+    <AssociationSet Name="FK__Order__OrderStat__3F115E1A" Association="Self.FK__Order__OrderStat__3F115E1A">
       <End Role="OrderStatus" EntitySet="OrderStatus" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK__Order__PaymentMe__66603565" Association="Self.FK__Order__PaymentMe__66603565">
+    <AssociationSet Name="FK__Order__PaymentMe__10566F31" Association="Self.FK__Order__PaymentMe__10566F31">
       <End Role="PaymentMethod" EntitySet="PaymentMethod" />
       <End Role="Order" EntitySet="Order" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderItem__Commo__6754599E" Association="Self.FK__OrderItem__Commo__6754599E">
+    <AssociationSet Name="FK__OrderItem__Commo__0C85DE4D" Association="Self.FK__OrderItem__Commo__0C85DE4D">
       <End Role="Commodity" EntitySet="Commodity" />
       <End Role="OrderItems" EntitySet="OrderItems" />
     </AssociationSet>
-    <AssociationSet Name="FK__OrderItem__Order__68487DD7" Association="Self.FK__OrderItem__Order__68487DD7">
+    <AssociationSet Name="FK__OrderItem__Order__0D7A0286" Association="Self.FK__OrderItem__Order__0D7A0286">
       <End Role="Order" EntitySet="Order" />
       <End Role="OrderItems" EntitySet="OrderItems" />
     </AssociationSet>
-    <AssociationSet Name="FK__SubCatego__Categ__6D0D32F4" Association="Self.FK__SubCatego__Categ__6D0D32F4">
+    <AssociationSet Name="FK__SubCatego__Categ__0E6E26BF" Association="Self.FK__SubCatego__Categ__0E6E26BF">
       <End Role="Category" EntitySet="Category" />
       <End Role="SubCategory" EntitySet="SubCategory" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserRatin__Revie__6E01572D" Association="Self.FK__UserRatin__Revie__6E01572D">
+    <AssociationSet Name="FK__UserRatin__Revie__3864608B" Association="Self.FK__UserRatin__Revie__3864608B">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="UserRating" EntitySet="UserRating" />
     </AssociationSet>
-    <AssociationSet Name="FK__UserRatin__UserI__6EF57B66" Association="Self.FK__UserRatin__UserI__6EF57B66">
+    <AssociationSet Name="FK__UserRatin__UserI__395884C4" Association="Self.FK__UserRatin__UserI__395884C4">
       <End Role="AspNetUsers" EntitySet="AspNetUsers" />
       <End Role="UserRating" EntitySet="UserRating" />
     </AssociationSet>
-    <AssociationSet Name="FK__Village__Distric__6FE99F9F" Association="Self.FK__Village__Distric__6FE99F9F">
+    <AssociationSet Name="FK__Village__Distric__0F624AF8" Association="Self.FK__Village__Distric__0F624AF8">
       <End Role="District" EntitySet="District" />
       <End Role="Village" EntitySet="Village" />
     </AssociationSet>

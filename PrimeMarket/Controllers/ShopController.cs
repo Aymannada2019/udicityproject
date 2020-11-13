@@ -71,6 +71,111 @@ namespace PrimeMarket.Controllers
         }
 
         [HttpPost]
+        public JsonResult RateProduct(decimal id,float value)
+        {
+            var result = new JsonResult()
+            {
+                Data = new
+                {
+                    success = false,
+                    message = "There was an error processing your request."
+                }
+            };
+            var success = 0;
+            // save rate
+            if(!User.Identity.IsAuthenticated)
+            {
+                result.Data = new
+                {
+                    success = false,
+                    message = "يجب تسجيل الدخول أولاً حتى تتمكن من تقييم هذا المنتج"
+                };
+                return result;
+            }
+            var reviewerId = User.Identity.GetUserId();
+            var commodityRating = new CommodityRating();
+            commodityRating.ReviewerId = reviewerId;
+            commodityRating.Rating = value;
+            commodityRating.CreationDate = DateTime.Now;
+            commodityRating.CommodityId = id;
+            db.CommodityRatings.Add(commodityRating);
+            db.SaveChanges();
+
+            // update commodity rating
+            var total = db.CommodityRatings.Where(c => c.CommodityId == id && c.Rating > 0).Average(c=>c.Rating);
+            float avgRating = (float)Math.Round((double)total,1);
+            var commidity = db.Commodities.Where(c => c.CommodityId == id).FirstOrDefault();
+            if(commidity!=null)
+            {
+                commidity.Rating = avgRating;
+                success = db.SaveChanges();
+            }
+            
+            if (success > 0)
+            {
+                result.Data = new
+                {
+                    success = true,
+                    message = "Rating saved successfully"
+                };
+            }
+            return result;
+        }
+
+        [HttpPost]
+        public JsonResult RateUser(string id, float value)
+        {
+            var result = new JsonResult()
+            {
+                Data = new
+                {
+                    success = false,
+                    message = "There was an error processing your request."
+                }
+            };
+            var success = 0;
+            // save rate
+            if (!User.Identity.IsAuthenticated)
+            {
+                result.Data = new
+                {
+                    success = false,
+                    message = "يجب تسجيل الدخول أولاً حتى تتمكن من تقييم هذا البائع"
+                };
+                return result;
+            }
+            var reviewerId = User.Identity.GetUserId();
+            var userRating = new UserRating();
+            userRating.ReviewerId = reviewerId;
+            userRating.Rating = value;
+            userRating.CreationDate = DateTime.Now;
+            userRating.UserId = id;
+            db.UserRatings.Add(userRating);
+            db.SaveChanges();
+
+            // update commodity rating
+            var total = db.UserRatings.Where(c => c.UserId == id && c.Rating > 0).Average(c => c.Rating);
+            float avgRating = (float)Math.Round((double)total, 1);
+            var user = db.AspNetUsers.Where(c => c.Id == id).FirstOrDefault();
+            if (user != null)
+            {
+                user.Rating = avgRating;
+                db.Configuration.ValidateOnSaveEnabled = false;
+                success = db.SaveChanges();
+            }
+
+            if (success > 0)
+            {
+                result.Data = new
+                {
+                    success = true,
+                    message = "Rating saved successfully"
+                };
+            }
+            return result;
+        }
+
+        [HttpPost]
         public ActionResult AddToCart()
         {
             try

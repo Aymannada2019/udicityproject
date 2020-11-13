@@ -36,7 +36,6 @@ namespace PrimeMarket.Models
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Commodity> Commodities { get; set; }
         public virtual DbSet<CommodityImage> CommodityImages { get; set; }
-        public virtual DbSet<CommodityRating> CommodityRatings { get; set; }
         public virtual DbSet<District> Districts { get; set; }
         public virtual DbSet<Governorate> Governorates { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
@@ -45,10 +44,11 @@ namespace PrimeMarket.Models
         public virtual DbSet<PaymentMethod> PaymentMethods { get; set; }
         public virtual DbSet<PriceUnit> PriceUnits { get; set; }
         public virtual DbSet<SubCategory> SubCategories { get; set; }
-        public virtual DbSet<UserRating> UserRatings { get; set; }
         public virtual DbSet<Village> Villages { get; set; }
         public virtual DbSet<View_Cart> View_Cart { get; set; }
         public virtual DbSet<View_Commodity> View_Commodity { get; set; }
+        public virtual DbSet<CommodityRating> CommodityRatings { get; set; }
+        public virtual DbSet<UserRating> UserRatings { get; set; }
     
         public virtual ObjectResult<Nullable<int>> SP_Commodity_Count(Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate)
         {
