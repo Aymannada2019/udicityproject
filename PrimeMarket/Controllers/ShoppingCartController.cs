@@ -21,6 +21,10 @@ namespace PrimeMarket.Controllers
 
         public ActionResult Checkout()
         {
+            if(!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account", new { ReturnUrl = "/ShoppingCart/Checkout" });
+            }
             var model = new CartViewModel();
             return View(model);
         }

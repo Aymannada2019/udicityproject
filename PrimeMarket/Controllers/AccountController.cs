@@ -13,6 +13,8 @@ using PrimeMarket.Models;
 //using Microsoft.Owin.Logging;
 using System.Net.Mail;
 using System.Configuration;
+using System.Security.Principal;
+using System.Threading;
 
 namespace PrimeMarket.Controllers
 {
@@ -100,7 +102,15 @@ namespace PrimeMarket.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        var identity = new System.Security.Principal.GenericIdentity(user.UserName);
+                        var principal = new GenericPrincipal(identity, new string[0]);
+                        System.Web.HttpContext.Current.User = principal;
+                        Thread.CurrentPrincipal = principal;
+                        Helper.MigrateCart(user.Id);
+
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

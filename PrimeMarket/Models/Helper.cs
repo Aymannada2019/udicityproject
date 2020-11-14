@@ -66,6 +66,17 @@ namespace PrimeMarket.Models
             CartItemsCount = 0;
             PrimeMarketEntities context = new PrimeMarketEntities();
             var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (string.IsNullOrEmpty(CustomerId))
+            {
+                //return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                var tempCustomerId = Helper.GetCookie("tempCustomerId");
+                if (tempCustomerId == null)
+                {
+                    tempCustomerId = Guid.NewGuid().ToString();
+                    Helper.SetCookie("tempCustomerId", tempCustomerId, DateTime.Now.AddDays(20));
+                }
+                CustomerId = tempCustomerId;
+            }
             try
             {
                 var cart = context.Carts.Where(c => c.CustomerId == CustomerId).ToList();
@@ -80,7 +91,53 @@ namespace PrimeMarket.Models
             return total;
         }
 
-        
+        public static string GetCookie(string CookieField)
+        {
+            HttpCookie cookie = HttpContext.Current.Request.Cookies[CookieField];
+            if (cookie != null)
+                return cookie.Value;
+            return null;
+        }
+        public static void SetCookie(string CookieField, string value, DateTime expireDate)
+        {
+            HttpContext.Current.Response.Cookies[CookieField].Value=value;
+            HttpContext.Current.Response.Cookies[CookieField].Expires = expireDate;
+        }
+        public static void MigrateCart(string LoggedInUserId)
+        {
+            PrimeMarketEntities db = new PrimeMarketEntities();
+            if (!System.Web.HttpContext.Current.User.Identity.IsAuthenticated)
+                return;
+            var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId();
+            if (string.IsNullOrEmpty(CustomerId))
+                CustomerId = LoggedInUserId;
+            var tempCustomerId = GetCookie("tempCustomerId");
+            if(tempCustomerId!=null)
+            {
+                var CustomerCartItems = db.Carts.Where(c => c.CustomerId == CustomerId).ToList();
+                var tempCustomerCartItems = db.Carts.Where(c => c.CustomerId == tempCustomerId).ToList();
+                foreach(var tempItem in tempCustomerCartItems)
+                {
+                    // check if temp item in the temp cart already exist in user cart, then update the old quantity else add the temp item
+                    var item = CustomerCartItems.Where(c => c.CommodityId == tempItem.CommodityId).FirstOrDefault();
+                    if (item!=null)
+                    {
+                        item.Quantity += tempItem.Quantity;
+                        db.Carts.Remove(tempItem);
+                    }
+                    else
+                    {
+                        tempItem.CustomerId = CustomerId;
+                    }
+                }
+                db.SaveChanges();
+                // delete cookies
+                SetCookie("tempCustomerId", tempCustomerId, DateTime.Now.AddDays(-1));
+            }
+
+
+        }
+
     }
     
 }

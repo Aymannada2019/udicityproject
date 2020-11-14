@@ -41,7 +41,7 @@ namespace PrimeMarket.Models.UIViewModel
 
             }
         }
-        public ShopViewModel(int? CategoryId, int? subCatId,int? minPrice, int? maxPrice, int? sortField, int? crntPage, int? pageSize)
+        public ShopViewModel(int? CategoryId, int? subCatId,int? minPrice, int? maxPrice, int? sortField, int? crntPage, int? pageSize, string searchText)
         {
             try
             {
@@ -55,17 +55,18 @@ namespace PrimeMarket.Models.UIViewModel
                 sortField = (sortField ?? 1);
                 crntPage = (crntPage ?? 1);
                 pageSize = (pageSize ?? 9);
-
-                var results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice);
+                searchText = (searchText ?? "");
+                //Items = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Include(u => u.PriceUnit).Where(u => u.Available == true && u.Publish == true && u.Title.ToLower().Contains(term)).OrderByDescending(u => u.CreationDate).ToList();
+                var results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice && u.Title.ToLower().Contains(searchText));
                 if (CategoryId != null)
                 {
                     SelectedCategory = db.Categories.Where(c => c.CategoryId == CategoryId).FirstOrDefault();
-                    results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice && u.SubCategory.CategoryId == CategoryId);
+                    results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice && u.SubCategory.CategoryId == CategoryId && u.Title.ToLower().Contains(searchText));
                 }
                 if(subCatId!=null)
                 {
                     SelectedSubCategory = db.SubCategories.Where(s => s.SubCategoryId == subCatId).FirstOrDefault();
-                    results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice && u.SubCategory.SubCategoryId == subCatId);
+                    results = db.Commodities.Include(u => u.AspNetUser).Include(u => u.PriceUnit).Include(u => u.SubCategory).Include(u => u.CommodityImages).Include(u => u.CommodityRatings).Where(u => u.Available == true && u.Publish == true && u.Price >= minPrice && u.Price <= maxPrice && u.SubCategory.SubCategoryId == subCatId && u.Title.ToLower().Contains(searchText));
                 }
                 switch(sortField)
                 {

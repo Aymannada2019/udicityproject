@@ -10,6 +10,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="shoping__cart__table">
+                    @{ double CartTotal = 0.0;}
+                    @if (Model.cartItems.Count > 0)
+                    {
                     <table>
                         <thead>
                             <tr>
@@ -21,7 +24,6 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @{ double CartTotal = 0.0;}
                             @foreach (var item in Model.cartItems)
                             {
                                 <tr>
@@ -71,6 +73,11 @@
 
                         </tbody>
                     </table>
+                                            }
+                                            else
+                                            {
+                                                <p style="text-align:center;">لا يوجد أي سلعة في سلة المشتريات</p>
+                                            }
                 </div>
             </div>
         </div>
@@ -95,6 +102,8 @@
                         </div>
                     </div>
                 </div>*@
+            @if (Model.cartItems.Count > 0)
+            {
             <div class="col-lg-6">
                 <div class="shoping__checkout">
                     <h5>سلة المشتريات</h5>
@@ -105,6 +114,7 @@
                     <a href="~/shoppingcart/Checkout" class="primary-btn">تابع عملية الشراء</a>
                 </div>
             </div>
+            }
         </div>
     </div>
 </section>

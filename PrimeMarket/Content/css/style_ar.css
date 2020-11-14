@@ -1186,7 +1186,7 @@ ol {
             height: 1px;
             width: 5px;
             background: #dd2222;
-            content: "";
+            content: none;
         }
 
         .price-range-wrap .range-slider .price-input input {

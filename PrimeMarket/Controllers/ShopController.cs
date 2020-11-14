@@ -24,13 +24,17 @@ namespace PrimeMarket.Controllers
             var model = new ShopViewModel(crntPage,pageSize);
             return View(model);
         }
-        public ActionResult Indx(int? id,int? subCatId,int? minPrice,int? maxPrice,int? sortField, int? crntPage, int? pageSize)
+        public ActionResult Indx(int? id,int? subCatId,int? minPrice,int? maxPrice,int? sortField, int? crntPage, int? pageSize, string txt_search)
         {
+            if(!string.IsNullOrEmpty(txt_search))
+                txt_search = txt_search.ToLower().Replace("#", "");
+
             minPrice = (minPrice ?? 1);
             maxPrice = (maxPrice ?? 999999);
             sortField = (sortField ?? 1);
             crntPage = (crntPage ?? 1);
             pageSize = (pageSize ?? 9);
+            txt_search = (txt_search ?? "");
 
             ViewBag.catId = id;
             ViewBag.subCatId = subCatId;
@@ -39,8 +43,10 @@ namespace PrimeMarket.Controllers
             ViewBag.sortField = sortField;
             ViewBag.crntPage = crntPage;
             ViewBag.pageSize = pageSize;
+            ViewBag.txt_search = txt_search;
 
-            var model = new ShopViewModel(id, subCatId,minPrice,maxPrice,sortField,crntPage,pageSize);
+
+            var model = new ShopViewModel(id, subCatId,minPrice,maxPrice,sortField,crntPage,pageSize,txt_search);
             return View("Index",model);
         }
 
@@ -190,7 +196,14 @@ namespace PrimeMarket.Controllers
                 }
                 if(string.IsNullOrEmpty(CustomerId))
                 {
-                    return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                    //return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                    var tempCustomerId = Helper.GetCookie("tempCustomerId");
+                    if(tempCustomerId == null)
+                    {
+                        tempCustomerId = Guid.NewGuid().ToString();
+                        Helper.SetCookie("tempCustomerId", tempCustomerId, DateTime.Now.AddDays(20));
+                    }
+                    CustomerId = tempCustomerId;
                 }
                 var cart = db.Carts.Where(c => c.CommodityId == CommodityId && c.CustomerId == CustomerId).FirstOrDefault();
                 if (cart == null)

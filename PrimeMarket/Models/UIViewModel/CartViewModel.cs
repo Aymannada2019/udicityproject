@@ -15,8 +15,19 @@ namespace PrimeMarket.Models.UIViewModel
         public List<Cart> cartItems = new List<Cart>();
         public CartViewModel()
         {
-            var UserId = System.Web.HttpContext.Current.User.Identity.GetUserId(); // logged in user
-            cartItems = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity).Where(c => c.CustomerId == UserId).ToList();
+            var CustomerId = System.Web.HttpContext.Current.User.Identity.GetUserId(); // logged in user
+            if (string.IsNullOrEmpty(CustomerId))
+            {
+                //return RedirectToAction("Login", "Account",new { ReturnUrl ="/shop/index"});
+                var tempCustomerId = Helper.GetCookie("tempCustomerId");
+                if (tempCustomerId == null)
+                {
+                    tempCustomerId = Guid.NewGuid().ToString();
+                    Helper.SetCookie("tempCustomerId", tempCustomerId, DateTime.Now.AddDays(20));
+                }
+                CustomerId = tempCustomerId;
+            }
+            cartItems = db.Carts.Include(c => c.AspNetUser).Include(c => c.Commodity).Where(c => c.CustomerId == CustomerId).ToList();
         }
     }
 }
