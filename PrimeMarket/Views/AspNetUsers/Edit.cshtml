@@ -3,6 +3,9 @@
     ViewBag.Title = "تعديل المستخدم";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+
 
 <h2>تعديل المستخدم</h2>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -85,28 +88,29 @@
 
 
         <div class="form-group row">
-            @Html.LabelFor(model => model.GovernoratetId, "المحافظة", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.GovernoratetId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @*@Html.DropDownList("GovernoratetId", null, htmlAttributes: new { @class = "form-control" })*@
-                @Html.DropDownList("GovernorateId", null, "اختر المحافظة", htmlAttributes: new { @class = "form-control" })
-                
+                @Html.DropDownList("GovernorateId", null, "- اختر المحافظة -", htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.GovernoratetId, "", new { @class = "text-danger" })
+                <input id="SelectedGovernorateId" value='@ViewBag.SelectedGovernorateId' type="hidden" /> 
             </div>
         </div>
         <div class="form-group row">
-            @Html.LabelFor(model => model.DistrictId, "المركز", htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.DistrictId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("DistrictId", null, "اختر المركز", new { @class = "form-control" })
+                @Html.DropDownList("DistrictId", null, "- اختر المركز -", new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.DistrictId, "", new { @class = "text-danger" })
                 <input id="SelectedDistrictId" value='@ViewBag.SelectedDistrictId' type="hidden" />
             </div>
         </div>
-
 
         <div class="form-group">
             @Html.LabelFor(model => model.VillageId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VillageId", null,"- اختر القرية -", htmlAttributes: new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.VillageId, "", new { @class = "text-danger" })
+                <input id="SelectedVillageId" value='@ViewBag.SelectedVillageId' type="hidden" />
+                
             </div>
         </div>
         <br /><br />
@@ -151,14 +155,18 @@
 
 <script src="~/Scripts/jquery-1.10.2.min.js"></script>
 <script>
-    console.log("Hello world!");
+    //console.log("Hello world!");
     $(document).ready(function () {
-        $("#GovernoratetId").change(function () {
-
-            $.get("/AspNetUsers/getDistrictList", { GovernoratetId: $(GovernoratetId).val() }, function (data) {
+        //console.log("mohamed said");
+        $("#GovernorateId").change(function () {
+            //console.log("mohamed said2");
+            $.get("/AspNetUsers/getDistrictList", { GovernorateId: $(GovernorateId).val() }, function (data) {
                 $("#DistrictId").empty();
+                $("#DistrictId").append("<option value='0' selected>- اختر المركز -</option>")
+                $("#VillageId").empty();
+                $("#VillageId").append("<option value='0'>- اختر القرية -</option>")
                 $.each(data, function (index, row) {
-                    console.log($("#SelectedDistrictId").val());
+                    //console.log($("#SelectedDistrictId").val());
                     if ($("#SelectedDistrictId").val() == row.SubCategoryId)
                         $("#DistrictId").append("<option value='" + row.DistrictId + "' selected>" + row.District1 + "</option>")
                     else
@@ -168,5 +176,25 @@
 
         });
     });
+
+    $(document).ready(function () {
+        //console.log("mohamed said");
+        $("#DistrictId").change(function () {
+            //console.log("mohamed said2");
+            $.get("/AspNetUsers/getVillageList", { DistrictId: $(DistrictId).val() }, function (data) {
+                $("#VillageId").empty();
+                $("#VillageId").append("<option value='0'>- اختر القرية -</option>")
+                $.each(data, function (index, row) {
+                    //console.log($("#SelectedDistrictId").val());
+                    if ($("#SelectedVillageId").val() == row.SubCategoryId)
+                        $("#VillageId").append("<option value='" + row.VillageId + "' selected>" + row.Village1 + "</option>")
+                    else
+                        $("#VillageId").append("<option value='" + row.VillageId + "'>" + row.Village1 + "</option>")
+                });
+            });
+
+        });
+    });
+
 
 </script>

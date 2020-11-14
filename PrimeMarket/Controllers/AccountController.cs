@@ -103,12 +103,13 @@ namespace PrimeMarket.Controllers
             {
                 case SignInStatus.Success:
                     {
+                        ///////////add by Baker in 14/11/2020
                         var identity = new System.Security.Principal.GenericIdentity(user.UserName);
                         var principal = new GenericPrincipal(identity, new string[0]);
                         System.Web.HttpContext.Current.User = principal;
                         Thread.CurrentPrincipal = principal;
                         Helper.MigrateCart(user.Id);
-
+                        //////////////
                         return RedirectToLocal(returnUrl);
                     }
                 case SignInStatus.LockedOut:
@@ -266,6 +267,7 @@ namespace PrimeMarket.Controllers
                 //*await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 string EmailBody = "Please, reset your password by clicking on the following link " + callbackUrl;
                 SendEmail(model.Email, EmailBody, "Reset Password");
+                //Helper.SendEmail(model.Email, "Reset Password", EmailBody);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -283,6 +285,7 @@ namespace PrimeMarket.Controllers
             mailMessage.Body = emailBody;
             // Specify the email Subject
             mailMessage.Subject = mailSubject;
+            mailMessage.IsBodyHtml = true;
 
             // No need to specify the SMTP settings as these 
             // are already specified in web.config
