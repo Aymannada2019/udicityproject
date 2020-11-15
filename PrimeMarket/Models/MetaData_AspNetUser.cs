@@ -12,10 +12,12 @@ namespace PrimeMarket.Models
     public partial class AspNetUser
     {
         [Display(Name = "المحافظة")]
+        [Required(ErrorMessage = "اختر المحافظة")]
         public decimal GovernoratetId { get; set; }
         public virtual Governorate Governorate { get; set; }
 
         [Display(Name = "المركز")]
+        [Required(ErrorMessage = "اختر المركز")]
         public decimal DistrictId { get; set; }
         public virtual District District { get; set; }
     }
