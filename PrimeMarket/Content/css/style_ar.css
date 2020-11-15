@@ -3750,6 +3750,32 @@ form[action$="ResetPassword"] {
     padding: 5px;
 }
 
+.default-btn-be{
+    align-items: flex-start;
+    text-align: center;
+    cursor: default;
+    color: buttontext;
+    background-color: buttonface;
+    box-sizing: border-box;
+    padding: 2px 6px 3px;
+    border-width: 2px;
+    border-style: outset;
+    border-color: buttonface;
+    border-image: initial;
+}
+
+.site-btn-be{
+    font-size: 14px;
+    color: #ffffff;
+    /* font-weight: 800; */
+    text-transform: uppercase;
+    display: inline-block;
+    padding: 5px 5px 5px;
+    background: #7fad39;
+    border: 1px solid #35520b;
+    border-radius: 4px;
+}
+
 @media only screen and (max-width: 767px) {
     #loginForm {
         margin: auto 2%;
