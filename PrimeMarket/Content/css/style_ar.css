@@ -3329,6 +3329,12 @@ ol {
     .sidebar__item:nth-child(2) {
         margin-top: -70px;
     }
+
+    .product__discount__item__pic{
+        min-width:351px;
+        display:flex;
+        justify-content: center;
+    }
     /*===============================*/
 
     .hero__categories {
