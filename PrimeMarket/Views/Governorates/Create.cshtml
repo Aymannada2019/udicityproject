@@ -28,18 +28,19 @@
             @Html.LabelFor(model => model.Governorate1, "اسم المحافظة", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Governorate1, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Governorate1, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model.Governorate1, "اسم المحافظة", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="حفظ" class="btn btn-default" />
+                <input type="submit" value="حفظ" class="site-btn" />|
+                @Html.ActionLink("عودة للمحافظات", "Index", null, new { @class = "site-btn" })
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("عودة للمحافظات", "Index")
+ 
 </div>

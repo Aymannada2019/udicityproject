@@ -4,15 +4,16 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
-
-<h2>تفاصيل</h2>
+<center>
+    <h2>تفاصيل المركز</h2>
+</center>
 
 <div>
-    <h4>المركز</h4>
+    @*<h4></h4>*@
     <hr />
     <dl class="dl-horizontal">
         <dt>المركز
-            @*@Html.DisplayNameFor(model => model.District1)*@
+           
         </dt>
 
         <dd>
@@ -20,7 +21,7 @@
         </dd>
 
         <dt>المحافظة
-            @*@Html.DisplayNameFor(model => model.Governorate.Governorate1)*@
+            
         </dt>
 
         <dd>
@@ -30,6 +31,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("تعديل", "Edit", new { id = Model.DistrictId }) |
-    @Html.ActionLink("عودة للمراكز", "Districtfilter", new { GovernorateId = Model.GovernorateId })
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.DistrictId },new { @class="site-btn"}) |
+    @Html.ActionLink("عودة للمراكز", "Index", new { GovernorateId = Model.GovernorateId }, new { @class = "site-btn" })
 </p>

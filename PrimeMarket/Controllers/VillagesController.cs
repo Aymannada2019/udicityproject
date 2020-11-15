@@ -9,6 +9,8 @@ using System.Web.Mvc;
 using PrimeMarket.Models;
 using PagedList;
 using PagedList.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 namespace PrimeMarket.Controllers
 {
     public class VillagesController : Controller
@@ -18,38 +20,21 @@ namespace PrimeMarket.Controllers
         // GET: Villages
         public ActionResult Index(int? page)
         {
-            var villages = db.Villages.Include(v => v.District);
-           // var model = new VillageGov();
-          //  return View(model);
-            //var villages1 = (from d in db.Districts
-            //                 join g in db.Governorates on d.GovernorateId equals g.GovernorateId
-            //                 join v in db.Villages on d.DistrictId equals v.DistrictId
-            //                 select new
-            //                 {
-            //                     Governorate1 = g.Governorate1,
-            //                     GovernorateId = g.GovernorateId,
-            //                     District1 = d.District1,
-            //                     DistrictId = d.DistrictId,
-            //                     Village1 = v.Village1,
-            //                     VillageId = v.VillageId,
-            //                     District= v.District
-            //                 }).Include(v => v.District);
-
-        //    var villages = villages1.Include(v => v.District);
-
-        //}
-
-            return View(villages.ToList().ToPagedList(page ?? 1, 20));
+            //var District = db.Districts.Where(r => r.DistrictId == DistrictId).FirstOrDefault();
+            // var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId && rs.GovernoratetId == District.GovernorateId);
+            var villages = db.Villages.Include(v => v.District).ToList();       
+            ViewBag.GovernoratesList = new SelectList(db.Governorates, "GovernorateId", "Governorate1", "1");
+            return View(villages.ToPagedList(page ?? 1, 20));
         }
         public ActionResult Villagesfilter(decimal DistrictId, int? page)
         {
-
-            var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
+            var District = db.Districts.Where(r => r.DistrictId == DistrictId).FirstOrDefault();
+            var villages = db.Villages.Include(v => v.District).Where(rs => rs.DistrictId == DistrictId );
             if (villages == null)
             {
                 return HttpNotFound();
             }
-
+            ViewBag.GovernoratesList = new SelectList(db.Governorates, "GovernorateId", "Governorate1", "1");
             return View(villages.ToList().ToPagedList(page ?? 1, 20));
         }
         // GET: Villages/Details/5
@@ -59,23 +44,60 @@ namespace PrimeMarket.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+           //Village village = db.Villages.Include(x => x.District).Include(g => g.Governorate).Where(x => x.VillageId == id && x.GovernoratetId==x.Governorate.GovernorateId).FirstOrDefault();
+            //var GovernorateId = village2.District.GovernorateId;
+            //var DistrictId = village2.DistrictId;
             Village village = db.Villages.Find(id);
+            //List<string> vv = new List<string>();
+            //Village village2 = new Village();
+            //foreach (District d in db.Districts)
+            //{
+            //    if (d.DistrictId == id)
+            //    {
+            //        var gid = d.GovernorateId;
+            //        foreach (Governorate g in db.Governorates.Where(h => h.GovernorateId == gid))
+            //        {
+            //            village2.Village1 = village.Village1;
+            //            village2.Governorate.Governorate1 = g.Governorate1;
+            //            village2.District.District1 = d.District1;
+            //            village2.VillageId = village.VillageId;
+            //        }
+            //    }
+            //}
+
             if (village == null)
             {
                 return HttpNotFound();
             }
+            ViewBag.Details = village;
             return View(village);
         }
 
         // GET: Villages/Create
-        public ActionResult Create(decimal DistrictId)
+        public ActionResult Create(decimal? DistrictId)
+           //  public ActionResult Create()
         {
 
             var dist =  db.Districts.Where(d => d.DistrictId == DistrictId).ToList();
-         //   var governorates = db.Governorates.ToList();
-            ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", DistrictId);
+           // var dist = db.Districts.ToList();
+            ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1");
             // var villages = db.Villages.Where(rs => rs.DistrictId == DistrictId);
-            ViewBag.GovernoratesList = new SelectList(db.Governorates,"GovernorateId","Governorate1","1");
+            List<SelectListItem> governorates = db.Governorates.AsNoTracking()
+
+                        .Select(n =>
+                        new SelectListItem
+                        {
+                            Value = n.GovernorateId.ToString(),
+                            Text = n.Governorate1
+                        }).ToList();
+            var categorytip = new SelectListItem()
+            {
+                Value = "0",
+                Text = "--- اختر المحافظة ---"
+            };
+            governorates.Insert(0, categorytip);
+            ViewBag.GovernoratesList = new SelectList(governorates, "Value", "Text", "0");
+           // ViewBag.GovernoratesList = new SelectList(db.Governorates,"GovernorateId","Governorate1", "0");
             return View();
         }
 
@@ -84,18 +106,19 @@ namespace PrimeMarket.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+
         public ActionResult Create([Bind(Include = "VillageId,Village1,DistrictId")] Village village)
         {
             if (ModelState.IsValid)
             {
                 // get last record
+                if(village.DistrictId>0 && village.Village1 != "") { 
                 Int64 max = (Int64)db.Villages.Max(p => p.VillageId)+1;
-                // add 1 to get new record id                         
-             //   string TempId="1000"+ (max + 1);
-          //      village.VillageId = (double)village.DistrictId + (max + 1);
+             
                 village.VillageId = max;
                 db.Villages.Add(village);
                 db.SaveChanges();
+                }
                 //return RedirectToAction("Index");
                 var village2 = db.Villages.Include(x=>x.District).Where(x=>x.VillageId==village.VillageId).FirstOrDefault();
                 var GovernorateId = village2.District.GovernorateId;
@@ -104,7 +127,7 @@ namespace PrimeMarket.Controllers
             }
             
             ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", village.DistrictId);
-            http://localhost:58090/Villages/Villagesfilter?DistrictId=206&GovernorateId=2
+           // http://localhost:58090/Villages/Villagesfilter?DistrictId=206&GovernorateId=2
             return View(village);
             //return RedirectToAction("Villagesfilter", "Villages", new { DistrictId= ViewBag.DistrictId, GovernorateId = GovernorateId });
         }
@@ -122,6 +145,25 @@ namespace PrimeMarket.Controllers
                 return HttpNotFound();
             }
             ViewBag.DistrictId = new SelectList(db.Districts, "DistrictId", "District1", village.DistrictId);
+            var village2 = db.Villages.Include(x => x.District).Where(x => x.VillageId == village.VillageId).FirstOrDefault();
+            var GovernorateId = village2.District.GovernorateId;
+            var DistrictId = village2.DistrictId;
+            List<SelectListItem> governorates = db.Governorates.AsNoTracking()
+
+                       .Select(n =>
+                       new SelectListItem
+                       {
+                           Value = n.GovernorateId.ToString(),
+                           Text = n.Governorate1
+                       }).ToList();
+            var categorytip = new SelectListItem()
+            {
+                Value = "0",
+                Text = "--- اختر المحافظة ---"
+            };
+            governorates.Insert(0, categorytip);
+            ViewBag.Govs = new SelectList(governorates, "Value", "Text", GovernorateId);
+          //  ViewBag.GovernorateId = new SelectList(db.Governorates, "GovernorateId", "Governorate1", GovernorateId);
             return View(village);
         }
 
@@ -179,9 +221,19 @@ namespace PrimeMarket.Controllers
 
         public JsonResult getDistrictList(int GovernorateId)
         {
+            
             db.Configuration.ProxyCreationEnabled = false;
             List<District> DistrictList = db.Districts.Where(district => district.GovernorateId == GovernorateId).ToList();
             return Json(DistrictList,JsonRequestBehavior.AllowGet);
+        }
+        public JsonResult getGovName(int DistrictId)
+        {
+
+            db.Configuration.ProxyCreationEnabled = false;
+            var village2 = db.Villages.Include(x => x.District).Where(x => x.DistrictId == DistrictId).FirstOrDefault();
+            var GovernorateId = village2.District.GovernorateId;
+            var GovName = db.Governorates.Where(g => g.GovernorateId == GovernorateId).FirstOrDefault();
+            return Json(GovName.Governorate1.ToString());
         }
     }
 }

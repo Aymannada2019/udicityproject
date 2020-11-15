@@ -9,6 +9,18 @@
     <h4>منتج فرعى</h4>
     <hr />
     <dl class="dl-horizontal">
+
+
+        <dt>
+            المنتج الرئيسى
+            @*@Html.DisplayNameFor(model => model.Category.Category1)*@
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Category.Category1)
+        </dd>
+
+    </dl>
         <dt>المنتج الفرعى
             @*@Html.DisplayNameFor(model => model.SubCategory1)*@
         </dt>
@@ -34,17 +46,8 @@
             }
 </dd>
 
-        <dt>المنتج الرئيسى
-            @*@Html.DisplayNameFor(model => model.Category.Category1)*@
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Category.Category1)
-        </dd>
-
-    </dl>
 </div>
 <p>
-    @Html.ActionLink("تعديل", "Edit", new { id = Model.SubCategoryId }) |
-    @Html.ActionLink("عودة للمنتجات الفرعية", "Index")
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.SubCategoryId }, new { @class = "site-btn" }) |
+    @Html.ActionLink("عودة للمنتجات الفرعية", "Index",null, new { @class = "site-btn" })
 </p>

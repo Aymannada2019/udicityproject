@@ -4,6 +4,9 @@
     ViewBag.Title = "Details";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+
 
 <h2>تفاصيل</h2>
 
@@ -11,25 +14,53 @@
     <h4>القرية</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            المحافظة
+
+        </dt>
+
+        <dd>
+           @Html.HiddenFor(model => model.DistrictId)
+            @Html.Display("GovName")
+            @*@Html.DisplayFor(model => model.Governorate.Governorate1,new { @Value = ViewBag.Governorate1 })*@
+     </dd>
+        <dt>
+            المركز
+
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.District.District1)
+        </dd>
         <dt>اسم القرية
-            @*@Html.DisplayNameFor(model => model.Village1)*@
+           
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.Village1)
         </dd>
 
-        <dt>المركز
-            @*@Html.DisplayNameFor(model => model.District.District1)*@
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.District.District1)
-        </dd>
+       
 
     </dl>
 </div>
 <p>
-    @Html.ActionLink("تعديل", "Edit", new { id = Model.VillageId }) |
-    @Html.ActionLink("عودة للقرى", "Villagesfilter", new { DistrictId = Model.DistrictId,GovernorateId = Request["GovernorateId"] })
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.VillageId },new { @class = "site-btn" }) |
+    @Html.ActionLink("عودة للقرى", "Index", new { DistrictId = Model.DistrictId }, new { @class = "site-btn" })
 </p>
+<script src="~/Scripts/jquery-1.10.2.min.js"></script>
+<script>
+    $(document).ready(function () {
+        debugger;
+        var disid = $("#DistrictId").val();
+        $.get("/Villages/getGovName", { DistrictId: disid }, function (data) {
+            //$("#GovName").empty();
+
+
+            //$.each(data, function (ss) {
+            $("#GovName").val() = data;
+            //});
+            });
+        });
+  
+</script>

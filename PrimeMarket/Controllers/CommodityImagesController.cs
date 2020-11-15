@@ -66,9 +66,10 @@ namespace PrimeMarket.Controllers
                 if (file != null)
                 {
                     var fileext = file.FileName.Split('.');
-                    file.SaveAs(HttpContext.Server.MapPath("~/img/commodities/")
-                                                        + "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
-                    commodityImages.ImagePath = "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    string imgpath = "/img/commodities/Commodity"+ DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    file.SaveAs(HttpContext.Server.MapPath(imgpath));
+                                                       // + "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    commodityImages.ImagePath = imgpath; //"Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
 
                 }
               // commodityImages.CommodityId =decimal.Parse(Request["CommodityId"].ToString());
@@ -113,13 +114,15 @@ namespace PrimeMarket.Controllers
                 if (file != null)
                 {
                     //delete old  image file
-                    string oldimageFilePath = Server.MapPath(@"~/img/commodities/" + commodityImages.ImagePath);
+                    string oldimageFilePath = Server.MapPath(@commodityImages.ImagePath);
                     System.IO.File.Delete(oldimageFilePath);
                     //upload new file
                     var fileext = file.FileName.Split('.');
-                    file.SaveAs(HttpContext.Server.MapPath("~/img/commodities/")
-                                                        + "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
-                    commodityImages.ImagePath = "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+                    string imgpath = "/img/commodities/Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
+
+                    file.SaveAs(HttpContext.Server.MapPath(imgpath));
+                    // + "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1]);
+                    commodityImages.ImagePath = imgpath;// "Commodity" + DateTime.Now.Year + DateTime.Now.Month + DateTime.Now.Day + DateTime.Now.Hour + DateTime.Now.Minute + "." + fileext[1];
 
                 }
                 db.Entry(commodityImages).State = EntityState.Modified;

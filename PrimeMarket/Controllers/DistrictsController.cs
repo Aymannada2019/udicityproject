@@ -69,9 +69,11 @@ namespace PrimeMarket.Controllers
                 int max = db.Districts.Max(p => p.DistrictId);
                 // add 1 to get new record id                         
                 district.DistrictId = (short)(max + 1);
-
-                db.Districts.Add(district);
-                db.SaveChanges();
+                if (district.District1 != "")
+                {
+                    db.Districts.Add(district);
+                    db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 

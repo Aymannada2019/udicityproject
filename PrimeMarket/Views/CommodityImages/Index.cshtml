@@ -6,47 +6,68 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 <h2>الصور الخاصة بالسلعة</h2>
 
 <p>
-    @Html.ActionLink("اضافة صورة جديدة ", "Create", new { CommodityId = Request["CommodityId"] }, htmlAttributes: null)
+    @Html.ActionLink("اضافة صورة جديدة ", "Create", new { CommodityId = Request["CommodityId"] },  new { @class = "site-btn" })
 </p>
-<table class="table">
+<table id="Commoditiesimgtbl" class="disply table-responsive">
+    <thead>
     <tr>
        
         <th>السلعة
-            @*@Html.DisplayNameFor(model => model.First().Commodity.Title)*@
+        
         </th>
         <th> الصورة
-            @*@Html.DisplayNameFor(model => model.First().ImagePath)*@
+          
         </th>
         <th></th>
     </tr>
+</thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
 
-@foreach (var item in Model) {
-    <tr>
-       
-        <td>
-            @Html.DisplayFor(modelItem => item.Commodity.Title)
-        </td>
-        <td>
-            @if (item.ImagePath != "" && item.ImagePath!=null)
+                <td>
+                    @Html.DisplayFor(modelItem => item.Commodity.Title)
+                </td>
+                <td>
+                    @if (item.ImagePath != "" && item.ImagePath!=null)
             {
-                <img src="~/img/commodities/@Html.DisplayFor(modelItem => item.ImagePath)" id="commidityimage" style="height:40px;width:40px;" name="commidityimage" />
+            <img src="@Html.DisplayFor(modelItem => item.ImagePath)" id="commidityimage" style="height:40px;width:40px;" name="commidityimage" />
             }
             else
             {
             @Html.DisplayFor(modelItem => item.ImagePath)}
-        </td>
-        <td>
-            @Html.ActionLink("تعديل", "Edit", new { id=item.CommodityImageId }) |
-            @Html.ActionLink("تفاصيل", "Details", new { id=item.CommodityImageId }) |
-            @Html.ActionLink("حذف", "Delete", new { id = item.CommodityImageId })
-        </td>
-    </tr>
-}
+                </td>
+                <td>
+                    <i class="large material-icons btn-default">
+                        @Html.ActionLink("edit", "Edit", new { id = item.CommodityImageId }, new { @title = "تعديل ", @style = "color:gray" })
+                    </i>
+                    |
+                    <i class="large material-icons ">
+                        @Html.ActionLink("storage", "Details", new { id = item.CommodityImageId }, new { @title = "تفاصيل ", @style = "color:gray" })
+                    </i>|
+                    <i class="large material-icons">
+                     @Html.ActionLink("delete", "Delete", new { id = item.CommodityImageId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
+                </td>
 
+            </tr>
+        }
+    </tbody>
 </table>
-<p>@Html.ActionLink("عودة للسلع", "Index", "Commodities")</p>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))
+<p>@Html.ActionLink("عودة للسلع", "Index", "Commodities",null,new { @class = "site-btn" })</p>
+@*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Commoditiesimgtbl').DataTable({
+                "language": {
+                    "url": "/content/arabic.json"
+                }
+            });
+        });
+    </script>
+}
