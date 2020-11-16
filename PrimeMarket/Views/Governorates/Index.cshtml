@@ -15,7 +15,7 @@
 
    
         <div class="col-lg-4">
-            @Html.ActionLink("اضافة محافظة", "Create", null, new { @class = "site-btn" })
+            @Html.ActionLink("اضافة محافظة", "Create", null, new { @class = "site-btn-be" })
         </div>
         @*<div class="col-lg-8">
             @using (Html.BeginForm("Index", "Governorates", FormMethod.Get))
@@ -52,7 +52,7 @@
                                     @Html.ActionLink("storage", "Details", new { id = item.GovernorateId }, new { @title = "تفاصيل ", @style = "color:gray" })
                                 </i> |
                                 <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.GovernorateId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
-                                | @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " })
+                                | @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
 
                             </td>
                             @*<td>
@@ -66,7 +66,7 @@
                     }
 </tbody>
 </table>
-            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], @class = "site-btn" }))*@
+            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], @class = "site-btn-be" }))*@
 
         </div>
     </div>

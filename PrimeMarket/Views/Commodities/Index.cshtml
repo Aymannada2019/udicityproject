@@ -21,18 +21,7 @@
                 else
                     t.prop('checked', false);
 
-                //if (id = i.tostring())
-                //    t.style.display = chkYes.checked ? "block" : "none";
-                //else
-                //    t.style.display = chkYes.checked ? "block" : "none";
-                //t.onclick = function () {
-                //    if (setCheck != this) {
-                //        setCheck = this;
-                //    } else {
-                //        this.checked = false;
-                //        setCheck = null;
-                //    }
-                //};
+              
             }
         }
     </script>
@@ -40,7 +29,7 @@
     <h2>السلع </h2>
 </center>
     <p>
-        @Html.ActionLink("تسجيل سلعة جديدة", "Create",null,new {@class= "glyphicon glyphicon-plus site-btn" })
+        @Html.ActionLink("تسجيل سلعة جديدة", "Create",null,new {@class= "glyphicon glyphicon-plus site-btn-be" })
     </p>
     @using (Html.BeginForm("Index", "Commodities", FormMethod.Get))
     {
@@ -113,7 +102,7 @@
                             @Html.ActionLink("storage", "Details", new { id = item.CommodityId }, new { @title = "تفاصيل ", @style = "color:gray" })
                         </i> |
                         <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.CommodityId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
-                        | @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " })
+                        | @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
 
                     </td>
                    

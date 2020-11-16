@@ -10,7 +10,7 @@
 <h2>المنتجات الرئيسية</h2>
 
 <p>
-    @Html.ActionLink("اضافة منتج رئيسى", "Create", null,new { @class = "site-btn" })
+    @Html.ActionLink("اضافة منتج رئيسى", "Create", null,new { @class = "site-btn-be" })
 </p>
 <table  id="categorytbl" class="disply table-responsive">
     <thead>
@@ -58,7 +58,7 @@
                 </i> |
                 <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.CategoryId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
                 |
-                @Html.ActionLink("المنتجات الفرعية", "catfilter", "SubCategories", new { CategoryId = item.CategoryId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " })
+                @Html.ActionLink("المنتجات الفرعية", "catfilter", "SubCategories", new { CategoryId = item.CategoryId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
             </td>
         </tr>
     </tbody>

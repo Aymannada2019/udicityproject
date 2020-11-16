@@ -10,7 +10,7 @@
 <h2>المراكز</h2>
 
 <p>
-    @Html.ActionLink("أضافة مركز جديد", "Create", new { GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn" })
+    @Html.ActionLink("أضافة مركز جديد", "Create", new { GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn-be" })
 </p>
 <table id="Districttbl" class="disply table-responsive">
     <thead>
@@ -45,18 +45,18 @@
                         @Html.ActionLink("storage", "Details", new { id = item.DistrictId }, new { @title = "تفاصيل ", @style = "color:gray" })
                     </i> |
                     <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.DistrictId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
-                    | @Html.ActionLink("القرى", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId, GovernorateId = item.GovernorateId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " })
+                    | @Html.ActionLink("القرى", "Villagesfilter", "Villages", new { DistrictId = item.DistrictId, GovernorateId = item.GovernorateId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
 
                 </td>
             </tr>
         }
     </tbody>
 </table>
-@*@Html.PagedListPager(Model, page => Url.Action("Districtfilter", new { page, GovernorateId = Request["GovernorateId"], @class = "site-btn" }))*@
+@*@Html.PagedListPager(Model, page => Url.Action("Districtfilter", new { page, GovernorateId = Request["GovernorateId"], @class = "site-btn-be" }))*@
 <div>
     <br />
-    @Html.ActionLink("عودة للمحافظات", "Index", "Governorates", new { GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn" })
-    @*@Html.ActionLink("عودة للمحافظات", "Index", "Governorates", new { @class = "site-btn" })*@
+    @Html.ActionLink("عودة للمحافظات", "Index", "Governorates", new { GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn-be" })
+    @*@Html.ActionLink("عودة للمحافظات", "Index", "Governorates", new { @class = "site-btn-be" })*@
 </div>
 @section Scripts{
     <script>

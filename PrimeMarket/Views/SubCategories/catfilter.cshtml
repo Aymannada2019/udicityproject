@@ -10,7 +10,7 @@
 <h2>المنتجات الفرعية</h2>
 
 <p>
-    @Html.ActionLink("اضافة منتج فرعى جديد", "Create",null, new { @class = "site-btn" })
+    @Html.ActionLink("اضافة منتج فرعى جديد", "Create",null, new { @class = "site-btn-be" })
 </p>
 <table id="subcategorytbl" class="disply table-responsive">
     <thead>
@@ -71,7 +71,7 @@
     }
 </tbody>
 </table>
-@Html.ActionLink("عودة للمنتج الرئيسى", "Index", "Categories", null,new { @class = "site-btn" })
+@Html.ActionLink("عودة للمنتج الرئيسى", "Index", "Categories", null,new { @class = "site-btn-be" })
 @*@Html.PagedListPager(Model, page => Url.Action("catfilter", new { page }))*@
 @section Scripts{
     <script>

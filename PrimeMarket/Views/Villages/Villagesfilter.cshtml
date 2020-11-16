@@ -13,11 +13,11 @@
 <p>
   @*@if (Request["DistrictId"] != null)
   {
-    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn" })
+    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn-be" })
   }
   else
   {*@
-    @Html.ActionLink("اضافة قرية جديدة", "Create", null, new { @class = "site-btn" })
+    @Html.ActionLink("اضافة قرية جديدة", "Create", null, new { @class = "site-btn-be" })
   @*}*@
 </p>
 <table id="villagetbl" class="disply table-responsive">
@@ -63,11 +63,11 @@
         }
     </tbody>
 </table>
-@*@Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page, @class="site-btn" }))*@
+@*@Html.PagedListPager(Model, page => Url.Action("Villagesfilter", new { page, @class="site-btn-be" }))*@
 <div>
    
    
-@Html.ActionLink("عودة للمراكز", "Index", "Districts",null, new { @class = "site-btn" })
+@Html.ActionLink("عودة للمراكز", "Index", "Districts",null, new { @class = "site-btn-be" })
 
 
 

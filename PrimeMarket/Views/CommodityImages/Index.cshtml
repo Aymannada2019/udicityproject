@@ -10,7 +10,7 @@
 <h2>الصور الخاصة بالسلعة</h2>
 
 <p>
-    @Html.ActionLink("اضافة صورة جديدة ", "Create", new { CommodityId = Request["CommodityId"] },  new { @class = "site-btn" })
+    @Html.ActionLink("اضافة صورة جديدة ", "Create", new { CommodityId = Request["CommodityId"] },  new { @class = "site-btn-be" })
 </p>
 <table id="Commoditiesimgtbl" class="disply table-responsive">
     <thead>
@@ -58,7 +58,7 @@
         }
     </tbody>
 </table>
-<p>@Html.ActionLink("عودة للسلع", "Index", "Commodities",null,new { @class = "site-btn" })</p>
+<p>@Html.ActionLink("عودة للسلع", "Index", "Commodities",null,new { @class = "site-btn-be" })</p>
 @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page }))*@
 @section Scripts{
     <script>
