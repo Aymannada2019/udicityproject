@@ -6,37 +6,37 @@ using System.Linq;
 using System.Net.Mail;
 using System.Web;
 using Microsoft.AspNet.Identity;
-
+using System.Configuration;
 
 namespace PrimeMarket.Models
 {
     public class Helper
     {
         // ApplicationDbContext db = new ApplicationDbContext();
-        public static void SendEmail(string To,string Subject, string Body)
+        public static void SendMail(string To, string Subject, string Body)
         {
             try
             {
-                string From = "Souq.prime.arc@gmail.com";
-                string PWD = "S0uQ.9R!M3Pa55";
-                MailMessage mail = new MailMessage(From, To);
-                mail.Subject = Subject;
-                mail.Body = Body;
-                mail.IsBodyHtml = true;
-                
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;// 25;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.EnableSsl = true;
-                client.Credentials = new System.Net.NetworkCredential(From, PWD);
-                client.Host = "smtp.gmail.com";
-                client.Send(mail);
+                // Specify the from and to email address
+                string MailSender = ConfigurationManager.AppSettings["MailSender"];
+                MailMessage mailMessage = new MailMessage(MailSender, To);
+                // Specify the email body
+                mailMessage.Body = Body;
+                // Specify the email Subject
+                mailMessage.Subject = Subject;
+                mailMessage.IsBodyHtml = true;
+
+                // No need to specify the SMTP settings as these 
+                // are already specified in web.config
+                SmtpClient smtpClient = new SmtpClient();
+                // Finall send the email message using Send() method
+                smtpClient.Send(mailMessage);
             }
             catch
             {
 
             }
+
         }
 
         public static bool isInRole(string UserName, string rolename)

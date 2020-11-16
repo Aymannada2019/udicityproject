@@ -787,6 +787,5 @@ D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\Pr
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\bin\Microsoft.Owin.Security.Google.xml
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\bin\Microsoft.Owin.Security.Twitter.xml
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\obj\Debug\PrimeMarket.csprojResolveAssemblyReference.cache
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\obj\Debug\PrimeMarket.dll
 D:\DriveE\Mohammed_Work\Work\E_Marketing_CCICREES\PRIMEMarket_Site_BackToWork\PrimeMarket\obj\Debug\PrimeMarket.pdb

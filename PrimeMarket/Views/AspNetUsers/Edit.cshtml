@@ -6,8 +6,12 @@
 @Scripts.Render("~/bundles/jquery")
 @Scripts.Render("~/bundles/jqueryui")
 
-
-<h2>تعديل المستخدم</h2>
+<style>
+    .form-control {
+        padding: 0px 10px !important;
+    }
+</style>
+<h4>تعديل بيانات المستخدم</h4>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
     <script type="text/javascript">
@@ -45,7 +49,7 @@
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
@@ -53,7 +57,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control" } })
@@ -61,7 +65,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.PhoneNumber, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PhoneNumber, new { htmlAttributes = new { @class = "form-control" } })
@@ -104,7 +108,7 @@
             </div>
         </div>
 
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.VillageId, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.DropDownList("VillageId", null,"- اختر القرية -", htmlAttributes: new { @class = "form-control" })
@@ -114,7 +118,7 @@
             </div>
         </div>
         <br /><br />
-        <div class="form-group">
+        <div class="form-group row">
             @Html.LabelFor(model => model.ImagePath, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @if (Model.ImagePath != null)
@@ -139,7 +143,7 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="تعديل" class="btn btn-default" />
+                <input type="submit" value="تعديل" class="site-btn" />
             </div>
         </div>
     </div>
