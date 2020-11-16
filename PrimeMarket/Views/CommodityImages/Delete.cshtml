@@ -15,7 +15,7 @@
         <div class="col-md-2">
             <b>
                 السلعة
-                @*@Html.DisplayNameFor(model => model.Commodity.Title)*@
+              
             </b>
         </div><div class="col-md-10">
             @Html.DisplayFor(model => model.Commodity.Title)
@@ -25,12 +25,12 @@
         <div class="col-md-2">
             <b>
                 الصورة
-                @*@Html.DisplayNameFor(model => model.ImagePath)*@
+           
             </b>
         </div><div class="col-md-10">
             @if (Model.ImagePath != "" && Model.ImagePath != null)
             {
-                <img src="~/img/commodities/@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
+                <img src="@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
             }
             else
             {
@@ -49,8 +49,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="حذف" class="btn btn-default" /> |
-            @Html.ActionLink("عودة لقائمة الصور", "Index", new { CommodityId = Model.CommodityId }, htmlAttributes: null)
+            <input type="submit" value="حذف" class="site-btn-be" /> |
+            @Html.ActionLink("عودة لقائمة الصور", "Index", new { CommodityId = Model.CommodityId }, new { @class = "site-btn-be" })
         </div>
     }
 </div>

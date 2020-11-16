@@ -19,8 +19,8 @@ namespace PrimeMarket.Models
         {
             this.Carts = new HashSet<Cart>();
             this.CommodityImages = new HashSet<CommodityImage>();
-            this.OrderItems = new HashSet<OrderItem>();
             this.CommodityRatings = new HashSet<CommodityRating>();
+            this.OrderItems = new HashSet<OrderItem>();
         }
     
         public decimal CommodityId { get; set; }
@@ -45,11 +45,13 @@ namespace PrimeMarket.Models
         public virtual ICollection<Cart> Carts { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CommodityImage> CommodityImages { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CommodityRating> CommodityRatings { get; set; }
         public virtual PriceUnit PriceUnit { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrderItem> OrderItems { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CommodityRating> CommodityRatings { get; set; }
+
+       
     }
 }

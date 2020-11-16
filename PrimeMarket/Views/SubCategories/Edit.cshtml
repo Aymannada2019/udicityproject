@@ -72,7 +72,7 @@
              }
               
                 <input id="ImagePath" title="تحميل صورة لمنتج فرعى"
-                       type="file" name="ImagePath" onchange="fileCheck(this);" />
+                       type="file" name="ImagePath" onchange="fileCheck(this);"  />
             
                 @Html.ValidationMessageFor(model => model.ImagePath, "", new { @class = "text-danger" })
             </div>
@@ -80,14 +80,14 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="تعديل" class="btn btn-default" />
+                <input type="submit" value="تعديل" class="site-btn-be btn-default" />|@Html.ActionLink("عودة للمنتجات الفرعية", "Index",null,new {  @class = "site-btn-be" })
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("عودة للمنتجات الفرعية", "Index")
+  
 </div>
 
 @section Scripts {

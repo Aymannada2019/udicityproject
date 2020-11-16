@@ -180,7 +180,7 @@
 
 
                                 <div class="col-md-4">
-                                    <img src="~/img/commodities/@file.ImagePath" style="height:200px;width:200px;" />
+                                    <img src="@file.ImagePath" style="height:200px;width:200px;" />
                                     <p>
                                         @file.CommodityImageId
                                     </p>
@@ -205,6 +205,6 @@
         </div>
 
         <p>
-            @Html.ActionLink("تعديل", "Edit", new { id = Model.CommodityId },new { @class = "site-btn" } ) |
-            @Html.ActionLink("عودة للسلع", "Index", null,new { @class = "site-btn" })
+            @Html.ActionLink("تعديل", "Edit", new { id = Model.CommodityId },new { @class = "site-btn-be" } ) |
+            @Html.ActionLink("عودة للسلع", "Index", null,new { @class = "site-btn-be" })
         </p>
