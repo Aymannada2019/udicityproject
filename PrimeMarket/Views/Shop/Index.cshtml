@@ -167,10 +167,21 @@
                                                                 <img src="@latestItem.CommodityImages.FirstOrDefault().ImagePath" alt="">
                                                             </div>
                                                             <div class="latest-product__item__text">
+                                                       
                                                                 <h6>@latestItem.Title</h6>
                                                                 <span style="direction:rtl;">@latestItem.Price ج.م /@latestItem.PriceUnit.PriceUnit1</span>
                                                             </div>
                                                         </a>
+                                                        <div>
+                                                            <form id="AddToCartForm @i" name="AddToCartForm" method="post" action="/Shop/AddToCart">
+                                                                @*<input type="hidden" id="hdn_CommodityId" name="hdn_CommodityId" value="@saleItem.CommodityId" />
+                                                                <input type="hidden" id="txt_Quantity" name="txt_Quantity" value="1" />*@
+
+                                                                <ul class="product__item__pic__hover">
+                                                                    <li><a class="addtocart"><i class="fa fa-shopping-cart"></i></a></li>
+                                                                </ul>
+                                                            </form>
+                                                        </div>
 
                                                     }
                                                 } @*inner for*@

@@ -1306,6 +1306,9 @@ ol {
             visibility: hidden;
         }
 
+ .sidebar__item .product__item__pic__hover{                     /*khmonir // new style for sidebar cart*/
+    position: relative;  
+    }
 /*---------------------
   Shop Grid
 -----------------------*/
@@ -3787,4 +3790,3 @@ form[action$="ResetPassword"] {
         background-color: #D8D8B3;
     }
 }
-
