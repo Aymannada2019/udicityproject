@@ -44,7 +44,7 @@
                 }
 
                 <input id="ImagePath" title="تحميل صورة منتج رئيسى"
-                       type="file" name="ImagePath" onchange="fileCheck(this);" />
+                       type="file" name="ImagePath" onchange="fileCheck(this);"  />
 
 
 
@@ -55,12 +55,12 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="تعديل" class="btn btn-default" />
+                <input type="submit" value="تعديل" class="site-btn-be btn-default" />|@Html.ActionLink("عودة للنتجات الرئيسية", "Index",null, new { @class = "site-btn-be" })
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("عودة للنتجات الرئيسية", "Index")
+  
 </div>

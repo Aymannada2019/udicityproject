@@ -5,10 +5,10 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
  }
 
-<h2>بيانات </h2>
+@*<h2>بيانات </h2>*@
 
 <div>
-    <h4>المحافظة</h4>
+    <h4>بيانات المحافظة</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>اسم المحافظة
@@ -22,6 +22,6 @@
     </dl>
 </div>
 <p>
-    @Html.ActionLink("تعديل", "Edit", new { id = Model.GovernorateId }) |
-    @Html.ActionLink("عودة للمحافظات", "Index")
+    @Html.ActionLink("تعديل", "Edit", new { id = Model.GovernorateId }, new { @class = "site-btn-be" }) |
+    @Html.ActionLink("عودة للمحافظات", "Index", null, new { @class = "site-btn-be" })
 </p>

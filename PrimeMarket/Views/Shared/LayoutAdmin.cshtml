@@ -48,12 +48,13 @@
             <link rel="stylesheet" href="/content/css/owl.carousel.min.css" type="text/css">
             <link rel="stylesheet" href="/content/css/slicknav.min.css" type="text/css">
             <link rel="stylesheet" href="/content/css/style_ar.css" type="text/css">
-
+            <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" />
 
 
             <script src="~/Scripts/jquery-1.10.2.min.js"></script>
             <script src="~/Scripts/jquery.validate.min.js"></script>
             <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+            
         </head>
 
         <body>
@@ -69,12 +70,17 @@
             <header class="header">
 
                 <div class="container">
+                    <div class="row" dir="rtl">
+                        <div class="col-lg-12" style="text-align:right;direction:rtl;">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
                     <div class="row">
                         <div class="col-lg-3">
                             <div class="header__logo" style="margin-left:100px;margin-right:100px;">
-                                <a href="./index.html"><img src="~/img/logo.png" alt=""></a>
+                                <a href="/shop/"><img src="~/img/logo.png" alt=""></a>
                                 @*<a href="~/Account/Login"><i class="fa fa-user"></i> Login</a>*@
-                                @Html.Partial("_LoginPartial")
+                                
                             </div>
                         </div>
                         <div class="col-lg-9">
@@ -142,13 +148,13 @@
             <script src="~/Scripts/js/jquery-ui.min.js"></script>
             <script src="~/Scripts/js/jquery.slicknav.js"></script>
             <script src="~/Scripts/js/mixitup.min.js"></script>
-
+            <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
             @*<script src="~/Scripts/js/owl.carousel.min.js"></script>
                 <script src="~/Scripts/js/main.js"></script>
             *@
-            @RenderSection("Scripts", false);
-
+            @RenderSection("Scripts", false)
+            
         </body>
 
     </html>

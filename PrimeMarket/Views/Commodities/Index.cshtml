@@ -6,6 +6,7 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
     }
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
     <script type="text/javascript">
 
 
@@ -20,18 +21,7 @@
                 else
                     t.prop('checked', false);
 
-                //if (id = i.tostring())
-                //    t.style.display = chkYes.checked ? "block" : "none";
-                //else
-                //    t.style.display = chkYes.checked ? "block" : "none";
-                //t.onclick = function () {
-                //    if (setCheck != this) {
-                //        setCheck = this;
-                //    } else {
-                //        this.checked = false;
-                //        setCheck = null;
-                //    }
-                //};
+              
             }
         }
     </script>
@@ -39,7 +29,7 @@
     <h2>السلع </h2>
 </center>
     <p>
-        @Html.ActionLink("تسجيل سلعة جديدة", "Create",null,new {@class= "glyphicon glyphicon-plus site-btn" })
+        @Html.ActionLink("تسجيل سلعة جديدة", "Create",null,new {@class= "glyphicon glyphicon-plus site-btn-be" })
     </p>
     @using (Html.BeginForm("Index", "Commodities", FormMethod.Get))
     {
@@ -54,17 +44,18 @@
                 <option value="1">الكل</option>
                 <option value="2">تم نشرها</option>
                 <option value="3">لم تنشر</option>
-            </select>
+            </select><input type="submit" value="بحث" /><i class="fa icon_search icon"></i>
         </div><div class="col-md-8">
                   
-    @Html.TextBox("search")<input type="submit" value="بحث" /><i class="fa icon_search icon"></i>
+  
 </div>
 
         
 
 </div>
     }
-    <table class="table" height="" >
+    <table id="Commoditiestbl" class="disply table-responsive">
+    <thead>
         <tr>
             <th >
                 اسم السلعة
@@ -85,30 +76,51 @@
             <th></th>
 
         </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Title)
+                    </td>
+                    @*<td>
+                        @Html.DisplayFor(modelItem => item.Category.Category1)
+                    </td>*@
+                    <td>
+                        @Html.DisplayFor(modelItem => item.SubCategory.SubCategory1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Quantity)
+                    </td>
+                    <td>
+                        <i class="large material-icons btn-default">
+                            @Html.ActionLink("edit", "Edit", new { id = item.CommodityId }, new { @title = "تعديل ", @style = "color:gray" })
+                        </i>
+                        |
+                        <i class="large material-icons ">
+                            @Html.ActionLink("storage", "Details", new { id = item.CommodityId }, new { @title = "تفاصيل ", @style = "color:gray" })
+                        </i> |
+                        <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.CommodityId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
+                        | @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
 
-        @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>
-            @*<td>             
-                @Html.DisplayFor(modelItem => item.Category.Category1)
-            </td>*@
-            <td>
-                @Html.DisplayFor(modelItem => item.SubCategory.SubCategory1)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Quantity)
-            </td>
-            <td>
-     @Html.ActionLink("تعديل", "Edit", new { id = item.CommodityId }, new { @class = "btn btn-success ", @style= "font-size:10px !important; " })|
-    @Html.ActionLink("تفاصيل", "Details", new { id = item.CommodityId }, new { @class = "btn btn-success", @style = "font-size:10px !important;" }) |
-    @Html.ActionLink("حذف", "Delete", new { id = item.CommodityId }, new { @class = "btn btn-danger", @style = "font-size:10px !important; background-color:red" })|
-    @Html.ActionLink("الصور", "Index", "CommodityImages", new { CommodityId = item.CommodityId },  new { @class = "btn btn-default", @style = "font-size:10px !important;" })
-
-</td>
-        </tr>
-        }
-        <script src="~/bin/jquery.min.js"></script>
+                    </td>
+                   
+                </tr>
+            }
+        </tbody>
+      
     </table>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))
+<script src="~/bin/jquery.min.js"></script>
+    @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"],@class="site-btn" }))*@
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Commoditiestbl').DataTable({
+                "language": {
+                    "url": "/content/arabic.json"
+                }
+            });
+        });
+    </script>
+}

@@ -86,8 +86,11 @@ namespace PrimeMarket.Controllers
                 int max = db.Governorates.Max(p => p.GovernorateId);
  // add 1 to get new record id                         
                 governorate.GovernorateId = (short)(max + 1);
-db.Governorates.Add(governorate);
+                if (governorate.Governorate1 != "")
+                { 
+                db.Governorates.Add(governorate);
                 db.SaveChanges();
+                }
                 return RedirectToAction("Index");
             }
 

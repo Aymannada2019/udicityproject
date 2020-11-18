@@ -5,45 +5,80 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
 
-
-<div class="col-lg-4" >
+<center>
     <h2>المحافظات</h2>
-     <p >
-        @Html.ActionLink("اضافة محافظة", "Create")
-    </p>
-    @using (Html.BeginForm("Index", "Governorates", FormMethod.Get))
-    {
-        <p><b>بحث ب:</b>@Html.TextBox("Search") <input type="submit" value="بحث" /></p>
-    }
-</div>
-<div class="col-lg-8"></div>
-<div class="col-lg-8">
-    <table class="table">
-        <tr>
-            <th>المحافظة
-                @*@Html.DisplayNameFor(model => model.First().Governorate1,,,"المحافظة")*@
-            </th>
-            <th></th>
-        </tr>
+</center>
+<div class="container">
+    <div class="row">
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Governorate1)
-                </td>
-                <td>
-                 
-                    @Html.ActionLink("تعديل", "Edit", new { id = item.GovernorateId }) |
-                    @Html.ActionLink("تفاصيل", "Details", new { id = item.GovernorateId }) |
-                    @Html.ActionLink("حذف", "Delete", new { id = item.GovernorateId })  |
-                    @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, htmlAttributes: null)
-                </td>
-            </tr>
-        }
+   
+        <div class="col-lg-4">
+            @Html.ActionLink("اضافة محافظة", "Create", null, new { @class = "site-btn-be" })
+        </div>
+        @*<div class="col-lg-8">
+            @using (Html.BeginForm("Index", "Governorates", FormMethod.Get))
+            {
+                <p><b>بحث ب:</b>@Html.TextBox("Search") <input type="submit" value="بحث" /></p>
+            }
+        </div>*@
+    </div>
+    <div class="row">
+        <div class="col-lg-8">
+            <table id="Governoratetbl" class="disply table-responsive">
+    <thead>
+                <tr>
+                    <th>
+                        المحافظة
 
-    </table>
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"] }))
+                    </th>
+                    <th></th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Governorate1)
+                            </td>
+                            <td>
+                                <i class="large material-icons btn-default">
+                                    @Html.ActionLink("edit", "Edit", new { id = item.GovernorateId }, new { @title = "تعديل ", @style = "color:gray" })
+                                </i>
+                                |
+                                <i class="large material-icons ">
+                                    @Html.ActionLink("storage", "Details", new { id = item.GovernorateId }, new { @title = "تفاصيل ", @style = "color:gray" })
+                                </i> |
+                                <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.GovernorateId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
+                                | @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, new { @class = "site-btn-be", @style = "font-size:10px !important; " })
 
-</div>
+                            </td>
+                            @*<td>
+
+                        @Html.ActionLink("تعديل", "Edit", new { id = item.GovernorateId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " }) |
+                        @Html.ActionLink("تفاصيل", "Details", new { id = item.GovernorateId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " }) |
+                        @Html.ActionLink("حذف", "Delete", new { id = item.GovernorateId }, new { @class = "btn btn-danger", @style = "font-size:10px !important; " })  |
+                        @Html.ActionLink("المراكز", "Districtfilter", "Districts", new { GovernorateId = item.GovernorateId }, new { @class = "btn btn-success", @style = "font-size:10px !important; " })
+                    </td>*@
+                        </tr>
+                    }
+</tbody>
+</table>
+            @*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, search = Request.QueryString["search"], @class = "site-btn-be" }))*@
+
+        </div>
+    </div>
+    </div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('#Governoratetbl').DataTable({
+                "language": {
+                    "url": "/content/arabic.json"
+                }
+            });
+        });
+    </script>
+}

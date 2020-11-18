@@ -8,46 +8,81 @@
 }
 <br /><br /><br />
 <h2>القرى</h2>
-
-<p>@if (Request["DistrictId"] != null) { 
-    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] })
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<p>
+    @if (Request["DistrictId"] != null)
+{
+    @*@Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId = Request["DistrictId"], GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn-be" })*@
+    @Html.ActionLink("اضافة قرية جديدة", "Create", null, new { @class = "site-btn-be" })
 }
-else { 
-    @Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId =1, GovernorateId = Request["GovernorateId"] })
+else
+{
+    @Html.ActionLink("اضافة قرية جديدة", "Create", null, new { @class = "site-btn-be" })
+    @*@Html.ActionLink("اضافة قرية جديدة", "Create", new { DistrictId =1, GovernorateId = Request["GovernorateId"] }, new { @class = "site-btn-be" })*@
 }
 </p>
-<table class="table">
-    <tr>
-        <th>المركز
-            @*@Html.DisplayNameFor(model => model.First().District.District1)*@
-        </th>
-        <th>
-            القرية/النجع   @*@Html.DisplayNameFor(model => model.First().Village1)*@
-        </th>
-      @*<th>المحافظة</th>*@
-        <th></th>
-    </tr>
-    
+<table id="villagetbl" class="disply table-responsive">
+    <thead>
+        <tr>
+            @*<th>المحافظة</th>*@
+            <th>
+                المركز
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.District.District1)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Village1)
-        </td>
-    @*<td>@Html.DisplayFor(modelItem => item)</td>*@
-        <td>
-            @Html.ActionLink("تعديل", "Edit", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] }) |
-            @Html.ActionLink("تفاصيل", "Details", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] }) |
-            @Html.ActionLink("حذف", "Delete", new { id=item.VillageId, GovernorateId = Request["GovernorateId"] })
-        </td>
-    </tr>
-}
+            </th>
+            <th>
+                القرية/النجع
+            </th>
 
+            <th></th>
+        </tr>
+        </thead>
+    <tbody>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                @*<td>
+                    @Html.DisplayFor(modelItem => item.Governorate.Governorate1)*@
+                @*@Html.Display("Governorate",null, new { districtId = item.DistrictId , @class = "form-control" })
+                    </td>*@
+                <td>
+                    @Html.DisplayFor(modelItem => item.District.District1)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Village1)
+                </td>
+
+                <td>
+                    <i class="large material-icons btn-default">
+                        @Html.ActionLink("edit", "Edit", new { id = item.VillageId }, new { @title = "تعديل ", @style = "color:gray" })
+                    </i>
+                    |
+                    <i class="large material-icons ">
+                        @Html.ActionLink("storage", "Details", new { id = item.VillageId }, new { @title = "تفاصيل ", @style = "color:gray" })
+                    </i> |
+                    <i class="large material-icons"> @Html.ActionLink("delete", "Delete", new { id = item.VillageId }, new { @title = "حذف ", @style = "color:#a50303" }) </i>
+                </td>
+
+             
+            </tr>
+        }
+    </tbody>
 </table>
-@Html.PagedListPager(Model, page => Url.Action("Index", new { page, DistrictId =  Request["DistrictId"], GovernorateId = Request["GovernorateId"] }))
+@*@Html.PagedListPager(Model, page => Url.Action("Index", new { page, @class = "site-btn-be" }))*@
+<br />
 <div>
-    @Html.ActionLink("عودة للمراكز", "Districtfilter", "Districts",  new { GovernorateId = Request["GovernorateId"] })
+    @Html.ActionLink("عودة للمراكز", "Index", "Districts", null, new { @class = "site-btn-be" })
+
+
 </div>
+@section Scripts{
+<script>
+        $(document).ready(function () {
+            $('#villagetbl').DataTable({
+                "language": {
+                    "url": "/content/arabic.json"
+                }
+            });
+        });
+</script>
+    }

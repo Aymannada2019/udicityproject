@@ -184,7 +184,7 @@
 
 
                         <div class="col-md-4">
-                            <img src="~/img/commodities/@file.ImagePath" style="height:200px;width:200px;" />
+                            <img src="@file.ImagePath" style="height:200px;width:200px;" />
                             <p>
                                 @file.CommodityImageId
                             </p>
@@ -213,8 +213,8 @@
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="حذف" class="site-btn" /> |
-            @Html.ActionLink("عودة للسلع", "Index",null,new{@class="site-btn"})
+            <input type="submit" value="حذف" class="site-btn-be" /> |
+            @Html.ActionLink("عودة للسلع", "Index",null,new{@class="site-btn-be"})
         </div>
     }
 </div>

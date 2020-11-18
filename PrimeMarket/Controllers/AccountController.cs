@@ -198,7 +198,7 @@ namespace PrimeMarket.Controllers
                     //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { email = model.Email, code = code }, protocol: Request.Url.Scheme);
                     //*await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
                     string EmailBody = "Please confirm your account by clicking on following link " + callbackUrl;
-                    SendEmail(model.Email, EmailBody, "Confirm your account");
+                    Helper.SendMail(model.Email, "Confirm your account", EmailBody);
 
                     //*return RedirectToAction("Index", "Home");
                     return RedirectToAction("RegisterConfirmation_moh", "Account");
@@ -266,7 +266,7 @@ namespace PrimeMarket.Controllers
                 
                 //*await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 string EmailBody = "Please, reset your password by clicking on the following link " + callbackUrl;
-                SendEmail(model.Email, EmailBody, "Reset Password");
+                Helper.SendMail(model.Email, "Reset Password", EmailBody);
                 //Helper.SendEmail(model.Email, "Reset Password", EmailBody);
 
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
@@ -276,6 +276,7 @@ namespace PrimeMarket.Controllers
             return View(model);
         }
 
+        /*
         private void SendEmail(string recipientMail, string emailBody, string mailSubject)
         {
             // Specify the from and to email address
@@ -293,7 +294,7 @@ namespace PrimeMarket.Controllers
             // Finall send the email message using Send() method
             smtpClient.Send(mailMessage);
         }
-
+        */
         //
         // GET: /Account/ForgotPasswordConfirmation
         [AllowAnonymous]

@@ -5,7 +5,7 @@
     Layout = "~/Views/Shared/LayoutAdmin.cshtml";
 }
 
-<h2>تعديل</h2>
+@*<h2>تعديل</h2>*@
 <script type="text/javascript">
     function fileCheck(obj) {
         var fileExtension = ['jpeg', 'jpg', 'png', 'gif', 'bmp'];
@@ -18,8 +18,9 @@
 {
     @Html.AntiForgeryToken()
     
-    <div class="form-horizontal">
-        <h4>الصور للسلعة</h4>
+    <div class="form-horizontal"><center>
+    <h4>تعديل الصور لسلعة</h4>
+</center>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CommodityImageId)
@@ -35,7 +36,7 @@
             <div class="col-md-10">
                 @if (Model.ImagePath != "" && Model.ImagePath != null)
                 {
-                    <img src="~/img/commodities/@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
+                    <img src="@Html.DisplayFor(model => model.ImagePath)" id="commidityimage" style="height:200px;width:250px;" name="commidityimage" />
                     @Html.EditorFor(model => model.ImagePath, new { htmlAttributes = new { @class = "form-control", @style = "display: none" } })
                    <br /> <label title="To change Image">لتغيير الصورة</label> 
                 }
@@ -50,14 +51,15 @@
 
         <div class="form-group row">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="تعديل" class="btn btn-default" />
+                <input type="submit" value="تعديل" class="site-btn-be" />
+                @Html.ActionLink("عودة لقائمة الصور", "Index", new { CommodityId = Model.CommodityId }, new { @class = "site-btn-be" })
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("عودة لقائمة الصور", "Index", new { CommodityId = Model.CommodityId }, htmlAttributes: null)
+ 
 </div>
 
 @section Scripts {
