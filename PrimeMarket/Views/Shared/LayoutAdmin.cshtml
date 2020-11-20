@@ -111,7 +111,14 @@
 
                                         </ul>
                                     </li>
-                                    <li>@Html.ActionLink("مستخدمين", "Index", "AspNetUsers")</li>
+                                    <li>
+                                        <a href="#"> مدير النظــام</a>
+                                        <ul class="header__menu__dropdown">
+                                            <li>@Html.ActionLink("مستخدمين", "Index", "AspNetUsers")</li>
+                                            <li>@Html.ActionLink("الصلاحيات", "ListRoles", "Administration")</li>
+                                        </ul>
+                                    </li>
+                                    
                                    }
 
                                        

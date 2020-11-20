@@ -1,0 +1,31 @@
+﻿@model PrimeMarket.Models.CreateRoleViewModel
+@{
+    ViewBag.Title = "إنشاء صلاحية";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<h4>@ViewBag.Title.</h4>*@
+
+@using (Html.BeginForm("CreateRole", "Administration", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>إنشاء صلاحية جديد</h4>
+    <hr />
+    @Html.ValidationSummary("", new { @class = "text-danger" })
+    <div class="form-group">
+        @Html.LabelFor(m => m.RoleName, new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.RoleName, new { @class = "form-control" })
+        </div>
+    </div>
+    
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="site-btn" value="حفظ" />
+        </div>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

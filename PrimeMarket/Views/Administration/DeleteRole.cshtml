@@ -1,0 +1,30 @@
+﻿@model PrimeMarket.Models.EditRoleViewModel
+
+@{
+    ViewBag.Title = "حذف الصلاحية";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>حذف الصلاحية</h2>
+
+<h3>هل انت متأكد من حذف هذه الصلاحية ؟</h3>
+<div>
+    @*<h4>Account</h4>*@
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.RoleName)
+        </dt>
+
+    </dl>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("الغاء", "ListRoles")
+        </div>
+    }
+</div>

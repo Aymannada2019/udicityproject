@@ -1,0 +1,75 @@
+﻿@model List<PrimeMarket.Models.UserRole_UserList_ViewModel>
+
+@{
+    var roleId = ViewBag.roleId;
+    ViewBag.Title = "EditUsersInRole_UserList";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+
+
+<h4>EditUsersInRole_UserList</h4>
+@using (Html.BeginForm("EditUsersInRole_UserList", "Administration", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        
+        @*@Html.HiddenFor(Model => Model.UserId)*@
+        @*@Html.EditorFor(model => model.UserName, new { htmlAttributes = new { @class = "form-control" } })*@
+        @for (int i = 0; i < Model.Count; i++)
+        {
+            @*@Html.TextBoxFor(model => model[i].UserName,null, htmlAttributes: new { @class = "control-label col-md-2" })*@
+
+            <div class="form-group">
+                @*@Html.LabelFor(model => model[i].UserName, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model[i].IsSelected)
+                        @Html.HiddenFor(model => model[i].UserId)
+                        <b>اسم المستخدم: </b>
+                        @Html.DisplayFor(model => model[i].FullName)
+                        <b>البريدالالكترونى</b>
+                        @Html.DisplayFor(model => model[i].UserName)
+                        @*@Html.CheckBoxFor(model => model[i].IsSelected)*@
+                        @*@Html.ValidationMessageFor(model => model[i].UserName, "", new { @class = "text-danger" })*@
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="تعديل" class="site-btn" />
+            </div>
+        </div>
+
+    </div>
+
+}
+@*<form method="post">
+    <div class="card">
+        <div class="card-header">
+            <h2>Add or remove users from this role</h2>
+        </div>
+        <div class="card-body">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <div class="form-check m-1">
+                    <input type="hidden" asp-for="@Model[i].UserId" />
+                    <input type="hidden" asp-for="@Model[i].UserName" />
+                    <input asp-for="@Model[i].IsSelected" class="form-check-input" />
+                    <label class="form-check-label" asp-for="@Model[i].IsSelected">
+                        @Model[i].UserName
+                    </label>
+                </div>
+            }
+        </div>
+        <div class="card-footer">
+            <input type="submit" value="Update" class="btn btn-primary" style="width:auto" />
+            <a asp-action="EditRole" asp-route-id="@roleId" class="btn btn-primary" style="width:auto">Cancel</a>
+        </div>
+    </div>
+</form>*@
+

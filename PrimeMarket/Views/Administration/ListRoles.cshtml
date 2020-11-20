@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
+@{
+    ViewBag.Title = "ListRoles";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h4>الصلاحيات</h4>
+
+<p>
+    @Html.ActionLink("إنشاء صلاحية جديدة", "CreateRole")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @*@Html.DisplayNameFor(model => model.Name)*@
+            اسم الصلاحية
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.ActionLink("تعديل", "EditRole", new { id = item.Id }) |
+                @Html.ActionLink("مستخدمين", "EditUsersInRole_UserList", new { id = item.Id }) |
+                @Html.ActionLink("حذف", "DeleteRole", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

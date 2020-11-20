@@ -44,24 +44,25 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.PassWord)
-        </dt>
+                @Html.DisplayNameFor(model => model.PassWord)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.PassWord)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.PassWord)
+            </dd>*@
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.ImagePath)
-        </dt>*@
+                @Html.DisplayNameFor(model => model.ImagePath)
+            </dt>*@
 
         @*<dd>
-            @Html.DisplayFor(model => model.ImagePath)
-        </dd>*@
+                @Html.DisplayFor(model => model.ImagePath)
+            </dd>*@
 
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
