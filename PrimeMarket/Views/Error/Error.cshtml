@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Error";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div dir="rtl">
+    <center>
+        <div class="row">
+            <div class="col-md-12">خطأ</div>
+        </div>
+         <div class="row">
+             <div class="col-md-12">  لا تقلق ، ستعود إلى المسار الصحيح في  وقت قريب! </div>
+         </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <img src="~/img/erorr.png" />
+            </div>
+                <div class="col-md-2" style="font-size: 100px; font-weight: bold;">503</div>
+               
+            <div class="col-md-3"></div>
+            </div>
+            
+        <div class="row">
+            <div class="col-md-12">يشير خطأ 503 Service Unavailable إلى أن خادم الويب غير قادر مؤقتاً على معالجة الطلب. قد يكون ذلك خادم الويب الذي تحاول الوصول إليه مباشرةً مشغول انتظر قليلا او حاول مرة اخرى. انتقل إلى @Html.ActionLink("الصفحة الرئيسية", "Index", "Home") أو ارجع إلى الصفحة السابقة</div>
+        </div>
+      
+       
+    </center>
+</div>

@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "BadRequest";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<h2>BadRequest</h2>
+<center>
+    <h2>خطأ</h2>
+    <p>لا تقلق ، ستعود إلى المسار الصحيح في  وقت قريب! </p>
+    <p><h1>403</h1> خطأ </p>
+</center>
+<div dir="rtl">
+    <center>
+        <div class="row">
+            <div class="col-md-12">خطأ</div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">  لا تقلق ، ستعود إلى المسار الصحيح في  وقت قريب! </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-4">
+                <img src="~/img/erorr.png" />
+            </div>
+            <div class="col-md-2" style="font-size: 100px; font-weight: bold;">403</div>
+
+            <div class="col-md-3"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">ليس لديك صلاحية للوصول / على الخادم. انتقل إلى @Html.ActionLink("الصفحة الرئيسية", "Index", "Home") أو ارجع إلى الصفحة السابقة</div>
+        </div>
+
+
+    </center>
+</div>

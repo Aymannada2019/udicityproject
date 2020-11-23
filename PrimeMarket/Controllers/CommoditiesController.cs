@@ -71,6 +71,9 @@ namespace PrimeMarket.Controllers
             var commodity = db.Commodities.Include(c => c.AspNetUser).Include(c => c.SubCategory).Include(c => c.PriceUnit);
             if (!isAdminUser())
                 commodity = commodity.Where(x => x.SellerId== UserId);
+           //ayman 23/11/2020 ToString test error 
+            //string msg = null;
+            //ViewBag.Message = msg.Length;
             if (search != null && search != "")
             {
                 return View(commodity.Where(x => x.Title.StartsWith(search) || search == null).OrderByDescending(x=>x.CommodityId).ToList().ToPagedList(page ?? 1, 20));

@@ -33,7 +33,7 @@
     </p>
     @using (Html.BeginForm("Index", "Commodities", FormMethod.Get))
     {
-    <div class="row">
+    <div class="row" dir="rtl">
         <div class="col-md-2">
 
             <b>بحث ب:  الحالة: </b>
@@ -54,10 +54,10 @@
 
 </div>
     }
-    <table id="Commoditiestbl" class="disply table-responsive">
+    <table id="Commoditiestbl" class="disply table-responsive" dir="rtl">
     <thead>
         <tr>
-            <th >
+            <th width="20%">
                 اسم السلعة
                 @*@Html.DisplayNameFor(model => model.First().Title)*@
             </th>
@@ -65,15 +65,15 @@
                 المنتج الرئيسى
                Html.DisplayNameFor(model => model.First().SubCategory)
             </th>*@
-            <th>
+            <th width="15%">
                 المنتج الفرعى
                 @*@Html.DisplayNameFor(model => model.First().SubCategory)*@
             </th>
-            <th>
+            <th width="10%">
                الكمية
                 @*@Html.DisplayNameFor(model => model.First().Quantity)*@
             </th>
-            <th></th>
+            <th width="35%"></th>
 
         </tr>
         </thead>
@@ -81,19 +81,19 @@
             @foreach (var item in Model)
             {
                 <tr>
-                    <td>
+                    <td width="20%">
                         @Html.DisplayFor(modelItem => item.Title)
                     </td>
                     @*<td>
                         @Html.DisplayFor(modelItem => item.Category.Category1)
                     </td>*@
-                    <td>
+                    <td width="15%">
                         @Html.DisplayFor(modelItem => item.SubCategory.SubCategory1)
                     </td>
-                    <td>
+                    <td width="10%">
                         @Html.DisplayFor(modelItem => item.Quantity)
                     </td>
-                    <td>
+                    <td width="35%">
                         <i class="large material-icons btn-default">
                             @Html.ActionLink("edit", "Edit", new { id = item.CommodityId }, new { @title = "تعديل ", @style = "color:gray" })
                         </i>
