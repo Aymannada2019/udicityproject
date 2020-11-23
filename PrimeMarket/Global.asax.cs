@@ -36,6 +36,32 @@ namespace PrimeMarket
                 routeData.Values.Add("controller", "Error");
                 routeData.Values.Add("action", "NotFound");
                 var requestContext = new RequestContext(
+                new HttpContextWrapper(Context), routeData);
+                controller.Execute(requestContext);
+            }
+            if (httpException != null && httpException.GetHttpCode() == 403)
+            {
+                Response.Clear();
+                Server.ClearError();
+                Response.TrySkipIisCustomErrors = true;
+                IController controller = new ErrorController();
+                var routeData = new RouteData();
+                routeData.Values.Add("controller", "Error");
+                routeData.Values.Add("action", "BadRequest");
+                var requestContext = new RequestContext(
+                 new HttpContextWrapper(Context), routeData);
+                controller.Execute(requestContext);
+            }
+            if (httpException != null && httpException.GetHttpCode() == 503)
+            {
+                Response.Clear();
+                Server.ClearError();
+                Response.TrySkipIisCustomErrors = true;
+                IController controller = new ErrorController();
+                var routeData = new RouteData();
+                routeData.Values.Add("controller", "Error");
+                routeData.Values.Add("action", "Error");
+                var requestContext = new RequestContext(
              new HttpContextWrapper(Context), routeData);
                 controller.Execute(requestContext);
             }
