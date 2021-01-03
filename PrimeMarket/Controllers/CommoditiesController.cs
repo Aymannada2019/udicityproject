@@ -259,8 +259,11 @@ namespace PrimeMarket.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-           // ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
-            ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            // ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
+             ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+            ViewBag.CategoryId = new SelectList(db.Categories, "CategoryId", "Category1", commodity.SubCategoryId.ToString());
+            ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
+            ViewBag.IsUserAdmin = isAdminUser();
             //var i = 1;
             //foreach (var file1 in files)
             //{

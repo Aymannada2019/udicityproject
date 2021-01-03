@@ -203,13 +203,9 @@
 //.log("Hello world!");
     $(document).ready(function () {
         $("#CategoryId").change(function () {
-
             $.get("/Commodities/getSubCategoryList", { CategoryId: $(CategoryId).val() }, function (data) {
                 $("#SubCategoryId").empty();
-
-
-                $.each(data, function (index, row) {
-                   
+                $.each(data, function (index, row) {                  
                     console.log($("#SelectedSubCategoryId").val());
                     if ($("#SelectedSubCategoryId").val() == row.SubCategoryId)
                         $("#SubCategoryId").append("<option value='" + row.SubCategoryId + "' selected>" + row.SubCategory1 + "</option>")
