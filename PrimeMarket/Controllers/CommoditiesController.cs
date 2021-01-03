@@ -206,10 +206,26 @@ namespace PrimeMarket.Controllers
                 return RedirectToAction("Index");
             }
 
-           // ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
-          //  ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
-          //  ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
-           return View(commodity);
+           ViewBag.SellerId = new SelectList(db.AspNetUsers, "Id", "Email", commodity.SellerId);
+           ViewBag.SubCategoryId = new SelectList(db.SubCategories, "SubCategoryId", "SubCategory1", commodity.SubCategoryId);
+          ViewBag.PriceUnitId = new SelectList(db.PriceUnits, "PriceUnitId", "PriceUnit1", commodity.PriceUnitId);
+            List<SelectListItem> categories = db.Categories.AsNoTracking()
+
+                          .Select(n =>
+                          new SelectListItem
+                          {
+                              Value = n.CategoryId.ToString(),
+                              Text = n.Category1
+                          }).ToList();
+            var categorytip = new SelectListItem()
+            {
+                Value = "0",
+                Text = "--- اختر منتج ---"
+            };
+            categories.Insert(0, categorytip);
+            ViewBag.CategoriesList = new SelectList(categories, "Value", "Text", "0");
+            ViewBag.IsUserAdmin = isAdminUser();
+            return View(commodity);
 
         }
      
